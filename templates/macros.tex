@@ -1,0 +1,104 @@
+% MACROS.
+
+\newcommand{\lp}{\left}
+\newcommand{\rp}{\right}
+\newcommand{\mrm}[1]{\mathrm{#1}}
+\newcommand{\mbb}[1]{\mathbb{#1}}
+\newcommand{\mcal}[1]{\mathcal{#1}}
+\newcommand{\mfrak}[1]{\mathfrak{#1}}
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+
+% Asymptotic Notation.
+\newcommand{\bigOh}[1]{O\lp(#1\rp)}
+\newcommand{\smalloh}[1]{o\lp(#1\rp)}
+\newcommand{\bigOmega}[1]{\Omega\lp(#1\rp)}
+\newcommand{\smallomega}[1]{\omega\lp(#1\rp)}
+
+% Standard sets
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+
+% Constants.
+\newcommand{\me}{\mathrm{e}}
+
+% Analysis.
+\def\d{\mrm{d}}
+\newcommand\Ball[2]{\mcal{B}\lp(#1, #2 \rp)}
+
+% Functions.
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\1}[1]{\mathds{1}_{\left[#1\right]}}
+\newcommand{\Real}[1]{\mathrm{Re}\lp(#1\rp)}
+\newcommand{\Imag}[1]{\mathrm{Im}\lp(#1\rp)}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% Distances & Probability.
+\newcommand{\Normal}[2]{\mcal{N}\lp(#1,#2\rp)}
+\newcommand{\DNormal}[2]{\mrm{DN}\lp(#1,#2\rp)}
+\newcommand{\GBD}{\mrm{GBD}}
+\newcommand{\PBD}{\mrm{PBD}}
+\newcommand{\Bin}{\mrm{Bin}}
+\newcommand{\Pois}{\mrm{Pois}}
+\newcommand{\Distr}{\mathcal{L}}
+
+% \newcommand{\GBD}[1][]{
+%   \def\ArgI{{#1}}%
+%   \GBDRelay
+% }
+% \newcommand{\GBDRelay}[1]{
+%   \mrm{GBD}\lp( \ArgI, #2 \rp)
+% }
+
+\newcommand{\NormalPDF}[3]
+{
+  \frac{1}{\sqrt{2 \pi} #2} \me^{-\frac{(#3 - #1)^2}{2 {#2}^2}}
+}
+\newcommand{\erf}[1]{\mrm{erf}\lp(#1\rp)}
+\newcommand{\erfc}[1]{\mrm{erfc}\lp(#1\rp)}
+
+\newcommand{\Prob}[1]{\mathbb{P}\lp[#1\rp]}
+
+\newcommand{\Exp}[1][]{
+  \def\ArgI{{#1}}%
+  \ExpRelay
+}
+\newcommand{\ExpRelay}[1]{
+  \bm{\mrm{E}}_{\ArgI} \lp[ #1 \rp]
+}
+
+\newcommand{\Var}[1]{\bm{\mrm{V}}\lp[#1\rp]}
+\newcommand{\Cov}[2]{\mrm{Cov}\lp[#1, #2\rp]}
+\newcommand{\Kurt}[1]{\mrm{Kurt}\lp[#1 \rp]}
+
+\newcommand{\fdiv}[3]{D_{#1} \lp(#2\|#3\rp)}
+\newcommand{\dkl}[2]{D_{\mrm{kl}} \lp(#1\|#2\rp) }
+\newcommand{\dtv}[2]{d_{\mrm{tv}} \lp(#1, #2\rp) }
+\newcommand{\dhel}[2]{d_{\mrm{hel}} \lp(#1, #2\rp) }
+\newcommand{\dkol}[2]{d_{\mrm{kol}} \lp(#1, #2\rp) }
+
+% minimax risk
+\newcommand{\minimax}[1]{\mfrak{M}_{#1}}
+
+\newcommand{\h}[1]{\hat{#1}}
+
+% PBD powers specific macros.
+\def\eps{\varepsilon}
+\def\p{\hat{p}}
+\def\q{\hat{q}}
+
+\def\reals{\mathbb{R}}
+\def\nats{\mathbb{N}}
+\def\D{\mathcal{D}}
+
+\def\P{\mathcal{P}}
+\def\p{\hat{p}}
+\def\q{\hat{q}}
+\newcommand{\err}[1]{\mbox{\rm err}\left(#1\right)}
+
+
+% other.
+
+\newcommand{\sline}[1]{\textcolor{#1}{\linethickness{.5mm}\line(1,0){15}} }
