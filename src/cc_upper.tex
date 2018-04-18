@@ -44,3 +44,21 @@ $$ |x_j(\pi_{ij}(t)) - x_j^*| \leq \left( 1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\
 \begin{corollary}
 If the algorithm runs for $O(D \log \frac{1}{\epsilon})$ iterations, it gets $\epsilon$-close to the solution $x^*$.
 \end{corollary}
+
+We now turn our attention to the problem of computing the appropriate length $D$ of epochs. A useful fact concerning the coupons collector problem is the following.
+
+\begin{lemma}
+Suppose that the collector picks $n\ln n + cn$ coupons, where $n$ is the number of distinct coupons. Then: 
+$$
+\Prob{\text{collector hasn't seen all coupons}} \leq \frac{1}{\me^c}
+$$
+\end{lemma}
+
+\begin{theorem}
+After $t$ rounds, with probability at least $1 - p$: $\norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$
+\end{theorem}
+\begin{proof}
+In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a collector and wants to gather all $d_i$ coupons during each epoch. Suppose $d = \max_i d_i$ is the maximum degree of the graph. Then, if we set $n = d$ and $c = \ln (\frac{dt}{p})$ , using the previous lemma we get that a node hasn't seen at least one neigbour after $cd + d\ln d$ samples with probability at most $\frac{p}{dt}$. This means that if we set $D = cd + d\ln d = d \ln \frac{dt}{p} + d \ln d \geq 2d\ln\frac{dt}{p} $ when $p$ is small enough, then the probability that a specific agent at a specific epoch hasn't collected all neighbouring opinions at least once is at most $\frac{p}{dt}$. By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs with probability at least $1 - p$. We observe that at time $t$ approximately $\frac{t}{D}$ epochs have passed. Therefore, using the previous result about the convergence rate, we get that with probability at least $1 - p$:
+$$ \norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{D}} \leq (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$$
+
+\end{proof}
