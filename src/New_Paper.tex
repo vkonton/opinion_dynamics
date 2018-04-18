@@ -1,0 +1,202 @@
+\section{Preliminaries}
+In the Friedkin-Johsen model an undirected graph $G(V,E)$ is assumed, where $V$ denotes the agents and $E$ the social relations between them. Each agent $i$ poses an internal opinion $s_i \in [0,1]$ and a self confidence coefficient $\alpha_i \in[0,1]$. At each time step $t\geq 1$, agent $i$ updates her opinion as follows: $$x_i(t) = (1-\alpha_i) \frac{\sum_{j \in N_i}x_j(t-1)}{d_i} + \alpha_i s_i$$ $d_i$ denotes the degree of node $i$ and $N_i$ the set of her neighbors. The above process have been studied and it is known to converge to a unique equilibrium point $x^* \in [0,1]^n$, where $n=|V|$. \\
+
+
+\section{Full memory with limited information exchange}
+In each round, every agent learns a neighbour's opinion and updates the appropriate cell in memory. Because an agent learns only one opinion in each round, he uses outdated information about his other neighbours in order to compute his opinion. We first introduce some convinient notation.
+\begin{definition}
+$\pi_{ij}(t)$ is the last time that $i$ learned $j$'s opinion until time $t$.
+\end{definition}
+
+Obviously, if at time $t$ an agent $i$ learned $k$'s opinion, then $\pi_{ik}(t) = t$. The rule, according to which agent $i$ updates his opinion at time $t$ is the following(for simplicity, assume that $\alpha_i = \frac{1}{d+1}$ and that the graph is $d$-regular):$$x_{i}(t+1)=(1-\alpha_i)\frac{\sum_{j \in N_i}x_j(\pi_{ij}(t))}{d_i}+\alpha_i s_i$$
+Notice that in contrast with the traditional model, instead of $x_j(t)$ we have $x_j(\pi_{ij}(t))$. That is because the information about $j$ is probably outdated.
+Denote with $x^*$ the solution vector of the system. We would like to prove that such a process converges to the solution of the linear system involving the laplacian matrix of the graph. In order to analyse the algorithm, we will divide the time into "epochs". Each epoch has a length $D \ge d$, so the first epoch is from time 1 to time $D$, the second from $D+1$ to $2D$ e.t.c. Time $0$ does not belong at any epoch. The numbering of epochs begins from $1$. We will also assume that during each epoch, each agent picks every one of his neighbours for update at least once. Later we are going to find a suitable epoch length D, such that this holds with high probability. In other words, for a specific time in epoch $i$ every agent has information which has "bounded" outdateness, since every coordinate was updated at least once during the $i-1$ epoch. We are going to use this fact to prove the following lemma.
+
+\begin{lemma}
+Denote with $x^*$ the solution vector of the system. For every time $t$, which belongs to epoch $T$, it holds:
+$$ ||x(t)-x^*||_{\infty} \leq \left( 1-\alpha_i\right)^T||x(0)-x^*||_{\infty}$$
+\end{lemma}
+
+\begin{proof}
+We are going to use induction in time. The base case is for time $t=1$. We are going to prove that: $$ ||x(1)-x^*||_{\infty} \leq (1-\alpha_i)||x(0)-x^*||_{\infty}$$
+We assume that everybody has the same initial vector $x(0)$ stored in memory, so for each $i$ holds:
+$$x_i(1) = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j(0)}{d}+\alpha_i s_i (1)$$Since $x^*$ is the solution of the system, we have:
+$$ x_i^* = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j^*}{d}+\alpha_i s_i (2)$$
+Subtracting $(2)$ from $(1)$ we get:
+\begin{eqnarray*}
+|x_i(1) - x_i^*| &=& |(1-\alpha_i)\frac{\sum_{j \in N_i}(x_j(0)-x_j^*)}{d}|\\
+&\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}|x_j(0)-x_j^*|}{d} \\
+&\leq& (1-\alpha_i) ||x(0)-x^*||_{\infty}
+\end{eqnarray*}
+$$ \Rightarrow ||x(1)-x^*||_{\infty} \leq (1-\alpha_i)||x(0)-x^*||_{\infty}$$
+So the base case is verified. Let the inductive hypothesis hold for all times until $t$. Suppose that time $t+1$ belongs to epoch $T$. We fix an agent $i$. Then, if $\pi_{ij}(t)$ belongs to the previous epoch, by the induction hypothesis it holds:
+$$ |x_j(\pi_{ij}(t)) - x_j^*| \leq \left( 1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}$$
+ On the other hand, if $\pi_{ij}(t)$ belongs to the current epoch $T$, by the induction hypothesis we have:
+ $$ |x_j(\pi_{ij}) - x_j^*| \leq \left( 1-\alpha_i\right)^{T}||x(0)-x^*||_{\infty} \leq \left( 1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}$$
+ So, for every neighbour of agent $i$, the value that $i$ stores for this neighbour is "close" to the optimal. Now, using again equation $(1)$, we have:
+ \begin{eqnarray*}
+|x_i(t+1) - x_i^*| &=& |(1-\alpha_i)\frac{\sum_{j \in N_i}(x_j(\pi_{ij}(t))-x_j^*)}{d}|\\
+&\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}|x_j(\pi_{ij}(t))-x_j^*|}{d}\\
+&\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}||x(\pi_{ij}(t))-x^*||_\infty}{d}\\
+&\leq& \frac{\sum_{j \in N_i}\left(1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}}{d+1}\\
+&=& (1-\alpha_i)\left(1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}\\
+&=& \left(1-\alpha_i\right)^{T}||x(0)-x^*||_{\infty}
+ \end{eqnarray*}
+
+\end{proof}
+
+\begin{Col}
+If the algorithm runs for $O(D \log \frac{1}{\epsilon})$ iterations, it gets $\epsilon$-close to the solution $x^*$.
+\end{Col}
+
+\section{Constant Memory with full window}
+In this work we investigate an variant of the above process. Namely we assume that at each time $t$, each agent $i$ picks uniformly at random one of her neighbors and updates her opinion as follows: $$x_i(t) = (1-\alpha_i)\frac{\sum_{\tau=1}^tx_{\pi_i(\tau)}(\tau-1)}{t} + \alpha_i s_i$$ $\pi_i(\tau)$ denotes neighbor that has selected at $\tau$ and $x_{\pi_i(\tau)}(\tau-1)$ her opinion that given time. In this word we prove that the above process converges arbitrarily close with arbitrarily high probability to the same equilibrium point $x^*$.
+We denote with $d$ the maximum degree of $G(V,E)$ ($d=\text{max}_{i \in V}d_i$) and $x^t \in [0,1]^n$ the opinion vector of the agents at $t$.
+
+\begin{definition}
+$T_{ij}^t$ is the number of times, $i$ has selected $j$ until time $t$.
+\end{definition}
+
+\noindent Observe that if $j \notin N_i$ then $T_{ij}^t=0$ for all $t$.
+
+\begin{lemma}
+Let $\delta(t) = O(\sqrt{\frac{\log(\frac{nd}{p}t)}{t}})$ and $0<p<1$. With probability at least $1-p$ for all $t,i,j$
+$$|T_{ij}^t - \frac{t}{d_i}|\leq \delta(t)\frac{t}{d_i}$$
+\end{lemma}
+\begin{proof}
+Fix an agent $i$ and one of her neighbors $j$. Observe that $E[T_{ij}^t] = \frac{t}{d_i}$ since at each round $i$ selects $j$ with probability $1/d_i$.
+\begin{eqnarray*}
+\Pr[\exists t:~|T^t_{ij}-\frac{t}{d_i}| > \delta(t)\frac{t}{d_i}] &\leq& \sum_{t=1}^{\infty}\Pr[|T^t_{ij}-\frac{t}{d_i}|>\delta(t)\frac{t}{d_i}]\\
+&\leq& \sum_{t=1}^{\infty}2e^{-\frac{\delta^2(t)t}{3d_i}}
+\end{eqnarray*}
+The inequalities follow form Union and Chernoff bound respectively. Now setting $\delta(t) = \frac{3d}{t}\log(\frac{3ndt^2}{\pi^2 p})$ we get $$\Pr[\exists t:~|T^t_{ij}-\frac{t}{d_i}| > \delta(t)\frac{t}{d_i}] \leq \frac{6p}{\pi^2nd}\sum_{t=1}^{\infty}\frac{1}{t^2}=\frac{p}{nd}$$
+since $d_i \leq d$ and $\sum_{t=1}^{\infty}\frac{1}{t^2}=\frac{6}{\pi^2}$. Then by Union Bound $$\Pr[\forall t,i,j:~ |T_{ij}^t - \frac{t}{d_i}|\leq \delta(t)\frac{t}{d_i}] \geq 1-p$$
+%\noindent By Union Bound $\Pr[\exists t:~|T^t_{ij}-\frac{t}{d_i}| > \delta(t)\frac{t}{d_i}] \leq \sum_{t=1}^{\infty}\Pr[|T^t_{ij}-\frac{t}{d_i}|>\delta(t)\frac{t}{d_i}]$
+\end{proof}
+
+\begin{lemma}
+With probability at least $1-p$, $||x^t - x^*||_{\infty} \leq e(t)$, where $e(t)$ satisfies the following recursive relation
+$$e(t) = \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t} \text{ and } e(0)=||x^0 - x^*||_{\infty}$$
+and $\delta(t)=O(\sqrt{\frac{\log(\frac{nd}{p}t)}{t}})$
+\end{lemma}
+\begin{proof}
+For all $t,i,j:$ $|T_{ij}^t - \frac{t}{d_i}|\leq \delta(t)\frac{t}{d_i}$ with probability at least $1-p$. We assume that $||x^{\tau}-x^*||_{\infty} \leq e(\tau)$ for all $\tau \leq t$.
+\begin{eqnarray*}
+x_i(t) &=& (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x_{\pi_i(\tau)}(\tau-1)}{t} + \alpha_i s_i\\
+%&\leq& (1-\alpha_i)\frac{\sum_{\tau=0}^{t-1}x_{\pi_i(\tau)}(\tau)}{t} + \alpha_i s_i\\
+&\leq& (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x^*_{\pi_i(\tau)} + \sum_{\tau=1}^{t} e(\tau-1)}{t} + \alpha_i s_i\\
+&\leq& (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x^*_{\pi_i(\tau)} + \sum_{\tau=0}^{t-1} e(\tau)}{t} + \alpha_i s_i\\
+&\leq&  (1-\alpha_i)\frac{(1+\delta(t))\sum_{j \in N_i}x^*_{j}}{d_i} + \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t} + \alpha_i s_i\\
+&=& x_i^* + (1-\alpha_i)(\frac{\delta(t)\sum_{j \in N_i}x^*_{j}}{d_i} + \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t})\\
+&\leq& x_i^* + \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1} e(\tau)}{t}
+\end{eqnarray*}
+Equivalently, we can prove that $x_i(t+1) \geq x_i^* - \delta(t) - (1-\alpha)\frac{\sum_{\tau=1}^t e(\tau)}{t}$. As a result $||x_i(t)-x^*||_{\infty} \leq e(t)$.
+\end{proof}
+
+\begin{Col}
+The function $e(t)$ satisfies the following recursive relation
+$$e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}=\delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}$$
+\end{Col}
+In order to bound the convergence time of the system, we just need to bound the convergence rate of the function $e(t)$. One can easily prove that $e(t)$ tends to $0$, however finding the explicit formula for $e(t)$ is a quite hard task. The following lemma provides us with a simpler upper bound for the convergence rate of our process.
+
+\begin{lemma}
+$$e(t) \leq \frac{e(0)}{t^\alpha} + \frac{O(\sqrt{\log(\frac{nd}{p})})}{t^\alpha}\sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$$
+\end{lemma}
+
+\begin{proof}
+At first since $\frac{\delta(t)}{t}$ is a decreasing function, $e(t)\leq (1-\frac{\alpha}{t}) + g(t)$, where $g(t)=\frac{\delta(t)}{t}$.
+\begin{eqnarray*}
+ e(t) &\leq& (1-\frac{\alpha}{t})e(t-1) + g(t)\\
+ &\leq& (1-\frac{\alpha}{t})(1-\frac{\alpha}{t-1})e(t-2) + (1-\frac{\alpha}{t})g(t-1) + g(t)\\
+&\leq& (1-\frac{\alpha}{t})\cdots (1-\alpha)e(0) + \sum_{\tau=1}^t g(\tau)\Pi_{i=\tau+1}^t(1-\frac{\alpha}{i})\\
+ &\leq& \frac{e(0)}{t^\alpha} + \sum_{\tau=1}^tg(\tau)e^{-\alpha\sum_{i=\tau+1}^t\frac{1}{i}}\\
+ &\leq& \frac{e(0)}{t^\alpha} + \sum_{\tau=1}^tg(\tau)e^{-\alpha(H_t-H_{\tau})}\\
+ &\leq& \frac{e(0)}{t^\alpha} + e^{-\alpha H_t}\sum_{\tau=1}^tg(\tau)e^{\alpha H_{\tau}}\\
+  &\leq& \frac{e(0)}{t^\alpha} + \frac{O(\sqrt{\log(\frac{nd}{p})})}{t^\alpha}\sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}\\
+ \end{eqnarray*}
+
+\end{proof}
+
+\begin{lemma}
+\[
+e(t) =
+     \begin{cases}
+       O(\sqrt{\log(\frac{nd}{p})}\frac{(\log t)^{3/2}}{t^\alpha}) &\quad\text{if } \alpha \leq 1/2\\
+       O(\sqrt{\log(\frac{nd}{p})}\frac{(\log t)^{3/2}}{t^{1/2}}) &\quad\text{if } \alpha > 1/2\\
+       \end{cases}
+\]
+
+\end{lemma}
+\begin{proof}
+We observe that $\sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}} \leq \int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau$ since $\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$\\
+If $\alpha\leq 1/2$ then $\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau \leq \int_{\tau=1}^t \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))$\\
+
+\noindent If $\alpha> 1/2$ then\\
+
+\begin{eqnarray*}
+\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau &=& \int_{\tau=1}^t \tau^{\alpha-1/2}\frac{\sqrt{\log \tau}}{\tau}d\tau\\
+&=& \frac{2}{3} \int_{\tau=1}^t \tau^{\alpha-1/2}((\log \tau)^{3/2})'d\tau\\
+&=& \frac{2}{3}(\log t)^{3/2} - (\alpha-1/2)\frac{2}{3} \int_{\tau=1}^t \tau^{\alpha-3/2}(\log \tau)^{3/2}d\tau\\
+&\leq& O(\log t)^{3/2})
+\end{eqnarray*}
+
+%$\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau \leq \int_{\tau=1}^t \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))$
+
+\end{proof}
+
+
+%\begin{lemma}
+%Let $g(t)$ such that $$g(t+1)-g(t) + \alpha \frac{g(t)}{t}=(1-\alpha)\frac{\delta(t)}{t} \text{ and } g(1)=e(1)$$ then for all $t$, $e(t)\leq g(t)$.
+%\end{lemma}
+%\begin{proof}
+%Assume that $e(t) \leq g(t)$.
+%\begin{eqnarray}
+% e(t+1) &=& (1-\alpha)e(t) + (1-\alpha)(\delta(t)-\delta(t-1)) + (1-\alpha)\frac{\delta(t-1)}{t}\\
+% &\leq& (1-\alpha)g(t) + (1-\alpha)\frac{\delta(t-1)}{t}\\
+% &=& g(t+1)
+%\end{eqnarray}
+%In the second inequality, we used the fact that $e(t) \leq g(t)$ and that $\delta(t)$ is strictly decreasing for a sufficiently large value of $p$.
+%\end{proof}
+%Now we just need to bound $g(t)$ that is simpler than $e(t)$.
+
+%\begin{lemma}
+%Let $h(t)$ a continous function that satisfies the following differential equation
+%$$h'(t) + \frac{\alpha}{t}h(t) = \frac{\delta(t)}{t}$$
+%Then $g(t) \leq h(t-1)$
+%\end{lemma}
+
+%\begin{proof}
+%We can prove that $h(t)$ is a decreasing function. Again we assume that $g(t)\leq h(t-1)$.
+%\begin{eqnarray*}
+%\int_{t-1}^{t}h'(\tau)d\tau &=& \int_{t-1}^{t}\frac{\delta(\tau)}{\tau}d\tau - \alpha \int_{t-1}^{t}\frac{h(\tau)}{\tau}d\tau\\
+%&\geq& \frac{\delta(t)}{t} - \alpha h(t-1)\int_{t-1}^{t}\frac{1}{\tau}d\tau\\
+%&=& \frac{\delta(t)}{t} - \alpha h(t-1) \ln(\frac{t}{t-1})\\
+%&\backsimeq & \frac{\delta(t)}{t} - \alpha h(t-1) \frac{1}{t}\\
+%\end{eqnarray*}
+%The inequality follows form the fact that $\frac{\delta(t)}{t}$ is decreasing.
+
+%\begin{eqnarray*}
+%\int_{t-1}^{t}h'(\tau)d\tau &\geq& \frac{\delta(t)}{t} - \frac{\alpha}{t}h(t-1)\\
+%h(t) &\geq& \frac{\delta(t)}{t} +  (1- \frac{\alpha}{t})h(t-1) \\
+%h(t)  &\geq& \frac{\delta(t)}{t} + (1- \frac{\alpha}{t})g(t)\\
+%h(t)  &\geq& g(t+1)
+%\end{eqnarray*}
+
+%\end{proof}
+
+%\begin{lemma}
+% $h(t) = O(\frac{\log(\frac{nd}{p})}{t^\alpha})$
+%\end{lemma}
+%\begin{proof}
+%\begin{eqnarray*}
+%h'(t) + \frac{\alpha}{t}h(t) &=& \frac{\delta(t)}{t}\\
+%(e^{\alpha \log t} h(t))' &=& e^{\alpha \log t} \frac{\delta(t)}{t} \\
+%e^{\alpha \log t} h(t) - h(1) &=& \int_{1}^{t}e^{\alpha \log \tau}\frac{\delta(\tau)}{\tau}d\tau\\
+%e^{\alpha \log t} h(t) &\leq& h(1) +  O(\log \frac{nd}{p})\int_{1}^{t}e^{\alpha \log \tau}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau\\
+%e^{\alpha \log t} h(t) &\leq& h(1) +  O(\log \frac{nd}{p})\int_{1}^{\infty}\frac{\sqrt{\log \tau}}{\tau^{3/2-\alpha}}d\tau \\
+%e^{\alpha \log t} h(t) &\leq& O(\log \frac{nd}{p})
+%\end{eqnarray*}
+%Since $\alpha<1$ then $\int_{1}^{\infty}\frac{\sqrt{\log \tau}}{\tau^{3/2-\alpha}}d\tau = O(1)$
+%\end{proof}
+
+\end{document}

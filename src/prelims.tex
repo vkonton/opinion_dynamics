@@ -1,0 +1,10 @@
+\section{Preliminaries}
+
+In the Friedkin-Johsen model an undirected graph $G(V,E)$ is assumed, where $V$
+denotes the agents and $E$ the social relations between them. Each agent $i$
+poses an internal opinion $s_i \in [0,1]$ and a self confidence coefficient
+$\alpha_i \in[0,1]$. At each time step $t\geq 1$, agent $i$ updates her opinion
+as follows: $$x_i(t) = (1-\alpha_i) \frac{\sum_{j \in N_i}x_j(t-1)}{d_i} +
+\alpha_i s_i$$ $d_i$ denotes the degree of node $i$ and $N_i$ the set of her
+neighbors. The above process have been studied and it is known to converge to a
+unique equilibrium point $x^* \in [0,1]^n$, where $n=|V|$.
