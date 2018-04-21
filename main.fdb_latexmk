@@ -1,7 +1,7 @@
 # Fdb version 3
-["bibtex main"] 1524050709 "main.aux" "main.bbl" "main" 1524050710
+["bibtex main"] 1524314714 "main.aux" "main.bbl" "main" 1524321660
   "/usr/share/texmf-dist/bibtex/bst/urlbst/plainurl.bst" 1520151866 31050 ffdaefb09013f5fd4b31e485c13933c1 ""
-  "main.aux" 1524050710 1235 e80a90c6d5516580b10feb7255e7107a ""
+  "main.aux" 1524321660 1492 0bf303d72b5b29b75400c0cd4475fff6 ""
   "refs.bib" 1523997023 212 3d6f374e0c6a8b9ed877f837b83b3ab9 ""
   (generated)
   "main.bbl"
@@ -24,7 +24,7 @@
   (generated)
   "main.log"
   "main.dvi"
-["pdflatex"] 1524050709 "main.tex" "main.pdf" "main" 1524050710
+["pdflatex"] 1524321659 "main.tex" "main.pdf" "main" 1524321660
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc" 1520157211 2375 baa924870cfb487815765f9094cf3728 ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc" 1520157211 3486 c7eadf5dcc57b3b2d11736679f6636ba ""
   "/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc" 1520157211 2405 5dcf2c1b967ee25cc46c58cd52244aed ""
@@ -111,6 +111,7 @@
   "/usr/share/texmf-dist/fonts/type1/public/lm/lmss8.pfb" 1520157212 94400 e33ecfb646a9f148e2e53da01a9168fe ""
   "/usr/share/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb" 1520157212 119663 e82fa1a58f98ccd89bdbd77311ac9cf1 ""
   "/usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb" 1520157212 27863 09ce3735688ffde955e72da27c95b61a ""
+  "/usr/share/texmf-dist/fonts/type1/public/lm/lmsy5.pfb" 1520157212 28210 987b40585e9bcf6463d6155bb4219492 ""
   "/usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb" 1520157212 27941 d1f5d03f61a46c3fcc3a2ba904ddda52 ""
   "/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1520157251 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texmf-dist/tex/generic/babel-english/UKenglish.ldf" 1520157238 2772 43f923fdb8719709f1f3e1f4f671e083 ""
@@ -337,21 +338,21 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1524049103 7738161 f8ed59071fd1e5f29933a0084b550116 ""
   "cc-by.pdf" 1523985610 59879 b534039833ae0720e95faf00c3f48850 ""
   "lipics-logo-bw.pdf" 1523985669 13746 f468fb282d86ba458872de888bef15fe ""
-  "main.aux" 1524050710 1235 e80a90c6d5516580b10feb7255e7107a ""
-  "main.bbl" 1524050709 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
-  "main.out" 1524050710 195 909c4610ec1299b36570edf4d3c08357 ""
+  "main.aux" 1524321660 1492 0bf303d72b5b29b75400c0cd4475fff6 ""
+  "main.bbl" 1524314715 49 0eba253fc001332e731e8aba3f23127b "bibtex main"
+  "main.out" 1524321660 195 909c4610ec1299b36570edf4d3c08357 ""
   "main.tex" 1523997536 3565 2caa1eaa7532736e97c8bc0dc2123244 ""
   "orcid.pdf" 1523985591 20017 79b632ac548930bf160f3957487153b4 ""
   "src/cc_upper.tex" 1523997470 4313 73a5f9508a60933551f85eabc4dd0d6d ""
   "src/prelims.tex" 1523997384 629 4e8bc501c67eb7a7ae8d1d4ef51323b4 ""
-  "src/sample_mean_upper.tex" 1524003191 5588 c1a28ee8625c95ea39d799fe3e6983fb ""
+  "src/sample_mean_upper.tex" 1524321658 7400 d12def87185ffd2083f647d72aa42b19 ""
   "templates/colors.tex" 1523879608 835 c894d71b899ffddd3560864fbbf34e54 ""
   "templates/lipics-v2018-authors/lipics-v2018.cls" 1523287660 27452 763e5353c4fba31a2cccc73ee95c6072 ""
-  "templates/macros.tex" 1524001686 2575 22d00490a8d796d21d92eaedc006d693 ""
+  "templates/macros.tex" 1524311971 2603 022e75b61bf6812926dc4284b4709ca5 ""
   "templates/packages.tex" 1523879608 1860 820d1050419a740ce1686d974c16b6b6 ""
   (generated)
+  "main.vtc"
+  "main.aux"
   "main.pdf"
   "main.out"
-  "main.aux"
-  "main.vtc"
   "main.log"
