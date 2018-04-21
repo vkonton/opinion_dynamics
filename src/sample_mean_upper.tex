@@ -1,7 +1,33 @@
 \section{Constant Memory with full window}
 
-In this work we investigate an variant of the above process. Namely we assume that at each time $t$, each agent $i$ picks uniformly at random one of her neighbors and updates her opinion as follows: $$x_i(t) = (1-\alpha_i)\frac{\sum_{\tau=1}^tx_{\pi_i(\tau)}(\tau-1)}{t} + \alpha_i s_i$$ $\pi_i(\tau)$ denotes neighbor that has selected at $\tau$ and $x_{\pi_i(\tau)}(\tau-1)$ her opinion that given time. In this word we prove that the above process converges arbitrarily close with arbitrarily high probability to the same equilibrium point $x^*$.
-We denote with $d$ the maximum degree of $G(V,E)$ ($d=\text{max}_{i \in V}d_i$) and $x^t \in [0,1]^n$ the opinion vector of the agents at $t$.
+In this work we investigate an variant of the above process.
+We denote by $V$ the set of agents, and $N_{i} \subset V$ the set of neighbors
+of agent $i$.
+Let $x(t) \in [0,1]^n$ be the opinion vector at round $t$.
+We denote by $x_i(t)$ the opinion of agent $i$ at round $t$.
+At round $t+1$, $x(t+1)$ is constructed in the following way.
+At first, each agent $i$ gets to see
+the opinion $x_j(t)$, where $j \in N_i$ is picked uniformly at random
+from the set of her neighbors.  Let $W_i^t$ be the random variable
+corresponding to the selected neighbor. Now each agent $i \in V$
+updates her opinion as follows
+\[
+  x_i(t+1) =
+  (1-\alpha_i)\frac{\sum_{\tau=1}^{t+1} x_{W_i^\tau}(\tau-1)}{t+1}
+  + \alpha_i s_i.
+\]
+We remark that each agent $i$ get to see \emph{only} the opinion
+$x_{W_i^t}$ and not the label $W_i^t$ of her neighbor.
+
+Let $x^* \in [0,1]^n$ be the unique equilibrium point
+of the given instance $I$. We prove that
+the above stochastic process has the following convergence
+rate to $x^*$.
+\begin{theorem}
+  \[
+    \Exp{\norm{\infty}{x^t - x^*}} \leq \sqrt{\frac{\log(n)}{t}}
+  \]
+\end{theorem}
 
 We start by stating the standard Hoeffding bound
 
@@ -14,99 +40,192 @@ We start by stating the standard Hoeffding bound
 \end{lemma}
 
 \begin{lemma}
-With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$, where $e(t)$ satisfies the following recursive relation
-$$e(t) = \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t} \text{ and } e(0)=\|x^0 - x^*\|_{\infty}$$
-and $\delta(t)=\sqrt{\frac{\log(\frac{n}{p})}{t}}$.
+  With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
+  where $e(t)$ satisfies the following recursive relation
+  $$e(t) =
+  \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+  \text{ and } e(0)=\|x^0 - x^*\|_{\infty}, $$
+  where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
 \end{lemma}
-\begin{proof}
-Using Lemma~\ref{l:hoeffding} we have
-\[
-  \Prob
-  {
-    \lp|
-    \frac{\sum_{\tau = 1}^{t} x^*_{\pi_i(\tau)}}{t}
-    - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
-    > \sqrt{
-      \frac{\log(n/p)}{t}
-    }
-  } < \frac{2 \me^{-2} p}{n} < \frac{p}{n}
-\]
-Therefore, by the union bound we have
-\[
-  \Prob
-  {
-    \max_{i \in V}
-    \lp|
-    \frac{\sum_{\tau = 1}^{t} x^*_{\pi_i(\tau)}}{t}
-    - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
-    > \sqrt{
-      \frac{\log(n/p)}{t} }
-  } < p
-\]
-We assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all $\tau \leq t$.
-To simplify notation, let $\delta(t) =
-\sqrt{ \log(n/p)/t} $.
-Now with probability $p$ we have that for all agents it holds
-\begin{align*}
-x_i(t)
-&= (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x_{\pi_i(\tau)}(\tau-1)}{t} + \alpha_i s_i\\
-&\leq (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x^*_{\pi_i(\tau)} + \sum_{\tau=1}^{t} e(\tau-1)}{t} + \alpha_i s_i\\
-&\leq (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x^*_{\pi_i(\tau)} + \sum_{\tau=0}^{t-1} e(\tau)}{t} + \alpha_i s_i\\
-&\leq  (1-\alpha_i)\lp(\frac{\sum_{j \in N_i}x^*_{j}}{|N_i|} + \delta(t) + \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t} \rp) + \alpha_i s_i\\
-&\leq x_i^* + (1-\alpha) \lp(\delta(t) + \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t} \rp)
-\end{align*}
-Equivalently, we can prove that $x_i(t+1) \geq x_i^* - \delta(t) - (1-\alpha)\frac{\sum_{\tau=1}^t e(\tau)}{t}$.
-As a result $||x_i(t)-x^*||_{\infty} \leq e(t)$.
-\end{proof}
-
 \begin{corollary}
-The function $e(t)$ satisfies the following recursive relation
-$$e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}=\delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}$$
+  The function $e(t)$ satisfies the following recursive relation
+  $$e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}=\delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}$$
 \end{corollary}
-In order to bound the convergence time of the system, we just need to bound the convergence rate of the function $e(t)$. One can easily prove that $e(t)$ tends to $0$, however finding the explicit formula for $e(t)$ is a quite hard task. The following lemma provides us with a simpler upper bound for the convergence rate of our process.
+\begin{proof}
+  As we have already mentioned for any instance $I$ there exists
+  a unique equilibrium vector $x^*$. Since
+  $W_i^\tau \sim \Unif(N_i)$ we have that $
+  \Exp{x^*_{W_i^\tau}} = \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
+  $.
+  Since $W_i^\tau$ are independent random variables, we can use
+  Hoeffding's inequality (Lemma~\ref{l:hoeffding}) to get
+  \[
+    \Prob
+    {
+      \lp|
+      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^\tau}}{t}
+      - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+      > \delta(t)
+    }
+    < \frac{6}{\pi^2} \frac{p}{ n t^2},
+  \]
+  where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
+  Therefore, by the union bound
+  \begin{align*}
+    &\Prob
+    {
+      \text{for all } t \geq 1 :
+      \max_{i \in V}
+      \lp|
+      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
+      - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+      > \delta(t)} \leq \\
+    &\sum_{t =1 }^{\infty} \Prob
+    {
+      \max_{i \in V}
+      \lp|
+      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
+      - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+      > \delta(t)} \leq
+    \\
+    &\sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
+    p
+  \end{align*}
+
+  As a result with probability $1-p$ we have that for all $t$
+  \begin{equation}\label{eq:error_per_round}
+    \lp|
+    \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
+    \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
+    \rp| \leq \delta(t)
+  \end{equation}
+  We will our claim by induction.
+  We assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all
+  $\tau \leq t-1$. Then
+  \begin{align}
+    x_i(t)
+    &=
+    (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x_{W_i^{\tau}}(\tau-1)}{t}
+    + \alpha_i s_i \nonumber \\
+    &\leq
+    (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x^*_{W_i^{\tau}} +
+      \sum_{\tau=1}^{t} e(\tau-1)}{t} + \alpha_i s_i \label{step:induction_step}\\
+    &\leq
+    (1-\alpha_i)
+    \lp(
+    \frac{\sum_{\tau=1}^{t}x^*_{W_i^{\tau}}}{t}+
+    \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t}
+    \rp)
+    + \alpha_i s_i \nonumber\\
+    &\leq
+    (1-\alpha_i)\lp(\frac{\sum_{j \in N_i}x^*_{j}}{|N_i|} +
+    \delta(t) + \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t} \rp) +
+    \alpha_i s_i \label{step:error} \\
+    &\leq
+    x_i^* + \delta(t) + (1-\alpha)
+    \lp(
+    \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t}
+    \rp)
+    \nonumber
+  \end{align}
+  We get (\ref{step:induction_step}) from the induction step and
+  (\ref{step:error}) from inequality~(\ref{eq:error_per_round}).
+  Similarly, we can prove that
+  $x_i(t) \geq x_i^* - \delta(t) - (1-\alpha)
+  \frac{\sum_{\tau=1}^t e(\tau)}{t}$.
+  As a result $||x_i(t)-x^*||_{\infty} \leq e(t)$.
+\end{proof}
+
+In order to bound the convergence time of the system, we just need to bound
+the convergence rate of the function $e(t)$.
+The following lemma provides us with a simple upper bound for the
+convergence rate of our process.
 
 \begin{lemma}
-$$e(t) \leq \frac{e(0)}{t^\alpha} + \frac{O(\sqrt{\log(\frac{nd}{p})})}{t^\alpha}\sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$$
+  $$e(t) \leq \frac{e(0)}{t^\alpha} +
+  \frac{\bigOh{\sqrt{\log(\frac{nd}{p})}}}{t^\alpha}
+  \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$$
 \end{lemma}
 
 \begin{proof}
-At first since $\frac{\delta(t)}{t}$ is a decreasing function, $e(t)\leq (1-\frac{\alpha}{t}) + g(t)$, where $g(t)=\frac{\delta(t)}{t}$.
-\begin{align*}
- e(t)
- &\leq (1-\frac{\alpha}{t})e(t-1) + g(t)\\
- &\leq (1-\frac{\alpha}{t})(1-\frac{\alpha}{t-1})e(t-2) + (1-\frac{\alpha}{t})g(t-1) + g(t)\\
- &\leq (1-\frac{\alpha}{t})\cdots (1-\alpha)e(0) + \sum_{\tau=1}^t g(\tau)\Pi_{i=\tau+1}^t(1-\frac{\alpha}{i})\\
- &\leq \frac{e(0)}{t^\alpha} + \sum_{\tau=1}^tg(\tau)e^{-\alpha\sum_{i=\tau+1}^t\frac{1}{i}}\\
- &\leq \frac{e(0)}{t^\alpha} + \sum_{\tau=1}^tg(\tau)e^{-\alpha(H_t-H_{\tau})}\\
- &\leq \frac{e(0)}{t^\alpha} + e^{-\alpha H_t}\sum_{\tau=1}^tg(\tau)e^{\alpha H_{\tau}}\\
- &\leq \frac{e(0)}{t^\alpha} + \frac{O(\sqrt{\log(\frac{nd}{p})})}{t^\alpha}\sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}\\
-\end{align*}
+  At first, since $\frac{\delta(t)}{t}$ is a decreasing function
+  for $p \leq 1/4$, we have that
+  $e(t)\leq (1-\frac{\alpha}{t}) + g(t)$, where $g(t)=\frac{\delta(t)}{t}$.
+  \begin{align*}
+    e(t)
+    &\leq
+    (1-\frac{\alpha}{t})e(t-1) + g(t)\\
+    &\leq
+    (1-\frac{\alpha}{t})(1-\frac{\alpha}{t-1})e(t-2)
+    + (1-\frac{\alpha}{t})g(t-1) + g(t)\\
+    &\leq
+    (1-\frac{\alpha}{t})\cdots (1-\alpha)e(0)
+    + \sum_{\tau=1}^t g(\tau)\prod_{i=\tau+1}^t(1-\frac{\alpha}{i})\\
+    &\leq
+    \frac{e(0)}{t^\alpha}
+    + \sum_{\tau=1}^tg(\tau)e^{-\alpha\sum_{i=\tau+1}^t\frac{1}{i}}\\
+    &\leq
+    \frac{e(0)}{t^\alpha}
+    + \sum_{\tau=1}^tg(\tau)e^{-\alpha(H_t-H_{\tau})}\\
+    &\leq
+    \frac{e(0)}{t^\alpha}
+    + e^{-\alpha H_t}\sum_{\tau=1}^tg(\tau)e^{\alpha H_{\tau}}\\
+    &\leq \frac{e(0)}{t^\alpha}
+    + \frac{\bigOh{\sqrt{\log(\frac{n}{p})}}}{t^\alpha}
+    \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}\\
+  \end{align*}
 
 \end{proof}
 
 \begin{lemma}
-\[
-e(t) =
-     \begin{cases}
-       O(\sqrt{\log(\frac{nd}{p})}\frac{(\log t)^{3/2}}{t^\alpha}) &\quad\text{if } \alpha \leq 1/2\\
-       O(\sqrt{\log(\frac{nd}{p})}\frac{(\log t)^{3/2}}{t^{1/2}}) &\quad\text{if } \alpha > 1/2\\
-       \end{cases}
-\]
+  \[
+    e(t) =
+    \begin{cases}
+      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^\alpha}}
+      &\quad\text{if } \alpha \leq 1/2\\
+      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^{1/2}}}
+      &\quad\text{if } \alpha > 1/2\\
+    \end{cases}
+  \]
 
 \end{lemma}
 \begin{proof}
-We observe that $\sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}} \leq \int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau$ since $\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$\\
-If $\alpha\leq 1/2$ then $\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau \leq \int_{\tau=1}^t \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))$\\
+  We observe that
+  \[
+    \sum_{\tau=1}^t\tau^\alpha
+    \frac{\sqrt{\log \tau}}{\tau^{3/2}}
+    \leq
+    \int_{\tau=1}^t
+    \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau,
+  \]
+  since $\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$
+  \begin{itemize}
+    \item If
+  $\alpha\leq 1/2$ then
+  \[
+    \int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
+    \leq
+    \int_{\tau=1}^t
+    \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))
+  \]
+\item If $\alpha> 1/2$ then\\
+  \begin{align*}
+    \int_{\tau=1}^t
+    \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
+    &=
+    \int_{\tau=1}^t \tau^{\alpha-1/2}\frac{\sqrt{\log \tau}}{\tau}d\tau \\
+    &=
+    \frac{2}{3} \int_{\tau=1}^t
+    \tau^{\alpha-1/2}((\log \tau)^{3/2})'d\tau \\
+    &=
+    \frac{2}{3}(\log t)^{3/2} - (\alpha-1/2)\frac{2}{3}
+    \int_{\tau=1}^t \tau^{\alpha-3/2}(\log \tau)^{3/2}d\tau \\
+    &=
+    \bigOh{(\log t)^{3/2}}
+  \end{align*}
 
-\noindent If $\alpha> 1/2$ then\\
+\end{itemize}
 
-\begin{eqnarray*}
-\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau &=& \int_{\tau=1}^t \tau^{\alpha-1/2}\frac{\sqrt{\log \tau}}{\tau}d\tau\\
-&=& \frac{2}{3} \int_{\tau=1}^t \tau^{\alpha-1/2}((\log \tau)^{3/2})'d\tau\\
-&=& \frac{2}{3}(\log t)^{3/2} - (\alpha-1/2)\frac{2}{3} \int_{\tau=1}^t \tau^{\alpha-3/2}(\log \tau)^{3/2}d\tau\\
-&\leq& O(\log t)^{3/2})
-\end{eqnarray*}
-
-%$\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau \leq \int_{\tau=1}^t \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))$
+  %$\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau \leq \int_{\tau=1}^t \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))$
 
 \end{proof}
