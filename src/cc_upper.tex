@@ -62,13 +62,26 @@ In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each n
 $$ \norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{D}} \leq (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$$
 
 \end{proof}
-We are now going to translate this result to one that involves the expected value of the error. First of all, we set $Err(t) = \norm{\infty}{x^t-x^*}$ the error after $t$ rounds and using the conditional expectations identity, we get:
+We are now going to translate this result to one that involves the expected value of the error. 
+\begin{theorem}If we set $u(t) = \norm{\infty}{x^t-x^*}$, the error after $t$ rounds, then:
+$$
+\Exp{u(t)} \leq 2(1-a)^{\frac{\sqrt{t}}{4d\ln(dt)\ln\lp( \frac{1}{1-a}\rp)}}
+$$
+\begin{proof}
+Using the result of the previous theorem, we obtain:
+$$ \Prob{u(t) > (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }} \leq p $$
+for every probability $p \in [0,1]$. Also, since all the parameters of the problem lie in $[0,1]$, we have 
+$$\Exp{u(t)|u(t) > r} \leq 1$$
+Now, by the conditional expectations identity, we get:
 \begin{align*}
-&\mathbb{E}[Err(t)] = \mathbb{E}[Err(t)|Err(t) > r]\Prob{Err(t) > r} +\mathbb{E}[Err(t)|Err(t) \leq r]\Prob{Err(t) \leq r}\\
-&\leq p + r \\
+\Exp{u(t)} &= \Exp{u(t)|u(t) > r}\Prob{u(t) > r} +\Exp{u(t)|u(t) \leq r}\Prob{u(t) \leq r}\\
+&\leq p + r 
 \end{align*}
-where $p = (1-a)^{\frac{\sqrt{t}}{2d\ln dt}}$ and $r = (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$. 
-We now evaluate $r$:
+where $r = (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$. If we set $p = (1-a)^{\frac{\sqrt{t}}{2d\ln dt}}$, then:
+$$
+\Exp{u(t)} \leq (1-a)^{\frac{\sqrt{t}}{2d\ln dt}} + (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }
+$$
+We now evaluate $r$ for our choice of probability $p$:
 \begin{align*}
 r 
 &= (1-a)^{\frac{t}{2d\ln\lp( \frac{dt}{p}\rp)} }\\
@@ -79,6 +92,6 @@ r
 \end{align*}
 
 Using the previous calculation, we obtain:
-$$ \mathbb{E}[Err(t)] \leq (1-a)^{\frac{\sqrt{t}}{2d\ln dt}} + (1-a)^{\frac{\sqrt{t}}{4d\ln(dt)\ln\lp( \frac{1}{1-a}\rp)}} \leq 2(1-a)^{\frac{\sqrt{t}}{4d\ln(dt)\ln\lp( \frac{1}{1-a}\rp)}}$$
-This means that the error decreases subexponentially with the number of rounds in expectation. 
-
+$$ \Exp{u(t)} \leq (1-a)^{\frac{\sqrt{t}}{2d\ln dt}} + (1-a)^{\frac{\sqrt{t}}{4d\ln(dt)\ln\lp( \frac{1}{1-a}\rp)}} \leq 2(1-a)^{\frac{\sqrt{t}}{4d\ln(dt)\ln\lp( \frac{1}{1-a}\rp)}}$$
+\end{proof}
+Therefore, this strategy achieves subexponential convergence rate in expectation. 
