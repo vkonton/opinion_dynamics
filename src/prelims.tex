@@ -1,10 +1,113 @@
-\section{Preliminaries}
+\section{Introduction}
 
-In the Friedkin-Johsen model an undirected graph $G(V,E)$ is assumed, where $V$
-denotes the agents and $E$ the social relations between them. Each agent $i$
-poses an internal opinion $s_i \in [0,1]$ and a self confidence coefficient
-$\alpha_i \in[0,1]$. At each time step $t\geq 1$, agent $i$ updates her opinion
-as follows: $$x_i(t) = (1-\alpha_i) \frac{\sum_{j \in N_i}x_j(t-1)}{d_i} +
-\alpha_i s_i$$ $d_i$ denotes the degree of node $i$ and $N_i$ the set of her
-neighbors. The above process have been studied and it is known to converge to a
-unique equilibrium point $x^* \in [0,1]^n$, where $n=|V|$.
+\subsection{Friedkin-Johsen Model}
+In the Friedkin-Johsen model (FJ-model) an undirected graph $G(V,E)$ with $n$
+nodes, is assumed, where $V$ denotes the agents and $E$ the social relations between
+them. Each agent $i$ poses an internal opinion $s_i \in [0,1]$ and a self confidence coefficient
+$\alpha_i \in[0,1]$. At each round $t\geq 1$, agent $i$ updates her opinion
+as follows:
+
+\begin{equation}\label{eq:best_response}
+  x_i(t) = (1-\alpha_i) \frac{\sum_{j \in N_i}x_j(t-1)}{|N_i|} + \alpha_i s_i,
+\end{equation}
+where $N_i$ is the set of her neighbors. The simplicity of its update rule makes it plausible, because in
+real social networks it is very unlikely that agents change their opinions
+according to complex rules. This model has been studies from several perspectives.
+Based on the above model, in \cite{BKO11}, they propose a game
+in which the strategy that each agent $i$ plays, is the opinion $x_i \in [0,1]$
+that she publicly expresses incurring her a cost
+\begin{align}\label{eq:kleinberg_cost}
+  C_i(x) = (1-a_i) \sum_{j \in N_i} (x_i - x_j)^2 + a_i (x_i - s_i)^2.
+\end{align}
+They prove that this game admits a unique equilibrium point and that
+the price of anarchy is $9/8$ for undirected graphs and $O(n)$ for
+directed networks.  In \cite{GS14} they study they show that the update
+rule (\ref{eq:best_response}) is the \emph{best response} play for the above
+game and they also study its convergence properties to the equilibrium point
+$x^* \in [0,1]^n$. Therefore, Friedkin-Johsen model admits several nice properties
+as it very simple to execute by the agents, rapidly converges to its equilibrium,
+and it is a natural behavior for selfish agents.
+
+Our work is motivated by the fact that the FJ-model requires that
+agents interact with all their neighbors at each round. This requirement
+could be under discussion in today's large social networks, where each individual
+could have several hundreds of friends (neighbors). In such graphs it is quite
+unnatural to assume that everybody updates her opinion using the opinions of all
+her friends. In this work we propose simple and natural models, similar to
+the original FJ-model, that require minimal interaction between agents at each
+round with similar convergence properties. More precisely, we assume that
+each agent can only interact with only one of her neighbors at each round.
+To make our setting precise we define the following oracles.
+\begin{itemize}
+  \item The \emph{labeled} oracle $O^l_i(t)$: when
+    agent $i$ calls the oracle at round $t$ the oracle $O^l_i(t)$ picks one
+    of her neighbors $j$ uniformly at random and returns $(j, x_j(t-1))$,
+    namely the label and the opinion of her neighbor $j$.
+
+  \item The \emph{unlabeled} oracle $O^u_i(t)$: when
+    agent $i$ calls the oracle $O^u_i(t)$ at round $t$ the oracle picks one
+    of her neighbors $j$ uniformly at random and returns $x_j(t-1)$.
+\end{itemize}
+In the \emph{labeled} resp. \emph{unlabeled} setting, at the beginning of each
+round $t$, each agent $i$ calls $O^l(i)$ resp. $O^u(i)$.
+We motivate the study of the unlabeled setting by the fact that
+in a huge social network, natural models would not take into account
+the identities of the people that express an opinion. (CAREFUL OPINION LEADERS).
+For the labeled setting we propose the following natural update rule.
+
+In the unlabeled setting we consider the following update rule that closely
+resembles the original FJ-model
+\begin{align}
+  x_i(0) &= s_i \nonumber \\
+  x_i(t) &=
+  (1-\alpha_i)\frac{\sum_{\tau=1}^{t} O^u_i(\tau)}{t} + \alpha_i s_i.
+\label{eq:unlabeled_update_rule}
+\end{align}
+In the labeled setting each agent $i$ keeps a vector $M_i \in [0,1]^{|N_i|}$
+with the opinions of all her neighbors. At each round $t$ she receives the
+value $(j, x_j(t-1))$ from $O_i^l(t)$ and sets $M_i(j) = x_j(t-1)$. Initially
+all agents have $M_i = 0$. Her update rule is
+\begin{align}
+  x_i(0) &= s_i \nonumber \\
+  x_i(t) &=  (1-a_i) \frac{\sum_{j\in N_i} M_i(j)}{|N_i|} + a_i s_i
+  \label{eq:labeled_update_rule}
+\end{align}
+
+\subsection{Our Results}
+We first show that in the unlabeled setting, using the update rule
+(\ref{eq:unlabeled_update_rule}) gives a protocol that converges to the
+same equilibrium point as the FJ-model. In the next theorem we provide
+the rate of convergence of our model.
+\begin{theorem}
+  For any instance $I = (G, s, a)$ the update rule \ref{eq:unlabeled_update_rule}
+  has the following convergence rate
+\[
+\Exp{\norm{\infty}{x^t - x^*}} \leq
+    \begin{cases}
+      C_1 \sqrt{\log n}\frac{(\log t)^{2}}{t^\rho}
+      &\quad\text{if } \rho \leq 1/2\\
+      C_2 \sqrt{\log n}\frac{(\log t)^{2}}{t^{1/2}}
+      &\quad\text{if } \rho > 1/2\\
+    \end{cases},
+  \]
+  where $\rho = \min_{i \in V} a_i$ and $C_1, C_2$ are universal constants.
+\end{theorem}
+
+For the labeled case we show that we even in our restricted setting we can still
+achieve an almost linear rate of convergence as stated in the following theorem
+
+\begin{theorem}
+  For any instance $I = (G, s, a)$ the update rule \ref{eq:labeled_update_rule}
+  has the following convergence rate
+\[
+\Exp{\norm{\infty}{x^t - x^*}} \leq
+
+  \]
+  where $\rho = \min_{i \in V} a_i$ and $C_1, C_2$ are universal constants.
+\end{theorem}
+
+
+
+% In this limited information environment, we propose simple and natural
+% models that share similar convergence properties with the original FJ-model.
+

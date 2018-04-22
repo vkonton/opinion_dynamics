@@ -24,10 +24,21 @@ of the given instance $I$. We prove that
 the above stochastic process has the following convergence
 rate to $x^*$.
 \begin{theorem}
-  \[
-    \Exp{\norm{\infty}{x^t - x^*}} \leq \sqrt{\frac{\log(n)}{t}}
+
+\[
+\Exp{\norm{\infty}{x^t - x^*}} =
+    \begin{cases}
+      \bigOh{\sqrt{\log n}\frac{(\log t)^{2}}{t^\alpha}}
+      &\quad\text{if } \alpha \leq 1/2\\
+      \bigOh{\sqrt{\log n}\frac{(\log t)^{2}}{t^{1/2}}}
+      &\quad\text{if } \alpha > 1/2\\
+    \end{cases}
   \]
 \end{theorem}
+\begin{proof}
+  Setting $p = 1/\sqrt{t}$ in Lemma~\ref{l:error_bound} yields
+  the result.
+\end{proof}
 
 We start by stating the standard Hoeffding bound
 
@@ -39,7 +50,7 @@ We start by stating the standard Hoeffding bound
   \]
 \end{lemma}
 
-\begin{lemma}
+\begin{lemma}\label{l:error_recursion}
   With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
   where $e(t)$ satisfies the following recursive relation
   $$e(t) =
@@ -47,7 +58,7 @@ We start by stating the standard Hoeffding bound
   \text{ and } e(0)=\|x^0 - x^*\|_{\infty}, $$
   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
 \end{lemma}
-\begin{corollary}
+\begin{corollary}\label{c:error_recursion}
   The function $e(t)$ satisfies the following recursive relation
   $$e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}=\delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}$$
 \end{corollary}
@@ -141,10 +152,25 @@ the convergence rate of the function $e(t)$.
 The following lemma provides us with a simple upper bound for the
 convergence rate of our process.
 
-\begin{lemma}
-  $$e(t) \leq \frac{e(0)}{t^\alpha} +
-  \frac{\bigOh{\sqrt{\log(\frac{nd}{p})}}}{t^\alpha}
-  \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$$
+% \begin{lemma}\label{l:error_bound}
+%   $$e(t) \leq \frac{e(0)}{t^\alpha} +
+%   \frac{\bigOh{\sqrt{\log(\frac{nd}{p})}}}{t^\alpha}
+%   \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$$
+% \end{lemma}
+
+\begin{lemma}\label{l:error_bound}
+  Let $e(t)$ be a function satisfying the recursion of
+  Corollary~\ref{c:error_recursion}. Then with probability
+  at least $1-p$ we have that
+  \[
+    e(t) =
+    \begin{cases}
+      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^\alpha}}
+      &\quad\text{if } \alpha \leq 1/2\\
+      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^{1/2}}}
+      &\quad\text{if } \alpha > 1/2\\
+    \end{cases}
+  \]
 \end{lemma}
 
 \begin{proof}
@@ -175,21 +201,6 @@ convergence rate of our process.
     \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}\\
   \end{align*}
 
-\end{proof}
-
-\begin{lemma}
-  \[
-    e(t) =
-    \begin{cases}
-      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^\alpha}}
-      &\quad\text{if } \alpha \leq 1/2\\
-      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^{1/2}}}
-      &\quad\text{if } \alpha > 1/2\\
-    \end{cases}
-  \]
-
-\end{lemma}
-\begin{proof}
   We observe that
   \[
     \sum_{\tau=1}^t\tau^\alpha
@@ -225,7 +236,5 @@ convergence rate of our process.
   \end{align*}
 
 \end{itemize}
-
-  %$\int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau \leq \int_{\tau=1}^t \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))$
 
 \end{proof}
