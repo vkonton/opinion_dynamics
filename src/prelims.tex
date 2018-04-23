@@ -61,7 +61,7 @@ resembles the original FJ-model
   x_i(0) &= s_i \nonumber \\
   x_i(t) &=
   (1-\alpha_i)\frac{\sum_{\tau=1}^{t} O^u_i(\tau)}{t} + \alpha_i s_i.
-\label{eq:unlabeled_update_rule}
+  \label{eq:unlabeled_update_rule}
 \end{align}
 In the labeled setting each agent $i$ keeps a vector $M_i \in [0,1]^{|N_i|}$
 with the opinions of all her neighbors. At each round $t$ she receives the
@@ -81,8 +81,8 @@ the rate of convergence of our model.
 \begin{theorem}
   For any instance $I = (G, s, a)$ the update rule \ref{eq:unlabeled_update_rule}
   has the following convergence rate
-\[
-\Exp{\norm{\infty}{x^t - x^*}} \leq
+  \[
+    \Exp{\norm{\infty}{x^t - x^*}} \leq
     \begin{cases}
       C_1 \sqrt{\log n}\frac{(\log t)^{2}}{t^\rho}
       &\quad\text{if } \rho \leq 1/2\\
@@ -99,13 +99,11 @@ achieve an almost linear rate of convergence as stated in the following theorem
 \begin{theorem}
   For any instance $I = (G, s, a)$ the update rule \ref{eq:labeled_update_rule}
   has the following convergence rate
-\[
-\Exp{\norm{\infty}{x^t - x^*}} \leq
-
+  \[
+    \Exp{\norm{\infty}{x^t -x^*}} \leq
+    2(1-a)^{\frac{\sqrt{t}}{4d\ln(dt)\ln\lp( \frac{1}{1-a}\rp)}}
   \]
-  where $\rho = \min_{i \in V} a_i$ and $C_1, C_2$ are universal constants.
 \end{theorem}
-
 
 
 % In this limited information environment, we propose simple and natural

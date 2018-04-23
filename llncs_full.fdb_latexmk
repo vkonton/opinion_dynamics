@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex llncs_full"] 1524426039 "llncs_full.aux" "llncs_full.bbl" "llncs_full" 1524426039
-  "llncs_full.aux" 1524426039 2579 bd51d809dd6f36df4317945a100e4f69 ""
+["bibtex llncs_full"] 1524479441 "llncs_full.aux" "llncs_full.bbl" "llncs_full" 1524480469
+  "llncs_full.aux" 1524480469 2638 43b7650eee42f2e15a6314227c697a49 ""
   "refs.bib" 1524414688 1216 20eaf4779817a696de9ea52672a09f8e ""
   "splncs04.bst" 0 -1 0 ""
   (generated)
-  "llncs_full.bbl"
   "llncs_full.blg"
-["pdflatex"] 1524426038 "llncs_full.tex" "llncs_full.pdf" "llncs_full" 1524426038
+  "llncs_full.bbl"
+["pdflatex"] 1524480468 "llncs_full.tex" "llncs_full.pdf" "llncs_full" 1524480469
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1520157250 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc" 1520152023 2639 b7bbeb66c016cde6fdcad9263fe54a4a ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1520157216 3332 103109f5612ad95229751940c61aada0 ""
@@ -266,22 +266,22 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1520157258 32585 d82bbcf7626b7842c87671687479e852 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1524049115 2623954 0a6a6b46f4d66e54dc08a8252a5fd1fb ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1524049103 7738161 f8ed59071fd1e5f29933a0084b550116 ""
-  "llncs_full.aux" 1524425891 2579 8bf728f2b98511a91d93cd0117b7bd25 ""
-  "llncs_full.bbl" 1524425875 0 d41d8cd98f00b204e9800998ecf8427e "bibtex llncs_full"
-  "llncs_full.out" 1524425891 53 ffcbb8ea0fa1262be3db0ca23b974124 ""
-  "llncs_full.tex" 1524412199 2016 1dcdbf9aaf8bf7e5a04a0b12838e4520 ""
+  "llncs_full.aux" 1524480469 2638 43b7650eee42f2e15a6314227c697a49 ""
+  "llncs_full.bbl" 1524479441 0 d41d8cd98f00b204e9800998ecf8427e "bibtex llncs_full"
+  "llncs_full.out" 1524480469 53 ffcbb8ea0fa1262be3db0ca23b974124 ""
+  "llncs_full.tex" 1524478543 1929 6d433c51f94694668905151086782bfe ""
   "src/abstract.tex" 1524344896 16 40a46c9c78e0bafe7cbe81d9a92f4d4c ""
-  "src/cc_upper.tex" 1524321814 7234 0c5e6cf24315b648f797a6d47878e48b ""
-  "src/noregret.tex" 1524406733 3455 6c9c81512bfefc713a9af485cd971927 ""
-  "src/prelims.tex" 1524426037 4973 874c0042f3cacabb050d4821f640531a ""
+  "src/cc_upper.tex" 1524478743 7707 db5c3b0763efa698fbe6d74821021da5 ""
+  "src/noregret.tex" 1524480466 3661 f774d3b4d90ba61e9674398744f7267b ""
+  "src/prelims.tex" 1524426445 5405 a59b76e8694f5f04b00644e988f4ba62 ""
   "src/sample_mean_upper.tex" 1524412215 7748 46637da15ed58892a755882f37b16d46 ""
   "src/unbiased.tex" 1524321814 1834 8e68f55bb85604396f5401affc4e06ed ""
   "templates/colors.tex" 1523879608 835 c894d71b899ffddd3560864fbbf34e54 ""
   "templates/llncs/llncs.cls" 1521108100 43467 a21466011e5ed5d4c3f1d5a9af897395 ""
   "templates/macros.tex" 1524311971 2603 022e75b61bf6812926dc4284b4709ca5 ""
-  "templates/packages.tex" 1524407234 1857 d100b3b6116cbb13af4a2777b390c52b ""
+  "templates/packages.tex" 1524478380 1833 e287fdcdd7fd3e7460f4f228785d3e6e ""
   (generated)
   "llncs_full.out"
-  "llncs_full.log"
   "llncs_full.pdf"
+  "llncs_full.log"
   "llncs_full.aux"
