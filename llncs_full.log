@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  23 APR 2018 13:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  23 APR 2018 15:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1600,11 +1600,11 @@ Package rerunfilecheck Info: File `llncs_full.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 66.
  ) 
 Here is how much of TeX's memory you used:
- 34679 strings out of 492982
- 763748 string characters out of 6138579
+ 34686 strings out of 492982
+ 763841 string characters out of 6138579
  991708 words of memory out of 5000000
- 37345 multiletter control sequences out of 15000+600000
- 145046 words of font info for 305 fonts, out of 8000000 for 9000
+ 37348 multiletter control sequences out of 15000+600000
+ 145470 words of font info for 308 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,14n,96p,1120b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/kpfonts/kpfonts-expert.enc}{/usr/share
@@ -1616,12 +1616,11 @@ e1/public/kpfonts/jkpmi.pfb></usr/share/texmf-dist/fonts/type1/public/kpfonts/j
 kpmit8a.pfb></usr/share/texmf-dist/fonts/type1/public/kpfonts/jkpmn8a.pfb></usr
 /share/texmf-dist/fonts/type1/public/kpfonts/jkpmne.pfb></usr/share/texmf-dist/
 fonts/type1/public/kpfonts/jkpsy.pfb></usr/share/texmf-dist/fonts/type1/public/
-kpfonts/jkpttmn8a.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbol
-s/msbm10.pfb>
-Output written on llncs_full.pdf (10 pages, 124877 bytes).
+kpfonts/jkpttmn8a.pfb>
+Output written on llncs_full.pdf (10 pages, 123113 bytes).
 PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
- 136 compressed objects within 2 object streams
+ 158 PDF objects out of 1000 (max. 8388607)
+ 133 compressed objects within 2 object streams
  45 named destinations out of 1000 (max. 500000)
  36373 words of extra memory for PDF output out of 42996 (max. 10000000)
 

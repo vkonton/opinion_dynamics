@@ -61,15 +61,20 @@
 \newcommand{\erf}[1]{\mrm{erf}\lp(#1\rp)}
 \newcommand{\erfc}[1]{\mrm{erfc}\lp(#1\rp)}
 
-\newcommand{\Prob}[1]{\mathbb{P}\lp[#1\rp]}
+\newcommand{\Prob}[1]{\bm{\mrm{P}}\lp[#1\rp]}
 
 \newcommand{\Exp}[1][]{
-  \def\ArgI{{#1}}%
+  \def\ArgI{#1}%
   \ExpRelay
 }
 \newcommand{\ExpRelay}[1]{
   \bm{\mrm{E}}_{\ArgI} \lp[ #1 \rp]
 }
+
+\newcommand{\Expnew}[2]{
+  \bm{\mrm{E}}_{#1} \lp[ #2 \rp]
+}
+
 
 \newcommand{\Var}[1]{\bm{\mrm{V}}\lp[#1\rp]}
 \newcommand{\Cov}[2]{\mrm{Cov}\lp[#1, #2\rp]}
