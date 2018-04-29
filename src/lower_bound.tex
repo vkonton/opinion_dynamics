@@ -1,0 +1,56 @@
+\section{Lower Bound}
+\begin{theorem}\label{t:lower_bound}
+Suppose $\hat{\theta}^t$ is an estimator for the probability $p$ of a Bernoulli random variable that takes $t$ samples. Then, for every interval $[a,b]$ which is contained in $[0,1]$ and for every $c>0$, it holds that:
+$$ \lim_{t\to\infty} t^{1+c}\int_{a}^b \Exp{\norm{\infty}{\hat{\theta}^t-p}}dp = \infty$$
+\end{theorem}
+In order to prove this, we need the following result:
+\begin{lemma}[Fano's Inequality]\label{l:fano}
+Suppose we have an estimator $\hat{\theta}^t$ for the probability of a Bernoulli distribution. 
+The unknown distribution belongs to a family of distributions $\mathcal{P}$ with the property that the probabilities of every two distributions in this family differ by at least $2\delta$, where $\delta$ is a positive real number.
+Then, for every subset ${P_1, P_2, ..., P_n}$ of distributions from this family, where $p_i$ is the probability of distribution $P_1$, the following inequality holds:
+$$\frac{1}{n} \sum_{i=1}^n \Exp{\lp|\hat{\theta}^t-p_i\rp|} \geq \delta \lp(1-\frac{I(X;V)+\log 2}{\log n}\rp)$$
+\end{lemma}
+
+We are now going to use Theroem~(\ref{l:fano}) to prove the following lemma, which provides a lower bound for the mean of the expectation of errors of the estimator.
+\begin{lemma}\label{l:fano_application}
+Suppose we choose $t$ Bernoulli distributions ${P_i}_{i=0}^{t-1}$ with the following probabilities: $$p_i = a+\frac{b-a}{2t} + i \frac{b-a}{t} , i=0, ..., t-1$$. Then:
+$$\frac{1}{t} \sum_{i=1}^t \Exp{\lp|\hat{\theta}^t-p_i\rp|} \geq \frac{b-a}{2t} \lp(c_1 - \frac{c_2}{t}\rp)$$
+where $c_1, c_2 >0$ and $c_1 > \frac{1}{2}$.
+\end{lemma}
+\begin{proof}
+Without loss of generality, we can assume that $t$ is a multiple of 5. For simplicity, we set $E_i = \Exp{\lp|\hat{\theta}^t-p_i\rp|}$.
+By the choice of $p_i$, we have that $$\lp|p_i - p_j\rp| \geq \frac{b-a}{t}$$, for every distinct $i,j$ in the family.
+ This means that for the family of $t$ distributions that we picked, the property of Lemma~(\ref{l:fano}) is satisfied for $\delta = \frac{b-a}{2t}$. Thus, by dividing the $t$ distributions into groups of 5 and applying Lemma~(\ref{l:fano}) to each one, we obtain:
+ \begin{align}\label{eq:fano}
+ \frac{\sum{k =i}^{i+4}}{5} &\geq \frac{b-a}{2t}\lp(1-\frac{I(X;V)+\log 2}{\log n}\rp) \nonumber\\
+ &= \frac{b-a}{2t}\lp(1- \frac{\log 2}{\log 5} - \frac{I(X;V)}{\log5}\rp) \nonumber\\
+ &= \frac{b-a}{2t}\lp(c_1 - \frac{I(X;V)}{\log5}\rp)
+ \end{align}
+ where $c_1 = 1-\frac{\log2}{\log5} > \frac{1}{2}$. 
+ We are now going to upper bound the mutual information $I(X;V)$ for every group of 5 distributions. We denote by $P_i^t$ the distribution on vectors with $t$ coordinates,
+  where each coordinate is sampled independently from $P_i$. Let $U= \{i,i+1,i+2,i+3,i+4\}$ be a family of 5 distributions.
+ Using a well known inequality REFERENCE NEEDED HERE:
+\begin{align*}
+I(X;V) &\leq \frac{1}{5^2}\sum_{\substack{i,j \in U \\i\neq j}} D_{kl}\lp(P_i^t,P_j^t\rp)\\
+&\leq D_{kl}\lp(P_i^t, P_{i+4}^t\rp)\\
+&= t D_{kl}\lp(P_i, P_{i+4}\rp)\\
+&\leq t \frac{\lp(p_i - p_{i+4}\rp)^2}{p_i(1-p_i)}\\
+&\leq t\lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp) \lp(p_i - p_{i+4}\rp)^2\\
+&= t\lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp)\lp(\frac{b-a}{2t} + i\frac{b-a}{t} - \frac{b-a}{t} -(i+4)\frac{b-a}{t}\rp)^2\\
+&= t\lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp) \frac{16(b-a)^2}{t^2}\\
+&= \frac{16(b-a)^2}{t} \lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp) 
+\end{align*}
+So, if we set $$c_2 = 16\frac{(b-a)^2}{\log5}\lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp)$$ 
+then by equation~(\ref{eq:fano}) we obtain:
+\begin{equation}\label{eq:fano5}
+\sum_{k =i}^{i+4} \geq \frac{5(b-a)}{2t}\lp(c_1 - \frac{c_2}{t}\rp)
+\end{equation}
+Inequality~(\ref{eq:fano5}) holds for every group of 5 distributions. By summing up for all groups:
+\begin{align*}
+\sum_{i=0}^{t-1} E_i &\geq t \frac{b-a}{2t}\lp(c_1 - \frac{c_2}{t}\rp)\\
+&= \frac{b-a}{2}\lp(c_1 - \frac{c_2}{t}\rp)
+\end{align*}
+which is what we wanted to prove. 
+
+
+\end{proof}
