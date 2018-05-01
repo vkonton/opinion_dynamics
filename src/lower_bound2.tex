@@ -1,0 +1,174 @@
+\section{Lower bound}
+\begin{theorem}\label{t:lower_bound_lecam}
+Let $P$ be a protocol run by each agent that produces vector output $x^t$ after $t$ iterations. 
+Suppose that for every graph $G$ and for every choice of parameters $s_i,\alpha_i \in [0,1]$ the error of the output is:
+$$
+\Exp{\norm{\infty}{x^t - x^*}} = f(n,t)
+$$
+where $n$ is the number of nodes in the graph. Then, 
+$$
+\lim_{t \to \infty} \sqrt{t} f(t,t) > 0
+$$
+\end{theorem}
+\begin{proof}
+
+Let $G$ be a graph that consists of 2 star topologies. That is, we have 2 center nodes $v_1, v_2$. Each of the two center nodes has exactly $t$ neighbours, which have degree 1. We will call these nodes the leaves of the graph. This graph has $2t+2$ nodes. We set $\alpha_i = 1$ for all the leaves and $\alpha_i = 1/2$ for the two centers. For exactly $t/2 + \sqrt{t}/2$ leaves of $v_1$ we set $s_i = 1$, for the rest $s_i = 0$. Similarly, for exactly $t/2 - \sqrt{t}/2$ leaves of $v_2$ we set $s_i = 1$, for the rest $s_i = 0$. By direct calculation, we get that the equilibrium point for this graph is the following:
+$$
+x_i^* = 
+\begin{cases}
+s_i &\quad\text{if i is a leaf node}\\
+\frac{1}{4}+\frac{1}{4\sqrt{t}} &\quad\text{if } i = v_1\\
+\frac{1}{4}-\frac{1}{4\sqrt{t}} &\quad\text{if } i = v_2
+\end{cases}
+$$
+Since the graph has $2t+2$ nodes:
+\begin{equation}\label{eq:f(2t,t)}
+\Exp{\norm{\infty}{x^t - x^*}} = f(2t+2,t)
+\end{equation}
+On the other hand, since $\norm{\infty}{x^t - x^*} \geq \max\{\lp|x_{v_1} - x_{v_1}^*\rp|, \lp|x_{v_2} - x_{v_2}^*\rp|\}$ we get:
+\begin{equation}\label{eq:mean}
+\Exp{\norm{\infty}{x^t - x^*}} \geq \frac{1}{2} \Exp{\lp|x_{v_1}^t - x_{v_1}^*\rp|} + \frac{1}{2} \Exp{\lp|x_{v_2}^t - x_{v_2}^*\rp|}
+\end{equation} 
+Suppose we have a star graph with center node $c$. At each time $t$, the oracle returns to the center node either the value of a leaf with $s_i = 1$ (e.g.$f(1,1,t)$) with probability :
+$$
+p = \frac{\text{\# leaves with } s_i = 1}{\text{\# leaves}}
+$$
+or the value of a leaf with $s_i = 0$ (e.g.$f(1,0,t)$) with probability $1-p$. As a result, knowing the 0-1 choice of the oracle at time step $t$, one can compute $x_c^t$, 
+meaning that $\hat{\theta}^t = 2x_c^t$ is an estimator for a Bernoulli random variable with probability $p$. This obviously holds for every choice of $s_i \in \{0,1\}$. 
+This means that in our graph, $\hat{\theta}_1 = 2x_{v_1}^t$ is an estimator for the Bernoulli with probability $p_1 = \frac{1}{2}+\frac{1}{2\sqrt{t}}$ 
+and $\hat{\theta}_2 = 2x_{v_2}^t$ is an estimator for the Bernoulli with probability $p_2 = \frac{1}{2}-\frac{1}{2\sqrt{t}}$.
+To be more precise, since the protocol is executed in the same way in all nodes, $\hat{\theta}_1$ and $\hat{\theta}_2$ are the ouputs of one estimator $\hat{\theta}$, depending on the distribution 
+from which this estimator gets its input. 
+By combining inequalities~(\ref{eq:f(2t,t)}) and~(\ref{eq:mean}) we get:
+\begin{equation}\label{eq:lecam}
+f(2t+2,t) \geq \frac{1}{4} E_{p_1}\{\lp|\hat{\theta} - p_1\rp|\} + \frac{1}{4} E_{p_2}\{\lp|\hat{\theta} - p_2\rp|\}
+\end{equation}
+We will now try to bound the right hand side of equation~(\ref{eq:lecam}).
+We first notice that:
+\begin{align*}
+E_{p_1}{\lp|\hat{\theta} - p_1\rp|} &\geq \delta \Exp{\mathds{1}\{\lp|\hat{\theta} - p_1\rp| > \delta\}}\\
+&= \delta \Prob{\lp|\hat{\theta} - p_1\rp| > \delta}
+\end{align*}
+The same holds for $p_2$. It suffices now to provide a lower bound for this probability. 
+In order to do this, we use a standard reduction from estimation problems to testing problems(see lecam). 
+In a testing problem, there exist two Bernoulli distributions $P_1$ and $P_2$. First, nature selects with equal probability one of them and let $V \in \{1,2\}$ denote this random choice. 
+Then, we draw a random vector $(Y_1,\ldots, Y_t)$ from the $t$-fold product distribution $P_V^t$. 
+The goal is to decide whether $V=1$ or $V=2$. More precisely, we have to select a suitable function $\psi:\{0,1\}^t\mapsto \{1,2\}$ that minimizes $\Prob{\psi(Y_1,\ldots,Y_t) \neq V}$ 
+First, we state a Lemma that provides a lower bound for this probability.
+\begin{lemma}\label{l:lecam_lemma}
+For every function $\psi:\{0,1\}^t\mapsto \{1,2\}$:
+$$
+\Prob{\psi(Y_1,\ldots,Y_t) \neq V} \geq \frac{1}{2} \lp(1 - D_{TV}(P_1^t, P_2^t)\rp)
+$$
+where $t$ is the number of samples.
+\end{lemma}
+We have:
+\begin{align*}
+\frac{1}{4} E_{p_1}\{\lp|\hat{\theta} - p_1\rp|\} + \frac{1}{4} E_{p_2}\{\lp|\hat{\theta} - p_2\rp|\} 
+&= \frac{1}{4} E\{\lp|\hat{\theta} - p_1\rp|| V = 1\} + \frac{1}{4} E\{\lp|\hat{\theta} - p_2\rp|| V = 2\}\\
+&\geq \frac{1}{4\sqrt{t}}\Prob{\hat{\theta} > \frac{1}{2}|V = 1} + \frac{1}{4\sqrt{t}}\Prob{\hat{\theta} < \frac{1}{2}|V = 2} 
+\end{align*}
+We define :
+$$
+\psi = 
+\begin{cases}
+1 \quad \hat{\theta} < \frac{1}{2}\\
+2 \quad \hat{\theta} > \frac{1}{2}
+\end{cases}
+$$
+As a result, 
+\begin{align*}
+\frac{1}{4\sqrt{t}}\Prob{\hat{\theta} > \frac{1}{2}|V = 1} + \frac{1}{4\sqrt{t}}\Prob{\hat{\theta} < \frac{1}{2}|V = 2} 
+&\geq \frac{1}{2\sqrt{t}}\lp(\Prob{\hat{\theta} > \frac{1}{2},V = 1} + \Prob{\hat{\theta} > \frac{1}{2},V = 2}\rp)\\
+&= \frac{1}{2\sqrt{t}}\lp(\Prob{\psi = 2,V = 1} + \Prob{\psi = 1,V = 2}\rp) \\
+&= \frac{1}{2\sqrt{t}}\lp(\Prob{\psi \neq V}\rp)\\
+&\geq \frac{1}{4\sqrt{t}}(1 - D_{TV}(P_1^t,P_2^t))\\
+&\geq \frac{1}{24\sqrt{t}}
+\end{align*}
+So 
+$$
+\lim_{t \to \infty} \sqrt{t} f(2t+2,t) > 0
+$$
+
+
+
+
+\end{proof}
+\subsection{Estimating Bernoulli Distributions}
+The problem definition is the following:
+\begin{itemize}
+\item There exists an unkown parameter $p \in [0,1]$
+\item We receive i.i.d. observations $X_i$ , where $X_i\sim B(p)$ 
+\item We output an estimate value $\hat{p}=\hat{\theta_t}(X_1,\ldots,X_t)$ according to some function $\hat{\theta_t}:~ \{0,1\}^t\mapsto [0,1]$.
+ \end{itemize}
+The goal is to appropriately select $\hat{\theta_t}$ such that $\hat{p}$ and $p$ are relatively close. For example a very known selection is $$\hat{\theta_t}(X1,\ldots,X_t)= \frac{\sum_{i=1}^t X_i}{t}$$ which is the sample mean estimator
+
+\begin{definition}
+An estimator $\hat{\theta}$ is a colection of functions $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where $\hat{\theta_t}: \{0,1\}^t\mapsto [0,1]$.
+\end{definition} As the number of samples grows we would expect that an effiencient estimator $\hat{\theta}$ produces more and more accurate values for $p$. The following definition provides us the metric to evaluate the quality of an estimator $\hat{\theta}$. 
+
+\begin{definition}
+For any estimator $\hat{\theta_t}$ we define 
+$$E_p[|\hat{\theta_t}(X_1,\ldots,X_t)| - p|]= \sum_{(x_1,\ldots,x^t)\in \{0,1\}^t}|\hat{\theta_t}(x^1,\ldots,x^t) -p| \cdot p^{\sum_{i=1}^tx^i}(1-p)^{t-\sum_{i=1}^tx^i}$$ 
+\end{definition}
+The quantity $E_p[|\hat{\theta_t}(X_1,\ldots,X_t)| - p|]$ is the expected distance of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the distribution of the samples is $B(p)$. To simplify notation we also denote it as $E_p[|\hat{\theta_t} - p|]$.\\
+
+\noindent Notice that $E_p[|\hat{\theta_t}-p|]$ does not serve as a good metric since an effiencient estimator $\hat{\theta}$ must garantee good estimates for any parameter $p$. Consider an estimator $\hat{\theta}$ that outputs $1/2$ for all $t$. In this case, $E_{p}[|\hat{\theta_t}- p|]=|p-1/2|$ meaning that this estimator performs optimally when $p=1/2$, but extremely bad in any other case. As a result the standard metric in the statistics literature is the following.
+
+\begin{definition}
+For any estimator $\hat{\theta_t}$ we define its risk with $t$ samples as, $$R^t(\hat{\theta})=\text{max}_{p \in [0,1]}E_p[|\hat{\theta_t} - p|]$$
+\end{definition}Now our goal is clear, we need to design estimators $\hat{\theta_t}$ such that the risk $R^t(\hat{\theta_t})$ is as small as possible. For example one can easily prove that the risk rate of the \emph{sample mean estimator} ($\hat{\theta_t}= \frac{\sum_{i=1}^t X_i}{t}$) $R^t(\hat{\theta_t}) \leq \frac{1}{\sqrt{2t}}$. Obviously the next question is whether we can find another (probably more complex estimator) that acheives risk smaller than that of $\frac{1}{\sqrt{2t}}$.   
+
+\begin{theorem}\label{thm: risk_optimality}
+Any estimator $\hat{\theta}$ has risk $R^t(\hat{\theta}) \geq \frac{1}{16\sqrt{t}}$
+\end{theorem}
+The above theorem can be easily derived by standard techniques (e.g. Le Cam or Fano method) that have been develloped in the statistics literature to provide lower bounds on the risk of estimators. Especially, proving this lower bound for the Bernoulli case is requires a simple applications of these methods. The above theorem also tells us that the risk of the \emph{sample mean estimator} is up to constant factors optimal. Are we done?
+
+\begin{theorem}
+There exists an estimator $\hat{\theta}$ such that for all $p\in[0,1]$, $$E_p[|\hat{\theta_t} - p|] = \bigOh{\frac{1}{\sqrt{t}}}$$ 
+\end{theorem} Can this rate be imporoved? For example, is there a an estimator $\hat{\theta}$ such that for all $p\in [0,1]$, $E_p[|\hat{\theta_t} - p|] = \bigOh{\frac{1}{t}}$?\\
+
+\noindent It seems that the latter question can be answered negatively using Theorem~\ref{thm: risk_optimality}. Unfortunately, this is not the case. The difference is subtle but very important. The definition of the risk $R^t = \text{max}_{p \in [0,1]}E_p[|\hat{\theta_t}-p|]$, allows the maximum to be attained in a $p$ that depends on $t$ (e.g. $p=1/2+1/t$). As a result, Theorem~\ref{thm: risk_optimality} does not provide us with information about the above question.
+
+
+\begin{theorem}
+For any estimator $\hat{\theta}$ there exists a fixed $p\in[0,1]$ such that $$E_p[|\hat{\theta_t} - p|] = \Omega(\frac{1}{t})$$
+\end{theorem}
+
+\noindent To the best of our knowledge this question is not answered in the statistics literature. However, the same question has been asked for more the estimator of more general and complex distribution. These results ensure the above statement for estimators that satisfy certain propetries (unbaised estimators, locally regular, e.t.c.). In this section we provide a theorem that holds for any estimator and indicates that estimators that don't satisfy the above statement are very unlikely to exists.
+
+\begin{theorem}
+For any Bernoulli estimator $\hat{\theta}$, for all $[a,b] \subseteq [0,1]$,
+$$ \lim_{t \to \infty}t \int_{a}^{b}E_p[|\hat{\theta_t} -p|]dp = +\infty$$
+\end{theorem} In case that statement .. is not true than there exists an estimator $\hat{\theta}$ that simultaneous satisfies the following two properties:
+\begin{enumerate}
+ \item for all $p\in[0,1]$, $\lim_{t \to \infty}t E_p[|\hat{\theta_t} - p|]=0$
+ \item for all $[a,b] \in [0,1]$, $\lim_{t \to \infty}t \int_a^b E_p[|\hat{\theta_t} - p|]=+\infty$
+\end{enumerate}
+
+We conjecture that there does not exists a function that satisfies both of these properties. Even in case that this is not true, such a function has a very degenerate form making it very difficult to be the risk function of an estimator.  
+
+\subsection{Final Lower Bound}
+\begin{theorem}
+Let a graph oblivious protocol $P$ such that for any instance $I$, $E[||x^t - x^*||_{\infty}] \leq f(I)g(t)$, where $f: I\mapsto R_+$ and $g: N \mapsto R_+$. Then $\text{lim}_{t \to \infty}tf(t)\neq 0$.
+\end{theorem}
+\begin{proof}
+We use the protocol $P$ to construct an estimator $\hat{\theta}$ and then we use the theorem ... For any $k,n \in N$ with $k \leq n$ we construct the following instance.
+\begin{itemize}
+ \item A star graph with $n+1$ nodes
+ \item $k$ leaves have $a_i=1$ and $s_i=1$
+ \item $n-k$ leaves have $a_i=1$ and $s_i=0$
+ \item the central node has $a_{n+1}=1/2$ and $s_{n+1}=0$
+\item directed edges from the central node to all the leaves.
+ \end{itemize} Observe that for all $i \neq n+1$, $x^*_i=s_i$ and $x^*_{n+1}=\frac{k}{2n}$. For all $i\neq n+1$, $x_i^t=P(1,1,t)$ if $s_i=1$ and $x_i^t=P(0,1,t)$ if $s_i=0$. Notice that these are deterministic functions with respect to $t$ and are independent of the values of $k,n$. Now, $x_{n+1}^t=P(P(y_1,1,1),P(y_2,1,2),\dots,P(y_t,1,t),1/2,0,t)$, where $x_i \in {0,1}$. As a result, $x_{n+1}^t = g(y_1,\ldots,y_t)$, where $g: \{0,1\}^t \mapsto [0,1]$. As a result, the estimator $\hat{\theta}$ with $\hat{\theta_t} =\frac{x_c^t}{2}$ is valid estimator. Now let $p=k/n$ we have that \begin{eqnarray*}
+  E_p[||x^t-x^*||] &\geq& E_p[|x_{n+1}^t-\frac{p}{2}|]\\
+  &=& E_p[|\frac{\hat{\theta_t}}{2}-\frac{p}{2}|]\\
+  &=& \frac{1}{2}E_p[|\hat{\theta_t}-p|]\\
+ \end{eqnarray*} Finally, for all $p \in[0,1]~$  $E_p[|\hat{\theta_t}-p|] \leq 2f(I_{k,n})g(t)= f'(p)g(t)$. By theorem .., $\text{lim}_{t \to \infty}tf(t)\neq 0$.
+ 
+ 
+ 
+
+ 
+ 
+\end{proof}
