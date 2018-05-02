@@ -1,0 +1,87 @@
+\section{LeCam's lower bound}
+Suppose $P = B(p), Q = B(q)$ are two Bernoulli distributions. 
+We are first going to bound $D_{TV}(P^t, Q^t)$ by the hellinger distance of the two distributions.
+\begin{lemma}\label{l:totalv_hell}
+Suppose $P,Q$ are two arbitrary distributions. Then:
+$$
+D_{TV}(P,Q) \leq D_{hel}(P,Q) \sqrt{1-\frac{D_{hel}(P,Q)^2}{4}}
+$$
+\end{lemma}
+Thus, in order to find a lower bound for $D_{TV}(P,Q)$ , it suffices 
+to prove upper and lower bound for $D_{hel}(P,Q)$. This is done in the following lemmas. 
+In the following we denote by $D = D_{hel}(P, Q)^2$.
+\begin{lemma}\label{l:hell_n}
+$$
+D_{hel}(P^t, Q^t)^2 = 2 - 2\lp(1 - \frac{1}{2}D^2\rp)^t
+$$
+\end{lemma}
+
+\begin{lemma}\label{l:upper_lower}
+$$
+2 - 2e^{-\frac{Dt}{2}} \leq D_{hel}(P^t,Q^t)^2 \leq
+2 - 2e^{-Dt}
+$$
+\end{lemma}
+\begin{proof}
+Let's first prove the lower bound. We have:
+\begin{equation}\label{eq:exp1}
+\lp(1 - \frac{D}{2}\rp)^t \leq e^{-\frac{Dt}{2}}
+\end{equation}
+So, by Lemma~(\ref{l:hell_n}) we get:
+\begin{align*}
+d_hel(P^t,Q^t)^2 &= 2 - 2\lp(1 - \frac{D}{2}\rp)^t \\
+&\geq 2 - 2e^{-\frac{Dt}{2}}
+\end{align*}
+For the upper bound, notice that for any $x\in[0,0.7]$ :
+\begin{equation}\label{eq:exp2}
+1 -x \geq e^{-2x}
+\end{equation}
+As we shall see later, if $p,q$ are close enough, $D$ will be small, so we can assum that $D/2 \in [0,0.7]$. So, by using inequality~(\ref{eq:exp2}) and Lemma~(\ref{l:hell_n})
+we have:
+\begin{align*}
+d_{hel}(P^t,Q^t)^2 &= 2 - 2\lp(1 - \frac{D}{2}\rp)^t \\
+&\leq 2 - 2 e^{-Dt}
+\end{align*}
+\end{proof}
+\begin{lemma}\label{l:dtv_lower}
+$$
+D_{TV}(P^t,Q^t) \leq 1 - \frac{e^{-Dt}}{2}
+$$
+\end{lemma}
+\begin{proof}
+By Lemmata~(\ref{l:totalv_hell}) and ~(\ref{l:upper_lower}) we get:
+\begin{align*}
+D_{TV}(P^t,Q^t) &\leq D_{hel}(P^t,Q^t) \sqrt{1-\frac{D_{hel}(P^t,Q^t)^2}{4}}\\
+&\leq \sqrt{2 - 2e^{-Dt}} \sqrt{1 - \frac{2 - 2e^{\frac{Dt}{t}}}{4}}\\
+&= \sqrt{2}\sqrt{1 - e^{-Dt}} \sqrt{\frac{1}{2} - \frac{e^{-\frac{Dt}{2}}}{2}}\\
+&= \sqrt{1 - e^{-Dt}} \sqrt{1 - e^{-\frac{Dt}{2}}}\\
+&\leq 1 - \frac{e^{-Dt}}{2}
+\end{align*}
+since $e^{-\frac{Dt}{2}} \leq e^{-Dt}$. 
+\end{proof}
+The only thing that remains is to compute $D = D_{hel}(P,Q)$. We proceed to do this in the following lemma:
+\begin{lemma}\label{l:hell}
+If $p<q$ then
+$$
+D_{hel}(P,Q)^2 \leq \frac{1}{4}\lp(\frac{1}{p} + \frac{1}{1-q}\rp)(p-q)^2
+$$
+\end{lemma}
+\begin{proof}
+Since $P$ and $Q$ are Bernoulli, we have:
+$$
+D_{hel}(P,Q)^2 = \lp(\sqrt{p}- \sqrt{q}\rp)^2 + \lp(\sqrt{1-p}- \sqrt{1-q}\rp)^2
+$$
+We will bound the first term. We define the function $f:[p,q]\to \reals$:
+$$
+f(x) = \sqrt{x} - \sqrt{q}
+$$
+where $q$ is assumed to be constant. We have $f(p) = \sqrt{p} - \sqrt{q}$ and $ f(q) = 0$. $f$ is clearly continuously differentiable in $[p,q] $ with $f'(x) = \frac{1}{2\sqrt{x}}$,  
+so by the mean value theorem:
+$$
+f(q)-f(p) = f'(\xi) (q-p)
+$$
+for some $\xi \in [p,q]$. We notice that $\lp|f'(\xi)\rp| \leq \frac{1}{\sqrt{p}}$. So
+$$
+\lp|f(q)-f(p)\rp| \leq  \frac{1}{\sqrt{p}}(q-p)
+$$
+\end{proof}
