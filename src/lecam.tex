@@ -12,7 +12,7 @@ to prove upper and lower bound for $D_{hel}(P,Q)$. This is done in the following
 In the following we denote by $D = D_{hel}(P, Q)^2$.
 \begin{lemma}\label{l:hell_n}
 $$
-D_{hel}(P^t, Q^t)^2 = 2 - 2\lp(1 - \frac{1}{2}D^2\rp)^t
+D_{hel}(P^t, Q^t)^2 = 2 - 2\lp(1 - \frac{1}{2}D\rp)^t
 $$
 \end{lemma}
 
@@ -29,7 +29,7 @@ Let's first prove the lower bound. We have:
 \end{equation}
 So, by Lemma~(\ref{l:hell_n}) we get:
 \begin{align*}
-d_hel(P^t,Q^t)^2 &= 2 - 2\lp(1 - \frac{D}{2}\rp)^t \\
+D_{hel}(P^t,Q^t)^2 &= 2 - 2\lp(1 - \frac{D}{2}\rp)^t \\
 &\geq 2 - 2e^{-\frac{Dt}{2}}
 \end{align*}
 For the upper bound, notice that for any $x\in[0,0.7]$ :
@@ -39,7 +39,7 @@ For the upper bound, notice that for any $x\in[0,0.7]$ :
 As we shall see later, if $p,q$ are close enough, $D$ will be small, so we can assum that $D/2 \in [0,0.7]$. So, by using inequality~(\ref{eq:exp2}) and Lemma~(\ref{l:hell_n})
 we have:
 \begin{align*}
-d_{hel}(P^t,Q^t)^2 &= 2 - 2\lp(1 - \frac{D}{2}\rp)^t \\
+D_{hel}(P^t,Q^t)^2 &= 2 - 2\lp(1 - \frac{D}{2}\rp)^t \\
 &\leq 2 - 2 e^{-Dt}
 \end{align*}
 \end{proof}
@@ -69,19 +69,37 @@ $$
 \begin{proof}
 Since $P$ and $Q$ are Bernoulli, we have:
 $$
-D_{hel}(P,Q)^2 = \lp(\sqrt{p}- \sqrt{q}\rp)^2 + \lp(\sqrt{1-p}- \sqrt{1-q}\rp)^2
+D_{hel}(P,Q)^2 = \lp(\sqrt{p}-\sqrt{q}\rp)^2 + \lp(\sqrt{1-p}- \sqrt{1-q}\rp)^2
 $$
 We will bound the first term. We define the function $f:[p,q]\to \reals$:
 $$
 f(x) = \sqrt{x} - \sqrt{q}
 $$
-where $q$ is assumed to be constant. We have $f(p) = \sqrt{p} - \sqrt{q}$ and $ f(q) = 0$. $f$ is clearly continuously differentiable in $[p,q] $ with $f'(x) = \frac{1}{2\sqrt{x}}$,  
+where $q$ is assumed to be constant. We have $f(p) = \sqrt{p} - \sqrt{q}$ and $ f(q) = 0$.
+$f$ is clearly continuously differentiable in $[p,q] $ with $f'(x) = \frac{1}{2\sqrt{x}}$, 
 so by the mean value theorem:
 $$
 f(q)-f(p) = f'(\xi) (q-p)
 $$
-for some $\xi \in [p,q]$. We notice that $\lp|f'(\xi)\rp| \leq \frac{1}{\sqrt{p}}$. So
+for some $\xi \in [p,q]$. We notice that $\lp|f'(\xi)\rp| \leq \frac{1}{2\sqrt{p}}$. So
 $$
-\lp|f(q)-f(p)\rp| \leq  \frac{1}{\sqrt{p}}(q-p)
+\lp|f(q)-f(p)\rp| \leq  \frac{1}{\sqrt{p}}\lp|q-p\rp|
 $$
+Hence,
+\begin{equation}\label{eq:bound1}
+\lp(\sqrt{p} - \sqrt{q}\rp)^2 \leq \frac{1}{4p}(p-q)^2
+\end{equation}
+Using the exact same technique, we obtain:
+\begin{equation}\label{eq:bound2}
+\lp(\sqrt{1-p} - \sqrt{1-q}\rp)^2 \leq \frac{1}{4(1-q)}(p-q)^2
+\end{equation}
+If we combine inequalities~(\ref{eq:bound1}) and ~(\ref{eq:bound2}) we get:
+$$
+\lp(\sqrt{p} - \sqrt{q}\rp)^2 + \lp(\sqrt{1-p}- \sqrt{1-q}\rp)^2 \leq \frac{1}{4}\lp(\frac{1}{p} + \frac{1}{1-q}\rp)(p-q)^2
+$$ 
 \end{proof}
+So, if we set $p = d_1/n$ and $q = d_2/n$, then:
+\begin{align*}
+\Prob{\psi \neq V} &\geq \frac{\lp|d_1 - d_2\rp|}{4n} e^{-\frac{Dt}{2}}\\
+&\geq \frac{\lp|d_1 - d_2\rp|}{4n}e^{-\frac{1}{8}\lp(\frac{1}{p} + \frac{1}{1-q}\rp)\frac{(d_1 - d_2)^2}{n^2}}
+\end{align*}
