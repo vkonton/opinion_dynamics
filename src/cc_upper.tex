@@ -16,9 +16,14 @@ $$ ||x(t)-x^*||_{\infty} \leq \left( 1-\alpha_i\right)^T||x(0)-x^*||_{\infty}$$
 \begin{proof}
 We are going to use induction in time. The base case is for time $t=1$. We are going to prove that: $$ ||x(1)-x^*||_{\infty} \leq (1-\alpha_i)||x(0)-x^*||_{\infty}$$
 We assume that everybody has the same initial vector $x(0)$ stored in memory, so for each $i$ holds:
-$$x_i(1) = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j(0)}{d}+\alpha_i s_i (1)$$Since $x^*$ is the solution of the system, we have:
-$$ x_i^* = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j^*}{d}+\alpha_i s_i (2)$$
-Subtracting $(2)$ from $(1)$ we get:
+\begin{equation}\label{eq:time1}
+x_i(1) = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j(0)}{d}+\alpha_i s_i 
+\end{equation}
+Since $x^*$ is the solution of the system, we have:
+\begin{equation}\label{eq:sol}
+x_i^* = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j^*}{d}+\alpha_i s_i 
+\end{equation}
+Subtracting ~(\ref{eq:sol}) from ~(\ref{eq:time1}) we get:
 \begin{eqnarray*}
 |x_i(1) - x_i^*| &=& |(1-\alpha_i)\frac{\sum_{j \in N_i}(x_j(0)-x_j^*)}{d}|\\
 &\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}|x_j(0)-x_j^*|}{d} \\
@@ -58,7 +63,15 @@ $$
 After $t$ rounds, with probability at least $1 - p$: $\norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$
 \end{theorem}
 \begin{proof}
-In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a collector and wants to gather all $d_i$ coupons during each epoch. Suppose $d = \max_i d_i$ is the maximum degree of the graph. Then, if we set $n = d$ and $c = \ln (\frac{dt}{p})$ , using the previous lemma we get that a node hasn't seen at least one neigbour after $cd + d\ln d$ samples with probability at most $\frac{p}{dt}$. This means that if we set $D = cd + d\ln d = d \ln \frac{dt}{p} + d \ln d \geq 2d\ln\frac{dt}{p} $ when $p$ is small enough, then the probability that a specific agent at a specific epoch hasn't collected all neighbouring opinions at least once is at most $\frac{p}{dt}$. By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs with probability at least $1 - p$. We observe that at time $t$ approximately $\frac{t}{D}$ epochs have passed. Therefore, using the previous result about the convergence rate, we get that with probability at least $1 - p$:
+In our setting, coupon $i$ corresponds to the selection of neighbour $i$. 
+Each node is a collector and wants to gather all $d_i$ coupons during each epoch. 
+Suppose $d = \max_i d_i$ is the maximum degree of the graph. Then, if we set $n = d$ and $c = \ln (\frac{dt}{p})$ , 
+using the previous lemma we get that a node hasn't seen at least one neigbour after $cd + d\ln d$ samples with probability at most $\frac{p}{dt}$. 
+This means that if we set $D = cd + d\ln d = d \ln \frac{dt}{p} + d \ln d \geq 2d\ln\frac{dt}{p} $ when $p$ is small enough, 
+then the probability that a specific agent at a specific epoch hasn't collected all neighbouring opinions at least once is at most $\frac{p}{dt}$. 
+By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs with probability at least $1 - p$. 
+We observe that at time $t$ approximately $\frac{t}{D}$ epochs have passed. 
+Therefore, using the previous result about the convergence rate, we get that with probability at least $1 - p$:
 $$ \norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{D}} \leq (1-a)^{\frac{t}{2d\ln( \frac{dt}{p})} }$$
 
 \end{proof}
