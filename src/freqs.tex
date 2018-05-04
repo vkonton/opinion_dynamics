@@ -21,7 +21,7 @@ Chervonenkis inequality.
   \]
   Then
   \[
-    \Expnew{P^N}{\sup_{A \in \mcal{A}} \lp| \hat{P}_t(A) - P(A) \rp|}
+    \Expnew{P^N}{\max_{A \in \mcal{A}} \lp| \hat{P}_t(A) - P(A) \rp|}
     \leq 2 \sqrt{\frac{\log{2 S_{\mcal{A}}(N)}}{N}}
   \]
 \end{lemma}
@@ -55,9 +55,11 @@ For simplicity we describe it for agent $i$.
   \caption{Graph Aware Update Rule}
   \label{alg:frequencies}
   \begin{algorithmic}[1]
-    %\State $x_i(0) \gets s_i$, $t \gets 0$.
-    %\For{$T = 1, \ldots,\ln(1/\eps))$}
-    \State Agent $i$ keeps a map $h$ from $[0,1]$ to $[d_i]$
+    \State $x_i(0) \gets s_i$, $t \gets 0$.
+    \For{$l = 1, \ldots, \infty$}
+    \State $\eps \gets 1/2^l$.
+    \For{$t = 1, \ldots,\ln(1/\eps))$}
+    \State Keep a map $h$ from $[0,1]$ to $[d_i]$
     and array of counters $A$ of length $d_i$ and an array $B$ of length
     $M_1$.
     \State $M_1 = O(\ln(1/\eps))$,
@@ -66,9 +68,7 @@ For simplicity we describe it for agent $i$.
     \For{$j = 1, \ldots, M_1$}
 
     \For{$k = 1, \ldots, M_2$}
-    \State Agent $i$ calls the unlabeled oracle $O_i^u(t)$ to get
-    an opinion $X_i$.
-
+    \State Call the unlabeled oracle $O_i^u(t)$ to get an opinion $X_i$.
     \If{$X_i$ is not in $h$}
       \State Insert $X_i$ to $h$.
     \Else
@@ -81,13 +81,19 @@ For simplicity we describe it for agent $i$.
   \State $B(j) = \sum_{i=1}^{d_i} A(i)$.
 \EndFor
 \State $x_i(t) \gets \maj_{j} B(j)$.
+\EndFor
+\EndFor
 \end{algorithmic}
 \end{algorithm}
 
 \begin{theorem}
-  The update rule~\ref{alg:frequencies} after
-$T = O(d^2 \log d ( \log(n/\eps) + \log \log (1-a))$ rounds
-has $\Exp{\norm{\infty}{x_T - x^*}} = O(\eps)$.
+  The update rule~\ref{alg:frequencies} for $a > 1/2$ achieves
+  convergence rate
+  \[
+    \Exp{\norm{\infty}{x_t- x^*}}
+    \leq C \me^{-\sqrt{t}/(d\sqrt{\log{d}})},
+\]
+where $C$ is a universal constant.
 \end{theorem}
 \begin{proof}
   According to the update rule~\ref{alg:frequencies}
@@ -105,7 +111,7 @@ has $\Exp{\norm{\infty}{x_T - x^*}} = O(\eps)$.
   Letting $\mcal{A} = \{\{1\},\{2\},\ldots, \{d_i\}\}$ we have from
   Lemma~\ref{l:vc_inequality} that
   \[
-    \Expnew{P^m}{\sup_{j \in [d_i]} \lp| \hat{P}_m(j) - P(j) \rp|}
+    \Expnew{P^m}{\max_{j \in [d_i]} \lp| \hat{P}_m(j) - P(j) \rp|}
     \leq 2 \sqrt{\frac{\log{2 d_i}}{m}},
   \]
   since $S_{\mcal{A}} \leq d_i$. Therefore, an agent can draw
