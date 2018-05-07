@@ -1,0 +1,228 @@
+\section{Introduction}
+% \subsection{Friedkin-Johsen Model}
+
+\subsection{Friedkin-Johsen Model and Opinion Formation Games}
+In the Friedkin-Johsen model (FJ-model) an undirected graph $G(V,E)$ with $n$
+nodes, is assumed, where $V$ denotes the agents and $E$ the social relations
+between them. Each agent $i$ poses an internal opinion $s_i \in [0,1]$ and a self
+confidence coefficient $\alpha_i \in[0,1]$. At each round $t \geq 1$,
+agent $i$ updates her opinion as follows:
+
+\begin{equation}\label{eq:fj_dynamics}
+  x_i(t) = (1-\alpha_i) \frac{\sum_{j \in N_i}x_j(t-1)}{|N_i|} + \alpha_i s_i,
+\end{equation}
+
+where $N_i$ is the set of her neighbors. The simplicity of the update rule
+(\ref{eq:fj_dynamics}) makes the FJ-model plausible, because in real social
+networks it is very unlikely that agents change their opinions according
+to complex rules.
+% \subsection{Opinion Formation Games}
+Based on the FJ-model, in \cite{BKO11}, they propose an \emph{
+  opinion formation game} in which the strategy that each agent
+$i$ plays, is the opinion $x_i \in [0,1]$
+that she publicly expresses incurring her a cost
+
+\begin{equation}\label{eq:kleinberg_cost}
+  C_i(x_i,x_{-i})=(1-a_i)\sum_{j \in N_i}(x_i -x_j)^2 + a_i(x_i-s_i)^2.
+\end{equation}
+
+In \cite{BK011} they prove that it always admits a unique
+Nash Equilibrium $x^*$ and has Price of Anarchy $9/8$ if $G$ is
+undirected and $O(n)$ in the directed case.  We denote an instance of this
+game as $I=(G,s,a)$.
+The FJ-model can be viewed as the best-response dynamics of the
+of the opinion formation game.
+% j
+%
+% \begin{equation}
+%   C_i(x_i(t-1),x_{-i}(t-1))=(1-a_i)\sum_{j \in N_i}(x_i(t-1) -x_j(t-1))^2 +
+%   a_i(x_i(t-1)-s_i)^2
+% \end{equation}
+More precisely, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$ and
+at round $t \geq 1$, suffers the cost (\ref{eq:best_response})
+and updates her opinion so as to minimize her individual cost
+
+\begin{equation}\label{eq:best_response}
+  x_i(t) =
+  \argmin_{x \in [0,1]}
+  (1-a_i) \sum_{j \in N_i} (x - x_j(t-1))^2 + a_i (x -s_i)^2
+\end{equation}
+
+In \cite{GS14} it is proved that for any instance $I=(G,s,a)$ the opinion
+vector $x(t)=(x_1(t),\ldots,x_n(t))$ converges to the unique equilibrium point
+$x^*$. Moreover, this is achieved by an update rule that is very simple
+but more importantly it is \emph{rational}, in the sense
+that each agent $i$ adopts this rule in order to minimize her individual cost.
+
+\subsection{Opinion Formation Games with Random Payoffs}
+In the game defined by (\ref{eq:kleinberg_cost}),
+agent's $i$ cost $C_i(x_i,x_{-i})$ is a deterministic function of the
+opinion vector $x$. Many recent works (see e.g. \cite{Zhou17}) study games
+with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
+random variable. The random payoff setting can be much more realistic,
+since randomness may naturally occur because of incomplete information, noise
+or other stochastic factors. Motivated by this
+line of research we introduce a random payoff variant of the opinion
+formation game (\ref{eq:kleinberg_cost}).
+
+\begin{definition}\label{d:random_payoff_game}
+  Let $I=(G,s,a)$ an instance of the opinion formation game
+  and $x$ the opinion vector. Each agent $i$,
+  \begin{itemize}
+    \item picks uniformly at random one of her neighbors $j \in N_i$
+    \item suffers cost
+      $C_i(x_i,x_{-i}) = (1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$
+  \end{itemize}
+
+\end{definition}
+
+This game is more compatible to a realistic settings since
+in real world networks (e.g. Facebook, Twitter e.t.c.), each agent may have
+several hundreds of friends. As a result is far more reasonable to assume that
+every day, each agent meets a random small subset of her acquaintances and
+suffers a cost based on how much she disagrees with them.
+Since the expected cost of our random payoff variant equals
+the cost of game $(\ref{eq:kleinberg_cost})$, $ \Exp{C(x_i, x_{-i})} =
+(1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$,
+the results about the existence of a unique equilibrium,
+and the PoA bounds also hold in our variant.
+However, the best-response dynamics in the random payoff game
+does not converge to the equilibrium.  In this work, we investigate
+whether there exists natural dynamics that leads the system to the
+equilibrium point $x^*$.
+
+\subsection{Our Results and Techniques}
+In this work we propose the following dynamics for the
+random payoff game of Definition~\ref{d:random_payoff_game}.
+
+\begin{itemize}
+  \item Initially, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$.
+
+  \item At round $t \geq 1$, each agent $i$ meets uniformly at random one of
+    her friends $j \in N_i$, suffers cost
+    \(
+      C^t_i(x_i(t-1),x_{j}(t-1))=(1-a_i)(x_i(t-1)
+      -x_j(t-1))^2 + a_i(x_i(t-1)-s_i)^2
+    \)
+    and updates her opinion
+    \begin{equation}\label{eq:fictitious_play}
+      x_i(t) =
+      \argmin_{x \in [0,1]}
+      \sum_{\tau=1}^tC^{\tau}_i(x,x_{\pi_i(\tau)}(\tau-1))
+      % =
+      % (1-a_i)\frac{\sum_{\tau=1}^t x_{\pi_i(\tau)}(t-1)}{t} + a_is_i,
+    \end{equation}
+
+    where $\pi_i(\tau)$ denotes the index of the index of the neighbor that $i$
+    selected at round $\tau$.
+
+\end{itemize}
+The above dynamics is the \emph{fictitious play} in the game defined
+by the instance $I=(G,s,a)$. Generally speaking \emph{fictitious play} does
+guarantees convergence to the equilibrium.  We show that for our game with
+random payoffs fictitious play converges to equilibrium, giving the following
+bound for its convergence rate
+\begin{theorem}
+  For every instance $I=(G(V,E),s,a)$, if $x(t)$ is the opinion vector
+  generated by the update rule  (\ref{eq:fictitious_play}) then
+
+  \[
+    \Expnew{}{\norm{\infty}{x^t - x^*}} \leq
+      C \sqrt{\log |V|}\frac{(\log t)^{2}}{t^{\min(1/2,\, \rho)}},
+  \]
+  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
+\end{theorem}
+The update rule (\ref{eq:fictitious_play}) guarantees convergence
+while vastly reducing the information exchange between the agents
+at each round.
+Namely, each agent learns the opinion of only one of her neighbors
+whereas in the classical FJ-model (\ref{eq:fj_dynamics}) each agent
+learns the opinions of all of her neighbors. In terms of
+total communication needed to get within distance $\eps$ of the
+equilibrium, the update rule (\ref{eq:fictitious_play}) needs
+$O(|V| \log |V|)$ communication while (\ref{eq:fj_dynamics}) needs
+$O(|E|)$. Of course for this difference to be significant we need
+each agent to have at least $O(\log |V|)$ neighbors.  A large social
+network like Facebook has approximately $2$ billion users and each user
+has usually more that $100$ friends which far more than $\log(2\ 10^9)$.
+
+Apart from converging to the equilibrium, our update rule
+(\ref{eq:fictitious_play}) is also a rational behavioral
+assumption since it ensures \emph{no regret} for the agents.
+Having no-regret means that the average cost for each agent $i$
+after $T$ rounds is close to the average cost that she would
+suffer by expressing any fixed opinion. This is a very important
+feature of our update rule because even players that selfishly
+will to minimize their incurred cost, could choose to play according
+to it.
+
+\begin{theorem}
+
+  For every instance $I=(G,s,a)$, for every agent $i$
+  $$\sum_{\tau=1}^tC_i^\tau(x_i(\tau)) \leq \text{min}_{x \in
+    [0,1]}\sum_{\tau=1}^tC_i^\tau(x) + \bigOh{\log t}$$
+
+\end{theorem}
+
+Even though our update rule (\ref{eq:fictitious_play}) has the above
+desired properties it only achieves convergence rate of
+$\widetilde{O}(1/\sqrt{t})$ for a fixed instance $I$ with
+$\rho>1/2$.  For such an instance the original FJ-model outperforms
+our update rule since it achieves convergence rate $O(1/2^{t})$.
+We investigate whether this gap is due to an inherent characteristic
+of the random payoff setting i.e. learning the opinion of just one random
+neighbor vs learning all of them or we could find another natural dynamics
+that converges exponentially fast. Can the agents select another no regret
+algorithm that guarantees an asymptotically faster convergence rate?
+In Section~4 we investigate the following question
+
+\begin{question}
+  Is there a no regret algorithm that the agents can choose such that
+  for any instance $I = (G, s, a)$, $\Exp{\norm{\infty}{x_t - x^*}} = O(1/t)$ ?
+\end{question}
+
+To answer this question we first show that the existence of a no regret
+algorithm (that achieves this convergence rate to the equilibrium) implies
+the existence of an algorithm that uses i.i.d samples from a Bernoulli random
+variable $B(p)$ to estimate its success probability $p$ with the same asymptotic
+error rate. We use sample complexity lower bound techniques from statistics
+to show that such a no regret algorithm is unlikely to exist.
+We show that updating the opinion according to no regret algorithms leads
+to update rules that are totally ignorant of the specific graph structure $G$.
+Perhaps surprisingly, in Section~5 we present an update rule that takes
+into account only the maximum degree of the graph and for any fixed instance $I$
+achieves convergence rate $O(1/2^{\sqrt{t}})$.
+
+
+% In section 4, we investigate where a better convergence rate,
+% $E[||x(t)-x^*||_{\infty}]$ can be acheived if agent selected another no regret
+% algorithm. More precisely, we investigate the following question, \emph{Is
+%   there a no-regret algorithm such that for every instance }
+% $I,~E[||x(t)-x^*||_{\infty}] \in \bigOh{\frac{1}{t}}?$  We reduce this question
+% to the following question in statistical estimation, \emph{Is there a Bernoulli
+%   estimator }$\hat{\theta}$\emph{, such that for all }$q \in [0,1]$, $\lim_{t
+%   \rightarrow \infty} t E_q[|\hat{\theta^t} -q|]=0?$  To the best of our
+% knowledge this question is not answered in statistics literature. However, we
+% use standard tecnhiques for lower bounds in the statistical estimation to prove
+% the following theorem.
+
+% \begin{theorem}
+%   For any Bernoulli estimator
+%   $\hat{\theta}$, for all $[a,b] \subseteq [0,1]:~$ $\lim_{t \rightarrow
+%     \infty}t \int_{a}^bE_p[|\hat{\theta^t} -p|]= +\infty$
+% \end{theorem}
+% This result indicates that the second question and consequently the
+% first is very unlike to hold, especially for any reasonable no-regret
+% algorithm. We believe that there exists no such algorithm and we leave this
+% proof as an open problem.\\
+
+% Finally in section 5, we present an interesting side result. The reason that
+% there does not exists a no-regret algorithm, that ensures faster convergence
+% rate, is the algorithm's ignorance to the instance $I$ that defines the
+% dynamics. More formally, a no-regret algorithm does needs the values $s_i,a_i$
+% and $Y_1,\ldots,Y_t$ to determine $x_i(t)$. We find interesting that we design
+% a distributed algorithm that uses $s_i,a_i,Y_1,\ldots,Y_t$ and additionally the
+% $d_\text{max}$ of $G$ that achieves for every instance $I$ convergence rate,
+% $E||x(t)-x^*||_{\infty} \in \bigOh{2^{-\frac{\sqrt{t}}{d^3}}}$.
+
+\subsection{Related Work}

@@ -25,14 +25,9 @@ the above stochastic process has the following convergence
 rate to $x^*$.
 \begin{theorem}
 
-\[
-\Exp{\norm{\infty}{x^t - x^*}} =
-    \begin{cases}
-      \bigOh{\sqrt{\log n}\frac{(\log t)^{2}}{t^\alpha}}
-      &\quad\text{if } \alpha \leq 1/2\\
-      \bigOh{\sqrt{\log n}\frac{(\log t)^{2}}{t^{1/2}}}
-      &\quad\text{if } \alpha > 1/2\\
-    \end{cases}
+  \[
+    \Expnew{}{\norm{\infty}{x^t - x^*}} \leq
+      C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
   \]
 \end{theorem}
 \begin{proof}
