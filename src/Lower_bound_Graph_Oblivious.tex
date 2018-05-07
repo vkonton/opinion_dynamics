@@ -1,0 +1,175 @@
+\section{Lower bound: Graph Oblivious Protocols}
+
+\subsection{Our Results for Graph Oblivious}
+In the previous section, we have seen that in the unlabelled comunication model, a simple update rule acheives an error rate $E[||x^t-x^*||_{\infty}] \leq \sqrt{\log n}\frac{(\log t)^2}{\sqrt{t}}$ when $a\geq 1/2$. This rate is good enough from the perspective of the size of the graph, but very inefficient from the perspective of the steps needed to acheive a certain accuracy. More precisely, in order to acheive accuracy $\epsilon>0$, $\bigOh{\frac{\log n}{\epsilon^2}}$ steps are needed. On the other hand, in the labelled case another simple update rule needs $\bigOh{d^2\log \frac{1}{\epsilon}}$. The terms $\log n$ and $d^2$ are comparable, however $\log \frac{1}{\eps}$ and $\frac{1}{\eps^2}$ are of different order of magnitude. In this section, we investigate whether this gap between these two cases can be closed or is impact of a generic defieciency of the unlabelled communication model.   
+
+\begin{definition}\label{def:graph_oblivious}
+A graph oblivious update rule $F$, is a sequence of function $\{f_t\}_{t=1}^{\infty}$ where $f_t: [0,1]^{t+2} \mapsto [0,1]$.
+\end{definition}
+
+\noindent These restricted class of update rules is very natural since it is very reasonable to assume that the update rule is not aware of the graph structure of network and must work for any structure. Formally, this is imposed in Definition~\ref{def:graph_oblivious} since $F=\{f_t\}_{t=1}^{\infty}$ is selected prior to knowledge of $G$. In the next definition, we define the error of an update rule $F$ for an instance $I$.  
+\begin{definition}\label{Graph Oblivious Updates Rules}
+Let the graph oblivious update rule $F = \{f_t\}_{t=1}^{\infty}$. For an instance $I=(G,s,a)$ we define the following process. At round $t$:
+\begin{itemize}
+ \item Each agent $i$ has a state $x_i(t) \in [0,1]$
+ \item For each agent $i$, the oracle $O_G$ randomly picks an agent $j \in N_i$ and returns the value $x_j(t-1)$ to $i$. Let $O_i^t$ denotes this value.
+ \item Each agent $i$ updates her value as follows: $x_i(t) = f_t(O_i^1,\ldots,O_i^t,s_i,a_i)$
+\end{itemize}
+The error of the update rule $F$, for the instance $I$ is denoted by $E_I[||x(t)-x^*||_\infty]$, where $x^*$ is the equilibrium point of $I$.
+\end{definition}
+
+\noindent For example in the update rule $\ref{eq:unlabeled_update_rule}$, $f_t(O_1,\ldots,O_t,s_i,a_i) = (1-a_i)\frac{\sum_{j=1}^tO_j}{t} + a_is_i$ and we have shown that for any instance $I$ with $\alpha>1/2$, $E_I[||x(t)-x^*||_{\infty}] \in \bigOh{\frac{(\log t)^2}{\sqrt{t}}}$. We investigate whether the exists a graph oblivious update rule that for gatantees a better asympotic rate for all instances $I$. We conjecture that the following statement holds.
+
+\begin{theorem}
+For any graph oblivious update rule, $F=\{f_t\}_{t=1}^\infty$ there exists an instance $I$ such that 
+$$E_I[||x_t-x^*||_\infty] \in \Omega(\frac{1}{t})$$
+\end{theorem}
+\noindent Although we were not able to prove the above claim, in the next section we provide a theorem that indicates that the existence of such a graph oblivious update rule is highly unlikely. In section .., we prove that such an update rule must satisfy simultaneous two techinical properties that excludes any reasonable update rule. We beleive that our difficulty is of tecnhical nature and we leave the proof of the above statement as an open problem.  
+\subsection{Our results for No regret}
+We have an agent that acts at the following simple setting. At every time $t$ the agent chooses $x_t \in [0,1]$. 
+Then, he receives a function $f_t:[0,1]\to [0,1]$. The cost incurred by 
+the agent for round $t$ is $f_t(x_t)$. 
+The goal of the player is to pick $x_t$ in a way that minimizes the total cost for all rounds.
+We emphasize the fact that the agent has to choose $x_t$ before he sees $f_t$, otherwise the problem becomes trivial. 
+Formally:
+\begin{definition}
+Let $K$ be the set of all functions $f:[0,1]\to \R$. Then, a protocol is a sequence of functions $F_t:K^{t-1} \to \R$, where $x_t = F_t(f_1, \ldots,f_{t-1})$
+\end{definition} 
+In order to measure the performance of the agent, we define the following quantity:
+\begin{definition}
+If an agent runs the protocol for $T$ rounds, we define the regret of the protocol as:
+\[
+\sup_{\{f_1,\ldots ,f_T\}\subseteq K}\lp\{\sum_{t=1}^T f_t(x^t) - \min_{x\in[0,1]}\lp\{\sum_{t=1}^T f_t(x)\rp\}\rp\}
+\]
+\end{definition}
+This quantity should ideally be a sublinear function of $T$, since this means that on average the cost incurred by the algorithm is close to 
+the best decision in hindsight.
+A protocol $P$ is said to be \emph{no regret} if the regret is $o(T)$.
+In the next definition, we define the error of an update rule $F$ for an instance $I$.  
+\begin{definition}\label{No regret Update Rules}
+Let the no regret update rule $F = \{F_t\}_{t=1}^{\infty}$. For an instance $I=(G,s,a)$ we define the following process. At round $t$:
+\begin{itemize}
+ \item Each agent $i$ has a state $x_i(t) \in [0,1]$
+ \item Each agent $i$ updates her value as follows: $x_i(t) = F_t(f_1,\ldots,f_{t-1})$
+ \item For each agent $i$, the oracle $O_G$ randomly picks an agent $j \in N_i$ and let $O_i^t = j$. Then, the oracle returns the following function:
+\[
+f_t(x) = \alpha\lp(x - s_i\rp)^2 + (1 - \alpha)\lp(x - x_j(t-1)\rp)^2
+\]
+
+\end{itemize}
+The error of the update rule $F$, for the instance $I$ is denoted by $E_I[||x(t)-x^*||_\infty]$, where $x^*$ is the equilibrium point of $I$.
+\end{definition}
+For example, if we have the protocol: 
+\[
+F_t(f_1, \ldots,f_{t-1}) = \argmin{x\in[0,1]}\sum_{i=1}^t f_i(x)
+\]
+then it is easy to see that 
+\[
+x_i(t) = (1-a_i)\frac{\sum_{j=1}^{t-1}x_{O_i^j}(t)}{t} + a_is_i
+\]
+which is just the weighted sample mean. 
+
+\subsection{Estimating Bernoulli Distributions}
+The problem definition is the following:
+\begin{itemize}
+\item There exists an unkown parameter $p \in [0,1]$
+\item We receive i.i.d. observations $X_i$ , where $X_i\sim B(p)$ 
+\item We output an estimate value $\hat{p}=\hat{\theta_t}(X_1,\ldots,X_t)$ according to some function $\hat{\theta_t}:~ \{0,1\}^t\mapsto [0,1]$.
+ \end{itemize}
+The goal is to appropriately select $\hat{\theta_t}$ such that $\hat{p}$ and $p$ are relatively close. For example a very known selection is $$\hat{\theta_t}(X1,\ldots,X_t)= \frac{\sum_{i=1}^t X_i}{t}$$ which is the sample mean estimator
+
+\begin{definition}
+An estimator $\hat{\theta}$ is a colection of functions $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where $\hat{\theta_t}: \{0,1\}^t\mapsto [0,1]$.
+\end{definition} As the number of samples grows we would expect that an effiencient estimator $\hat{\theta}$ produces more and more accurate values for $p$. The following definition provides us the metric to evaluate the quality of an estimator $\hat{\theta}$. 
+
+\begin{definition}
+For any estimator $\hat{\theta_t}$ we define 
+$$E_p[|\hat{\theta_t}(X_1,\ldots,X_t)| - p|]= \sum_{(x_1,\ldots,x^t)\in \{0,1\}^t}|\hat{\theta_t}(x^1,\ldots,x^t) -p| \cdot p^{\sum_{i=1}^tx^i}(1-p)^{t-\sum_{i=1}^tx^i}$$ 
+\end{definition}
+The quantity $E_p[|\hat{\theta_t}(X_1,\ldots,X_t)| - p|]$ is the expected distance of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the distribution of the samples is $B(p)$. To simplify notation we also denote it as $E_p[|\hat{\theta_t} - p|]$.\\
+
+\noindent Notice that $E_p[|\hat{\theta_t}-p|]$ does not serve as a good metric since an effiencient estimator $\hat{\theta}$ must garantee good estimates for any parameter $p$. Consider an estimator $\hat{\theta}$ that outputs $1/2$ for all $t$. In this case, $E_{p}[|\hat{\theta_t}- p|]=|p-1/2|$ meaning that this estimator performs optimally when $p=1/2$, but extremely bad in any other case. As a result the standard metric in the statistics literature is the following.
+
+\begin{definition}
+For any estimator $\hat{\theta_t}$ we define its risk with $t$ samples as, $$R^t(\hat{\theta})=\text{max}_{p \in [0,1]}E_p[|\hat{\theta_t} - p|]$$
+\end{definition}Now our goal is clear, we need to design estimators $\hat{\theta_t}$ such that the risk $R^t(\hat{\theta_t})$ is as small as possible. For example one can easily prove that the risk rate of the \emph{sample mean estimator} ($\hat{\theta_t}= \frac{\sum_{i=1}^t X_i}{t}$) $R^t(\hat{\theta_t}) \leq \frac{1}{\sqrt{2t}}$. Obviously the next question is whether we can find another (probably more complex estimator) that acheives risk smaller than that of $\frac{1}{\sqrt{2t}}$.   
+
+\begin{theorem}\label{thm: risk_optimality}
+Any estimator $\hat{\theta}$ has risk $R^t(\hat{\theta}) \geq \frac{1}{16\sqrt{t}}$
+\end{theorem}
+The above theorem can be easily derived by standard techniques (e.g. Le Cam or Fano method) that have been develloped in the statistics literature to provide lower bounds on the risk of estimators. Especially, proving this lower bound for the Bernoulli case is requires a simple applications of these methods. The above theorem also tells us that the risk of the \emph{sample mean estimator} is up to constant factors optimal. Are we done?
+
+\begin{theorem}
+There exists an estimator $\hat{\theta}$ such that for all $p\in[0,1]$, $$E_p[|\hat{\theta_t} - p|] = \bigOh{\frac{1}{\sqrt{t}}}$$ 
+\end{theorem} Can this rate be imporoved? For example, is there a an estimator $\hat{\theta}$ such that for all $p\in [0,1]$, $E_p[|\hat{\theta_t} - p|] = \bigOh{\frac{1}{t}}$?\\
+
+\noindent It seems that the latter question can be answered negatively using Theorem~\ref{thm: risk_optimality}. Unfortunately, this is not the case. The difference is subtle but very important. The definition of the risk $R^t = \text{max}_{p \in [0,1]}E_p[|\hat{\theta_t}-p|]$, allows the maximum to be attained in a $p$ that depends on $t$ (e.g. $p=1/2+1/t$). As a result, Theorem~\ref{thm: risk_optimality} does not provide us with information about the above question.
+
+
+\begin{theorem}
+For any estimator $\hat{\theta}$ there exists a fixed $p\in[0,1]$ such that $$E_p[|\hat{\theta_t} - p|] = \Omega(\frac{1}{t})$$
+\end{theorem}
+
+\noindent To the best of our knowledge this question is not answered in the statistics literature. However, the same question has been asked for more the estimator of more general and complex distribution. These results ensure the above statement for estimators that satisfy certain propetries (unbaised estimators, locally regular, e.t.c.). In this section we provide a theorem that holds for any estimator and indicates that estimators that don't satisfy the above statement are very unlikely to exists.
+
+\begin{theorem}
+For any Bernoulli estimator $\hat{\theta}$, for all $[a,b] \subseteq [0,1]$,
+$$ \lim_{t \to \infty}t \int_{a}^{b}E_p[|\hat{\theta_t} -p|]dp = +\infty$$
+\end{theorem} In case that statement .. is not true than there exists an estimator $\hat{\theta}$ that simultaneous satisfies the following two properties:
+\begin{enumerate}
+ \item for all $p\in[0,1]$, $\lim_{t \to \infty}t E_p[|\hat{\theta_t} - p|]=0$
+ \item for all $[a,b] \in [0,1]$, $\lim_{t \to \infty}t \int_a^b E_p[|\hat{\theta_t} - p|]=+\infty$
+\end{enumerate}
+
+We conjecture that there does not exists a function that satisfies both of these properties. Even in case that this is not true, such a function has a very degenerate form making it very difficult to be the risk function of an estimator.  
+
+\subsection{Reductions form update rules to Bernoulli Estimators}
+
+\begin{lemma}
+For any no regret protocol $P$, there exists a Bernulli estimator $\hat{\theta}$ such that\\
+for all $q \in Q([0,1])$, there exists an instance $I_q$ such that $$E_q[|\hat{\theta_t} - q|] \leq 2E_{I_q}[||x^t-x^*||_{\infty}]$$
+\end{lemma}
+
+\begin{proof}
+At round $t$, the graph oblivious protocol $P$ has selected the functions $F_t(f_1,\ldots,f_{t-1})$. An estimator $\hat{\theta}$ receives the samples $Y_1,\ldots,Y_t$ and outputs the value $\hat{\theta_t}(Y_1,\ldots,Y_t) \in [0,1]$. By Lemma~(\ref{l:help}) the opinions of neighbours are functions of $Y_1, \ldots, Y_{t-2}$. 
+We define:
+\[
+g_t(Y_1,\ldots,Y_t) = g_{Y_t}^t(Y_1,\ldots,Y_t) 
+\]
+We consider the estimator $\hat{\theta_t}=\frac{1}{2}F_t(g_1(Y_1),\ldots,g_t(Y_1,\ldots, Y_t))$ and observe that $\hat{\theta_t}$ is a function $\{0,1\}^t \mapsto [0,1]$.\\
+Now for any $q \in Q([0,1])$, construct an appropriate instance $I_q$ such that $E_q[|\hat{\theta_t} - q|] \leq 2E_{I_q}[||x^t-x^*||_{\infty}]$.\\
+Since $q=\frac{k}{n}$ some $k,n \in \nats$, the following instance $I_q$ with $n+1$ agents:
+\begin{itemize}
+ \item A central agent with $s_c=0$ and $a_c=1/2$.
+ \item Directed edges from the central agent to all the other agents.
+ \item $k$ agents with $s_i=0$ and $a_i=1$
+ \item $n-k$ agents with $s_i=1$ and $a_i=1$
+ \end{itemize}
+Notice that in this instance for all $i\neq c$, $x^*_i=s_i$ and $x^*_c=\frac{q}{2}$. We show that $E_q[|\hat{\theta_t}-q|] \leq 2E_{I_q}[||x^t-x^*||_{\infty}]$.\\
+At round $t$, if the oracle returns to the center agent the value $g_t(1,1)$ of a $1$-agent, then $Y_t=1$ otherwise $Y_t=0$. As a result, $\Prob{Y_t=1}=q$ and 
+\begin{align*}
+ E_{I_q}[||x^t-x^*||_{\infty}] &\geq E_{I_q}[|x^t_c-x^*_c|]\\
+ &= E_{q}[|\frac{\hat{\theta_t}}{2}-\frac{q}{2}|]
+\end{align*}
+
+\end{proof}
+
+\begin{lemma}\label{l:help}
+Suppose the no regret protocol $F = \{F_i\}_{i=1}^t $ runs in the topology defined in the previous lemma. We define the sequence $b_1, b_2, \ldots , b_t$ such that 
+$b_i = s$, where $s$ is the $s_i$ of the neighbour of center that was selected at time $i$. Then , for every time $i$ there are functions $g_0^i, g_1^i$ such that for all neighbours $j$ with $s_i = 0$ :
+$x_j(i) = g_0^i(b_1,\ldots, b_{i-2})$ and for all neighbours $j$ with $s_i = 1$ :
+$x_j(i) = g_1^i(b_1,\ldots, b_{i-2})$.
+\end{lemma}
+\begin{proof}
+We are going to prove the statement inductively for $i$. If $i=1$, then each agent hasn't seen any function yet and should make a choice for $x(1)$.
+ By the definition of $F_1$, all the agents select the same value, so $g_0^1 = g_1^1 = F_1$. We verified the base case.
+
+Suppose the statement holds for all times $i \leq k$. In particular, it holds for $i = k$, so there exist $g_0^k, g_1^k$ 
+that are functions of $b_1,\ldots, b_{k-2}$ that satisfy the proposition. Since all neighbouring values up to time $k$ are functions of $b_1,\ldots, b_{k-2}$
+and since the functions that the center node receives are determined by the opinions of the neighbours and the choice at round $k-1$,
+we get that $x_c(k)$ is a function of $b_1,\ldots, b_{k-1}$. At the end of round $k$, each agent learns one more function
+based on the opinion of one of its neighbours. Observe that every neigbour of the center has only the center as neighbour. As a result, all nodes
+with $s_i = 0$ receive the same function $\phi_1$ and all nodes with $s_i = 1$ receive the same function $\phi_2$. We notice that $\phi_1$ and $\phi_2$ are uniquely determined by $x_c(k)$ and thus of $b_1,\ldots, b_{k-1}$\\
+Now, at time $k+1$ first each agent evaluates the new opinion, based on the new function he received. Since the function that each node received 
+is determined by his $s_i$ and $x_c(k)$, it follows that all nodes that have the same $s_i$ have the same value, which is a function of $b_1,\ldots, b_{k-1}$. The inductive step is now complete. 
+\end{proof}
