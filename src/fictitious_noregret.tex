@@ -4,30 +4,36 @@ We consider the following online convex optimization problem.
 At each time step $t$, the player $i$ selects a real number $x^t$ and a
 function $f^t(x)$ arrives. The player then suffers $f^t(x^t)$ cost.
 The functions $f^t(x)$ have the following form:
-\[f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-a_t)^2,\]
+
+$$f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-a_t)^2$$
 where $s_i,\alpha \in [0,1]$ and are independent of $t$ and $a_t \in [0,1]$.
 In other words, the function $f^t$ is uniquely determined by the number $a_t$.
-
-We show that for this class of functions \emph{fictitious play} admits no-regret.
+We show that for this class of functions \emph{fictitious play} admits no regret.
 \begin{theorem}\label{t:no_regret}
   Let $f^t$ be a sequence of functions, where each function has the form:
   $f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-a_t)^2$,
-  where $s_i,\alpha \in [0,1]$ and are independent of $t$ and
-  $a_t \in [0,1]$.
-  If we define $x^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^{t-1} f^\tau (x)$
+  where $s_i,\alpha \in [0,1]$ and are independent of $t$ and $a_t \in [0,1]$.
+  If we define \(x^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^{t-1} f^\tau (x) \)
   then for each time $T$
   \[
-  \sum_{t = 1}^{T} f^t(x^t) \leq \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) + O(\log  T)
+    \sum_{t = 1}^{T} f^t(x^t) \leq
+    \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) + O(\log  T)
   \]
 \end{theorem}
 
-In order to prove this claim, we will first define a similar rule $y^t$ that takes into account the function $f^t$
-for the "prediction" at time $t$. Intuitively, this guarrantees that the rule admits no-regret.
+In order to prove this claim, we will first define a similar rule $y^t$
+that takes into account the function $f^t$ for the "prediction" at time $t$.
+Intuitively, this guarantees that the rule admits no regret.
 
-
-\begin{lemma} Let $y^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^t f^\tau (x)$ then
-  $$ \sum_{t=1}^T f^t(y^t) \leq \min_{x \in [0,1]} \sum_{t=1}^T f^t(x)$$
+\begin{lemma}
+  Let
+  \(y^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^t f^\tau (x)\)
+  then
+  \[
+    \sum_{t=1}^T f^t(y^t) \leq \min_{x \in [0,1]} \sum_{t=1}^T f^t(x)
+  \]
 \end{lemma}
+
 \begin{proof}By definition of $y^t$,
   $\min_{x \in [0,1]} \sum_{t=1}^T f^t(x) = \sum_{t=1}^T f^t(y^T)$, so
   \begin{align*}
@@ -41,22 +47,25 @@ for the "prediction" at time $t$. Intuitively, this guarrantees that the rule ad
   $\sum_{t=1}^T f^t(y^t) \leq min_{x \in [0,1]} \sum_{t=1}^T f^t(x)$.
 \end{proof}
 
-Now we can derive some intuition for the reason that \emph{fictitious play} admits
-no-regret. Since the cost incurred by the sequence $y^t$ is at most that of the best
-fixed strategy, we can compare the cost incurred by $x^t$ with that of $y^t$.
-However, for each $t$ the numbers $x^t$ and $y^t$ are quite close and as a result
-the difference in their cost must be quite small.
+Now we can derive some intuition for the reason that \emph{fictitious play}
+admits no regret. Since the cost incurred by the sequence $y^t$ is at most that
+of the best fixed strategy, we can compare the cost incurred by $x^t$ with
+that of $y^t$.  However, for each $t$ the numbers $x^t$ and $y^t$ are quite
+close and as a result the difference in their cost must be quite small.
 
 \begin{lemma}
-  For all $t$, $f^t(x^t) \leq f^t(y^t) + 2\frac{1-\alpha}{t} + \frac{(1-a)^2}{t^2}$.
+  For all $t$,
+  \(f^t(x^t) \leq f^t(y^t) + 2\frac{1-\alpha}{t} + \frac{(1-a)^2}{t^2}\).
 \end{lemma}
 \begin{proof}
   We first prove that for all $t$,
   \begin{equation}\label{eq:abs_value}
-  	\lp|x^t - y^t \rp| \leq \frac{1-\alpha}{t}
+    \lp|x^t - y^t \rp| \leq \frac{1-\alpha}{t}.
   \end{equation}
-  .By definition $x^t = \alpha s_i + (1-\alpha)\frac{\sum_{\tau = 1}^{t-1} a_\tau}{t-1}$
-  and $ y^t = \alpha s_i + (1-\alpha)\frac{\sum_{\tau = 1}^t a_\tau}{t}$.
+  By definition
+  \(x^t = \alpha s_i + (1-\alpha)\frac{\sum_{\tau = 1}^{t-1} a_\tau}{t-1}\)
+  and
+  \( y^t = \alpha s_i + (1-\alpha)\frac{\sum_{\tau = 1}^t a_\tau}{t}\).
   \begin{align*}
     \lp|x^t - y^t\rp|
     &=
@@ -68,7 +77,8 @@ the difference in their cost must be quite small.
     \frac{1-\alpha}{t}
   \end{align*}
   The last inequality follows from the fact that $a_\tau \in [0,1]$.
-  We now use inequality~(\ref{eq:abs_value}) to bound the difference $f^t(x^t) - f^t(y^t)$.
+  We now use inequality~(\ref{eq:abs_value}) to bound the difference
+  \( f^t(x^t) - f^t(y^t) \).
   \begin{align*}
     f^t(x^t)
     &=

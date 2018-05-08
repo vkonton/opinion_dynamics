@@ -3,28 +3,48 @@
 \usepackage{lmodern}
 \usepackage{microtype}
 
-% \usepackage{kpfonts}
+% fonts.
+%\usepackage{fontspec}
+
+% linespread looks better for mathpazo
 \linespread{1.05}
 \usepackage[sc]{mathpazo}
+% \usepackage{kpfonts}
 % \usepackage[boldsans]{ccfonts}
 % \usepackage{beton}
- % \usepackage{concrete}
-%  \usepackage{sectsty}
-%  \allsectionsfont{\mdseries}
-%\usepackage{beton}
-%\renewcommand{\bfdefault}{sbc}
-%\usepackage{kurier}
+% \usepackage{kurier}
+
 % \usepackage{eulervm}
+% \usepackage[euler-digits]{eulervm}
+
+% \usepackage{concrete}
+% \usepackage{sectsty}
+% \allsectionsfont{\mdseries}
+% \renewcommand{\bfdefault}{sbc}
+
+% \setmainfont{Linux Libertine}
 
 % \usepackage{ntheorem}
 
+% \usepackage{newpxtext}
 
 % allows for indexgeneration
 \usepackage{makeidx}
 
 \usepackage{amsfonts}
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{mathtools}
+
+% Theorem Environments.
+\usepackage{amsthm}
+\renewcommand\qedsymbol{$\blacksquare$}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem*{question}{Question}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -32,15 +52,6 @@
   urlcolor = {blue},
   citecolor = {blue}
 }
-
-
-%fonts.
-%\usepackage{fontspec}
-
-%\usepackage{newpxtext}
-%\usepackage[euler-digits]{eulervm}
-
-%%\setmainfont{Linux Libertine}
 
 \usepackage{textcomp}
 \usepackage{csquotes}
@@ -60,9 +71,8 @@
 \definecolor{red}{rgb}{0.9,0,0}
 \definecolor{blue}{rgb}{0.6,0,0.6}
 
-\DeclareSymbolFont{matha}{OML}{txmi}{m}{it}% txfonts
-\DeclareMathSymbol{\varv}{\mathord}{matha}{118}
-
+% \DeclareSymbolFont{matha}{OML}{txmi}{m}{it}% txfonts
+% \DeclareMathSymbol{\varv}{\mathord}{matha}{118}
 
 % bold vectors
 \usepackage{bm}
@@ -89,9 +99,9 @@
   stringstyle=\color{red},
   identifierstyle=\color{black},
   language=haskell,
-  %numbers=left,
-  %numberstyle=\scriptsize,
-  %numbersep=5pt,
+  % numbers=left,
+  % numberstyle=\scriptsize,
+  % numbersep=5pt,
   showstringspaces=false
 }
 

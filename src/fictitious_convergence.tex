@@ -1,34 +1,35 @@
-\section{Constant Memory with full window}
+\section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
 
-In this work we investigate an variant of the above process.
-We denote by $V$ the set of agents, and $N_{i} \subset V$ the set of neighbors
-of agent $i$.
-Let $x(t) \in [0,1]^n$ be the opinion vector at round $t$.
-We denote by $x_i(t)$ the opinion of agent $i$ at round $t$.
+In this Section we prove that the fictitious play
+described as Algorithm~\ref{alg:fictitious_play} convergences
+to the equilibrium.
 At round $t+1$, $x(t+1)$ is constructed in the following way.
 At first, each agent $i$ gets to see
 the opinion $x_j(t)$, where $j \in N_i$ is picked uniformly at random
 from the set of her neighbors.  Let $W_i^t$ be the random variable
-corresponding to the selected neighbor. Now each agent $i \in V$
-updates her opinion as follows
+corresponding to the selected neighbor.
+Now each agent $i \in V$ updates her opinion as follows
 \[
   x_i(t+1) =
   (1-\alpha_i)\frac{\sum_{\tau=1}^{t+1} x_{W_i^\tau}(\tau-1)}{t+1}
   + \alpha_i s_i.
 \]
-We remark that each agent $i$ get to see \emph{only} the opinion
-$x_{W_i^t}$ and not the label $W_i^t$ of her neighbor.
-
-Let $x^* \in [0,1]^n$ be the unique equilibrium point
-of the given instance $I$. We prove that
-the above stochastic process has the following convergence
+% Labeled vs Unlabeled: now deprecated.
+% We remark that each agent $i$ gets to see \emph{only} the opinion
+% $x_{W_i^t}$ and not the label $W_i^t$ of her neighbor.
+Let $x^* \in [0,1]^n$ be the unique equilibrium point of the given instance $I$.
+We prove that the above stochastic process has the following convergence
 rate to $x^*$.
 \begin{theorem}
-
+  Let $I = (G,s, \alpha)$ be any instance of the opinion formation
+  game of Definition~\ref{d:random_payoff_game} with equilibrium
+  $x^* \in [0,1]^n$.  The opinion vector $x^t$ produced by
+  Algorithm~\ref{alg:fictitious_play} after $t$ rounds satisfies
   \[
     \Expnew{}{\norm{\infty}{x^t - x^*}} \leq
-      C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
+    C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
   \]
+  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 \end{theorem}
 \begin{proof}
   Setting $p = 1/\sqrt{t}$ in Lemma~\ref{l:error_bound} yields
@@ -40,22 +41,28 @@ We start by stating the standard Hoeffding bound
 \begin{lemma}[Hoeffding's Inequality]\label{l:hoeffding}
   Let $X = (X_1 +\cdots + X_t) /t$, $X_i \in [0,1]$.
   Then,
-  \[
+  \(
     \Prob{|X - \Exp{X} | > \lambda} < 2 e^{-2 t \lambda^2}.
-  \]
+  \)
 \end{lemma}
 
 \begin{lemma}\label{l:error_recursion}
   With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
   where $e(t)$ satisfies the following recursive relation
-  $$e(t) =
-  \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
-  \text{ and } e(0)=\|x^0 - x^*\|_{\infty}, $$
+  \[
+    e(t) =
+    \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
+  \]
   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
 \end{lemma}
 \begin{corollary}\label{c:error_recursion}
   The function $e(t)$ satisfies the following recursive relation
-  $$e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}=\delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}$$
+  \[
+    e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}
+    =
+    \delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}
+  \]
 \end{corollary}
 \begin{proof}
   As we have already mentioned for any instance $I$ there exists
@@ -146,13 +153,6 @@ In order to bound the convergence time of the system, we just need to bound
 the convergence rate of the function $e(t)$.
 The following lemma provides us with a simple upper bound for the
 convergence rate of our process.
-
-% \begin{lemma}\label{l:error_bound}
-%   $$e(t) \leq \frac{e(0)}{t^\alpha} +
-%   \frac{\bigOh{\sqrt{\log(\frac{nd}{p})}}}{t^\alpha}
-%   \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$$
-% \end{lemma}
-
 \begin{lemma}\label{l:error_bound}
   Let $e(t)$ be a function satisfying the recursion of
   Corollary~\ref{c:error_recursion}. Then with probability
@@ -207,29 +207,28 @@ convergence rate of our process.
   since $\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$
   \begin{itemize}
     \item If
-  $\alpha\leq 1/2$ then
-  \[
-    \int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
-    \leq
-    \int_{\tau=1}^t
-    \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))
-  \]
-\item If $\alpha> 1/2$ then\\
-  \begin{align*}
-    \int_{\tau=1}^t
-    \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
-    &=
-    \int_{\tau=1}^t \tau^{\alpha-1/2}\frac{\sqrt{\log \tau}}{\tau}d\tau \\
-    &=
-    \frac{2}{3} \int_{\tau=1}^t
-    \tau^{\alpha-1/2}((\log \tau)^{3/2})'d\tau \\
-    &=
-    \frac{2}{3}(\log t)^{3/2} - (\alpha-1/2)\frac{2}{3}
-    \int_{\tau=1}^t \tau^{\alpha-3/2}(\log \tau)^{3/2}d\tau \\
-    &=
-    \bigOh{(\log t)^{3/2}}
-  \end{align*}
+      $\alpha\leq 1/2$ then
+      \[
+        \int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
+        \leq
+        \int_{\tau=1}^t
+        \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))
+      \]
+    \item If $\alpha> 1/2$ then\\
+      \begin{align*}
+        \int_{\tau=1}^t
+        \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
+        &=
+        \int_{\tau=1}^t \tau^{\alpha-1/2}\frac{\sqrt{\log \tau}}{\tau}d\tau \\
+        &=
+        \frac{2}{3} \int_{\tau=1}^t
+        \tau^{\alpha-1/2}((\log \tau)^{3/2})'d\tau \\
+        &=
+        \frac{2}{3}(\log t)^{3/2} - (\alpha-1/2)\frac{2}{3}
+        \int_{\tau=1}^t \tau^{\alpha-3/2}(\log \tau)^{3/2}d\tau \\
+        &=
+        \bigOh{(\log t)^{3/2}}
+      \end{align*}
 
-\end{itemize}
-
+  \end{itemize}
 \end{proof}

@@ -1,0 +1,178 @@
+\section{Preliminaries}
+\subsection{Notation}
+Let $G(V,E)$ be a graph. We denote by $V$ the set of agents,
+and $N_{i} \subset V$ the set of neighbors of agent $i$. Let $n = |V|$.
+We denote by $x(t)\in [0,1]^n$ the vector of opinions of the agents at round
+$t$ and $x_i(t)$ its $i$-th coordinate. We denote by $Q([0,1])$
+the set of rationals in $[0,1]$.
+
+\subsection{Online Convex Optimization and No Regret Algorithms}
+
+The \emph{Online Convex Optimization} (OCO) framework can be seen
+as a game played between a player and an adversary. Let
+$K \subseteq \reals^n$ be a convex set and a set of functions
+$\mcal{F}$ defined over $K$.  Both player and adversary know the sets
+$K$ and $\mcal{F}$.  At round $t$,
+\begin{enumerate}
+  \item the agent chooses $x_t \in K$.
+
+  \item the adversary observes the $x_t$ and selects a function
+    $f_t(x) \in \mcal{F}$.
+
+  \item the player receives cost $f_t(x_t)$.
+\end{enumerate}
+
+The goal of the player is to pick $x_t$ based on the history
+$(f_1,\ldots,f_{t-1})$ in a way that minimizes the total cost. We emphasize
+that the agent has to choose $x_t$ before seeing $f_t$, otherwise the
+problem becomes trivial.
+
+\begin{definition}\label{d:regret}
+  $A$ for OCO is a sequence of functions, $\{A_t\}_{t=1}^{\infty}$ where
+  $A_t:\mcal{F}^{t-1} \mapsto K$.\\
+  %\[x_t = A_t(f_1,\ldots,f_{t-1})\].
+  The regret of the algorithm $A$ as round $T$ is
+  \[R_A(T)=\sup_{\{f_1,\ldots ,f_T\}\subseteq F^T}\lp(\sum_{t=1}^T f_t(x^t) -
+    \min_{x\in K}\sum_{t=1}^T f_t(x)\rp),\]
+  where $x^t = A^t(f_1,\ldots, f_{t-1})$.
+  An algorithm $A$ is no-regret if $R_A(T)=o(T)$.
+\end{definition}
+In our problem agent $i$ selects at round $t$ an
+opinion $x_i(t) \in [0,1]$ and then suffers a cost $C^t_i(x_i(t))$.
+Obviously in our case $K=[0,1]$ and
+\(
+  \mcal{F} =
+  \{
+  x \mapsto a_i (x - s_i)^2 + (1-a_i) (x - c)^2:
+  \ a_i, s_i, c \in [0,1]
+  \}
+\).
+
+\begin{definition}[no-regret Dynamics] \label{d:noregret_dynamics}
+  Let $A$ be a no-regret algorithm for $\mcal{F}$, $K$.
+  For an instance $I = (G, s, a)$ of the opinion formation game
+  given in Definition~\ref{d:random_payoff_game} we define
+  the following no-regret dynamics.
+  \begin{itemize}
+    \item Initially, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$.
+
+    \item At round $t \geq 1$, each agent $i$:
+      \begin{itemize}
+        \item Meets uniformly at random one of her friends $j \in N_i$.
+        \item  Suffers cost
+          \(
+            C^t_i(x_i(t-1),x_{j}(t-1))=(1-a_i)(x_i(t-1)
+            -x_j(t-1))^2 + a_i(x_i(t-1)-s_i)^2
+          \).
+        \item Updates her opinion using $A$,
+          $x_i(t) = A_t(C^1_i, \ldots C^{t-1}_i)$.
+      \end{itemize}
+  \end{itemize}
+
+\end{definition}
+
+\subsection{Estimating Bernoulli distributions}
+
+Assume that we have access to the random variables $Y_1,\ldots,Y_t$, that are
+mutually independent and each
+$Y_i$ is distributed according to a Bernoulli distribution with $p \in [0,1]$,
+$X_i\sim B(p)$.  Initially the parameter $p$ is unkown. The task is to observe
+the realization of $y_1,\ldots,y_t$ and output an estimate
+$\hat{p}=\theta_t(y_1,\ldots,y_t)$ according to a function $\hat{\theta_t}:
+\{0,1\}^t\mapsto [0,1]$, that is close to the unkown parameter $p$.
+
+\begin{definition}
+  An estimator $\hat{\theta}$ is a collections of function,
+  $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where
+  $\hat{\theta_t}: \{0,1\}^t\mapsto [0,1]$.
+\end{definition}
+
+A well known example of such an estimator is the
+\emph{sample mean}, where $\hat{\theta_t}=\frac{\sum_{i=1}^tY_i}{t}$.
+\noindent Obviously for any efficient estimator, the estimate $\hat{p}$
+converges to the unkown parameter $p$ as $t$ grows. The following definition is
+the standard metric for the efficiency of an estimator $\hat{\theta}$.
+
+\begin{definition}
+  For an estimator $\hat{\theta}
+  =\{\hat{\theta_t}\}_{t=1}^\infty$ we define its  error rate $R_p(t) =
+  E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ \[\text{where
+    }E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]= \sum_{(y_1,\ldots,y^t)\in
+      \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
+    p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}\]
+\end{definition}
+
+The quantity $E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ is the expected distance
+of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the
+distribution of the samples is $B(p)$. To simplify notation we also denote it
+as $E_p[|\hat{\theta_t} - p|]$. The error rate $R_p(t)$ quantifies the rate of
+convergence of the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the
+real parameter $p$. \\ Since $p$ is unkown, any meaningful estimator $\hat{p}$
+must guarantee that for all $p \in [0,1]$, $\lim_{t \rightarrow \infty}
+R_p(t)=0$. For example the \emph{sample mean} has error rate $R_p(t) \leq
+\frac{1}{2\sqrt{t}}$ for ant $p \in [0,1]$ and clearly statisfies the above
+requirement. In section 4 we investigate the following question,
+
+\begin{question}
+  Is there an estimator $\hat{\theta}$ such that for all $p \in
+  Q[0,1]$, $\lim_{t \rightarrow \infty}t R_p(t)=0$?
+\end{question}
+
+%\noindent Notice that $E_p[|\hat{\theta_t}-p|]$ does not serve as a good
+%metric since an effiencient estimator $\hat{\theta}$ must garantee good
+%estimates for any parameter $p$. Consider an estimator $\hat{\theta}$ that
+%outputs $1/2$ for all $t$. In this case, $E_{p}[|\hat{\theta_t}- p|]=|p-1/2|$
+%meaning that this estimator performs optimally when $p=1/2$, but extremely bad
+%in any other case. As a result the standard metric in the statistics
+%literature is the following.
+
+%\begin{definition} For any estimator $\hat{\theta_t}$ we define its risk with
+%$t$ samples as, $$R^t(\hat{\theta})=\text{max}_{p \in
+%[0,1]}E_p[|\hat{\theta_t} - p|]$$ \end{definition}Now our goal is clear, we
+%need to design estimators $\hat{\theta_t}$ such that the risk
+%$R^t(\hat{\theta_t})$ is as small as possible. For example one can easily
+%prove that the risk rate of the \emph{sample mean estimator} ($\hat{\theta_t}=
+%\frac{\sum_{i=1}^t X_i}{t}$) $R^t(\hat{\theta_t}) \leq \frac{1}{\sqrt{2t}}$.
+%Obviously the next question is whether we can find another (probably more
+%complex estimator) that acheives risk smaller than that of
+%$\frac{1}{\sqrt{2t}}$.
+
+%\begin{theorem}\label{thm: risk_optimality} Any estimator $\hat{\theta}$ has
+%risk $R^t(\hat{\theta}) \geq \frac{1}{16\sqrt{t}}$ \end{theorem} The above
+%theorem can be easily derived by standard techniques (e.g. Le Cam or Fano
+%method) that have been develloped in the statistics literature to provide
+%lower bounds on the risk of estimators. Especially, proving this lower bound
+%for the Bernoulli case is requires a simple applications of these methods. The
+%above theorem also tells us that the risk of the \emph{sample mean estimator}
+%is up to constant factors optimal. Are we done?
+
+%\begin{theorem} There exists an estimator $\hat{\theta}$ such that for all
+%$p\in[0,1]$, $$E_p[|\hat{\theta_t} - p|] = \bigOh{\frac{1}{\sqrt{t}}}$$
+%\end{theorem} Can this rate be imporoved? For example, is there a an estimator
+%$\hat{\theta}$ such that for all $p\in [0,1]$, $E_p[|\hat{\theta_t} - p|] =
+%\bigOh{\frac{1}{t}}$?\\
+
+%\noindent It seems that the latter question can be answered negatively using
+%Theorem~\ref{thm: risk_optimality}. Unfortunately, this is not the case. The
+%difference is subtle but very important. The definition of the risk $R^t =
+%\text{max}_{p \in [0,1]}E_p[|\hat{\theta_t}-p|]$, allows the maximum to be
+%attained in a $p$ that depends on $t$ (e.g. $p=1/2+1/t$). As a result,
+%Theorem~\ref{thm: risk_optimality} does not provide us with information about
+%the above question.
+
+
+%\begin{theorem} For any estimator $\hat{\theta}$ there exists a fixed
+%$p\in[0,1]$ such that $$E_p[|\hat{\theta_t} - p|] = \Omega(\frac{1}{t})$$
+%\end{theorem}
+
+%\noindent To the best of our knowledge this question is not answered in the
+%statistics literature. However, the same question has been asked for more the
+%estimator of more general and complex distribution. These results ensure the
+%above statement for estimators that satisfy certain propetries (unbaised
+%estimators, locally regular, e.t.c.). In this section we provide a theorem
+%that holds for any estimator and indicates that estimators that don't satisfy
+%the above statement are very unlikely to exists.
+
+%\begin{theorem} For any Bernoulli estimator $\hat{\theta}$, for all $[a,b]
+%\subseteq [0,1]$, $$ \lim_{t \to \infty}t \int_{a}^{b}E_p[|\hat{\theta_t}
+%-p|]dp = +\infty$$ \end{theorem}

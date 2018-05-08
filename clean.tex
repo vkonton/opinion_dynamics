@@ -1,0 +1,51 @@
+\documentclass{article}
+\input{./templates/packages}
+\input{./templates/colors}
+\input{./templates/macros}
+
+
+\begin{document}
+
+\title{Contribution Title}
+
+\author{
+  First Author \\ NTUA
+  \and
+  Second Author \\ NTUA
+  \and
+  Third Author \\ NTUA
+  \and
+  Author \\ NTUA
+}
+
+% \date{}
+
+\maketitle
+
+\begin{abstract}
+  \input{src/abstract}
+\end{abstract}
+
+\setcounter{page}{0}
+\thispagestyle{empty}
+\newpage
+
+\input{src/introduction}
+\input{src/preliminaries}
+% \input{src/cc_upper}
+\input{src/fictitious_convergence}
+% \input{src/unbiased}
+\input{src/fictitious_noregret}
+\input{src/lower_bound}
+\input{src/lower_bound2}
+%\input{src/lecam}
+\input{src/Lower_bound_Graph_Oblivious}
+\input{src/freqs}
+
+%
+% ---- Bibliography ----
+
+\bibliographystyle{alpha}
+\bibliography{refs}
+
+\end{document}
