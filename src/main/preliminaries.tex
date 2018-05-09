@@ -6,80 +6,120 @@ We denote by $x(t)\in [0,1]^n$ the vector of opinions of the agents at round
 $t$ and $x_i(t)$ its $i$-th coordinate. We denote by $Q([0,1])$
 the set of rationals in $[0,1]$.
 
-\subsection{Some Useful Results}
-We start by stating the standard Hoeffding bound
-\begin{lemma}[Hoeffding's Inequality]\label{l:hoeffding}
-  Let $X = (X_1 +\cdots + X_t) /t$, $X_i \in [0,1]$.
-  Then,
-  \(
-    \Prob{|X - \Exp{X} | > \lambda} < 2 e^{-2 t \lambda^2}.
-  \)
-\end{lemma}
-
 \subsection{Online Convex Optimization and No Regret Algorithms}
-
 The \emph{Online Convex Optimization} (OCO) framework can be seen
 as a game played between a player and an adversary. Let
 $K \subseteq \reals^n$ be a convex set and a set of functions
-$\mcal{F}$ defined over $K$.  Both player and adversary know the sets
-$K$ and $\mcal{F}$.  At round $t$,
+$\mcal{F}$ defined over $K$. \emph{At round }$t$,
 \begin{enumerate}
-  \item the agent chooses $x_t \in K$.
+  \item \emph{the agent chooses }$x_t \in K$.
 
-  \item the adversary observes the $x_t$ and selects a function
+  \item \emph{the adversary observes the }$x_t$\emph{ and selects a function}
     $f_t(x) \in \mcal{F}$.
 
-  \item the player receives cost $f_t(x_t)$.
+  \item \emph{the player receives cost }$f_t(x_t)$.
 \end{enumerate}
 
-The goal of the player is to pick $x_t$ based on the history
+
+\noindent The goal of the player is to pick $x_t$ based on the history
 $(f_1,\ldots,f_{t-1})$ in a way that minimizes the total cost. We emphasize
 that the agent has to choose $x_t$ before seeing $f_t$, otherwise the
 problem becomes trivial.
-
-\begin{definition}\label{d:regret}
-  $A$ for OCO is a sequence of functions, $\{A_t\}_{t=1}^{\infty}$ where
-  $A_t:\mcal{F}^{t-1} \mapsto K$.\\
-  %\[x_t = A_t(f_1,\ldots,f_{t-1})\].
-  The regret of the algorithm $A$ as round $T$ is
-  \[R_A(T)=\sup_{\{f_1,\ldots ,f_T\}\subseteq F^T}\lp(\sum_{t=1}^T f_t(x^t) -
-    \min_{x\in K}\sum_{t=1}^T f_t(x)\rp),\]
-  where $x^t = A^t(f_1,\ldots, f_{t-1})$.
-  An algorithm $A$ is no-regret if $R_A(T)=o(T)$.
+\begin{definition}
+An OCO algorithm $A$, at round $t$ selects a vector $x^t \in K$ according to the history, 
+$x^t = A_t(f_1,\ldots,f_t)$.
 \end{definition}
-In our problem agent $i$ selects at round $t$ an
-opinion $x_i(t) \in [0,1]$ and then suffers a cost $C^t_i(x_i(t))$.
-Obviously in our case $K=[0,1]$ and
-\(
-  \mcal{F} =
-  \{
-  x \mapsto a_i (x - s_i)^2 + (1-a_i) (x - c)^2:
-  \ a_i, s_i, c \in [0,1]
-  \}
-\).
 
-\begin{definition}[no-regret Dynamics] \label{d:noregret_dynamics}
-  Let $A$ be a no-regret algorithm for $\mcal{F}$, $K$.
-  For an instance $I = (G, s, a)$ of the opinion formation game
-  given in Definition~\ref{d:random_payoff_game} we define
-  the following no-regret dynamics.
-  \begin{itemize}
-    \item Initially, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$.
-
-    \item At round $t \geq 1$, each agent $i$:
-      \begin{itemize}
-        \item Meets uniformly at random one of her friends $j \in N_i$.
-        \item  Suffers cost
-          \(
-            C^t_i(x_i(t-1),x_{j}(t-1))=(1-a_i)(x_i(t-1)
-            -x_j(t-1))^2 + a_i(x_i(t-1)-s_i)^2
-          \).
-        \item Updates her opinion using $A$,
-          $x_i(t) = A_t(C^1_i, \ldots C^{t-1}_i)$.
-      \end{itemize}
-  \end{itemize}
-
+\begin{definition}
+Let the OCO algorithm $A$ and the sequence of functions $\{f_1,\ldots,f_T\} \in F^T$. The regret of $A$ is defined by
+\[R_A(T) = \sum_{t=1}^Tf_t(x_t) - \text{min}_{x \in K}\sum_{t=1}^Tf_t(x)\]
+if $R_A(T) = o(T)$ for any sequence $\{f_1,\ldots,f_T\}$ then A is no-regret algorithm 
 \end{definition}
+According to the feasibility set $K$ and the set of functions $F$, different no-regret algorithms with differnt regret bounds can be derived. 
+Some seminal examples areZinkevic's algorithm that acheives regret $R_A(T) =\bigOh{\sqrt{T}}$, when $K$ is convex, closed and bounded and 
+$F$ is the set of convex functionswith bounded first derivative. Hazan et al \cite{} proposed an algorithm with $R_A(T) =\bigOh{\log T}$, 
+when $F$ is the set of twice diffentiable strongly convex functions.\\
+
+\noindent \textbf{No regret dynamics and repeated games:}
+\noindent Agent $i$ with $s_i,a_i$ is the player. At round $t$, she adopts an opinion $x_i(t) \in [0,1]$ and then the adversary selects a function $C_i^t(x)=(1-a_i)(x-y_t)^2 + a_i(x-s_i)^2$, where $y^t\in [0,1]$.
+Let $A$ a no-regret in the above OCO setting. Clearly, each agent $i$ is willinf to adopt as $x_i(t)$ the suggestion of $A$, ensuring that average cost is similar
+to the average cost of the best fixed opinion. As a result if all agents adopt the no-regret algorithm $A$, for a fixed instance $I$ of the game the following a dynamical process
+is defined.
+\begin{algorithm}
+  \caption{no-regret dynamics}
+  \label{alg:fno_regret_dynamics}
+      Let an instance $I=(G,s,a)$ of the opinion formation game and $x_1(0),\ldots,x_n(0)$ the initial opinions.\\
+      At round $t\geq 1$, each agent $i$:
+  \begin{algorithmic}[1]
+    \State Adopts an opinion $x_i(t)=A_t(C_i^1,\ldots,C_i^{t-1})$
+    \State Meets uniformly at random one of her friends $j \in N_i$
+    \State Suffers cost $C^t_i(x_i(t))$, where $C^t_i(x) = (1-a_i)(x-x_j(t))^2 + a_i(x-s_i)^2$
+    %\State Updates opinion
+    %\begin{equation}\label{eq:fictitious_play}
+    %  x_i(t) =
+     % \argmin_{x \in [0,1]}
+     % \sum_{\tau=1}^tC^{\tau}_i(x,x_{\pi_i(\tau)}(\tau-1))
+    %\end{equation}
+\end{algorithmic}
+\end{algorithm}
+
+\noindent We denote the as $x_A(t)$ the opinion vector when the algorithm $A$ is selected. In case $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$ 
+we obtain the \emph{fictitious play} defined in \ref{alg:fictitious_play} and for simplicity we denote it as $x(t)$. As we have already menioned, in Section 2 we
+bound the convergence rate of the \emph{fictitious play}, $\Exp{\norm{\infty}{x(t)-x^*}}$ and in Section 3, we prove that it is no-regret algorithm for the specific OCO setting. The latter
+does not hold in more general OCO settings. In section 4, we investigate whether there exists an algorithm $A$ with significantly better asymptotic rate of convergence. 
+
+%For example if the algorithm $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$, we obtain the dynamics defined in \ref{alg:fictitious_play}. 
+%As we have already mentioned, the above algorithm admits no-regret in the above OCO setting (see Section 3). The above dynamics converges to the unique equilibrium point $x^*$. 
+%\noindent In the repeated version of the opinion formation game with random payoffs, things are clear. Each agent $i$, at round $t$ must select a strategy $x_i(t) \in [0,1]$
+%and then suffers a cost $C_i(x(t))$. Assume that there exists and algorithm $A$ admits no-regret when $K=[0,1]$ and $F$ is the set of functions $f(x) = (1-a_i)(x-y_t)^2 + a_i(x-s_i)^2$
+%for all $c \in [0,1]$. Each agent $i$ is willing to adopt the suggestion of $A$, $x_i(t) = A_t(C_i^1,\ldots,C_i^{t-1})$ since it ensures him similar cost as the that
+%of the best opinion fixed in hindsight. For such an algorithm $A$ we define the following dynamical system.
+
+
+
+%\begin{definition}\label{d:regret}
+%  $A$ for OCO is a sequence of functions, $\{A_t\}_{t=1}^{\infty}$ where
+%  $A_t:\mcal{F}^{t-1} \mapsto K$.\\
+%  %\[x_t = A_t(f_1,\ldots,f_{t-1})\].
+%  The regret of the algorithm $A$ as round $T$ is
+%  \[R_A(T)=\sup_{\{f_1,\ldots ,f_T\}\subseteq F^T}\lp(\sum_{t=1}^T f_t(x^t) -
+%    \min_{x\in K}\sum_{t=1}^T f_t(x)\rp),\]
+%  where $x^t = A^t(f_1,\ldots, f_{t-1})$.
+%  An algorithm $A$ is no-regret if $R_A(T)=o(T)$.
+%\end{definition}
+%In our problem agent $i$ selects at round $t$ an
+%opinion $x_i(t) \in [0,1]$ and then suffers a cost $C^t_i(x_i(t))$.
+%Obviously in our case $K=[0,1]$ and
+%\(
+%  \mcal{F} =
+%  \{
+%  x \mapsto a_i (x - s_i)^2 + (1-a_i) (x - c)^2:
+%  \ a_i, s_i, c \in [0,1]
+%  \}
+%\).
+
+%\begin{definition}[no-regret Dynamics] \label{d:noregret_dynamics}
+ % Let $A$ be a no-regret algorithm for $\mcal{F}$, $K$.
+ % For an instance $I = (G, s, a)$ of the opinion formation game
+ % given in Definition~\ref{d:random_payoff_game} we define
+ % the following no-regret dynamics.
+ % \begin{itemize}
+ %   \item Initially, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$.
+
+ %   \item At round $t \geq 1$, each agent $i$:
+ %     \begin{itemize}
+%	\item Meets uniformly at random one of her friends $j \in N_i$.
+ %       \item  Suffers cost
+  %        \(
+   %         C^t_i(x_i(t-1),x_{j}(t-1))=(1-a_i)(x_i(t-1)
+    %        -x_j(t-1))^2 + a_i(x_i(t-1)-s_i)^2
+%          \).
+ %       \item Updates her opinion using $A$,
+ %         $x_i(t) = A_t(C^1_i, \ldots C^{t-1}_i)$.
+ %     \end{itemize}
+ % \end{itemize}
+
+%\end{definition}
 
 \subsection{Estimating Bernoulli distributions}
 
