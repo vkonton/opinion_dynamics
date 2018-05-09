@@ -1,25 +1,9 @@
 \section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
 
-In this Section we prove that the fictitious play
-described as Algorithm~\ref{alg:fictitious_play} convergences
-to the equilibrium.
-At round $t+1$, $x(t+1)$ is constructed in the following way.
-At first, each agent $i$ gets to see
-the opinion $x_j(t)$, where $j \in N_i$ is picked uniformly at random
-from the set of her neighbors.  Let $W_i^t$ be the random variable
-corresponding to the selected neighbor.
-Now each agent $i \in V$ updates her opinion as follows
-\[
-  x_i(t+1) =
-  (1-\alpha_i)\frac{\sum_{\tau=1}^{t+1} x_{W_i^\tau}(\tau-1)}{t+1}
-  + \alpha_i s_i.
-\]
-% Labeled vs Unlabeled: now deprecated.
-% We remark that each agent $i$ gets to see \emph{only} the opinion
-% $x_{W_i^t}$ and not the label $W_i^t$ of her neighbor.
-Let $x^* \in [0,1]^n$ be the unique equilibrium point of the given instance $I$.
-We prove that the above stochastic process has the following convergence
-rate to $x^*$.
+In this Section we prove that the fictitious play described as
+Algorithm~\ref{alg:fictitious_play} convergences to the equilibrium.
+We prove that the dynamics Fictitious Play defined as
+Algorithm~\ref{alg:fictitious_play} has the following convergence rate to $x^*$.
 \begin{theorem}
   Let $I = (G,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
@@ -32,19 +16,29 @@ rate to $x^*$.
   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 \end{theorem}
 \begin{proof}
-  Setting $p = 1/\sqrt{t}$ in Lemma~\ref{l:error_bound} yields
-  the result.
+  Let $W_i^t$ be the random variable corresponding to the selected neighbor
+  of agent $i$, at round $t$ of the dynamics~\ref{alg:fictitious_play}.
+  Therefore, each agent $i \in V$ updates her opinion as follows
+  \begin{align*}
+    x_i(t)
+    &=
+    \argmin_{x \in [0,1]}
+      \sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))
+    =
+    (1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}
+    + \alpha_i s_i
+  \end{align*}
+  We want to find a bound $e(t)$ for the random variable
+  of the error $\norm{\infty}{x^t - x^*}$ such that with probability
+  $1-p$ it holds $\norm{\infty}{x^t - x^*} \leq e(t)$.
+  We derive a recursion for the error $e(t)$ as follows.
+  First we assume that at round $t$ each agent $i$ observes
+  the opinion of a random neighbor at the equilibrium, namely
+  $x^*_{W_i^t}$.
+  Using Lemma~\ref{l:error_recursion} we get a recursion for
+  the error $e(t)$.  Setting $p = 1/\sqrt{t}$
+  in Lemma~\ref{l:error_bound} yields the result.
 \end{proof}
-
-We start by stating the standard Hoeffding bound
-
-\begin{lemma}[Hoeffding's Inequality]\label{l:hoeffding}
-  Let $X = (X_1 +\cdots + X_t) /t$, $X_i \in [0,1]$.
-  Then,
-  \(
-    \Prob{|X - \Exp{X} | > \lambda} < 2 e^{-2 t \lambda^2}.
-  \)
-\end{lemma}
 
 \begin{lemma}\label{l:error_recursion}
   With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
@@ -112,7 +106,7 @@ We start by stating the standard Hoeffding bound
     \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
     \rp| \leq \delta(t)
   \end{equation}
-  We will our claim by induction.
+  We will prove our claim by induction.
   We assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all
   $\tau \leq t-1$. Then
   \begin{align}
@@ -229,6 +223,5 @@ convergence rate of our process.
         &=
         \bigOh{(\log t)^{3/2}}
       \end{align*}
-
   \end{itemize}
 \end{proof}

@@ -6,6 +6,16 @@ We denote by $x(t)\in [0,1]^n$ the vector of opinions of the agents at round
 $t$ and $x_i(t)$ its $i$-th coordinate. We denote by $Q([0,1])$
 the set of rationals in $[0,1]$.
 
+\subsection{Some Useful Results}
+We start by stating the standard Hoeffding bound
+\begin{lemma}[Hoeffding's Inequality]\label{l:hoeffding}
+  Let $X = (X_1 +\cdots + X_t) /t$, $X_i \in [0,1]$.
+  Then,
+  \(
+    \Prob{|X - \Exp{X} | > \lambda} < 2 e^{-2 t \lambda^2}.
+  \)
+\end{lemma}
+
 \subsection{Online Convex Optimization and No Regret Algorithms}
 
 The \emph{Online Convex Optimization} (OCO) framework can be seen
