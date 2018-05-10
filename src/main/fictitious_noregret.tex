@@ -1,25 +1,28 @@
 \section{Fictitious Play is no-regret}\label{s:fictitious_noregret}
 
-We consider the following online convex optimization problem.
-At each time step $t$, the player $i$ selects a real number $x^t$ and a
-function $f^t(x)$ arrives. The player then suffers $f^t(x^t)$ cost.
-The functions $f^t(x)$ have the following form:
-
-$$f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-a_t)^2$$
-where $s_i,\alpha \in [0,1]$ and are independent of $t$ and $a_t \in [0,1]$.
-In other words, the function $f^t$ is uniquely determined by the number $a_t$.
+In this section we consider the Online Convex Optimization problem
+that we defined in Subsection~\ref{s:preliminaries:oco}. We remind that
+our class of functions $\mcal{F}$ contains all functions of the form
+\[
+  f_t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-y_t)^2,
+\]
+where $s_i,\alpha \in [0,1]$ and are independent of $t$ and $y_t \in [0,1]$.
+In other words, the function $f^t$ is uniquely determined by the number $y_t$.
 We show that for this class of functions \emph{fictitious play} admits no regret.
 \begin{theorem}\label{t:no_regret}
-  Let $f^t$ be a sequence of functions, where each function has the form:
-  $f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-a_t)^2$,
-  where $s_i,\alpha \in [0,1]$ and are independent of $t$ and $a_t \in [0,1]$.
+  Let $f^t$ be a sequence of functions, where each function has the form
+  $f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-y_t)^2$,
+  where $s_i,\alpha \in [0,1]$ and do not dependent on $t$
+  and $y_t \in [0,1]$.
   If we define \(x^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^{t-1} f^\tau (x) \)
   then for each time $T$
   \[
     \sum_{t = 1}^{T} f^t(x^t) \leq
-    \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) + O(\log  T)
+    \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) + O(\log  T).
   \]
 \end{theorem}
+\begin{proof}
+\end{proof}
 
 In order to prove this claim, we will first define a similar rule $y^t$
 that takes into account the function $f^t$ for the "prediction" at time $t$.
@@ -72,7 +75,7 @@ close and as a result the difference in their cost must be quite small.
     (1-\alpha)\lp|\frac{\sum_{\tau = 1}^{t-1}a_\tau}{t-1}
     - \frac{\sum_{\tau = 1}^t a_\tau}{t}\rp|\\
     &=
-    (1-\alpha)\lp|\frac{\sum_{\tau = 1}^{t-1}a_\tau -(t-1)a_t}{t(t-1)}\rp|\\
+    (1-\alpha)\lp|\frac{\sum_{\tau = 1}^{t-1}a_\tau -(t-1)y_t}{t(t-1)}\rp|\\
     &\leq
     \frac{1-\alpha}{t}
   \end{align*}
@@ -82,12 +85,12 @@ close and as a result the difference in their cost must be quite small.
   \begin{align*}
     f^t(x^t)
     &=
-    \alpha(x^t - s_i)^2 + (1 - \alpha)(x^t - a_t)^2 \\
+    \alpha(x^t - s_i)^2 + (1 - \alpha)(x^t - y_t)^2 \\
     &\leq
     \alpha(y^t - s_i)^2 + 2\alpha\lp|y^t -
     s_i\rp|\lp|x^t - y^t\rp| + \alpha \lp|x^t - y^t\rp|^2 \\
-    &\quad + (1-\alpha)(y_t - a_t)^2 +
-    2(1-\alpha)\lp|y^t - a_t\rp|\lp|x^t-y^t\rp| + (1 - \alpha)\lp|x^t - y^t\rp|^2\\
+    &\quad + (1-\alpha)(y_t - y_t)^2 +
+    2(1-\alpha)\lp|y^t - y_t\rp|\lp|x^t-y^t\rp| + (1 - \alpha)\lp|x^t - y^t\rp|^2\\
     &\leq
     f^t(y^t) + 2\lp|x^t - y^t\rp| + \lp|y^t - x^t\rp|^2\\
     &\leq
@@ -95,7 +98,7 @@ close and as a result the difference in their cost must be quite small.
   \end{align*}
 \end{proof}
 
-Theorem~\ref{t:no_regret} easily follows since:
+Theorem~\ref{t:no_regret} easily follows since
 \begin{align*}
   \sum_{t=1}^T f^t(x^t)
   &\leq

@@ -1,4 +1,4 @@
-\section{Preliminaries}
+\section{Preliminaries}\label{s:preliminaries}
 \subsection{Notation}
 Let $G(V,E)$ be a graph. We denote by $V$ the set of agents,
 and $N_{i} \subset V$ the set of neighbors of agent $i$. Let $n = |V|$.
@@ -7,6 +7,7 @@ $t$ and $x_i(t)$ its $i$-th coordinate. We denote by $Q([0,1])$
 the set of rationals in $[0,1]$.
 
 \subsection{Online Convex Optimization and No Regret Algorithms}
+\label{s:preliminaries:oco}
 The \emph{Online Convex Optimization} (OCO) framework can be seen
 as a game played between a player and an adversary. Let
 $K \subseteq \reals^n$ be a convex set and a set of functions
@@ -26,18 +27,21 @@ $(f_1,\ldots,f_{t-1})$ in a way that minimizes the total cost. We emphasize
 that the agent has to choose $x_t$ before seeing $f_t$, otherwise the
 problem becomes trivial.
 \begin{definition}
-An OCO algorithm $A$, at round $t$ selects a vector $x^t \in K$ according to the history, 
-$x^t = A_t(f_1,\ldots,f_t)$.
+An OCO algorithm $A$, at round $t$ selects a vector $x^t \in K$ according to the
+history, \(x^t = A_t(f_1,\ldots,f_t)\).
 \end{definition}
 
 \begin{definition}
-Let the OCO algorithm $A$ and the sequence of functions $\{f_1,\ldots,f_T\} \in F^T$. The regret of $A$ is defined by
+Let the OCO algorithm $A$ and the sequence of functions
+$\{f_1,\ldots,f_T\} \in F^T$. The regret of $A$ is defined by
 \[R_A(T) = \sum_{t=1}^Tf_t(x_t) - \text{min}_{x \in K}\sum_{t=1}^Tf_t(x)\]
-if $R_A(T) = o(T)$ for any sequence $\{f_1,\ldots,f_T\}$ then A is no-regret algorithm 
+if $R_A(T) = o(T)$ for any sequence $\{f_1,\ldots,f_T\}$ then A is no-regret
+algorithm
 \end{definition}
-According to the feasibility set $K$ and the set of functions $F$, different no-regret algorithms with differnt regret bounds can be derived. 
-Some seminal examples areZinkevic's algorithm that acheives regret $R_A(T) =\bigOh{\sqrt{T}}$, when $K$ is convex, closed and bounded and 
-$F$ is the set of convex functionswith bounded first derivative. Hazan et al \cite{} proposed an algorithm with $R_A(T) =\bigOh{\log T}$, 
+%
+According to the feasibility set $K$ and the set of functions $F$, different no-regret algorithms with differnt regret bounds can be derived.
+Some seminal examples areZinkevic's algorithm that acheives regret $R_A(T) =\bigOh{\sqrt{T}}$, when $K$ is convex, closed and bounded and
+$F$ is the set of convex functionswith bounded first derivative. Hazan et al \cite{} proposed an algorithm with $R_A(T) =\bigOh{\log T}$,
 when $F$ is the set of twice diffentiable strongly convex functions.\\
 
 \noindent \textbf{No regret dynamics and repeated games:}
@@ -63,13 +67,13 @@ is defined.
 \end{algorithmic}
 \end{algorithm}
 
-\noindent We denote the as $x_A(t)$ the opinion vector when the algorithm $A$ is selected. In case $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$ 
+\noindent We denote the as $x_A(t)$ the opinion vector when the algorithm $A$ is selected. In case $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$
 we obtain the \emph{fictitious play} defined in \ref{alg:fictitious_play} and for simplicity we denote it as $x(t)$. As we have already menioned, in Section 2 we
 bound the convergence rate of the \emph{fictitious play}, $\Exp{\norm{\infty}{x(t)-x^*}}$ and in Section 3, we prove that it is no-regret algorithm for the specific OCO setting. The latter
-does not hold in more general OCO settings. In section 4, we investigate whether there exists an algorithm $A$ with significantly better asymptotic rate of convergence. 
+does not hold in more general OCO settings. In section 4, we investigate whether there exists an algorithm $A$ with significantly better asymptotic rate of convergence.
 
-%For example if the algorithm $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$, we obtain the dynamics defined in \ref{alg:fictitious_play}. 
-%As we have already mentioned, the above algorithm admits no-regret in the above OCO setting (see Section 3). The above dynamics converges to the unique equilibrium point $x^*$. 
+%For example if the algorithm $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$, we obtain the dynamics defined in \ref{alg:fictitious_play}.
+%As we have already mentioned, the above algorithm admits no-regret in the above OCO setting (see Section 3). The above dynamics converges to the unique equilibrium point $x^*$.
 %\noindent In the repeated version of the opinion formation game with random payoffs, things are clear. Each agent $i$, at round $t$ must select a strategy $x_i(t) \in [0,1]$
 %and then suffers a cost $C_i(x(t))$. Assume that there exists and algorithm $A$ admits no-regret when $K=[0,1]$ and $F$ is the set of functions $f(x) = (1-a_i)(x-y_t)^2 + a_i(x-s_i)^2$
 %for all $c \in [0,1]$. Each agent $i$ is willing to adopt the suggestion of $A$, $x_i(t) = A_t(C_i^1,\ldots,C_i^{t-1})$ since it ensures him similar cost as the that

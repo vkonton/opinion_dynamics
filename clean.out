@@ -5,14 +5,13 @@
 \BOOKMARK [2][-]{subsection.1.4}{Related Work}{section.1}% 5
 \BOOKMARK [1][-]{section.2}{Preliminaries}{}% 6
 \BOOKMARK [2][-]{subsection.2.1}{Notation}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.2}{Some Useful Results}{section.2}% 8
-\BOOKMARK [2][-]{subsection.2.3}{Online Convex Optimization and No Regret Algorithms}{section.2}% 9
-\BOOKMARK [2][-]{subsection.2.4}{Estimating Bernoulli distributions}{section.2}% 10
-\BOOKMARK [1][-]{section.3}{Fictitious Play Convergence Rate}{}% 11
-\BOOKMARK [1][-]{section.4}{Fictitious Play is no-regret}{}% 12
-\BOOKMARK [1][-]{section.5}{Final Lower Bound}{}% 13
-\BOOKMARK [2][-]{subsection.5.1}{Proof of Theorem 4}{section.5}% 14
-\BOOKMARK [2][-]{subsection.5.2}{Proof of Theorem 5}{section.5}% 15
-\BOOKMARK [1][-]{section.6}{Lower Bound}{}% 16
-\BOOKMARK [1][-]{section.7}{A Graph Aware Protocol}{}% 17
-\BOOKMARK [1][-]{appendix.A}{Lower Bound}{}% 18
+\BOOKMARK [2][-]{subsection.2.2}{Online Convex Optimization and No Regret Algorithms}{section.2}% 8
+\BOOKMARK [2][-]{subsection.2.3}{Estimating Bernoulli distributions}{section.2}% 9
+\BOOKMARK [1][-]{section.3}{Fictitious Play Convergence Rate}{}% 10
+\BOOKMARK [1][-]{section.4}{Fictitious Play is no-regret}{}% 11
+\BOOKMARK [1][-]{section.5}{Final Lower Bound}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Proof of Theorem 4}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Proof of Theorem 5}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{Lower Bound}{}% 15
+\BOOKMARK [1][-]{section.7}{A Graph Aware Protocol}{}% 16
+\BOOKMARK [1][-]{appendix.A}{Lower Bound}{}% 17

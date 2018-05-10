@@ -1,4 +1,4 @@
-PWD /home/noscope/opinion_dynamics
+PWD /home/noscope/projects/opinion_dynamics
 INPUT /usr/share/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
 INPUT clean.tex
@@ -491,8 +491,8 @@ INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplr8r.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT src/main/preliminaries.tex
 INPUT src/main/preliminaries.tex
-INPUT /usr/share/texmf-dist/fonts/vf/adobe/palatino/pplr9t.vf
-INPUT /usr/share/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplr9e.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplr9e.tfm
 INPUT src/main/fictitious_convergence.tex
 INPUT src/main/fictitious_convergence.tex
 INPUT /usr/share/texmf-dist/fonts/vf/public/mathpazo/zplmr7v.vf
@@ -501,16 +501,16 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT /usr/share/texmf-dist/fonts/vf/public/mathpazo/zplmr7t.vf
+INPUT /usr/share/texmf-dist/fonts/tfm/public/mathpazo/fplmr.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmr10.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplr9e.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplr9e.tfm
+INPUT /usr/share/texmf-dist/fonts/vf/adobe/palatino/pplr9t.vf
 INPUT /usr/share/texmf-dist/fonts/vf/public/mathpazo/zplmr7y.vf
 INPUT /usr/share/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplr9c.tfm
+INPUT src/main/fictitious_noregret.tex
+INPUT src/main/fictitious_noregret.tex
 INPUT /usr/share/texmf-dist/fonts/vf/adobe/palatino/pplr9c.vf
 INPUT /usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplrc8r.tfm
-INPUT src/main/fictitious_noregret.tex
-INPUT src/main/fictitious_noregret.tex
 INPUT src/main/lower_bound.tex
 INPUT src/main/lower_bound.tex
 INPUT /usr/share/texmf-dist/tex/latex/psnfss/ufplmbb.fd
