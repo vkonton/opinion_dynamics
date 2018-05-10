@@ -1,68 +1,119 @@
-\section{Final Lower Bound}
-As we have already discussed in \ref{d:regret} a no-regret algorithm $A$ defines no-regret dynamics for any fixed instance $I=(G,s,a)$. 
-Let $\Expnew{I}{\norm{\infty}{x(t)-x^*}}$ denote the convergence rate of the above dynamics. Since $A$ ensures no-regret for each agent $i$, this 
-dynamical process can be considered as a natural dynamical process. In this section we investigate whether there exists such a no-regret algorithm that
-guarantees significantly better asymptotic convergence rate than those that \emph{fictitious play} provides. In this section we present some results that 
-indicate that the following question admits an negative answer.
-\begin{question}
-Is there a no-regret algorithm $A$ such that for all instance $I=(G,s,a)$, $\Expnew{I}{\norm{\infty}{x(t)-x^*}} \in \bigOh{1/t}$? 
-\end{question}
+\section{Lower Bound}
+As we have already discussed for any fixed instance $I$ with $\rho\geq 1/2$, \emph{fictitious play} acheives convergence rate $\Expnew{I}{\norm{\infty}{x(t)-x^*}}=\bigOh{1/\sqrt{t}}$, this rate is outperformed by
+the rate of the original \emph{FJ model} convergence rate $\Expnew{I}{\norm{\infty}{x(t)-x^*}}=\bigOh{1/2^{t}}$. An interesting question is whether this gap
+is due to the limited information exchange between the agents in the random payoff variant or can be reduced with another no-regret algorithm $A$.
 
-\noindent Altough we were not able to answer provide a negative answer to the above question, we present to main results that indicate that the existence of such
-an algorithm is higly unlikely. More precisely, we were able to prove two following theorems.
+\begin{claim}\label{claim}
+Let $A$ a no-regret algorithm and let $x_A(t)$ the opinion vector defined in \ref{alg:no_regret_dynamics}. Then there exists an instance $I_A$ such that $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t)$.
+\end{claim}
 
-\begin{theorem}
-Let a no-regret alogrithm $A$ such that for all instances $I$, $\lim_{t \rightarrow \infty} t\Expnew{I}{\norm{\infty}{x(t)-x^*}}=0$.\\
-Then there exists an estimator $\hat{\theta}$ such that $\text{for all }p \in Q[0,1],~  \lim_{t \rightarrow \infty}tR_p(t)=0$
+\noindent 
+The above claim states that rationality in selfish agents comes with the price of slow convergence to the equilibrium point.
+Although we were not able to fully prove it, we present two results that indicate that such an algorithm $A$ is higly unlike to exists. 
+We leave the full proof as an interesting open problem.\\
+
+At first we present a simple reduction that shows that any algorithm $A$ with convergence rate $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}$ can be used as
+an estimator $\hat{\theta}$ for Bernoulli distribution with error rate $R_p(t)$ asymptotically the same as $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}$. This is formally
+expressed in the following theorem, whose proof can be found in the next subsection.
+
+\begin{theorem}\label{t:reduction}
+Let a no-regret alogrithm $A$ such that for all instances $I$, $\lim_{t \rightarrow \infty} t\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.\\
+Then we can construct an estimator $\hat{\theta_A}$ such that $\text{for all }p \in Q[0,1],~  \lim_{t \rightarrow \infty}tR_p(t)=0$
 \end{theorem}
 
-\begin{theorem}
+\noindent Then using information theory lower bound techniques develloped in the statistics literature, we prove a \emph{contradictory} result for 
+any Bernoulli estimators $\hat{\theta}$. This contradiction between the two theorems is the indication that such an algorithm $A$ is highly unlikely to exists.
+
+\begin{theorem}\label{t:integral}
 Let a Bernoulli estimator $\hat{\theta}$ with error rate $R_p(t)$. Then, for all $[a,b] \subseteq [0,1]$,
 \[ \lim_{t \to \infty}t \int_{a}^{b}R_p(t)dp = +\infty\]
 \end{theorem} 
 
-\noindent As result the existence of such an algorithm $A$ implies the existence of estimator $\hat{\theta}$ with error rate $R_p(t)$ that satisfies the following
-two properties:
+\noindent Having seen Theorems \ref{t:reduction} and \ref{t:integral} we can understand why the existence of an algorithm $A$ not satisfying Claim \ref{claim},
+is highly unlike. Assume that such an algorithm $A$ exists. Then by Theorem \ref{t:reduction}, we can construct an estimator $\hat{\theta_A}$ with
+error rate $R_p(t)$ that satisfies the following two properties.
+
 \begin{itemize}
  \item for all $p \in Q([0,1]),~ \lim_{t \rightarrow \infty}tR_p(t)=0$
  \item for all $[a,b] \subseteq [0,1]$, $\lim_{t \to \infty}t \int_{a}^{b}R_p(t)dp = +\infty$
 \end{itemize}
-\noindent We conjecture that the does not exist such a function $R_p(t)$. Even if it is not the case, such a fuction admits an very degenerate form making very likely to be
-the error rate of any reasonable estimator $\hat{\theta}$. 
+
+\noindent Unfortunately there exist functions $R_p(t)$ that simultaneous satisfy the above two properties, meaning that we cannot derive a full proof of 
+Claim \ref{claim} by this approach. An example of such a function is $R_p(t)=\Pi_{i=1}^t(p-q_i)^2$, where the sequence $\{q_i\}_{i=1}^{\infty}$ is 
+an enumeration of the rationals in $[0,1]$. However, such functions $R_p(t)$ admit very degenerate forms meaning that there are very unlike 
+to be the error rate of a estimator $\hat{\theta_A}$. 
 
 
-\subsection{Proof of Theorem 4}
-\begin{lemma}
-For any graph oblivious update rule $F=\{\ f \}_{t=1}^\infty$, there exists a Bernulli estimator $\hat{\theta_F}$ such that\\
-for all $q \in Q([0,1])$, there exists an instance $I_q$ such that $$E_q[|\hat{\theta_t} - q|] \leq 2E_{I_q}[||x^t-x^*||_{\infty}]$$
+%$$ $$
+%As we have already discussed in \ref{d:regret} a no-regret algorithm $A$ defines no-regret dynamics for any fixed instance $I=(G,s,a)$. 
+%Let $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}$ denote the convergence rate of the above dynamics. Since $A$ ensures no-regret for each agent $i$, this 
+%dynamical process can be considered as a natural dynamical process. In this section we investigate whether there exists such a no-regret algorithm that
+%guarantees significantly better asymptotic convergence rate than those that \emph{fictitious play} provides. In this section we present some results that 
+%indicate that the following question admits an negative answer.
+%\begin{question}
+%Is there a no-regret algorithm $A$ such that for all instance $I=(G,s,a)$, $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}} \in \bigOh{1/t}$? 
+%\end{question}
+
+%\noindent Although we were not able to answer provide a negative answer to the above question, we present to main results that indicate that the existence of such
+%an algorithm is higly unlikely. More precisely, we were able to prove two following theorems.
+
+%\begin{theorem}
+%Let a no-regret alogrithm $A$ such that for all instances $I$, $\lim_{t \rightarrow \infty} t\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.\\
+%Then there exists an estimator $\hat{\theta}$ such that $\text{for all }p \in Q[0,1],~  \lim_{t \rightarrow \infty}tR_p(t)=0$
+%\end{theorem}
+
+%\begin{theorem}
+%Let a Bernoulli estimator $\hat{\theta}$ with error rate $R_p(t)$. Then, for all $[a,b] \subseteq [0,1]$,
+%\[ \lim_{t \to \infty}t \int_{a}^{b}R_p(t)dp = +\infty\]
+%\end{theorem} 
+
+%\noindent As result the existence of such an algorithm $A$ implies the existence of estimator $\hat{\theta}$ with error rate $R_p(t)$ that satisfies the following
+%two properties:
+%\begin{itemize}
+% \item for all $p \in Q([0,1]),~ \lim_{t \rightarrow \infty}tR_p(t)=0$
+% \item for all $[a,b] \subseteq [0,1]$, $\lim_{t \to \infty}t \int_{a}^{b}R_p(t)dp = +\infty$
+%\end{itemize}
+%\noindent We conjecture that the does not exist such a function $R_p(t)$. Even if it is not the case, such a fuction admits an very degenerate form making very likely to be
+%the error rate of any reasonable estimator $\hat{\theta}$. 
+\subsection{Proof of Theorem \ref{t:reduction}}
+\noindent In the following Lemma we show how we can use algorithm $A$ to construct an estimator $\hat{\theta_A}$ for Bernoulli distributions.
+\begin{lemma}\label{l:reduction}
+For any algorithm $A$, we can construct a Bernoulli estimator $\hat{\theta_A}$ such that for all $p \in Q([0,1])$, there exists an instance $I_p$ such that $$R_p(t) \leq 2E_{I_p}[||x_A(t)-x^*||_{\infty}]$$
 \end{lemma}
 
 \begin{proof}
-At round $t$, the graph oblivious update rule $F=\{\ f_t\}_{t=1}^\infty$ has selected the functions $f_t(O_1,\ldots,O_t,s_i,a_i)$ and $g_t(s_i,a_i)$. An estimator $\hat{\theta}$ receives the samples $Y_1,\ldots,Y_t$ and outputs the value $\hat{\theta_t}(Y_1,\ldots,Y_t) \in [0,1]$. Now consider the estimator $\hat{\theta_t}=\frac{1}{2}f(g_1(Y_1,1),\ldots,g_t(Y_t,1))$ and observe that $\hat{\theta_t}$ is a function $\{0,1\}^t \mapsto [0,1]$.\\
-Now for any $q \in Q([0,1])$, construct an appropriate instance $I_q$ such that $E_q[|\hat{\theta_t} - q|] \leq 2E_{I_q}[||x^t-x^*||_{\infty}]$.\\
-Since $q=\frac{k}{n}$ some $k,n \in \nats$, the following instance $I_q$ with $n+1$ agents:
+At first we remind that an estimator $\hat{\theta}$ is a sequence of fuctions $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where $\theta_t:~\{0,1\}^t\mapsto [0,1]$.  We construct such a sequence using the algorithm $A$.
+We also remind that when an agent $i$ runs algorithm $A$, she selects $x_i(t)$ according to the cost functions $\{C_i^{\tau}\}$ that she has already reveived \[x_i(t)=A_t(C_i^1,\ldots,C_i^{t-1})\]
+
+\noindent Consider an agent $i$ with $a_i=1$ and $s_i=0$ that runs $A$. Then $C_i^t(x)=x^2$ for all $t$ and $x_i(t)=A_t(x^2,\ldots,x^2)$.
+The latter means that $x_i(t)$ only depends on $t$, $x_i(t)=h_0(t)$. Equivalently, if $a_i=1$ and $s_i=1$ then $x_i(t)=A_t((1-x)^2,\ldots,(1-x)^2)$ and $x_i(t)=h_1(t)$. Finally, consider an agent $i$ with $a_i=1/2$ and $s_i=0$. In this case $C_i^t = \frac{1}{2}x^2 + \frac{1}{2}(x-y_t)^2$, where $y_t \in [0,1]$ is the opinion of the neighbor $j\in N_i$ that $i$ met at 
+round $t$. As a result, $x_i(t)=A_t(\frac{1}{2}x^2+\frac{1}{2}(x-y_1)^2,\ldots,\frac{1}{2}x^2+\frac{1}{2}(x-y_{t-1})^2)=f_t(y_1,\ldots,y_{t-1})$. The estimator $\hat{\theta_A}$ is the following sequences $\{\hat{\theta_{t}}\}_{t=1}^{\infty}$ \[\hat{\theta_t}(Y_1,\ldots,Y_t) = \frac{1}{2}f_{t+1}(h_{Y_1}(1),\ldots,h_{Y_t}(t)) \]
+
+\noindent Observe that $\hat{\theta_t}: \{0,1\}^t \mapsto [0,1]$ meaning that $\hat{\theta_A}$ is a valid estimator for Bernoulli distributions.\\
+
+\noindent Now for any $p \in Q([0,1])$, we construct an appropriate instance $I_p$ s.t. $R_p(t)=\Expnew{p}{|\hat{\theta_t} - p|} \leq 2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$.
+For $p=\frac{k}{n}$ consider the following instance $I_p$ with $n+1$ agents:
 \begin{itemize}
  \item A central agent with $s_c=0$ and $a_c=1/2$.
  \item Directed edges from the central agent to all the other agents.
  \item $k$ agents with $s_i=0$ and $a_i=1$
  \item $n-k$ agents with $s_i=1$ and $a_i=1$
  \end{itemize}
-Notice that in this instance for all $i\neq c$, $x^*_i=s_i$ and $x^*_c=\frac{q}{2}$. We show that $E_q[|\hat{\theta_t}-q|] \leq 2E_{I_q}[||x^t-x^*||_{\infty}]$.\\
-At round $t$, if the oracle returns to the center agent the value $g_t(1,1)$ of a $1$-agent, then $Y_t=1$ otherwise $Y_t=0$. As a result, $\Prob{Y_t=1}=q$ and 
+We just need to prove that in $I_p$, $\Expnew{p}{|\hat{\theta_t}-p|} \leq 2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$. Notice that $x^*_c=\frac{p}{2}$ and $x^*_i=s_i$ if $i\neq c$. .\\
+At round $t$, if the oracle returns to the center agent the value $h_1(t)$ of a $1$-agent, then $Y_t=1$ otherwise $Y_t=0$. As a result, $\Prob{Y_t=1}=p$ and 
 \begin{align*}
- E_{I_q}[||x^t-x^*||_{\infty}] &\geq E_{I_q}[|x^t_c-x^*_c|]\\
- &= E_{q}[|\frac{\hat{\theta_t}}{2}-\frac{q}{2}|]
+ \Expnew{I_p}{\norm{\infty}{x^t-x^*}} &\geq \Expnew{I_p}{||x^t_c-x^*_c||}\\
+ &= \Expnew{p}{|\frac{\widehat{\theta_t}}{2}-\frac{p}{2}}] = R_p(t)
 \end{align*}
 \end{proof}
 
-\begin{corollary}
-Let the update rule $F=\{f_t\}_{t=1}^\infty$ s.t. for all instances $I$, $\lim_{t \rightarrow \infty} t E_I[||x^t -x^*||]=0$.
-Then for any  $q \in Q[0,1]$, $$\lim_{t \rightarrow \infty}tE_q[|\hat{\theta_F} -q|]=0$$
-\end{corollary}
+\begin{theorem}
+Let the no-regret algorithm $A$ such that for all instances $I$, $\lim_{t \rightarrow \infty} t \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.
+Let $\hat{\theta_A}$ the estimator constructed from $A$. Then for all  $p \in Q[0,1]$, \[\lim_{t \rightarrow \infty}tR_p(t)=0\]
+\end{theorem}
+The proof follows by direct application of the Lemma \ref{l:reduction}
 
 \subsection{Proof of Theorem 5}
-\section{Lower Bound}
-
 
 \begin{lemma}[Fano's Inequality]\label{l:fano}
 Suppose we have an estimator $\hat{\theta}^t$ for the probability of a Bernoulli distribution. 
