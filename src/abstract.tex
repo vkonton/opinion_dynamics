@@ -1,24 +1,32 @@
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis sapien nunc,
-commodo et, interdum suscipit, sollicitudin et, dolor. Excepteur sint occaecat
-cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-laborum. Nam quis nulla. Nullam sit amet magna in magna gravida vehicula. Sed
-elit dui, pellentesque a, faucibus vel, interdum nec, diam. Mauris dolor felis,
-sagittis at, luctus sed, aliquam non, tellus. Etiam egestas wisi a erat. Etiam
-dictum tincidunt diam. Quisque tincidunt scelerisque libero. Phasellus faucibus
-molestie nisl. Duis sapien nunc, commodo et, interdum suscipit, sollicitudin
-et, dolor.
+We study opinion formation games based on the famous model proposed by Friedkin
+and Johsen.  In today's huge social networks the assumption that in each round
+all agents update their opinions by taking into account the opinions of
+\emph{all} their friends could be unrealistic. Therefore, we assume that in
+each round each agent gets to meet with only one (uniformly random) friend of
+hers.  Specifically, we define an opinion formation game, where at round $t$,
+agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
+\in[0,1]$ meets a random neighbor $j$ with opinion $x_j(t)$ and suffers cost
+that is a convex combination of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
 
-Aenean placerat. Duis sapien nunc, commodo et, interdum suscipit, sollicitudin
-et, dolor. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel
-sapien. Donec iaculis gravida nulla. Pellentesque arcu. Nulla accumsan, elit
-sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla
-vel leo. Nam quis nulla. In convallis. Mauris dolor felis, sagittis at, luctus
-sed, aliquam non, tellus. Nullam at arcu a est sollicitudin euismod. Sed ac
-dolor sit amet purus malesuada congue. Integer tempor. Quis autem vel eum iure
-reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur,
-vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Vivamus ac leo
-pretium faucibus. Donec quis nibh at felis congue commodo. Phasellus rhoncus.
-Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget
-facilisis enim ipsum id lacus. Ut enim ad minima veniam, quis nostrum
-exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea
-commodi consequatur?
+For a dynamics in the above setting to be considered as natural it must be
+simple, converge to the equilibrium $x^*$, and perhaps most importantly, it
+must be a reasonable choice for selfish agents.  In this work we show that
+\emph{fictitious play}, is a natural dynamics for the above game.  We prove
+that, after $O(1/\eps^2)$ rounds, the opinion vector is within error $\eps$  of
+the equilibrium. Moreover, we show that fictitious play admits no-regret and
+thus, is a reasonable algorithm for agents to implement.
+
+The classical Friedkin-Johsen dynamics converges to the equilibrium within
+error $\eps$ after only $O(\log(1/\eps))$ rounds whereas in our setting
+fictitious play needs $\widetilde{O}(1/\eps^2)$ rounds. A natural question is
+whether there exists a natural dynamics for our problem with better rate of
+convergence.  To answer this question we show that from \emph{no-regret}
+dynamics in our setting, we can construct algorithms that estimate the mean of
+Bernoulli random variables.  By using information theoretic sample complexity
+lower bound techniques from statistics we show that no-regret algorithms are
+unlikely to converge with less than $O(1/\eps)$ rounds. Interestingly, the
+considerably worse convergence rate is not an inherent characteristic of our
+setting but rather of the class of no-regret dynamics since we show that, in
+general, there exists a dynamics that only needs $O(\log(1/\eps)^2)$ rounds in
+our setting, resembling the convergence rate of the original Friedkin-Johsen
+model.

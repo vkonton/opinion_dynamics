@@ -1,9 +1,50 @@
 \section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
-
-In this Section we prove that the fictitious play described as
+In this section we prove that the fictitious play described as
 Algorithm~\ref{alg:fictitious_play} convergences to the equilibrium.
-We prove that the dynamics Fictitious Play defined as
-Algorithm~\ref{alg:fictitious_play} has the following convergence rate to $x^*$.
+We shall use the following standard concentration inequality of Hoeffding.
+\begin{lemma}\label{l:hoeffding}
+  Let $X_1, \ldots, X_t$ be independent random variables such that
+  $0 \leq X_i \leq 1$ and let $X = (X_1 + \ldots + X_t) / t$. Then
+  for all $t > 0$,
+  \(
+    \Prob{ |X - \Exp X| \geq \lambda} \leq 2 \me^{-2 n \lambda^2}
+  \)
+\end{lemma}
+We break down the proof of Theorem~\ref{t:fictitious_converge}
+into two parts.  We first recursively define an upper bound $e(t)$
+of the error $\norm{\infty}{x^t - x^*}$ that holds with arbitrarily
+good probability $1-p$ for all $t \geq 1$. Then we work
+with the recursion in order to get an upper bound for $e(t)$.
+The following lemma provides a simple upper bound for the
+convergence rate of the recursion. Its technical proof can
+be found in Section~\ref{app:s:fictitious_convergence} of the Appendix.
+\begin{lemma}\label{l:recursion_upper_bound}
+  Let $e(t)$ be a function satisfying the recursion
+  \[
+    e(t) =
+    \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
+  \]
+  where \(\delta(t) = \sqrt{\frac{\ln(C t^2)}{t}} \), \(\delta(0) = 0 \),
+  and $D > \me^2$ is a positive constant.  Then
+  \(
+    e(t) \leq
+    \sqrt{2 \ln(D)} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
+  \)
+\end{lemma}
+% \begin{lemma}\label{l:error_recursion}
+%   With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
+%   where $e(t)$ satisfies the following recursive relation
+%   \[
+%     e(t) =
+%     \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+%     \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
+%   \]
+%   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$ for $t\geq 1$
+%   and $\delta(0) = 0$.
+% \end{lemma}
+We are now ready to fully prove Theorem~\ref{t:fictitious_converge}.
+We restate it here for the sake of completeness.
 \begin{theorem}
   Let $I = (G,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
@@ -23,83 +64,74 @@ Algorithm~\ref{alg:fictitious_play} has the following convergence rate to $x^*$.
     x_i(t)
     &=
     \argmin_{x \in [0,1]}
-      \sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))
+    \sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))
     =
     (1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}
     + \alpha_i s_i
   \end{align*}
   We want to find a bound $e(t)$ for the random variable
   of the error $\norm{\infty}{x^t - x^*}$ such that with probability
-  $1-p$ it holds $\norm{\infty}{x^t - x^*} \leq e(t)$.
+  $1-p$ it holds for all $t \geq 1$, $\norm{\infty}{x^t - x^*} \leq e(t)$.
   We derive a recursion for the error $e(t)$ as follows.
-  First we assume that at round $t$ each agent $i$ observes
-  the opinion of a random neighbor at the equilibrium, namely
-  $x^*_{W_i^t}$.
-  Using Lemma~\ref{l:error_recursion} we get a recursion for
-  the error $e(t)$.  Setting $p = 1/\sqrt{t}$
-  in Lemma~\ref{l:error_bound} yields the result.
-\end{proof}
-
-\begin{lemma}\label{l:error_recursion}
-  With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
-  where $e(t)$ satisfies the following recursive relation
-  \[
-    e(t) =
-    \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
-    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
-  \]
-  where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
-\end{lemma}
-\begin{corollary}\label{c:error_recursion}
-  The function $e(t)$ satisfies the following recursive relation
-  \[
-    e(t+1)-e(t) + \alpha \frac{e(t)}{t+1}
-    =
-    \delta(t+1)-\delta(t) + \frac{\delta(t)}{t+1}
-  \]
-\end{corollary}
-\begin{proof}
+  % First we assume that at round $t$ each agent $i$ observes
+  % the opinion of a random neighbor at the equilibrium, namely $x^*_{W_i^t}$.
+  % Using Lemma~\ref{l:error_recursion} we get a recursion for
+  % the error $e(t)$.
+  % Setting $p = 1/\sqrt{t}$ in Lemma~\ref{l:error_bound} yields the result.
   As we have already mentioned for any instance $I$ there exists
   a unique equilibrium vector $x^*$. Since
-  $W_i^\tau \sim \Unif(N_i)$ we have that $
-  \Exp{x^*_{W_i^\tau}} = \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
-  $.
+  $W_i^\tau \sim \Unif(N_i)$ we have that \(
+    \Exp{x^*_{W_i^\tau}} = \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
+  \).
   Since $W_i^\tau$ are independent random variables, we can use
   Hoeffding's inequality (Lemma~\ref{l:hoeffding}) to get
-  \[
+  \(
     \Prob
     {
-      \lp|
-      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^\tau}}{t}
-      - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+      |
+      {(\sum_{\tau = 1}^{t} x^*_{W_i^\tau}})/{t}
+      - {(\sum_{j \in N_i} x^*_j)}/{|N_i|}
       > \delta(t)
     }
-    < \frac{6}{\pi^2} \frac{p}{ n t^2},
-  \]
+    < 6 p / (\pi^2 n t^2),
+  \)
   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
-  Therefore, by the union bound
+  To bound the probability of error for all rounds $t=1$ to $\infty$
+  and all agents in $V$, we use the union bound to get
   \begin{align*}
-    &\Prob
-    {
-      \text{for all } t \geq 1 :
-      \max_{i \in V}
+    \sum_{i=1}^{\infty}
+    \Prob
+    { \max_{i \in V}
       \lp|
       \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
       - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
-      > \delta(t)} \leq \\
-    &\sum_{t =1 }^{\infty} \Prob
-    {
-      \max_{i \in V}
-      \lp|
-      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
-      - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
-      > \delta(t)} \leq
-    \\
-    &\sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
+      > \delta(t)}
+    \leq
+    \sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
     p
   \end{align*}
-
-  As a result with probability $1-p$ we have that for all $t$
+  %
+  % \begin{align*}
+  %   &\Prob
+  %   {
+  %     \text{for all } t \geq 1 :
+  %     \max_{i \in V}
+  %     \lp|
+  %     \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
+  %     - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+  %     > \delta(t)} \leq \\
+  %   &\sum_{t =1 }^{\infty} \Prob
+  %   {
+  %     \max_{i \in V}
+  %     \lp|
+  %     \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
+  %     - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+  %     > \delta(t)} \leq
+  %   \\
+  %   &\sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
+  %   p
+  % \end{align*}
+  As a result with probability $1-p$ we have that for all $t$ and all $i \in V$
   \begin{equation}\label{eq:error_per_round}
     \lp|
     \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
@@ -140,88 +172,30 @@ Algorithm~\ref{alg:fictitious_play} has the following convergence rate to $x^*$.
   Similarly, we can prove that
   $x_i(t) \geq x_i^* - \delta(t) - (1-\alpha)
   \frac{\sum_{\tau=1}^t e(\tau)}{t}$.
-  As a result $||x_i(t)-x^*||_{\infty} \leq e(t)$.
-\end{proof}
-
-In order to bound the convergence time of the system, we just need to bound
-the convergence rate of the function $e(t)$.
-The following lemma provides us with a simple upper bound for the
-convergence rate of our process.
-\begin{lemma}\label{l:error_bound}
-  Let $e(t)$ be a function satisfying the recursion of
-  Corollary~\ref{c:error_recursion}. Then with probability
-  at least $1-p$ we have that
+  As a result $\norm{\infty}{x_i(t)-x^*} \leq e(t)$ and the induction
+  is complete.  Therefore, we have that with probability at least $1-p$,
+  \(\norm{\infty}{x^t - x^*} \leq e(t)\), where $e(t)$ satisfies the
+  following recursive relation
   \[
     e(t) =
-    \begin{cases}
-      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^\alpha}}
-      &\quad\text{if } \alpha \leq 1/2\\
-      \bigOh{\sqrt{\log(\frac{n}{p})}\frac{(\log t)^{3/2}}{t^{1/2}}}
-      &\quad\text{if } \alpha > 1/2\\
-    \end{cases}
+    \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
   \]
-\end{lemma}
-
-\begin{proof}
-  At first, since $\frac{\delta(t)}{t}$ is a decreasing function
-  for $p \leq 1/4$, we have that
-  $e(t)\leq (1-\frac{\alpha}{t}) + g(t)$, where $g(t)=\frac{\delta(t)}{t}$.
-  \begin{align*}
-    e(t)
-    &\leq
-    (1-\frac{\alpha}{t})e(t-1) + g(t)\\
-    &\leq
-    (1-\frac{\alpha}{t})(1-\frac{\alpha}{t-1})e(t-2)
-    + (1-\frac{\alpha}{t})g(t-1) + g(t)\\
-    &\leq
-    (1-\frac{\alpha}{t})\cdots (1-\alpha)e(0)
-    + \sum_{\tau=1}^t g(\tau)\prod_{i=\tau+1}^t(1-\frac{\alpha}{i})\\
-    &\leq
-    \frac{e(0)}{t^\alpha}
-    + \sum_{\tau=1}^tg(\tau)e^{-\alpha\sum_{i=\tau+1}^t\frac{1}{i}}\\
-    &\leq
-    \frac{e(0)}{t^\alpha}
-    + \sum_{\tau=1}^tg(\tau)e^{-\alpha(H_t-H_{\tau})}\\
-    &\leq
-    \frac{e(0)}{t^\alpha}
-    + e^{-\alpha H_t}\sum_{\tau=1}^tg(\tau)e^{\alpha H_{\tau}}\\
-    &\leq \frac{e(0)}{t^\alpha}
-    + \frac{\bigOh{\sqrt{\log(\frac{n}{p})}}}{t^\alpha}
-    \sum_{\tau=1}^t\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}\\
-  \end{align*}
-
-  We observe that
+  where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$ for $t\geq 1$
+  and $\delta(0) = 0$.
+  By setting $D = 6 \pi^2 n \sqrt{t} > \me^2$ in
+  Lemma~\ref{l:recursion_upper_bound} we get that with probability at least
+  $1-1/\sqrt{t}$
   \[
-    \sum_{\tau=1}^t\tau^\alpha
-    \frac{\sqrt{\log \tau}}{\tau^{3/2}}
-    \leq
-    \int_{\tau=1}^t
-    \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau,
+    e(t) \leq
+    \sqrt{\ln D} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
   \]
-  since $\tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}$
-  \begin{itemize}
-    \item If
-      $\alpha\leq 1/2$ then
-      \[
-        \int_{\tau=1}^t \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
-        \leq
-        \int_{\tau=1}^t
-        \tau^{1/2}\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau = O((\log t)^{3/2}))
-      \]
-    \item If $\alpha> 1/2$ then\\
-      \begin{align*}
-        \int_{\tau=1}^t
-        \tau^\alpha\frac{\sqrt{\log \tau}}{\tau^{3/2}}d\tau
-        &=
-        \int_{\tau=1}^t \tau^{\alpha-1/2}\frac{\sqrt{\log \tau}}{\tau}d\tau \\
-        &=
-        \frac{2}{3} \int_{\tau=1}^t
-        \tau^{\alpha-1/2}((\log \tau)^{3/2})'d\tau \\
-        &=
-        \frac{2}{3}(\log t)^{3/2} - (\alpha-1/2)\frac{2}{3}
-        \int_{\tau=1}^t \tau^{\alpha-3/2}(\log \tau)^{3/2}d\tau \\
-        &=
-        \bigOh{(\log t)^{3/2}}
-      \end{align*}
-  \end{itemize}
+  Therefore, by the law of total expectation the expected error is upper
+  bounded by
+  \[
+    \Exp{\norm{\infty}{x_t - x^*}} \leq \frac{1}{\sqrt{t}} + e(t) \lp( 1 -\frac{1}{\sqrt{t}} \rp)
+    \leq C \sqrt{\ln n} \frac{(\ln t)^{2}}{t^{\min(\rho,\, 1/2)}},
+  \]
+  where $C$ is a sufficiently large universal constant.
+
 \end{proof}

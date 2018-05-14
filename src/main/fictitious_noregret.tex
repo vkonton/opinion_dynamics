@@ -4,28 +4,26 @@ In this section we consider the Online Convex Optimization problem
 that we defined in Subsection~\ref{s:preliminaries:oco}. We remind that
 our class of functions $\mcal{F}$ contains all functions of the form
 \[
-  f_t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-y_t)^2,
+  C_t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-y_t)^2,
 \]
 where $s_i,\alpha \in [0,1]$ and are independent of $t$ and $y_t \in [0,1]$.
-In other words, the function $f^t$ is uniquely determined by the number $y_t$.
+In other words, the function $C^t$ is uniquely determined by the number $y_t$.
 We show that for this class of functions \emph{fictitious play} admits no regret.
 \begin{theorem}\label{t:no_regret}
-  Let $f^t$ be a sequence of functions, where each function has the form
-  $f^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-y_t)^2$,
+  Let $C^t$ be a sequence of functions, where each function has the form
+  $C^t(x) = \alpha(x-s_i)^2 + (1-\alpha)(x-y_t)^2$,
   where $s_i,\alpha \in [0,1]$ and do not dependent on $t$
   and $y_t \in [0,1]$.
   If we define \(x^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^{t-1} f^\tau (x) \)
   then for each time $T$
   \[
-    \sum_{t = 1}^{T} f^t(x^t) \leq
-    \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) + O(\log  T).
+    \sum_{t = 1}^{T} C^t(x^t) \leq
+    \min_{x \in [0,1]} \sum_{t=1}^T C^t(x) + O(\log  T).
   \]
 \end{theorem}
-\begin{proof}
-\end{proof}
 
 In order to prove this claim, we will first define a similar rule $y^t$
-that takes into account the function $f^t$ for the "prediction" at time $t$.
+that takes into account the function $C^t$ for the "prediction" at time $t$.
 Intuitively, this guarantees that the rule admits no regret.
 
 \begin{lemma}
@@ -33,21 +31,21 @@ Intuitively, this guarantees that the rule admits no regret.
   \(y^t = \argmin_{x \in [0,1]} \sum_{\tau = 1}^t f^\tau (x)\)
   then
   \[
-    \sum_{t=1}^T f^t(y^t) \leq \min_{x \in [0,1]} \sum_{t=1}^T f^t(x)
+    \sum_{t=1}^T C^t(y^t) \leq \min_{x \in [0,1]} \sum_{t=1}^T C^t(x)
   \]
 \end{lemma}
 
 \begin{proof}By definition of $y^t$,
-  $\min_{x \in [0,1]} \sum_{t=1}^T f^t(x) = \sum_{t=1}^T f^t(y^T)$, so
+  $\min_{x \in [0,1]} \sum_{t=1}^T C^t(x) = \sum_{t=1}^T C^t(y^T)$, so
   \begin{align*}
-    \sum_{t=1}^T f^t(y^t) - \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) &=
-    \sum_{t=1}^T f^t(y^t) - \sum_{t=1}^T f^t(y^T)\\
-    &= \sum_{t=1}^{T-1} f^t(y^t) - \sum_{t=1}^{T-1} f^t(y^T)\\
-    &\leq \sum_{t=1}^{T-1} f^t(y^t) - \sum_{t=1}^{T-1} f^t(y^{T-1})\\
-    &= \sum_{t=1}^{T-2} f^t(y^t) - \sum_{t=1}^{T-2} f^t(y^{T-1})
+    \sum_{t=1}^T C^t(y^t) - \min_{x \in [0,1]} \sum_{t=1}^T C^t(x) &=
+    \sum_{t=1}^T C^t(y^t) - \sum_{t=1}^T C^t(y^T)\\
+    &= \sum_{t=1}^{T-1} C^t(y^t) - \sum_{t=1}^{T-1} C^t(y^T)\\
+    &\leq \sum_{t=1}^{T-1} C^t(y^t) - \sum_{t=1}^{T-1} C^t(y^{T-1})\\
+    &= \sum_{t=1}^{T-2} C^t(y^t) - \sum_{t=1}^{T-2} C^t(y^{T-1})
   \end{align*}
   Continuing in the same way, we get
-  $\sum_{t=1}^T f^t(y^t) \leq min_{x \in [0,1]} \sum_{t=1}^T f^t(x)$.
+  $\sum_{t=1}^T C^t(y^t) \leq min_{x \in [0,1]} \sum_{t=1}^T C^t(x)$.
 \end{proof}
 
 Now we can derive some intuition for the reason that \emph{fictitious play}
@@ -58,7 +56,7 @@ close and as a result the difference in their cost must be quite small.
 
 \begin{lemma}
   For all $t$,
-  \(f^t(x^t) \leq f^t(y^t) + 2\frac{1-\alpha}{t} + \frac{(1-a)^2}{t^2}\).
+  \(C^t(x^t) \leq C^t(y^t) + 2\frac{1-\alpha}{t} + \frac{(1-a)^2}{t^2}\).
 \end{lemma}
 \begin{proof}
   We first prove that for all $t$,
@@ -81,9 +79,9 @@ close and as a result the difference in their cost must be quite small.
   \end{align*}
   The last inequality follows from the fact that $a_\tau \in [0,1]$.
   We now use inequality~(\ref{eq:abs_value}) to bound the difference
-  \( f^t(x^t) - f^t(y^t) \).
+  \( C^t(x^t) - C^t(y^t) \).
   \begin{align*}
-    f^t(x^t)
+    C^t(x^t)
     &=
     \alpha(x^t - s_i)^2 + (1 - \alpha)(x^t - y_t)^2 \\
     &\leq
@@ -92,21 +90,21 @@ close and as a result the difference in their cost must be quite small.
     &\quad + (1-\alpha)(y_t - y_t)^2 +
     2(1-\alpha)\lp|y^t - y_t\rp|\lp|x^t-y^t\rp| + (1 - \alpha)\lp|x^t - y^t\rp|^2\\
     &\leq
-    f^t(y^t) + 2\lp|x^t - y^t\rp| + \lp|y^t - x^t\rp|^2\\
+    C^t(y^t) + 2\lp|x^t - y^t\rp| + \lp|y^t - x^t\rp|^2\\
     &\leq
-    f^t(y^t) + 2\frac{1-\alpha}{t} + \frac{(1-\alpha)^2}{t^2}
+    C^t(y^t) + 2\frac{1-\alpha}{t} + \frac{(1-\alpha)^2}{t^2}
   \end{align*}
 \end{proof}
 
 Theorem~\ref{t:no_regret} easily follows since
 \begin{align*}
-  \sum_{t=1}^T f^t(x^t)
+  \sum_{t=1}^T C^t(x^t)
   &\leq
-  \sum_{t=1}^T f^t(y^t) + \sum_{t=1}^T 2\frac{1-\alpha}{t} +
+  \sum_{t=1}^T C^t(y^t) + \sum_{t=1}^T 2\frac{1-\alpha}{t} +
   \sum_{t=1}^T \frac{(1-\alpha)^2}{t^2}\\
   &\leq
-  \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) +
+  \min_{x \in [0,1]} \sum_{t=1}^T C^t(x) +
   2(1-\alpha)(\log T + 1) + (1-\alpha)\frac{\pi^2}{6}\\
   &\leq
-  \min_{x \in [0,1]} \sum_{t=1}^T f^t(x) + O(\log T)
+  \min_{x \in [0,1]} \sum_{t=1}^T C^t(x) + O(\log T)
 \end{align*}

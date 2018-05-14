@@ -1,5 +1,4 @@
 \section{Introduction}
-% \subsection{Friedkin-Johsen Model}
 
 \subsection{Friedkin-Johsen Model and Opinion Formation Games}
 In the Friedkin-Johsen model (FJ-model) an undirected graph $G(V,E)$ with $n$
@@ -15,7 +14,6 @@ where $N_i$ is the set of her neighbors. The simplicity of the update rule
 (\ref{eq:fj_dynamics}) makes the FJ-model plausible, because in real social
 networks it is very unlikely that agents change their opinions according
 to complex rules.
-% \subsection{Opinion Formation Games}
 Based on the FJ-model, in \cite{BKO11}, they propose an \emph{
   opinion formation game} in which the strategy that each agent
 $i$ plays, is the opinion $x_i \in [0,1]$
@@ -30,23 +28,17 @@ Nash Equilibrium $x^*$ and has Price of Anarchy $9/8$ if $G$ is
 undirected and $O(n)$ in the directed case.  We denote an instance of this
 game as $I=(G,s,a)$.
 The FJ-model can be viewed as the best-response dynamics of the
-of the opinion formation game.
-% j
+of the opinion formation game.  More precisely, each agent $i$ has an opinion
+$x_1(0),\ldots,x_n(0)$ and at round $t \geq 1$, suffers the cost
+(\ref{eq:best_response}) and updates her opinion so as to minimize her
+individual cost
 %
-% \begin{equation}
-%   C_i(x_i(t-1),x_{-i}(t-1))=(1-a_i)\sum_{j \in N_i}(x_i(t-1) -x_j(t-1))^2 +
-%   a_i(x_i(t-1)-s_i)^2
-% \end{equation}
-More precisely, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$ and
-at round $t \geq 1$, suffers the cost (\ref{eq:best_response})
-and updates her opinion so as to minimize her individual cost
-
 \begin{equation}\label{eq:best_response}
   x_i(t) =
   \argmin_{x \in [0,1]}
-  (1-a_i) \sum_{j \in N_i} (x - x_j(t-1))^2 + a_i (x -s_i)^2
+  (1-a_i) \sum_{j \in N_i} (x - x_j(t-1))^2 + a_i (x -s_i)^2.
 \end{equation}
-
+%
 In \cite{GS14} it is proved that for any instance $I=(G,s,a)$ the opinion
 vector $x(t)=(x_1(t),\ldots,x_n(t))$ converges to the unique equilibrium point
 $x^*$. Moreover, this is achieved by an update rule that is very simple
@@ -90,28 +82,6 @@ whether there exists natural dynamics that leads the system to the
 equilibrium point $x^*$.
 
 \subsection{Our Results and Techniques}
-% \begin{itemize}
-%   \item Initially, each agent $i$ has an opinion $x_1(0),\ldots,x_n(0)$.
-
-%   \item At round $t \geq 1$, each agent $i$ meets uniformly at random one of
-%     her friends $j \in N_i$, suffers cost
-%     \(
-%       C^t_i(x_i(t-1),x_{j}(t-1))=(1-a_i)(x_i(t-1)
-%       -x_j(t-1))^2 + a_i(x_i(t-1)-s_i)^2
-%     \)
-%     and updates her opinion
-%     \begin{equation}\label{eq:fictitious_play}
-%       x_i(t) =
-%       \argmin_{x \in [0,1]}
-%       \sum_{\tau=1}^tC^{\tau}_i(x,x_{\pi_i(\tau)}(\tau-1))
-%       % =
-%       % (1-a_i)\frac{\sum_{\tau=1}^t x_{\pi_i(\tau)}(t-1)}{t} + a_is_i,
-%     \end{equation}
-
-%     where $\pi_i(\tau)$ denotes the index of the index of the neighbor that $i$
-%     selected at round $\tau$.
-
-% \end{itemize}
 In this work we propose Algorithm~\ref{alg:fictitious_play} as a dynamics
 for the random payoff game of Definition~\ref{d:random_payoff_game}.
 Note that the dynamics described in Algorithm~\ref{alg:fictitious_play} is the
@@ -141,7 +111,7 @@ convergence to the equilibrium.
 In Section~\ref{s:fictitious_convergence} we show that, for our game with
 random payoffs, fictitious play converges to equilibrium, with the following
 rate.
-\begin{theorem}
+\begin{theorem}\label{t:fictitious_convergence}
   Let $I = (G,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
   $x^* \in [0,1]^n$.  The opinion vector $x^t$ produced by
@@ -213,7 +183,6 @@ Perhaps surprisingly, in Section~\ref{s:graph_aware} we present an update rule
 that takes into account only the maximum degree of the graph and for any
 fixed instance $I$ achieves convergence rate $O(1/2^{\sqrt{t}})$.
 
-
 % In section 4, we investigate where a better convergence rate,
 % $E[||x(t)-x^*||_{\infty}]$ can be acheived if agent selected another no-regret
 % algorithm. More precisely, we investigate the following question, \emph{Is
@@ -246,3 +215,38 @@ fixed instance $I$ achieves convergence rate $O(1/2^{\sqrt{t}})$.
 % $E||x(t)-x^*||_{\infty} \in \bigOh{2^{-\frac{\sqrt{t}}{d^3}}}$.
 
 \subsection{Related Work}
+Our work belongs to the line of work studying the seminal Friedkin-Jonhsen
+model \cite{FJ90}. Bindel et al. in \cite{BKO11} defined an opinion
+formation game based on the FJ-model and bounded the inefficiency
+of its equilibrium point with respect to the total disagreement cost.
+Subsequent work bounded the inefficiency of its equilibrium in variants
+of the latter game \cite{BGM13, EFHS17, CKO13, BFM16}.
+In \cite{GS14} they show that the convergence time depends on
+the spectral radius of the adjacency matrix of the graph $G$
+and provided bounds in special graph topologies.
+In \cite{BFM16}, a variant of the opinion formation game in which social
+relations depend on the expressed opinions, is studied.
+They prove that, the discretized version of the above game admits
+a potential function and thus best-response converges to the
+Nash equilibrium. Convergence results in other discretized variants of
+the FJ-model can be found in \cite{YOASS13, FGV16}.
+
+
+In \cite{FV97}, \cite{FS99}, \cite{HM00} they prove that in a finite
+if each agent updated her mixed strategy according to a no-regret
+algorithm the resulting time-averaged distribution converges to
+Coarse Correlated Equilibrium. In the same spirit in \cite{BEL06}
+they proved that no-regret dynamics converge to NE in the
+case of congestion games. Later in \cite{EMN09} they studied no regret
+dynamics in games with infinite strategy space. They proved that for a large
+class of games with concave utility function (socially concave games), the
+time-averaged strategy vector converges to the pure Nash equilibrium.
+More recent work investigate a stronger notion of convergence of
+no-regret dynamics. In \cite{CHM17} they show that,
+in $n$-person finite generic games that admit unique Nash equilibrium,
+the strategy vector converges \emph{locally} and exponentially fast
+to the PNE. They also provide conditions for \emph{global} convergence.
+Our results fit in this line of research since we show that
+for a game with \emph{infinite} strategy space, the strategy vector (not the
+time-averaged) converges to the unique Nash equilibrium.
+

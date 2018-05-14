@@ -32,7 +32,24 @@
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{alg:fictitious_play}{{1}{2}{Fictitious Play\relax }{algorithm.1}{}}
 \newlabel{eq:fictitious_play}{{4}{2}{Fictitious Play\relax }{equation.1.4}{}}
+\newlabel{t:fictitious_convergence}{{1}{2}{}{theorem.1.1}{}}
 \newlabel{t:fictitious_noregret}{{2}{2}{}{theorem.1.2}{}}
+\citation{FJ90}
+\citation{BKO11}
+\citation{BGM13}
+\citation{EFHS17}
+\citation{CKO13}
+\citation{BFM16}
+\citation{GS14}
+\citation{BFM16}
+\citation{YOASS13}
+\citation{FGV16}
+\citation{FV97}
+\citation{FS99}
+\citation{HM00}
+\citation{BEL06}
+\citation{EMN09}
+\citation{CHM17}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.4}Related Work}{3}{subsection.1.4}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Preliminaries}{3}{section.2}}
 \newlabel{s:preliminaries}{{2}{3}{Preliminaries}{section.2}{}}
@@ -42,47 +59,67 @@
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces no-regret dynamics\relax }}{4}{algorithm.2}}
 \newlabel{alg:fno_regret_dynamics}{{2}{4}{no-regret dynamics\relax }{algorithm.2}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Estimating Bernoulli distributions}{4}{subsection.2.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Fictitious Play Convergence Rate}{4}{section.3}}
-\newlabel{s:fictitious_convergence}{{3}{4}{Fictitious Play Convergence Rate}{section.3}{}}
-\newlabel{l:error_recursion}{{1}{5}{}{lemma.1}{}}
-\newlabel{c:error_recursion}{{1}{5}{}{corollary.1}{}}
-\newlabel{eq:error_per_round}{{5}{5}{Fictitious Play Convergence Rate}{equation.3.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Fictitious Play Convergence Rate}{5}{section.3}}
+\newlabel{s:fictitious_convergence}{{3}{5}{Fictitious Play Convergence Rate}{section.3}{}}
+\newlabel{l:hoeffding}{{1}{5}{}{lemma.1}{}}
+\newlabel{l:recursion_upper_bound}{{2}{5}{}{lemma.2}{}}
+\newlabel{eq:error_per_round}{{5}{6}{Fictitious Play Convergence Rate}{equation.3.5}{}}
 \newlabel{step:induction_step}{{6}{6}{Fictitious Play Convergence Rate}{equation.3.6}{}}
 \newlabel{step:error}{{7}{6}{Fictitious Play Convergence Rate}{equation.3.7}{}}
-\newlabel{l:error_bound}{{2}{6}{}{lemma.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Fictitious Play is no-regret}{7}{section.4}}
-\newlabel{s:fictitious_noregret}{{4}{7}{Fictitious Play is no-regret}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Fictitious Play is no-regret}{6}{section.4}}
+\newlabel{s:fictitious_noregret}{{4}{6}{Fictitious Play is no-regret}{section.4}{}}
 \newlabel{t:no_regret}{{4}{7}{}{theorem.4.4}{}}
-\newlabel{eq:abs_value}{{8}{8}{Fictitious Play is no-regret}{equation.4.8}{}}
+\newlabel{eq:abs_value}{{8}{7}{Fictitious Play is no-regret}{equation.4.8}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Final Lower Bound}{8}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Proof of Theorem 4}{9}{subsection.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Proof of Theorem 5}{10}{subsection.5.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Lower Bound}{10}{section.6}}
+\newlabel{claim}{{1}{8}{}{claim.1}{}}
+\newlabel{t:integral}{{5}{8}{}{theorem.5.5}{}}
+\newlabel{t:reduction}{{6}{9}{}{theorem.5.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Proof of Theorem \ref  {t:reduction}}{9}{subsection.5.1}}
+\newlabel{l:reduction}{{5}{9}{}{lemma.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Proof of Theorem \ref  {t:integral}}{10}{subsection.5.2}}
+\newlabel{d:2packing}{{6}{10}{}{definition.6}{}}
 \newlabel{l:fano}{{6}{10}{Fano's Inequality}{lemma.6}{}}
 \newlabel{l:fano_application}{{7}{10}{}{lemma.7}{}}
-\newlabel{l:cauchy_schwarz}{{8}{10}{}{lemma.8}{}}
-\newlabel{l:upper}{{9}{10}{}{lemma.9}{}}
-\newlabel{t:lower_bound}{{7}{10}{}{theorem.6.7}{}}
-\newlabel{eq:final}{{9}{10}{Lower Bound}{equation.6.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}A Graph Aware Protocol}{11}{section.7}}
-\newlabel{s:graph_aware}{{7}{11}{A Graph Aware Protocol}{section.7}{}}
-\newlabel{eq:empirical_distribution}{{10}{11}{A Graph Aware Protocol}{equation.7.10}{}}
+\newlabel{l:cauchy_schwarz}{{8}{11}{}{lemma.8}{}}
+\newlabel{l:upper}{{9}{11}{}{lemma.9}{}}
+\newlabel{eq:final}{{5.2}{11}{Proof of Theorem \ref {t:integral}}{theorem.5.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}A Graph Aware Protocol}{11}{section.6}}
+\newlabel{s:graph_aware}{{6}{11}{A Graph Aware Protocol}{section.6}{}}
+\newlabel{eq:empirical_distribution}{{9}{11}{A Graph Aware Protocol}{equation.6.9}{}}
 \newlabel{l:vc_inequality}{{10}{11}{}{lemma.10}{}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Graph Aware Update Rule\relax }}{12}{algorithm.3}}
 \newlabel{alg:frequencies}{{3}{12}{Graph Aware Update Rule\relax }{algorithm.3}{}}
 \newlabel{alg:line:counters}{{15}{12}{Graph Aware Update Rule\relax }{algorithm.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Lower Bound}{13}{appendix.A}}
-\newlabel{l:fano_application}{{12}{13}{}{lemma.12}{}}
-\newlabel{eq:fano}{{11}{13}{Lower Bound}{equation.A.11}{}}
-\newlabel{eq:fano5}{{12}{14}{Lower Bound}{equation.A.12}{}}
-\newlabel{l:cauchy_schwarz}{{13}{14}{}{lemma.13}{}}
-\newlabel{eq:triangle_inequality}{{13}{14}{Lower Bound}{equation.A.13}{}}
-\newlabel{eq:cauchy_schwarz}{{14}{15}{Lower Bound}{equation.A.14}{}}
-\newlabel{eq:bernoulli_square_diff}{{15}{15}{Lower Bound}{equation.A.15}{}}
-\newlabel{l:upper}{{14}{15}{}{lemma.14}{}}
 \bibstyle{alpha}
 \bibdata{refs}
+\bibcite{BEL06}{BEDL06}
+\bibcite{BFM16}{BFM16}
+\bibcite{BGM13}{BGM13}
 \bibcite{BKO11}{BKO11}
+\bibcite{CHM17}{CHM17}
+\bibcite{CKO13}{CKO13}
+\bibcite{EFHS17}{EFHS17}
+\bibcite{EMN09}{EMN09}
+\bibcite{FGV16}{FGV16}
+\bibcite{FJ90}{FJ90}
+\bibcite{FS99}{FS99}
+\bibcite{FV97}{FV97}
 \bibcite{GS14}{GS14}
+\bibcite{HM00}{SA}
+\bibcite{YOASS13}{YOA{$^{+}$}13}
 \bibcite{Zhou17}{ZLZ17}
-\newlabel{eq:one_side}{{16}{16}{Lower Bound}{equation.A.16}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Fictitious Play Donvergence Rate}{16}{appendix.A}}
+\newlabel{app:s:fictitious_convergence}{{A}{16}{Fictitious Play Donvergence Rate}{appendix.A}{}}
+\newlabel{eq:recursion}{{10}{16}{Fictitious Play Donvergence Rate}{equation.A.10}{}}
+\newlabel{eq:recursion_zero}{{11}{16}{Fictitious Play Donvergence Rate}{equation.A.11}{}}
+\newlabel{eq:integral_upper_bound}{{12}{16}{Fictitious Play Donvergence Rate}{equation.A.12}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {B}Lower Bound}{17}{appendix.B}}
+\newlabel{l:fano_application}{{13}{17}{}{lemma.13}{}}
+\newlabel{eq:fano}{{13}{18}{Lower Bound}{equation.B.13}{}}
+\newlabel{eq:fano5}{{14}{18}{Lower Bound}{equation.B.14}{}}
+\newlabel{l:cauchy_schwarz}{{14}{19}{}{lemma.14}{}}
+\newlabel{eq:triangle_inequality}{{15}{19}{Lower Bound}{equation.B.15}{}}
+\newlabel{eq:cauchy_schwarz}{{16}{19}{Lower Bound}{equation.B.16}{}}
+\newlabel{eq:bernoulli_square_diff}{{17}{19}{Lower Bound}{equation.B.17}{}}
+\newlabel{l:upper}{{15}{19}{}{lemma.15}{}}
+\newlabel{eq:one_side}{{18}{20}{Lower Bound}{equation.B.18}{}}

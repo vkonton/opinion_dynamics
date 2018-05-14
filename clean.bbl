@@ -1,4 +1,26 @@
-\begin{thebibliography}{BKO11}
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{YOA{\etalchar{+}}13}
+
+\bibitem[BEDL06]{BEL06}
+Avrim Blum, Eyal Even-Dar, and Katrina Ligett.
+\newblock Routing without regret: On convergence to nash equilibria of
+  regret-minimizing algorithms in routing games.
+\newblock In {\em Proceedings of the Twenty-fifth Annual ACM Symposium on
+  Principles of Distributed Computing}, PODC '06, pages 45--52, New York, NY,
+  USA, 2006. ACM.
+
+\bibitem[BFM16]{BFM16}
+Vittorio Bil{\`o}, Angelo Fanelli, and Luca Moscardelli.
+\newblock Opinion formation games with dynamic social influences.
+\newblock In Yang Cai and Adrian Vetta, editors, {\em Web and Internet
+  Economics}, pages 444--458, Berlin, Heidelberg, 2016. Springer Berlin
+  Heidelberg.
+
+\bibitem[BGM13]{BGM13}
+Kshipra Bhawalkar, Sreenivas Gollapudi, and Kamesh Munagala.
+\newblock Coevolutionary opinion formation games.
+\newblock In {\em Symposium on Theory of Computing Conference, STOC'13, Palo
+  Alto, CA, USA, June 1-4, 2013}, pages 41--50, 2013.
 
 \bibitem[BKO11]{BKO11}
 David Bindel, Jon~M. Kleinberg, and Sigal Oren.
@@ -7,11 +29,70 @@ David Bindel, Jon~M. Kleinberg, and Sigal Oren.
   Science, {FOCS} 2011, Palm Springs, CA, USA, October 22-25, 2011}, pages
   57--66, 2011.
 
+\bibitem[CHM17]{CHM17}
+Johanne Cohen, Am{\'{e}}lie H{\'{e}}liou, and Panayotis Mertikopoulos.
+\newblock Hedging under uncertainty: Regret minimization meets exponentially
+  fast convergence.
+\newblock In {\em Algorithmic Game Theory - 10th International Symposium,
+  {SAGT} 2017, L'Aquila, Italy, September 12-14, 2017, Proceedings}, pages
+  252--263, 2017.
+
+\bibitem[CKO13]{CKO13}
+Flavio Chierichetti, Jon~M. Kleinberg, and Sigal Oren.
+\newblock On discrete preferences and coordination.
+\newblock In {\em {ACM} Conference on Electronic Commerce, {EC} '13,
+  Philadelphia, PA, USA, June 16-20, 2013}, pages 233--250, 2013.
+
+\bibitem[EFHS17]{EFHS17}
+Markos Epitropou, Dimitris Fotakis, Martin Hoefer, and Stratis Skoulakis.
+\newblock Opinion formation games with aggregation and negative influence.
+\newblock In {\em Algorithmic Game Theory - 10th International Symposium,
+  {SAGT} 2017, L'Aquila, Italy, September 12-14, 2017, Proceedings}, pages
+  173--185, 2017.
+
+\bibitem[EMN09]{EMN09}
+Eyal Even{-}Dar, Yishay Mansour, and Uri Nadav.
+\newblock On the convergence of regret minimization dynamics in concave games.
+\newblock In {\em Proceedings of the 41st Annual {ACM} Symposium on Theory of
+  Computing, {STOC} 2009, Bethesda, MD, USA, May 31 - June 2, 2009}, pages
+  523--532, 2009.
+
+\bibitem[FGV16]{FGV16}
+Diodato Ferraioli, Paul~W. Goldberg, and Carmine Ventre.
+\newblock Decentralized dynamics for finite opinion games.
+\newblock {\em Theor. Comput. Sci.}, 648(C):96--115, October 2016.
+
+\bibitem[FJ90]{FJ90}
+Noah~E. Friedkin and Eugene~C. Johnsen.
+\newblock Social influence and opinions.
+\newblock {\em The Journal of Mathematical Sociology}, 15(3-4):193--206, 1990.
+
+\bibitem[FS99]{FS99}
+Yoav Freund and Robert~E. Schapire.
+\newblock Adaptive game playing using multiplicative weights.
+\newblock {\em Games and Economic Behavior}, 29(1):79 -- 103, 1999.
+
+\bibitem[FV97]{FV97}
+Dean~P. Foster and Rakesh~V. Vohra.
+\newblock Calibrated learning and correlated equilibrium.
+\newblock {\em Games and Economic Behavior}, 21(1):40 -- 55, 1997.
+
 \bibitem[GS14]{GS14}
 Javad Ghaderi and R.~Srikant.
 \newblock Opinion dynamics in social networks with stubborn agents: Equilibrium
   and convergence rate.
 \newblock {\em Automatica}, 50(12):3209--3215, 2014.
+
+\bibitem[SA]{HM00}
+Hart Sergiu and Mas‐Colell Andreu.
+\newblock A simple adaptive procedure leading to correlated equilibrium.
+\newblock {\em Econometrica}, 68(5):1127--1150.
+
+\bibitem[YOA{\etalchar{+}}13]{YOASS13}
+Mehmet~Ercan Yildiz, Asuman~E. Ozdaglar, Daron Acemoglu, Amin Saberi, and Anna
+  Scaglione.
+\newblock Binary opinion dynamics with stubborn agents.
+\newblock {\em {ACM} Trans. Economics and Comput.}, 1(4):19:1--19:30, 2013.
 
 \bibitem[ZLZ17]{Zhou17}
 Yichi Zhou, Jialian Li, and Jun Zhu.
