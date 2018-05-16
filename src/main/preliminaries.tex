@@ -35,19 +35,19 @@ history, \(x^t = A_t(f_1,\ldots,f_t)\).
 Let the OCO algorithm $A$ and the sequence of functions
 $\{f_1,\ldots,f_T\} \in F^T$. The regret of $A$ is defined by
 \[R_A(T) = \sum_{t=1}^Tf_t(x_t) - \text{min}_{x \in K}\sum_{t=1}^Tf_t(x)\]
-if $R_A(T) = o(T)$ for any sequence $\{f_1,\ldots,f_T\}$ then A is no-regret
+If $R_A(T) = o(T)$ for any sequence $\{f_1,\ldots,f_T\}$ then A is no-regret
 algorithm
 \end{definition}
 %
 According to the feasibility set $K$ and the set of functions $F$, different no-regret algorithms with differnt regret bounds can be derived.
-Some seminal examples areZinkevic's algorithm that acheives regret $R_A(T) =\bigOh{\sqrt{T}}$, when $K$ is convex, closed and bounded and
-$F$ is the set of convex functionswith bounded first derivative. Hazan et al \cite{} proposed an algorithm with $R_A(T) =\bigOh{\log T}$,
+Some seminal examples are Zinkevic's algorithm that achieves regret $R_A(T) =\bigOh{\sqrt{T}}$, when $K$ is convex, closed and bounded and
+$F$ is the set of convex functions with bounded first derivative. Hazan et al \cite{} proposed an algorithm with $R_A(T) =\bigOh{\log T}$,
 when $F$ is the set of twice diffentiable strongly convex functions.\\
 
 \noindent \textbf{No regret dynamics and repeated games:}
 \noindent Agent $i$ with $s_i,a_i$ is the player. At round $t$, she adopts an opinion $x_i(t) \in [0,1]$ and then the adversary selects a function $C_i^t(x)=(1-a_i)(x-y_t)^2 + a_i(x-s_i)^2$, where $y^t\in [0,1]$.
-Let $A$ a no-regret in the above OCO setting. Clearly, each agent $i$ is willinf to adopt as $x_i(t)$ the suggestion of $A$, ensuring that average cost is similar
-to the average cost of the best fixed opinion. As a result if all agents adopt the no-regret algorithm $A$, for a fixed instance $I$ of the game the following a dynamical process
+Let $A$ a no-regret in the above OCO setting. Clearly, each agent $i$ is willing to adopt as $x_i(t)$ the suggestion of $A$, ensuring that average cost is similar
+to the average cost of the best fixed opinion. As a result if all agents adopt the no-regret algorithm $A$, for a fixed instance $I$ of the game the following dynamical process
 is defined.
 \begin{algorithm}
   \caption{no-regret dynamics}
@@ -67,7 +67,7 @@ is defined.
 \end{algorithmic}
 \end{algorithm}
 
-\noindent We denote the as $x_A(t)$ the opinion vector when the algorithm $A$ is selected. In case $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$
+\noindent We denote as $x_A(t)$ the opinion vector when the algorithm $A$ is selected. In case $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$
 we obtain the \emph{fictitious play} defined in \ref{alg:fictitious_play} and for simplicity we denote it as $x(t)$. As we have already menioned, in Section 2 we
 bound the convergence rate of the \emph{fictitious play}, $\Exp{\norm{\infty}{x(t)-x^*}}$ and in Section 3, we prove that it is no-regret algorithm for the specific OCO setting. The latter
 does not hold in more general OCO settings. In section 4, we investigate whether there exists an algorithm $A$ with significantly better asymptotic rate of convergence.
@@ -130,13 +130,13 @@ does not hold in more general OCO settings. In section 4, we investigate whether
 Assume that we have access to the random variables $Y_1,\ldots,Y_t$, that are
 mutually independent and each
 $Y_i$ is distributed according to a Bernoulli distribution with $p \in [0,1]$,
-$X_i\sim B(p)$.  Initially the parameter $p$ is unkown. The task is to observe
+$Y_i\sim B(p)$.  Initially the parameter $p$ is unkown. The task is to observe
 the realization of $y_1,\ldots,y_t$ and output an estimate
 $\hat{p}=\theta_t(y_1,\ldots,y_t)$ according to a function $\hat{\theta_t}:
 \{0,1\}^t\mapsto [0,1]$, that is close to the unkown parameter $p$.
 
 \begin{definition}
-  An estimator $\hat{\theta}$ is a collections of function,
+  An estimator $\hat{\theta}$ is a collection of functions,
   $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where
   $\hat{\theta_t}: \{0,1\}^t\mapsto [0,1]$.
 \end{definition}
