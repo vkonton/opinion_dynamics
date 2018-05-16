@@ -68,8 +68,8 @@ is defined.
 \end{algorithm}
 
 \noindent We denote as $x_A(t)$ the opinion vector when the algorithm $A$ is selected. In case $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$
-we obtain the \emph{fictitious play} defined in \ref{alg:fictitious_play} and for simplicity we denote it as $x(t)$. As we have already menioned, in Section 2 we
-bound the convergence rate of the \emph{fictitious play}, $\Exp{\norm{\infty}{x(t)-x^*}}$ and in Section 3, we prove that it is no-regret algorithm for the specific OCO setting. The latter
+we obtain the \emph{fictitious play} defined in \ref{alg:fictitious_play} and for simplicity we denote it as $x(t)$. As we have already menioned, in Section~\ref{s:fictitious_convergence} we
+bound the convergence rate of the \emph{fictitious play}, $\Exp{\norm{\infty}{x(t)-x^*}}$ and in Section~\ref{s:fictitious_noregret}, we prove that it is no-regret algorithm for the specific OCO setting. The latter
 does not hold in more general OCO settings. In section 4, we investigate whether there exists an algorithm $A$ with significantly better asymptotic rate of convergence.
 
 %For example if the algorithm $A_t(C_i^1,\ldots,C_i^{t-1})= \text{argmin}_{x \in [0,1]}\sum_{\tau=1}^{t-1}C_i^t(x)$, we obtain the dynamics defined in \ref{alg:fictitious_play}.
@@ -165,7 +165,7 @@ real parameter $p$. \\ Since $p$ is unkown, any meaningful estimator $\hat{p}$
 must guarantee that for all $p \in [0,1]$, $\lim_{t \rightarrow \infty}
 R_p(t)=0$. For example the \emph{sample mean} has error rate $R_p(t) \leq
 \frac{1}{2\sqrt{t}}$ for ant $p \in [0,1]$ and clearly statisfies the above
-requirement. In section 4 we investigate the following question,
+requirement. In section~\ref{s:lower_bound} we investigate the following question,
 
 \begin{question}
   Is there an estimator $\hat{\theta}$ such that for all $p \in
