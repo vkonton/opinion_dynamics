@@ -1,5 +1,5 @@
 \section{Lower Bound}
-\begin{lemma}
+\begin{lemma}\label{l:dkl}
   Let $P=B(p)$ and $Q=B(q)$ be two Bernoulli distributions then
   \[
     \dkl{P}{Q} \leq
@@ -57,7 +57,7 @@ of the estimator.
 \end{lemma}
 \begin{proof}
   Without loss of generality, we can assume that $t$ is a multiple of 5.
-  For simplicity, we set $E_i = \Exp{\lp|\hat{\theta}_t-p_i\rp|}$.
+  For simplicity, we set $R_{p_i}(t) = \Exp{\lp|\hat{\theta}_t-p_i\rp|}$.
   By the choice of $p_i$, we have that $$\lp|p_i - p_j\rp| \geq \frac{b-a}{t}$$,
   for every distinct $i,j$ in the family.
   This means that for the family of $t$ distributions that we picked, the property
@@ -65,7 +65,7 @@ of the estimator.
   Thus, by dividing the $t$ distributions into groups of 5 and applying
   Lemma~(\ref{l:fano}) to each one, we obtain:
   \begin{align}\label{eq:fano}
-    \frac{\sum{k =i}^{i+4}}{5}
+    \frac{\sum_{k =i}^{i+4}R_{p_i}(t)}{5}
     &\geq
     \frac{b-a}{2t}\lp(1-\frac{I(X;V)+\log 2}{\log n}\rp) \nonumber\\
     &=
@@ -83,13 +83,16 @@ of the estimator.
   \begin{align*}
     I(X;V)
     &\leq
-    \frac{1}{5^2}\sum_{\substack{i,j \in U \\i\neq j}} D_{kl}\lp(P_i^t,P_j^t\rp)\\
+    \frac{1}{5^2}\sum_{\substack{i,j \in U}} \dkl{P_i^t}{P_j^t}\\
     &\leq
-    D_{kl}\lp(P_i^t, P_{i+4}^t\rp)\\
+    \dkl{P_i^t}{P_{i+4}^t}\\
     &=
-    t D_{kl}\lp(P_i, P_{i+4}\rp)\\
-    &\leq
-    t \frac{\lp(p_i - p_{i+4}\rp)^2}{p_i(1-p_i)}\\
+    t \dkl{P_i}{P_{i+4}}\\
+  \end{align*}
+  Using Lemma~\ref{l:dkl} we obtain 
+  \begin{align*}
+    t \dkl{P_i}{P_{i+4}} &\leq
+    t \frac{\lp(p_i - p_{i+4}\rp)^2}{2}\lp(\frac{1}{p_i(1-p_i)} + \frac{1}{p_{i+4}(1-p_{i+4})}\rp)\\
     &\leq
     t\lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp) \lp(p_i - p_{i+4}\rp)^2\\
     &=
@@ -104,12 +107,12 @@ of the estimator.
   $$c_2 = 16\frac{(b-a)^2}{\log5}\lp(\frac{1}{a(1-a)} + \frac{1}{b(1-b)}\rp)$$
   then by equation~(\ref{eq:fano}) we obtain:
   \begin{equation}\label{eq:fano5}
-    \sum_{k =i}^{i+4} \geq \frac{5(b-a)}{2t}\lp(c_1 - \frac{c_2}{t}\rp)
+    \sum_{k =i}^{i+4}R_{p_i}(t) \geq \frac{5(b-a)}{2t}\lp(c_1 - \frac{c_2}{t}\rp)
   \end{equation}
   Inequality~(\ref{eq:fano5}) holds for every group of 5
   distributions. By summing up for all groups:
   \begin{align*}
-    \sum_{i=0}^{t-1} E_i &\geq t \frac{b-a}{2t}\lp(c_1 - \frac{c_2}{t}\rp)\\
+    \sum_{i=0}^{t-1} R_{p_i}(t) &\geq t \frac{b-a}{2t}\lp(c_1 - \frac{c_2}{t}\rp)\\
     &= \frac{b-a}{2}\lp(c_1 - \frac{c_2}{t}\rp)
   \end{align*}
   which is what we wanted to prove.
