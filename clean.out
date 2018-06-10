@@ -9,9 +9,9 @@
 \BOOKMARK [2][-]{subsection.2.3}{Estimating Bernoulli distributions}{section.2}% 9
 \BOOKMARK [1][-]{section.3}{Fictitious Play Convergence Rate}{}% 10
 \BOOKMARK [1][-]{section.4}{Fictitious Play is no-regret}{}% 11
-\BOOKMARK [1][-]{section.5}{Final Lower Bound}{}% 12
-\BOOKMARK [2][-]{subsection.5.1}{Proof of Theorem 6}{section.5}% 13
-\BOOKMARK [2][-]{subsection.5.2}{Proof of Theorem 5}{section.5}% 14
-\BOOKMARK [1][-]{section.6}{A Graph Aware Protocol}{}% 15
+\BOOKMARK [1][-]{section.5}{Lower Bound for no-regret Dynamics}{}% 12
+\BOOKMARK [2][-]{subsection.5.1}{Proof of Theorem ??}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.2}{Proof of Theorem ??}{section.5}% 14
+\BOOKMARK [1][-]{section.6}{A Graph Aware Update Rule}{}% 15
 \BOOKMARK [1][-]{appendix.A}{Fictitious Play Donvergence Rate}{}% 16
 \BOOKMARK [1][-]{appendix.B}{Lower Bound}{}% 17
