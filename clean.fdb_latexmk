@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex clean"] 1528646278 "clean.aux" "clean.bbl" "clean" 1528646278
+["bibtex clean"] 1528659404 "clean.aux" "clean.bbl" "clean" 1528659748
   "/usr/share/texmf-dist/bibtex/bst/base/alpha.bst" 1520157249 23907 a5f93555796fb564b924339521f10a7c ""
-  "clean.aux" 1528646277 7091 9d9a93745702ae0056f5c8920783759c ""
+  "clean.aux" 1528659748 7132 514f85d397cfaab1688ff50e42fc8216 ""
   "refs.bib" 1526299782 11514 409bc87b82430b428590527b9bf01806 ""
   (generated)
   "clean.bbl"
   "clean.blg"
-["pdflatex"] 1528646273 "clean.tex" "clean.pdf" "clean" 1528646273
+["pdflatex"] 1528659746 "clean.tex" "clean.pdf" "clean" 1528659748
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1520157250 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1520157216 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1520157222 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -260,24 +260,24 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1520157258 32585 d82bbcf7626b7842c87671687479e852 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1525856715 2623954 0a6a6b46f4d66e54dc08a8252a5fd1fb ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1524049103 7738161 f8ed59071fd1e5f29933a0084b550116 ""
-  "clean.aux" 1528646273 8 a94a2480d3289e625eea47cd1b285758 ""
-  "clean.bbl" 1528630082 4330 4101d6fc81374202a5c6f1d7866b0c65 "bibtex clean"
-  "clean.out" 0 -1 0 ""
+  "clean.aux" 1528659748 7132 514f85d397cfaab1688ff50e42fc8216 ""
+  "clean.bbl" 1528659404 4330 4101d6fc81374202a5c6f1d7866b0c65 "bibtex clean"
+  "clean.out" 1528659748 1177 3781937cb0de63185ef85fa6c06ad828 ""
   "clean.tex" 1528627732 975 a8eb1e059ffbe5f60dbf10dd91659fe2 ""
   "src/abstract.tex" 1526295574 2213 0f923d223aaaf807ce851cc178318484 ""
   "src/appendix/fictitious_convergence_appendix.tex" 1526323795 3736 879b6dc13757868fbff5926b1b85e499 ""
-  "src/appendix/lower_bound_appendix.tex" 1525949441 9066 9ec97ebf84e85f4182629f9c89b49ad1 ""
+  "src/appendix/lower_bound_appendix.tex" 1528647335 9221 7c38d1691043f22ba67ed025312c554f ""
   "src/main/fictitious_convergence.tex" 1528546920 7596 a15febd673e54aed82690199180a8993 ""
-  "src/main/fictitious_noregret.tex" 1526295365 4153 eff457587908bb85597663447fbeb9f1 ""
+  "src/main/fictitious_noregret.tex" 1528649658 4488 2a1c1531ae81978d328acf5961a2bf00 ""
   "src/main/introduction.tex" 1528546920 13126 9c2f330411cb63465b7213fa30a0a367 ""
   "src/main/lower_bound.tex" 1528546920 11500 706dab35601db1016cda4d6cf19ba978 ""
   "src/main/preliminaries.tex" 1528546920 12614 e2a8457f88b0e2f399c876b0a2a14e10 ""
-  "src/main/side_result.tex" 1528632523 8079 52110d6ae862f7c969ea8b6fdfac122c ""
+  "src/main/side_result.tex" 1528659743 8149 68a111716e921bf38c28f6b219d47c3c ""
   "templates/colors.tex" 1523879608 835 c894d71b899ffddd3560864fbbf34e54 ""
-  "templates/macros.tex" 1528630057 2731 bf089aa8aeb9a3d5a3d521d37954c28a ""
+  "templates/macros.tex" 1528657593 2731 bf089aa8aeb9a3d5a3d521d37954c28a ""
   "templates/packages.tex" 1525957856 2194 00e7339b16de62d5941ca3ca467c6f19 ""
   (generated)
+  "clean.pdf"
   "clean.out"
   "clean.aux"
   "clean.log"
-  "clean.pdf"

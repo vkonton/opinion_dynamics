@@ -5,67 +5,70 @@ for any no-regret algorithm $\mcal{A}$ there exists a graph $G$ such that the
 corresponding dynamics needs \( \poly(1/\eps) \) rounds to achieve error
 $\eps$.  However, in the \emph{perfect information} FJ-model there exists a
 simple update rule that requires only $\log(1/\eps)$ rounds.  Notice that our
-lower crucially depends on both the fact that $\mcal{A}$ is no-regret. At this
+lower bound crucially depends on the fact that $\mcal{A}$ is no-regret. At this
 point, a natural question is whether, this exponential gap is a generic
-restriction of imperfect information model?  We answer question in the
+restriction of our imperfect information model.  We answer this question in the
 negative. More precisely the reason that no-regret dynamics suffer slow
 convergence is that the update rule depends only on the expressed opinions. In
-this section we show that update rules that also depend on the graph $G$ can
-achieve exponentially fast convergence.  Perhaps surprisingly, we show that our
-update rule only depends on the expressed opinions, the number of neighbors of
-each agent and the maximum degree $d$ of $G$.  The latter is interesting
+this section we exhibit an update rule that depends on the graph $G$ and
+achieves exponentially fast convergence.  Precisely, our update rule
+depends on the expressed opinions, the number of neighbors of
+each agent, and the number of agents $n$.  The latter is interesting
 because information about the graph $G$ combined with agents that do not act
-selfishly can restore the exponential convergence rate.
+selfishly, can restore the exponential convergence rate.
 
 The main idea of the protocol is straightforward: to counterbalance the
-imperfect information the agents spend some rounds just to simulate one round
+imperfect information, the agents can spend some rounds to simulate one round
 of the original FJ-model. To do this, they agree to stop updating their
 expressed opinion for a large enough window of rounds so that everybody learns,
 with high probability, \emph{exactly} the average of the opinions of their
 neighbors.  Following the ideas of Section~\ref{s:fictitious_convergence} an
-agent could try to learn the average of the opinions of her neighbors by just
-averaging the opinions that she gets in this window.  Unfortunately this would
-again result in a $\poly(1/\eps)$-round protocol.  However this can be fixed by
-using the additional knowledge of the number of agents. Precisely, each agent
-$i$ keeps an array with the frequencies that she observed. But there is a
-catch, when the window ends, she rounds each frequency to the closest multiple
-of $1/d_i$, where $d_i$ is the number of neighbors of agent $i$. To see that
-this works, first notice that if all agents stop updating their opinions for
-$d$ rounds, the problem of learning the frequencies of the different opinions
-is equivalent to the problem of learning the probability mass function of a
-discrete distribution with support at most $d$, since the number of different
-opinions that an agents sees is at most equal to the max degree of the graph.
-Using a VC-dimension argument one shows that with $d^2 \log d$ samples each agent
-knows the frequencies within error smaller than $1/d$ with constant
-probability (which can be trivially amplified by repeating the procedure).
-Now, using the fact that the frequencies of the opinions of agent $i$ can
-only be multiples of $1/d_i$ we can round the estimated frequencies to the
-closest multiple of $1/d_i$ to get the true frequencies and use them to get
-the exact average of the opinions of the neighbors.
+agent could just average the opinions that she gets in this window.
+Unfortunately this would again result in a $\poly(1/\eps)$-round protocol.
+However this can be fixed by using the additional knowledge of the number
+of agents and the number of neighbors. Precisely, each agent
+$i$ keeps an array with the frequencies of the different opinions that she
+observes. The catch is that at the end of the window, she rounds each frequency
+to the closest multiple of $1/d_i$, where $d_i$ is the number of neighbors of
+agent $i$. This rounding step is crucial to ensure the exponential convergence
+rate. To see that this works, first notice that if all agents stop updating
+their opinions for a number of rounds, each agents just needs to specify
+exactly how many of her neighbors share a specific observed opinion.
+If the length of the window is large the frequency of
+a specific opinion at the end of the window will be sufficiently
+close to the true frequency.  Since the frequencies of
+the opinions that agent $i$ observes can only be multiples of $1/d_i$,
+we can round the estimated frequencies to the closest multiple of $1/d_i$ to
+recover the true frequencies and use them to get the exact average of the
+opinions of the neighbors.  To bound the length of the window we use a
+VC-dimension argument and show that with $n^2 \log n$ rounds each agent
+knows the frequencies within error smaller than $1/n$ with constant
+probability, which then can be trivially amplified by repeating the procedure.
+
 We next state a version of the standard VC-Inequality that we will use
-in our argument.  Let $P$ be a discrete distribution over $[d]$, and let
+in our argument.  Let $P$ be a discrete distribution over $[n]$, and let
 $S_1, \ldots, S_t$ be $t$ i.i.d samples drawn from $P$, i.e.
 $(S_1, \ldots, S_t) \sim P^t$.  The empirical distribution $\hat{P}_t$ is the
 following estimator of the density of $P$.
 \begin{equation}\label{eq:empirical_distribution}
-  \hat{P}_N(A) = \frac{\sum_{i=1}^N \1{S_i \in A}}{N},
+  \hat{P}_t(A) = \frac{\sum_{i=1}^t \1{S_i \in A}}{t},
 \end{equation}
-where $A \subseteq [d]$. In words, $\hat{P}_N$ simply counts
-how many times the value $i$ appeared in the samples $S_1, \ldots S_N$.
+where $A \subseteq [n]$. In words, $\hat{P}_t$ simply counts
+how many times the value $i$ appeared in the samples $S_1, \ldots S_t$.
 We will use the following version of the classical result of Vapnik and
 Chervonenkis.
 \begin{lemma}\label{l:vc_inequality}
-  Let $\mcal{A}$ be a collection of subsets of $\{0,\ldots, d\}$ and
-  Let $S_{\mcal{A}}(N)$ be the Vapnik-Chervonenkis shatter coefficient, defined
+  Let $\mcal{A}$ be a collection of subsets of $\{1,\ldots, n\}$ and let
+  $S_{\mcal{A}}(t)$ be the Vapnik-Chervonenkis shatter coefficient, defined
   by
   \[
-    S_{\mcal{A}(N)} = \max_{x_1,\ldots, x_t \in [d]}
+    S_{\mcal{A}(t)} = \max_{x_1,\ldots, x_t \in [n]}
     \lp| \{ \{x_1, \ldots, x_t\} \cap A : A \in \mcal{A} \} \rp|.
   \]
   Then
   \[
-    \Expnew{P^N}{\max_{A \in \mcal{A}} \lp| \hat{P}_t(A) - P(A) \rp|}
-    \leq 2 \sqrt{\frac{\log{2 S_{\mcal{A}}(N)}}{N}}
+    \Expnew{P^t}{\max_{A \in \mcal{A}} \lp| \hat{P}_t(A) - P(A) \rp|}
+    \leq 2 \sqrt{\frac{\log{2 S_{\mcal{A}}(t)}}{t}}
   \]
 \end{lemma}
 
@@ -74,29 +77,28 @@ Chervonenkis.
   \label{alg:frequencies}
   \begin{algorithmic}[1]
     \State $x_i(0) \gets s_i$.
-    \For{$l = 1, \ldots,\ln(1/\eps))$}
-    \State Keep a map $h$ from $[0,1]$ to $[d_i]$,
-    an array of counters $A$ of length $d_i$ and an array $B$ of length
-    $M_1$.
     \State $M_1 = O(\ln(n/\eps))$, $M_2 = O(d^2 \ln(d))$
+
+    \For{$l = 1, \ldots,\ln(1/\eps))$}
+    \State Keep a set $A$ of tuples $(x, \mrm{freq}(x))$
+    of and an array $B$ of length $M_1$.
 
     \For{$j = 1, \ldots, M_1$}
     \For{$k = 1, \ldots, M_2$}
 
-    \State Get the opinion $X_i$ of a random neighbor.
-    \If{$X_i$ is not in $h$}
-    \State Insert $X_i$ to $h$.
+    \State Get the opinion $X_k$ of a random neighbor.
+    \If{$X_j$ is not in $A$}
+    \State Insert $(X_k, 1)$ to $A$.
     \Else
-    \State $A(h(X_i)) \gets A(h(X_i)) +1$.
-
+    \State $(X_k, \mrm{freq}(X_k))
+    \gets (X_k,  \mrm{freq}(X_k) +1) $.
   \EndIf
-  \State $t \gets t+1$
 \EndFor
-\State Divide all entries of $A$ by $M_2$.  \label{alg:line:counters}
-\State Round all entries of $h$ to the closest multiple of $1/d$.
-\State $B(j) = \sum_{i=1}^{d_i} A(i)$.
+\State Divide all frequencies of $A$ by $M_2$.  \label{alg:line:counters}
+\State Round all frequencies of $Α$ to the closest multiple of $1/d_i$.
+\State $B(j) \gets \alpha_i \sum_{x \in A} \mrm{freq}(x) + (1-\alpha_i) s_i$.
 \EndFor
-\State $x_i(t) \gets \maj_{j} B(j)$.
+\State $x_i(t) \gets \mrm{majority}_j B(j)$.
 \EndFor
 \end{algorithmic}
 \end{algorithm}
@@ -133,8 +135,8 @@ Chervonenkis.
     \Expnew{P^m}{\max_{j \in [d_i]} \lp| \hat{P}_m(j) - P(j) \rp|}
     \leq 2 \sqrt{\frac{\log{2 d_i}}{m}},
   \]
-  since $S_{\mcal{A}} \leq d_i$. Therefore, an agent can draw
-  $m = 100 d^2 \log(2 d)$ to learn the frequencies $k_j/d_i$
+  since $S_{\mcal{A}} \leq n$. Therefore, an agent can draw
+  $m = 100 n^2 \log(2 n)$ to learn the frequencies $k_j/d_i$
   within expected error $1/(5 d)$.
   Notice now that the array $A$ after line~\ref{alg:line:counters}
   corresponds to the empirical distribution of

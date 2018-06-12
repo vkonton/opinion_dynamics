@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  10 JUN 2018 18:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  10 JUN 2018 22:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -984,7 +984,17 @@ Package caption Info: listings package is loaded.
 (./templates/colors.tex) (./templates/macros.tex)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
- (./clean.aux)
+ (./clean.aux
+
+LaTeX Warning: Label `l:fano_application' multiply defined.
+
+
+LaTeX Warning: Label `l:cauchy_schwarz' multiply defined.
+
+
+LaTeX Warning: Label `l:upper' multiply defined.
+
+)
 \openout1 = `clean.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 7.
@@ -1003,8 +1013,7 @@ LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 7.
 LaTeX Font Info:    ... okay on input line 7.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 7.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 7.
-
-(/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/share/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 7.
@@ -1074,11 +1083,12 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 7.
 LaTeX Info: Redefining \pageref on input line 7.
 LaTeX Info: Redefining \nameref on input line 7.
+ (./clean.out)
+(./clean.out)
 \@outlinefile=\write4
 \openout4 = `clean.out'.
 
-
-(/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count184
 \scratchdimen=\dimen276
@@ -1207,368 +1217,62 @@ LaTeX Font Info:    Font shape `U/msb/m/n' will be
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
 (Font)              scaled to size 6.25204pt on input line 4.
 LaTeX Font Info:    Font shape `T1/pplx/bx/n' in size <10> not available
-(Font)              Font shape `T1/pplx/b/n' tried instead on input line 14.
-
-
-LaTeX Warning: Reference `eq:fj_dynamics' on page 1 undefined on input line 14.
-
-
-
-LaTeX Warning: Citation `BKO11' on page 1 undefined on input line 17.
+(Font)              Font shape `T1/pplx/b/n' tried instead on input line 26.
 
 
 LaTeX Warning: Citation `BK011' on page 1 undefined on input line 26.
-
-
-LaTeX Warning: Reference `eq:best_response' on page 1 undefined on input line 3
-3.
-
-
-LaTeX Warning: Citation `GS14' on page 1 undefined on input line 42.
-
-
-LaTeX Warning: Reference `eq:kleinberg_cost' on page 1 undefined on input line 
-49.
-
-
-LaTeX Warning: Citation `Zhou17' on page 1 undefined on input line 51.
-
-
-LaTeX Warning: Reference `eq:kleinberg_cost' on page 1 undefined on input line 
-57.
 
 LaTeX Font Info:    Try loading font information for TS1+pplx on input line 63.
 
 (/usr/share/texmf-dist/tex/latex/psnfss/ts1pplx.fd
 File: ts1pplx.fd 2004/09/06 font definitions for TS1/pplx.
 )
-
-LaTeX Warning: Reference `eq:kleinberg_cost' on page 1 undefined on input line 
-75.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 1 undefined on input lin
-e 85.
-
-
-LaTeX Warning: Reference `d:random_payoff_game' on page 1 undefined on input li
-ne 86.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 1 undefined on input lin
-e 87.
-
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 92.
-
-LaTeX Warning: Reference `s:fictitious_convergence' on page 1 undefined on inpu
-t line 111.
-
-[1]
-
-LaTeX Warning: Reference `d:random_payoff_game' on page 2 undefined on input li
-ne 116.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 2 undefined on input lin
-e 118.
-
-
-LaTeX Warning: Reference `eq:fictitious_play' on page 2 undefined on input line
- 125.
-
-
-LaTeX Warning: Reference `eq:fj_dynamics' on page 2 undefined on input line 129
-.
-
-
-LaTeX Warning: Reference `eq:fictitious_play' on page 2 undefined on input line
- 132.
-
-
-LaTeX Warning: Reference `eq:fj_dynamics' on page 2 undefined on input line 133
-.
-
-
-LaTeX Warning: Reference `eq:fictitious_play' on page 2 undefined on input line
- 140.
-
-
-LaTeX Warning: Reference `s:fictitious_noregret' on page 2 undefined on input l
-ine 147.
-
-
-LaTeX Warning: Reference `eq:fictitious_play' on page 2 undefined on input line
- 157.
-
-
-LaTeX Warning: Reference `s:lower_bound' on page 2 undefined on input line 167.
-
-
-
-LaTeX Warning: Reference `s:graph_aware' on page 2 undefined on input line 182.
-
-
-[2]
-
-LaTeX Warning: Citation `FJ90' on page 3 undefined on input line 219.
-
-
-LaTeX Warning: Citation `BKO11' on page 3 undefined on input line 219.
-
-
-LaTeX Warning: Citation `BGM13' on page 3 undefined on input line 223.
-
-
-LaTeX Warning: Citation `EFHS17' on page 3 undefined on input line 223.
-
-
-LaTeX Warning: Citation `CKO13' on page 3 undefined on input line 223.
-
-
-LaTeX Warning: Citation `BFM16' on page 3 undefined on input line 223.
-
-
-LaTeX Warning: Citation `GS14' on page 3 undefined on input line 224.
-
-
-LaTeX Warning: Citation `BFM16' on page 3 undefined on input line 227.
-
-
-LaTeX Warning: Citation `YOASS13' on page 3 undefined on input line 232.
-
-
-LaTeX Warning: Citation `FGV16' on page 3 undefined on input line 232.
-
-
-LaTeX Warning: Citation `FV97' on page 3 undefined on input line 235.
-
-
-LaTeX Warning: Citation `FS99' on page 3 undefined on input line 235.
-
-
-LaTeX Warning: Citation `HM00' on page 3 undefined on input line 235.
-
-
-LaTeX Warning: Citation `BEL06' on page 3 undefined on input line 238.
-
-
-LaTeX Warning: Citation `EMN09' on page 3 undefined on input line 240.
-
-
-LaTeX Warning: Citation `CHM17' on page 3 undefined on input line 245.
-
-) (./src/main/preliminaries.tex [3]
+ [1] [2])
+(./src/main/preliminaries.tex [3]
 Underfull \hbox (badness 10000) in paragraph at lines 42--46
 
  []
 
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
-e 71.
-
-
-LaTeX Warning: Reference `s:fictitious_convergence' on page 4 undefined on inpu
-t line 71.
-
-
-LaTeX Warning: Reference `s:fictitious_noregret' on page 4 undefined on input l
-ine 72.
-
-
-LaTeX Warning: Reference `s:lower_bound' on page 4 undefined on input line 168.
-
-
 [4]) (./src/main/fictitious_convergence.tex
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
-e 3.
-
 
 LaTeX Warning: Reference `t:fictitious_converge' on page 5 undefined on input l
 ine 13.
 
 
-LaTeX Warning: Reference `app:s:fictitious_convergence' on page 5 undefined on 
-input line 20.
-
-
 LaTeX Warning: Reference `t:fictitious_converge' on page 5 undefined on input l
 ine 46.
 
-
-LaTeX Warning: Reference `d:random_payoff_game' on page 5 undefined on input li
-ne 50.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
-e 52.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
-e 61.
-
-
-LaTeX Warning: Reference `l:hoeffding' on page 5 undefined on input line 87.
-
-[5]
-
-LaTeX Warning: Reference `step:induction_step' on page 6 undefined on input lin
-e 170.
-
-
-LaTeX Warning: Reference `step:error' on page 6 undefined on input line 171.
-
-
-LaTeX Warning: Reference `eq:error_per_round' on page 6 undefined on input line
- 171.
-
-
-LaTeX Warning: Reference `l:recursion_upper_bound' on page 6 undefined on input
- line 187.
-
-) (./src/main/fictitious_noregret.tex
-
-LaTeX Warning: Reference `s:preliminaries:oco' on page 6 undefined on input lin
-e 4.
-
-[6]
-
-LaTeX Warning: Reference `eq:abs_value' on page 7 undefined on input line 81.
-
-[7]
-
-LaTeX Warning: Reference `t:no_regret' on page 8 undefined on input line 99.
-
-) (./src/main/lower_bound.tex
+[5]) (./src/main/fictitious_noregret.tex [6] [7]) (./src/main/lower_bound.tex
 
 LaTeX Warning: Reference `alg:no_regret_dynamics' on page 8 undefined on input 
 line 7.
 
-
-LaTeX Warning: Reference `claim' on page 8 undefined on input line 16.
-
-
-LaTeX Warning: Reference `claim' on page 8 undefined on input line 25.
-
-
-LaTeX Warning: Reference `t:reduction' on page 8 undefined on input line 26.
-
 [8]
-
-LaTeX Warning: Reference `t:integral' on page 9 undefined on input line 44.
-
-
-LaTeX Warning: Reference `claim' on page 9 undefined on input line 47.
-
-
-LaTeX Warning: Reference `claim' on page 9 undefined on input line 49.
-
-
-LaTeX Warning: Reference `t:reduction' on page 9 undefined on input line 52.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 66--67
 
  []
 
-[9]
+[9] [10]) (./src/main/side_result.tex [11]
+LaTeX Font Info:    Try loading font information for U+dsrom on input line 54.
 
-LaTeX Warning: Reference `l:reduction' on page 10 undefined on input line 88.
-
-
-LaTeX Warning: Reference `t:integral' on page 10 undefined on input line 90.
-
-
-LaTeX Warning: Reference `d:2packing' on page 10 undefined on input line 95.
-
-
-LaTeX Warning: Reference `l:fano' on page 10 undefined on input line 95.
-
-
-LaTeX Warning: Reference `l:fano' on page 10 undefined on input line 112.
-
-
-LaTeX Warning: Reference `l:fano_application' on page 10 undefined on input lin
-e 115.
-
-
-LaTeX Warning: Reference `l:cauchy_schwarz' on page 10 undefined on input line 
-128.
-
-[10]
-
-LaTeX Warning: Reference `l:cauchy_schwarz' on page 11 undefined on input line 
-136.
-
-
-LaTeX Warning: Reference `t:integral' on page 11 undefined on input line 143.
-
-
-LaTeX Warning: Reference `l:fano_application' on page 11 undefined on input lin
-e 150.
-
-
-LaTeX Warning: Reference `l:upper' on page 11 undefined on input line 150.
-
-
-LaTeX Warning: Reference `eq:final' on page 11 undefined on input line 156.
-
-) (./src/main/side_result.tex
-
-LaTeX Warning: Reference `s:lower_bound' on page 11 undefined on input line 3.
-
-
-LaTeX Warning: Reference `s:fictitious_convergence' on page 11 undefined on inp
-ut line 25.
-
-[11]
-LaTeX Font Info:    Try loading font information for U+dsrom on input line 51.
- (/usr/share/texmf-dist/tex/latex/doublestroke/Udsrom.fd
+(/usr/share/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 File: Udsrom.fd 1995/08/01 v0.1 Double stroke roman font definitions
 )
-
-LaTeX Warning: Reference `d:random_payoff_game' on page 12 undefined on input l
-ine 106.
-
-
-LaTeX Warning: Reference `alg:frequencies' on page 12 undefined on input line 1
-17.
-
-
-LaTeX Warning: Reference `l:vc_inequality' on page 12 undefined on input line 1
-31.
-
-[12]
-
-LaTeX Warning: Reference `alg:line:counters' on page 13 undefined on input line
- 139.
-
-
-LaTeX Warning: Reference `eq:empirical_distribution' on page 13 undefined on in
-put line 141.
-
+Missing character: There is no Î in font pplr9t!
+Missing character: There is no ‘ in font pplr9t!
+ [12]
 Missing character: There is no Î in font pplr9t!
 Missing character: There is no Ÿ in font pplr9t!
 Missing character: There is no Î in font pplr9t!
 Missing character: There is no Ÿ in font pplr9t!
-) [13] (./clean.bbl [14
+) [13]
+(./clean.bbl [14
 
-]) [15]
-(./src/appendix/fictitious_convergence_appendix.tex
-
-LaTeX Warning: Reference `s:fictitious_convergence' on page 16 undefined on inp
-ut line 4.
-
+]) [15] (./src/appendix/fictitious_convergence_appendix.tex
 
 LaTeX Warning: Reference `l:error_bound' on page 16 undefined on input line 4.
-
-
-LaTeX Warning: Reference `eq:recursion' on page 16 undefined on input line 34.
-
-
-LaTeX Warning: Reference `eq:recursion_zero' on page 16 undefined on input line
- 34.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 94--95
@@ -1577,73 +1281,30 @@ Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
 [16
 
-]) (./src/appendix/lower_bound_appendix.tex
-
-LaTeX Warning: Reference `l:fano' on page 17 undefined on input line 42.
-
-[17]
-
-LaTeX Warning: Reference `l:fano' on page 18 undefined on input line 64.
-
-
-LaTeX Warning: Reference `l:fano' on page 18 undefined on input line 66.
-
-
-LaTeX Warning: Reference `eq:fano' on page 18 undefined on input line 105.
-
-
-LaTeX Warning: Reference `eq:fano5' on page 18 undefined on input line 109.
-
-[18]
-
-LaTeX Warning: Reference `eq:triangle_inequality' on page 19 undefined on input
- line 207.
-
-
-LaTeX Warning: Reference `eq:cauchy_schwarz' on page 19 undefined on input line
- 208.
-
-
-LaTeX Warning: Reference `eq:bernoulli_square_diff' on page 19 undefined on inp
-ut line 209.
-
-
-LaTeX Warning: Reference `l:cauchy_schwarz' on page 19 undefined on input line 
-226.
-
-[19]
-
-LaTeX Warning: Reference `eq:one_side' on page 20 undefined on input line 254.
-
-) [20]
+]) (./src/appendix/lower_bound_appendix.tex [17] [18] [19]) [20]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 56.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 56.
- (./clean.aux)
+
+(./clean.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 56.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 56.
+Package rerunfilecheck Info: File `clean.out' has not changed.
+(rerunfilecheck)             Checksum: 3781937CB0DE63185EF85FA6C06AD828;1177.
 
-
-Package rerunfilecheck Warning: File `clean.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `clean.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  5C9EE9F706F25DE2CD927B0941F09128;1179.
 
 LaTeX Warning: There were undefined references.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 56.
  ) 
 Here is how much of TeX's memory you used:
- 34187 strings out of 492982
- 756847 string characters out of 6138579
- 979626 words of memory out of 5000000
- 36499 multiletter control sequences out of 15000+600000
- 108347 words of font info for 511 fonts, out of 8000000 for 9000
+ 34176 strings out of 492982
+ 756775 string characters out of 6138579
+ 978626 words of memory out of 5000000
+ 36512 multiletter control sequences out of 15000+600000
+ 103976 words of font info for 488 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,14n,96p,939b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
@@ -1656,10 +1317,10 @@ f-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texmf-dist/fonts/type1
 symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dis
 t/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on clean.pdf (21 pages, 223455 bytes).
+Output written on clean.pdf (21 pages, 228494 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 222 compressed objects within 3 object streams
+ 408 PDF objects out of 1000 (max. 8388607)
+ 370 compressed objects within 4 object streams
  111 named destinations out of 1000 (max. 500000)
- 62989 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 62101 words of extra memory for PDF output out of 74296 (max. 10000000)
 
