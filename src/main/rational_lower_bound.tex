@@ -1,0 +1,157 @@
+\section{Rational Lower Bound}
+% In this section we prove that the following Theorem
+
+% \begin{theorem}
+%   Let $\theta_t: \{0,1\}^t \to [0,1]$ be a sequence of estimators for
+%   the success probability $p$ of a Bernoulli random variable with
+%   distribution $P$.
+%   Let
+%   \[
+%     A =
+%     \{
+%     p \in [0,1]\ :\ \lim_{t\to \infty}
+%     t^2\ \Expnew{X \sim P^t}{\lp| \theta_t(X) - p \rp|} < 1/2
+%     \}.
+%   \]
+%   Then $\mu(A) = 0$.
+% \end{theorem}
+% \begin{proof}
+%   In the following, we work in the measure space
+%   $(\R, \mcal{M}, \mu)$, where $\mu$ is the Lebesgue measure,
+%   and $\mcal{M}$ is the $\sigma$-algebra of the Lebesgue measurable
+%   sets.
+%   We first show that our set $A$ is measurable.
+%   Let \(R_t(p) = t^2\ \Expnew{X \sim P^t}{| \theta_t(X) - p|}\).
+%   We have that $R_t: [0,1] \to [0, +\infty) $ is polynomial of
+%   degree $t$ in $p$ and therefore it is a measurable function.
+%   Moreover, \(\lim_{t \to \infty} R_t(p) \) is a measurable function
+%   as the limit of measurable functions. Thus, $A$ is a measurable set.
+%   Notice that,
+%   \[
+%     A \subseteq \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} A_k,
+%   \]
+%   where \( A_k = \{ p\in[0,1]\ :\ R_k(p) < 1/2 \} \).
+%   We now show that
+%   \[ A_k \subseteq B_k \coloneqq \{ p \in [0,1]\ : \
+%     k^2 \min_{0 \leq i \leq k} \lp| \theta_k(i) - p \rp| < 1 \}.
+%   \]
+%   We prove this by contradiction. Suppose that $p \in A_k$ but
+%   $p \notin B_k$. Since $p \in A_k$ we have that
+%   \begin{align*}
+%     R_k(p)
+%     =
+%     k^2 \sum_{i=0}^k \lp| \theta_k(i) - p \rp| p^i (1-p)^{k-i}
+%     \geq
+%     k^2 \min_{0 \leq i \leq k} \lp| \theta_k(i) - p \rp|
+%     \sum_{i=0}^k p^i (1-p)^{k-i}
+%     \geq 1.
+%   \end{align*}
+%   Since the functions $p \mapsto k^2 \lp| \theta_k(i) - p \rp|$ are
+%   measurable, their pointwise minimum is measurable and therefore
+%   the sets $B_k$ are also measurable.  We next proceed to bound
+%   $\mu(B_k)$. Since $\theta_k$ can only take $k$ different values
+%   we have that there exist $k+1$ intervals $(a_{k_i}, b_{k_i})$
+%   of length at most $2/t^2$ such that
+%   \(
+%     B_k = \bigcup_{i=0}^k \lp(a_{k_i}, b_{k_i} \rp).
+%   \)
+%   Since $\mu$ is subadditive we have
+%   \[
+%     \mu(B_k) \leq \sum_{i=0}^{k} \frac{2}{k^2} = \frac{2 (k+1)}{k^2}.  \]
+%   Now observe that
+%   \begin{align*}
+%     \mu(A)
+%     \leq \mu \lp( \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} A_k \rp)
+%     \leq \mu \lp( \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} B_k \rp)
+%     \leq \sum_{t = 1}^{\infty} \mu\lp(\bigcap_{k=t}^{\infty} B_k \rp)
+%     \leq \sum_{t = 1}^{\infty} \lim_{k \to \infty} \mu(B_k)
+%     = 0
+%   \end{align*}
+
+% \end{proof}
+
+\begin{theorem}
+  Let $\theta_t: \{0,1\}^t \to [0,1]$ be a sequence of estimators for
+  the success probability $p$ of a Bernoulli random variable with
+  distribution $P$.
+  There exists $p \in [0,1]$ such that
+  \[
+   \lim_{t\to \infty} t^2\ \Expnew{X \sim P^t}{\lp| \theta_t(X) - p \rp|} > 0.
+  \]
+\end{theorem}
+\begin{proof}
+  Observe that $\theta_t(\{0,1\}^t)$ has cardinality at most $2^t$.
+  Since
+  \[
+    \sum_{0 \leq i \leq t} \sum_{\norm{1}{x} = i}
+    \lp| \theta_t(x) - p \rp| p^i (1-p)^{t-i}
+    \geq
+    \sum_{0 \leq i \leq t} \binom{t}{i} \lp|
+     \frac{\sum_{\norm{1}{x} = i} \theta_t(x)}{\binom{t}{i}}  - p \rp|
+    p^i (1-p)^{t-i}.
+  \]
+  Thus, without loss of generality we assume that
+  $\theta_t(\{0,1\}^t)$ contains at most $t+1$ discrete
+  points.
+
+  In the following, we work in the measure space
+  $(\R, \mcal{M}, \mu)$, where $\mu$ is the Lebesgue measure,
+  and $\mcal{M}$ is the $\sigma$-algebra of the Lebesgue measurable
+  sets.
+  Suppose that there exists no such $p \in [0,1]$.
+  Let
+  \[
+    A =
+    \{
+    p \in [0,1]\ :\ \lim_{t\to \infty}
+    t^2\ \Expnew{X \sim P^t}{\lp| \theta_t(X) - p \rp|} = 0
+    \}.
+  \]
+  Then $A = [0,1]$ and $A$ is measurable as an interval.
+  Notice that,
+  \[
+    A \subseteq \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} A_k,
+  \]
+  where \( A_k = \{ p\in[0,1]\ :\ R_k(p) < 1/2 \} \),
+  and \(R_k(p) = k^2\ \Expnew{X \sim P^k}{| \theta_k(X) - p|}\).
+  We have that $R_k: [0,1] \to [0, +\infty) $ is polynomial of
+  degree $t$ in $p$ and therefore it is a measurable function.
+  Thus, $A_k$ is measurable.
+  We now show that
+  \[ A_k \subseteq B_k \coloneqq \{ p \in [0,1]\ : \
+    k^2 \min_{0 \leq i \leq k} \lp| \theta_k(i) - p \rp| < 1 \}.
+  \]
+  We prove this by contradiction. Suppose that $p \in A_k$ but
+  $p \notin B_k$. Since $p \in A_k$ we have that
+  \begin{align*}
+    R_k(p)
+    =
+    k^2 \sum_{i=0}^k \binom{k}{i} \lp| \theta_k(i) - p \rp| p^i (1-p)^{k-i}
+    \geq
+    k^2 \min_{0 \leq i \leq k} \lp| \theta_k(i) - p \rp|
+    \sum_{i=0}^k \binom{k}{i} p^i (1-p)^{k-i}
+    \geq 1.
+  \end{align*}
+  Since the functions $p \mapsto k^2 \lp| \theta_k(i) - p \rp|$ are
+  measurable, their pointwise minimum is measurable and therefore
+  the sets $B_k$ are also measurable.  We next proceed to bound
+  $\mu(B_k)$. Since $\theta_k$ can only take $k$ different values
+  we have that there exist $k+1$ intervals $(a_{k_i}, b_{k_i})$
+  of length at most $2/k^2$ such that
+  \(
+    B_k = \bigcup_{i=0}^k \lp(a_{k_i}, b_{k_i} \rp).
+  \)
+  Since $\mu$ is subadditive we have
+  \[
+    \mu(B_k) \leq \sum_{i=0}^{k} \frac{2}{k^2} = \frac{2 (k+1)}{k^2}.  \]
+  Now observe that
+  \begin{align*}
+    \mu(A)
+    \leq \mu \lp( \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} A_k \rp)
+    \leq \mu \lp( \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} B_k \rp)
+    \leq \sum_{t = 1}^{\infty} \mu\lp(\bigcap_{k=t}^{\infty} B_k \rp)
+    \leq \sum_{t = 1}^{\infty} \lim_{k \to \infty} \mu(B_k)
+    = 0
+  \end{align*}
+  Which is a contradiction since we assumed $A = [0,1]$.
+\end{proof}

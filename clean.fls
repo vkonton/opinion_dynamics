@@ -556,6 +556,8 @@ INPUT /usr/share/texmf-dist/tex/latex/doublestroke/Udsrom.fd
 INPUT /usr/share/texmf-dist/fonts/tfm/public/doublestroke/dsrom10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/doublestroke/dsrom8.tfm
+INPUT src/main/rational_lower_bound.tex
+INPUT src/main/rational_lower_bound.tex
 INPUT clean.bbl
 INPUT clean.bbl
 INPUT src/appendix/fictitious_convergence_appendix.tex

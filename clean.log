@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  10 JUN 2018 22:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  15 JUN 2018 19:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1267,29 +1267,30 @@ Missing character: There is no Î in font pplr9t!
 Missing character: There is no Ÿ in font pplr9t!
 Missing character: There is no Î in font pplr9t!
 Missing character: There is no Ÿ in font pplr9t!
-) [13]
-(./clean.bbl [14
+)
+(./src/main/rational_lower_bound.tex [13]) [14] (./clean.bbl [15
 
-]) [15] (./src/appendix/fictitious_convergence_appendix.tex
+]) [16]
+(./src/appendix/fictitious_convergence_appendix.tex
 
-LaTeX Warning: Reference `l:error_bound' on page 16 undefined on input line 4.
+LaTeX Warning: Reference `l:error_bound' on page 17 undefined on input line 4.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
  []
 
-[16
+[17
 
-]) (./src/appendix/lower_bound_appendix.tex [17] [18] [19]) [20]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 56.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 56.
+]) (./src/appendix/lower_bound_appendix.tex [18] [19] [20]) [21]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 57.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 57.
 
 (./clean.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 56.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 56.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 57.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 57.
 Package rerunfilecheck Info: File `clean.out' has not changed.
-(rerunfilecheck)             Checksum: 3781937CB0DE63185EF85FA6C06AD828;1177.
+(rerunfilecheck)             Checksum: F62FB00393E7A3E69A80969D29ECD21C;1233.
 
 
 LaTeX Warning: There were undefined references.
@@ -1297,14 +1298,14 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 56.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 57.
  ) 
 Here is how much of TeX's memory you used:
- 34176 strings out of 492982
- 756775 string characters out of 6138579
+ 34195 strings out of 492982
+ 757003 string characters out of 6138579
  978626 words of memory out of 5000000
- 36512 multiletter control sequences out of 15000+600000
- 103976 words of font info for 488 fonts, out of 8000000 for 9000
+ 36513 multiletter control sequences out of 15000+600000
+ 104599 words of font info for 497 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,14n,96p,939b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
@@ -1317,10 +1318,10 @@ f-dist/fonts/type1/public/mathpazo/fplmr.pfb></usr/share/texmf-dist/fonts/type1
 symbols/msam10.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb><
 /usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texmf-dis
 t/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on clean.pdf (21 pages, 228494 bytes).
+Output written on clean.pdf (22 pages, 234535 bytes).
 PDF statistics:
- 408 PDF objects out of 1000 (max. 8388607)
- 370 compressed objects within 4 object streams
- 111 named destinations out of 1000 (max. 500000)
- 62101 words of extra memory for PDF output out of 74296 (max. 10000000)
+ 417 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
+ 114 named destinations out of 1000 (max. 500000)
+ 62109 words of extra memory for PDF output out of 74296 (max. 10000000)
 
