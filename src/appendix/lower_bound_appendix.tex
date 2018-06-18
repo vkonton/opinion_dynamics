@@ -117,14 +117,76 @@ of the estimator.
   \end{align*}
   which is what we wanted to prove.
 \end{proof}
+\begin{lemma}\label{l:ratio}
+For every $p\in [p_i -\frac{b-a}{2t},p_i + \frac{b-a}{2t}]$,
+%\[\Exp{\lp|\hat{\theta}^t-p_i\rp|}_{p_i} \leq c_a^b\Exp{\lp|\hat{\theta}^t-p\rp|}_p + \lp|p - p_i\rp|\]
+\[R_{p_i}(t) \leq C_a^b R_{p}(t) +  |p-p_i|\]
+where $C_a^b$ is a constant that depends on $a,b$.
+\end{lemma}
+\begin{proof}
+Using the triangle inequality we get
+\begin{align*}
+R_{p_i}(t) &= \Expnew{p_i}{\lp|\hat{\theta}^t-p_i\rp|}\\
+ &\leq \Expnew{p_i}{\lp|\hat{\theta}^t-p\rp|} + \Expnew{p_i}{\lp|p-p_i\rp|}\\
+&= \Expnew{p_i}{\lp|\hat{\theta}^t-p\rp|} +\lp|p - p_i\rp|
+\end{align*}
+It suffices to show that
+\[
+\Expnew{p_i}{\lp|\hat{\theta}^t-p\rp|} \leq C_a^b \Expnew{p}{\lp|\hat{\theta}^t-p\rp|}
+\]
+where $C_a^b$ is a constant depending only on $a,b$.
+Since the estimator $\hat{\theta}$ receives $t$ samples that are either zero or one, 
+we have
+\[
+\Expnew{p_i}{|\hat{\theta_t} - p|}= \sum_{(y^1,\ldots,y^t)\in
+      \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
+    p_i^{\sum_{i=1}^ty^i}(1-p_i)^{t-\sum_{i=1}^ty^i}
+\]
 
+Similarly
+\[
+\Expnew{p}{|\hat{\theta_t} - p|}= \sum_{(y^1,\ldots,y^t)\in
+      \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
+    p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}
+\]
+Since the two expectations are sums with the same number of summands, in order to 
+bound the ratio of the two expectations it suffices to 
+bound the ratio of each two individual terms of the two sums. 
+For each tuple $(y^1,\ldots,y^t)\in\{0,1\}^t$ we have:
+\begin{align*}
+\frac{|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
+    p_i^{\sum_{i=1}^ty^i}(1-p_i)^{t-\sum_{i=1}^ty^i}}
+    {|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
+    p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}} 
+    &= \frac{p_i^{\sum_{i=1}^ty^i}(1-p_i)^{t-\sum_{i=1}^ty^i}}
+    {p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}}
+\end{align*}
+Let $k = \sum_{i=1}^ty^i$.
+Since $p \in [p_i -\frac{b-a}{2t},p_i + \frac{b-a}{2t}]$, there is an $\epsilon \in [-\frac{b-a}{2t}, \frac{b-a}{2t}]$ such that $p_i = p - \epsilon$. 
+Thus, the above ratio can be written as
+\begin{align*}
+\lp(\frac{p_i}{p}\rp)^k \lp(\frac{1-p_i}{1-p}\rp)^{t-k} &= 
+\lp(\frac{p - \epsilon}{p}\rp)^k \lp(\frac{1-p + \epsilon}{1-p}\rp)^{t-k}\\
+&= \lp(1 - \frac{\epsilon}{p}\rp) ^k \lp( 1 + \frac{\epsilon}{1-p}\rp)\\
+&\leq \me^{-k\frac{\epsilon}{p}} \me^{(t-k)\frac{\epsilon}{1-p}}\\
+&= \me^{-\frac{k\epsilon}{p} + \frac{t\epsilon}{1-p} - \frac{k\epsilon}{1-p}}\\
+&\leq \me^{\frac{k|\epsilon|}{p} + \frac{t|\epsilon|}{1-p} + \frac{k|\epsilon|}{1-p}}\\
+&\leq \me^{\frac{1}{p} + \frac{2}{1-p}}\\
+&\leq \me^{\frac{1}{a} + \frac{2}{1-b}}
+\end{align*}
+In the above computation, we have used the inequality $1+x \leq \me^x$ and the fact that $|\epsilon|t \leq 1$.
+Since this bound holds for all respective terms of the sum, we get
+\[
+\Expnew{p_i}{\lp|\hat{\theta}^t-p\rp|} \leq \me^{\frac{1}{a} + \frac{2}{1-b}} \Expnew{p}{\lp|\hat{\theta}^t-p\rp|}
+\]
+\end{proof}
 Next, we state a lemma regarding an upper bound on the
 expectation of the error in each $p_i$.
 % \begin{lemma}\label{l:cauchy_schwarz}
 %   For every $p\in [-(b-a)/{2t} + p_i , p_i + (b-a)/{2t}]$ :
 %   \[
 %     \Exp{\lp|\hat{\theta}_t-p_i\rp|}_{p_i}
-%     \leq c_a^b\Exp{\lp|\hat{\theta}_t-p\rp|}_p + \lp|p - p_i\rp|
+%     \leq c_a^bR_p(t) + \lp|p - p_i\rp|
 %   \]
 %   where $c_a^b$ is a constant that depends on $a,b$.
 
@@ -213,53 +275,53 @@ expectation of the error in each $p_i$.
 \end{proof}
 
 Now, we find an upper bound for the quantity
-$\sum_{i=0}^{t-1} E_i$.
+$\sum_{i=0}^{t-1} R_{p_i}(t)$.
 Our goal is to find an upper bound where the coefficient of
 $(b-a)/t$ is less than $1/4$.
 
 \begin{lemma}\label{l:upper}
   \[
     \frac{1}{t} \sum_{i=0}^{t-1}
-    E_i \leq
-    \frac{c_a^b}{b-a} \int_a^b \Exp{\lp|\hat{\theta}_t-p\rp|} dp +
+    R_{p_i}(t) \leq
+    \frac{c_a^b}{b-a} \int_a^b R_p(t) dp +
     \frac{b-a}{4t}
   \]
 \end{lemma}
 \begin{proof}
   By Lemma~(\ref{l:cauchy_schwarz}) we get that
   for every $p\in [-(b-a)/{2t} + p_i , p_i + (b-a)/{2t}]$:
-  $$E_i \leq  c_a^b\Exp{\lp|\hat{\theta}_t-p\rp|}_p + \lp|p_i - p\rp|$$
+  $$R_{p_i}(t) \leq  c_a^bR_p(t) + \lp|p_i - p\rp|$$
   We integrate both sides of the equation with respect to p and get:
   \[
-    \int_{p_i - \frac{b-a}{2t}}^{p_i + \frac{b-a}{2t}} E_i dp \leq c_a^b
+    \int_{p_i - \frac{b-a}{2t}}^{p_i + \frac{b-a}{2t}} R_{p_i}(t) dp \leq c_a^b
     \int_{p_i - \frac{b-a}{2t}}^{p_i + \frac{b-a}{2t}}
-    \Exp{\lp|\hat{\theta}_t-p\rp|}_p dp +
+    R_p(t) dp +
     \int_{p_i - \frac{b-a}{2t}}^{p_i + \frac{b-a}{2t}}\lp|p_i - p\rp| dp
   \]
   Hence:
   \begin{align*}
-    \frac{b-a}{t} E_i
+    \frac{b-a}{t} R_{p_i}(t)
     &\leq
     c_a^b\int_{p_i - \frac{b-a}{2t}}^{p_i+ \frac{b-a}{2t}}
-    \Exp{\lp|\hat{\theta}_t-p\rp|}_p dp +
+    R_p(t) dp +
     2\int_{p_i - \frac{b-a}{2t}}^{p_i}\lp|p_i-p\rp|dp\\
     &= c_a^b\int_{p_i - \frac{b-a}{2t}}^{p_i + \frac{b-a}{2t}}
-    \Exp{\lp|\hat{\theta}_t-p\rp|}_p
+    R_p(t)
     dp + \frac{1}{4} \frac{\lp(b-a\rp)^2}{t^2}
   \end{align*}
 
   Therefore:
   \begin{equation}\label{eq:one_side}
-    \frac{E_i}{t} \leq \frac{c_a^b}{b-a}
+    \frac{R_{p_i}(t)}{t} \leq \frac{c_a^b}{b-a}
     \int_{p_i - \frac{b-a}{2t}}^{p_i + \frac{b-a}{2t}}
-    \Exp{\lp|\hat{\theta}_t-p\rp|}_p dp + \frac{b-a}{4t^2}
+    R_p(t) dp + \frac{b-a}{4t^2}
   \end{equation}
   By summing up Equation~(\ref{eq:one_side}) for all $t$ intervals, we get:
   \begin{align*}
-    \frac{\sum_{i=0}^{t-1} E_i}{t} &\leq \frac{c_a^b}{b-a} \sum_{i=0}^{t-1}
+    \frac{\sum_{i=0}^{t-1} R_{p_i}(t)}{t} &\leq \frac{c_a^b}{b-a} \sum_{i=0}^{t-1}
     \int_{p_i - \frac{b-a}{2t}}^{p_i+ \frac{b-a}{2t}}
-    \Exp{\lp|\hat{\theta}_t-p\rp|}_p dp + \frac{b-a}{4t}\\
+    R_p(t) dp + \frac{b-a}{4t}\\
     &=
-    \frac{c_a^b}{b-a} \int_a^b \Exp{\lp|\hat{\theta}_t-p\rp|}_p dp + \frac{b-a}{4t}
+    \frac{c_a^b}{b-a} \int_a^b R_p(t) dp + \frac{b-a}{4t}
   \end{align*}
 \end{proof}
