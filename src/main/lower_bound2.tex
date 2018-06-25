@@ -20,7 +20,7 @@ The above theorem states that rationality in selfish agents comes with
 the price of slow convergence to the equilibrium point.
 At first we show that any no-regret algorithm $A$, achieving the previous
 convergence rate, can be used as an estimator of the parameter
-$q \in \Q\cap[0,1]$ of Bernoulli random variable
+$p \in [0,1] $ of Bernoulli random variable
 with the same asymptotic error rate. The reduction formally stated in
 Lemma~\ref{l:reduction}.
 
@@ -29,16 +29,16 @@ Lemma~\ref{l:reduction}.
   Let $A$ be a no-regret algorithm $A$ such that for all instances $I$,
   $\lim \limits_{t \rightarrow \infty} t^{1+c}
   \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.
-  Then there exists an estimator $\hat{\theta_A}$ such that for all
-  $p \in \Q\cap[0,1]$,
+  Then there exists an estimator $\hat{\theta_A}$ such that
+  for all $p \in [0,1]$,
   \[\lim_{t \rightarrow \infty}t^{1+c}R_p(\theta_t)=0\]
 
 \end{lemma}
 
 We sketch here the main idea. For a full proof see Section~\ref{app:s:lower_bound}
-of the Appendix.  For a given a $q \in \Q\cap[0,1]$, we construct an instance $I_q$ such that
-$x_c^*=q$ for an agent $c$. Moreover, agent $c$ must
-receive only values $1$ or $0$ with probability $q$ and $1-q$ respectively.
+of the Appendix.  For a given a $p \in [0,1]$, we construct an instance $I_p$ such that
+$x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
+receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
 This can be easily done using the star graph $K_{1,2}$.
 The agent corresponding to the center node, $c$, has $\alpha_c = 0$ and
 whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$.
@@ -67,7 +67,21 @@ It follows that the estimator $\theta_t$ with $\theta_A^t = x_A^c(t)$
 has error $R_p(\theta_t)=\Expnew{I_p}{\norm{\infty}{x_A(t)-x^*}}$.
 Meaning that if $A$ does not satisfy Theorem~\ref{t:dynamics_lower_bound}
 then $\lim\limits_{t \rightarrow \infty}t^{1+c}R_p(\theta_t)=0$ for all
-$p \in [0,1]$. At this point we should mention that it is known
+$p \in [0,1]$. Thus we want to prove the following claim
+\begin{claim}\label{cl:fixed_p}
+  For all sequences of estimators $\theta_t$
+  Then, there exists a fixed $p \in [0,1]$ such that
+  \[
+    \lim_{t \to \infty} t^{1+c} \Expnew{p}{|\theta_t - p} > 0.
+  \]
+\end{claim}
+The crucial point of Claim~\ref{cl:fixed_p} is the fact that
+in order to construct the hard instance for the estimator
+we first inspect the sequence of estimators and then choose
+a $p \in [0,1]$ so that \emph{all} estimators $\theta_t$ of
+the sequence have error rate $\omega(1/t^{1+c})$.
+
+At this point we should mention that it is known
 that $\Omega(1/\eps^2)$ samples are needed to estimate the parameter $p$
 of a Bernoulli random variable within additive error $\eps$.
 Another well-known result is that taking the average of the samples
@@ -75,13 +89,38 @@ is the \emph{best} way to estimate the mean of a Bernoulli random variable.
 These results would indicate that the best possible rate of convergence
 for a no-regret dynamics would be $O(1/\sqrt{t})$.
 However, there is some fine print in these results which does not allow us
-to use them. In order to explain the various limitations and pitfalls of
+to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.
 
- To the best of our knowledge, these sample complexity lower bounds in the
- statistics literature are given as lower bounds for the \emph{minimax risk},
- which, for the case of estimating the mean of a Bernoulli random variable,
- was defined by Wald in \cite{Wal39} as
+Perhaps the oldest sample complexity lower bound for estimation problems
+is the well-known Cramer-Rao inequality.
+Assuming that $\theta_t$ is a sequence of unbiased estimators,
+that is $\Exp{\theta_t} = p$ for all $t$, the Cramer-Rao lower bound
+for estimating the mean $p$ of a Bernoulli random variable states
+that
+\begin{equation}\label{eq:crlb}
+  \Expnew{p}{(\theta_t - p)^2} \geq \frac{p(1-p)}{t}.
+\end{equation}
+In our setting, we can lower bound $\Expnew{p}{|\theta_t - p|}$ by
+$\Expnew{p}{(\theta_t - p)^2)}$ since $|\theta_t - p| \leq 1$
+(making the natural assumption that estimators do not output values outside
+$[0,1]$).
+Simply setting $p=1/2$ in inequality (\ref{eq:crlb}) would give us a
+$p$ satisfying the requirements of Claim~\ref{cl:fixed_p}.
+The problem with this lower bound is that the assumption that the estimator
+is unbiased is considered rather restrictive and unrealistic even in
+the statistics literature in the sense that many efficient practical
+estimators are not unbiased.  Thus, we would like to get a lower bound
+with minimal assumptions about the estimator.
+
+To the best of our knowledge, sample complexity lower bounds without
+assumptions about the estimator are given as lower bounds for the
+\emph{minimax risk}, which was defined
+\footnote{
+Although the minimax risk is defined for any estimation problem and loss
+function, for simplicity, we write the minimax risk for estimating the mean
+of a Bernoulli random variable.}
+  by Wald in \cite{Wal39} as
 \[
   \inf_{\theta_t} \sup_{p\in[0,1]} \Expnew{p}{|\theta_t - p|}.
 \]
@@ -115,33 +154,22 @@ the adversary takes the $2$ distributions to be.
 For our problem we would like to \emph{fix} an instance and then argue
 about the rate of convergence of any algorithm on this instance.
 Namely, having an instance that depends on $t$ does not work for us.
-Another option would be to use the well-known Cramer-Rao lower bound
-which, if applied for Bernoulli random variables, states that
-\[
-  \Expnew{p}{(\theta_t - p)^2} \geq \frac{p(1-p)}{t}.
-\]
-The problem with this bound is that it assumes that the estimator
-$\theta_t$ is unbiased, that is $\Exp{p}{\theta_t} = p$. Apart
-from that this lower bound works for us, we could set
-$p =1/2$ in our instance of \ref{fig:lb_instance} and get a
-lower bound for the mean squared error.
-The assumption that the estimator is unbiased is considered rather
-restrictive and unrealistic even in the statistics literature, and we remark
-that our fictitious play dynamics does not correspond to an unbiased estimator.
-Thus we would like to get a lower bound with no assumptions about the
-estimator.
-Our next lemma states something significantly stronger in case $p \in [0,1]$.
-For \emph{almost all} $p \in [0,1]$, any estimator $\hat{\theta}$ cannot
-achieve this error rate. More precisely,  suppose we select a $p$ uniformly at
+
+Trying to get a lower bound without assumptions about the estimators
+while respecting our need for a fixed (independent of $t$) $p$ we prove
+Lemma~\ref{l:estimation_lower_bound}.
+In fact, we show something stronger:
+for \emph{almost all} $p \in [0,1]$, any estimator $\hat{\theta}$ cannot
+achieve rate $o(1/t^{1+c})$.
+More precisely,  suppose we select a $p$ uniformly at
 random in $[0,1]$ and run the estimator $\hat{\theta}$ with samples from the
 distribution $B(p)$, then with probability $1$ the error rate $R_p(\theta_t) \in
 \Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
 $\Omega(1/\sqrt{t})$ we prove that no exponential convergence rate
-is possible and we do this without assumptions about the estimator.
+is possible.
 Finally, while we do not preclude the possibility of similar results to exist
 in the statistics literature, we remark that our proof is fairly simple,
 intuitive, and could be of independent interest.
-
 
 \begin{lemma}\label{l:estimation_lower_bound}
 
