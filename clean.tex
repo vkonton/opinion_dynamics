@@ -2,6 +2,8 @@
 \input{./templates/packages}
 \input{./templates/colors}
 \input{./templates/macros}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 
 \begin{document}
@@ -34,10 +36,8 @@
 \input{src/main/preliminaries}
 \input{src/main/fictitious_convergence}
 \input{src/main/fictitious_noregret}
-\input{src/main/lower_bound}
-% \input{src/main/freqs}
+\input{src/main/lower_bound2}
 \input{src/main/side_result}
-\input{src/main/rational_lower_bound}
 
 \clearpage
 
@@ -48,7 +48,7 @@
 \appendix
 
 \input{src/appendix/fictitious_convergence_appendix.tex}
-% \input{src/appendix/lower_bound_appendix.tex}
+\input{src/appendix/lower_bound_2_appendix.tex}
 
 %
 % ---- Bibliography ----

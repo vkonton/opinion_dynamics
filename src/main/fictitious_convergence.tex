@@ -43,7 +43,7 @@ be found in Section~\ref{app:s:fictitious_convergence} of the Appendix.
 %   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$ for $t\geq 1$
 %   and $\delta(0) = 0$.
 % \end{lemma}
-We are now ready to fully prove Theorem~\ref{t:fictitious_converge}.
+We are now ready to fully prove Theorem~\ref{t:fictitious_convergence}.
 We restate it here for the sake of completeness.
 \begin{theorem}
   Let $I = (G,s, \alpha)$ be any instance of the opinion formation
@@ -57,8 +57,14 @@ We restate it here for the sake of completeness.
   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 \end{theorem}
 \begin{proof}
-  Let $W_i^t$ be the random variable corresponding to the selected neighbor
-  of agent $i$, at round $t$ of the dynamics~\ref{alg:fictitious_play}.
+  Let $W_i^t$ be the random variable corresponding to opinion of the
+  selected neighbor of agent $i$, at round $t$ of the
+  dynamics~\ref{alg:fictitious_play}. Namely,
+  %
+  \[
+    W_i^t = x_j(t-1),  \text{ with probability } p_{ij}.
+  \]
+  %
   Therefore, each agent $i \in V$ updates her opinion as follows
   \begin{align*}
     x_i(t)
@@ -79,18 +85,21 @@ We restate it here for the sake of completeness.
   % the error $e(t)$.
   % Setting $p = 1/\sqrt{t}$ in Lemma~\ref{l:error_bound} yields the result.
   As we have already mentioned for any instance $I$ there exists
-  a unique equilibrium vector $x^*$. Since
-  $W_i^\tau \sim \Unif(N_i)$ we have that \(
-    \Exp{x^*_{W_i^\tau}} = \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
+  a unique equilibrium vector $x^*$.
+
+  Since in the definition of $W_i^T$ we see the opinion of neighbor $j$
+  with probability $p_{ij}$ we have
+  \(
+    \Exp{x^*_{W_i^\tau}} = \sum_{j \in N_i} p_{ij} x^*_j
   \).
-  Since $W_i^\tau$ are independent random variables, we can use
-  Hoeffding's inequality (Lemma~\ref{l:hoeffding}) to get
+  Since, $W_i^\tau$ are independent random variables,
+  we can use Hoeffding's inequality (Lemma~\ref{l:hoeffding}) to get
   \(
     \Prob
     {
       |
       {(\sum_{\tau = 1}^{t} x^*_{W_i^\tau}})/{t}
-      - {(\sum_{j \in N_i} x^*_j)}/{|N_i|}
+      - (\sum_{j \in N_i} p_{ij} x^*_j)
       > \delta(t)
     }
     < 6 p / (\pi^2 n t^2),
@@ -104,7 +113,7 @@ We restate it here for the sake of completeness.
     { \max_{i \in V}
       \lp|
       \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
-      - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
+      - \sum_{j \in N_i} p_{ij} x^*_j \rp|
       > \delta(t)}
     \leq
     \sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
@@ -135,7 +144,7 @@ We restate it here for the sake of completeness.
   \begin{equation}\label{eq:error_per_round}
     \lp|
     \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
-    \frac{\sum_{j \in N_i} x^*_j}{|N_i|}
+    \sum_{j \in N_i} p_{ij} x^*_j
     \rp| \leq \delta(t)
   \end{equation}
   We will prove our claim by induction.
@@ -157,7 +166,7 @@ We restate it here for the sake of completeness.
     \rp)
     + \alpha_i s_i \nonumber\\
     &\leq
-    (1-\alpha_i)\lp(\frac{\sum_{j \in N_i}x^*_{j}}{|N_i|} +
+    (1-\alpha_i)\lp(\sum_{j \in N_i} p_{ij} x^*_{j} +
     \delta(t) + \frac{\sum_{\tau=0}^{t-1} e(\tau)}{t} \rp) +
     \alpha_i s_i \label{step:error} \\
     &\leq
@@ -172,9 +181,9 @@ We restate it here for the sake of completeness.
   Similarly, we can prove that
   $x_i(t) \geq x_i^* - \delta(t) - (1-\alpha)
   \frac{\sum_{\tau=1}^t e(\tau)}{t}$.
-  As a result $\norm{\infty}{x_i(t)-x^*} \leq e(t)$ and the induction
+  As a result $\norm{\infty}{x(t)-x^*} \leq e(t)$ and the induction
   is complete.  Therefore, we have that with probability at least $1-p$,
-  \(\norm{\infty}{x^t - x^*} \leq e(t)\), where $e(t)$ satisfies the
+  \(\norm{\infty}{x(t) - x^*} \leq e(t)\), where $e(t)$ satisfies the
   following recursive relation
   \[
     e(t) =
@@ -183,7 +192,9 @@ We restate it here for the sake of completeness.
   \]
   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$ for $t\geq 1$
   and $\delta(0) = 0$.
-  By setting $D =  \pi^2 n /6p > \me^2$ for sufficiently small $p$ in
+  To get error $e(t)$ with probability $1-1/\sqrt{t}$ we set
+  $p = 1/(2\sqrt{t})$.
+  Thus if we set $D = \pi^2 n /6p > \me^2$ in
   Lemma~\ref{l:recursion_upper_bound} we get that with probability at least
   $1-1/\sqrt{t}$
   \[

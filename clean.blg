@@ -13,45 +13,45 @@ Warning--I didn't find a database entry for "BK011"
 Warning--I didn't find a database entry for "DBLP:conf/sagt/2017"
 Warning--I didn't find a database entry for "DBLP:conf/sigecom/2013"
 Warning--empty year in HM00
-You've used 16 entries,
+You've used 20 entries,
             2543 wiz_defined-function locations,
-            687 strings with 7691 characters,
-and the built_in function-call counts, 8279 in all, are:
-= -- 849
-> -- 394
-< -- 9
-+ -- 139
-- -- 138
-* -- 605
-:= -- 1280
-add.period$ -- 50
-call.type$ -- 16
-change.case$ -- 110
-chr.to.int$ -- 16
-cite$ -- 17
-duplicate$ -- 328
-empty$ -- 605
-format.name$ -- 153
-if$ -- 1762
+            713 strings with 8128 characters,
+and the built_in function-call counts, 9660 in all, are:
+= -- 990
+> -- 426
+< -- 14
++ -- 147
+- -- 146
+* -- 688
+:= -- 1487
+add.period$ -- 62
+call.type$ -- 20
+change.case$ -- 130
+chr.to.int$ -- 20
+cite$ -- 21
+duplicate$ -- 398
+empty$ -- 729
+format.name$ -- 169
+if$ -- 2060
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 16
-newline$ -- 84
-num.names$ -- 50
-pop$ -- 107
+missing$ -- 20
+newline$ -- 103
+num.names$ -- 62
+pop$ -- 136
 preamble$ -- 1
-purify$ -- 126
+purify$ -- 150
 quote$ -- 0
-skip$ -- 301
+skip$ -- 356
 stack$ -- 0
-substring$ -- 565
-swap$ -- 100
-text.length$ -- 9
-text.prefix$ -- 0
+substring$ -- 650
+swap$ -- 113
+text.length$ -- 14
+text.prefix$ -- 4
 top$ -- 0
-type$ -- 128
+type$ -- 156
 warning$ -- 1
-while$ -- 86
-width$ -- 18
-write$ -- 215
+while$ -- 99
+width$ -- 22
+write$ -- 265
 (There were 3 error messages)

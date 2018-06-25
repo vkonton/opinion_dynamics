@@ -1,0 +1,166 @@
+\section{Lower bound for no-regret Dynamics}\label{app:s:lower_bound}
+
+In the following Lemma we show how we can use algorithm $A$ to construct an
+estimator $\hat{\theta_A}$ for Bernoulli distributions.
+We restate \ref{t:reduction} for completeness.
+\begin{theorem}
+
+  Let the no-regret algorithm $A$ such that
+  for all instances $I$, $\lim \limits_{t \rightarrow \infty} t^{1+c}
+  \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.  Then there exists an estimator
+  $\hat{\theta_A}$ such that for all
+  $q \in Q[0,1]$, \[\lim_{t \rightarrow \infty}t^{1+c}R_q(t)=0\]
+
+\end{theorem}
+
+\begin{proof}
+  At first we remind that an estimator $\hat{\theta}$ is a sequence
+  of functions $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where
+  $\theta_t:~\{0,1\}^t\mapsto [0,1]$.  We construct such a sequence using the
+  algorithm $A$.  We also remind that when an agent $i$ runs algorithm $A$, she
+  selects $x_i(t)$ according to the cost functions $\{C_i^{\tau}\}$ that she
+  has already received \[x_i(t)=A_t(C_i^1,\ldots,C_i^{t-1})\]
+
+  Consider an agent $i$ with $a_i=1$ and $s_i=0$ that runs $A$. Then
+  $C_i^t(x)=x^2$ for all $t$ and $x_i(t)=A_t(x^2,\ldots,x^2)$.  The latter
+  means that $x_i(t)$ only depends on $t$, $x_i(t)=h_0(t)$. Equivalently, if
+  $a_i=1$ and $s_i=1$ then $x_i(t)=A_t((1-x)^2,\ldots,(1-x)^2)$ and
+  $x_i(t)=h_1(t)$. Finally, consider an agent $i$ with $a_i=1/2$ and $s_i=0$.
+  In this case $C_i^t = \frac{1}{2}x^2 + \frac{1}{2}(x-y_t)^2$, where $y_t \in
+  [0,1]$ is the opinion of the neighbor $j\in N_i$ that $i$ met at round $t$.
+  As a result, $x_i(t)=A_t(\frac{1}{2}x^2+\frac{1}{2}(x-y_1)^2,\ldots,
+  \frac{1}{2}x^2+\frac{1}{2}(x-y_{t-1})^2)=f_t(y_1,\ldots,y_{t-1})$.  The
+  estimator $\hat{\theta_A}$ is the following sequences
+  $\{\hat{\theta_{t}}\}_{t=1}^{\infty}$
+  \[
+    \hat{\theta_t}(Y_1,\ldots,Y_t) =
+    \frac{1}{2}f_{t+1}(h_{Y_1}(1),\ldots,h_{Y_t}(t))
+  \]
+  Observe that $\hat{\theta_t}: \{0,1\}^t \mapsto [0,1]$ meaning that
+  $\hat{\theta_A}$ is a valid estimator for Bernoulli distributions.
+  Now for any $p \in Q([0,1])$, we construct an appropriate instance
+  $I_p$ s.t. $R_p(t)=\Expnew{p}{|\hat{\theta_t} - p|} \leq
+  2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$.  For $p=\frac{k}{n}$ consider the
+  following instance $I_p$ with $n+1$ agents:
+
+  \begin{itemize}
+    \item A central agent with $s_c=0$ and $a_c=1/2$.
+
+    \item Directed edges from the central agent to all the other agents.
+
+    \item $k$ agents with $s_i=0$ and $a_i=1$
+
+    \item $n-k$ agents with $s_i=1$ and $a_i=1$
+  \end{itemize}
+
+  We just need to prove that in $I_p$, $\Expnew{p}{|\hat{\theta_t}-p|} \leq
+  2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$. Notice that $x^*_c=\frac{p}{2}$ and
+  $x^*_i=s_i$ if $i\neq c$. .\\ At round $t$, if the oracle returns to the
+  center agent the value $h_1(t)$ of a $1$-agent, then $Y_t=1$ otherwise
+  $Y_t=0$. As a result, $\Prob{Y_t=1}=p$ and
+
+  \begin{align*}
+    \Expnew{I_p}{\norm{\infty}{x^t-x^*}}
+    &\geq
+    \Expnew{I_p}{||x^t_c-x^*_c||}\\
+    &=
+    \Expnew{p}{|\frac{\widehat{\theta_t}}{2}-\frac{p}{2}}] = R_p(t)
+  \end{align*} \end{proof}
+
+\begin{theorem}\label{t:continuous}
+  Let $g(p) = \lim \limits_{t \to \infty} t^{1+c}R_p(t)$ be a continuous
+  function. Then there exists $q_0$ such that
+  \[
+    \lim \limits_{t \to \infty} t^{1+c}R_{q_0}(t) >0
+  \]
+\end{theorem}
+\begin{proof}
+  laksdokasodkaok
+\end{proof}
+
+We next give a rigorous measure-theoretic proof of Theorem~\ref{t:lower_bound}.
+\begin{theorem}
+  Let $\theta_t: \{0,1\}^t \to [0,1]$ be a sequence of estimators for
+  the success probability $p$ of a Bernoulli random variable with
+  distribution $P$.
+  There exists $p \in [0,1]$ such that
+  \[
+   \lim_{t\to \infty} t^2\ \Expnew{X \sim P^t}{\lp| \theta_t(X) - p \rp|} > 0.
+  \]
+\end{theorem}
+\begin{proof}
+  Observe that $\theta_t(\{0,1\}^t)$ has cardinality at most $2^t$.
+  Since
+  \[
+    \sum_{0 \leq i \leq t} \sum_{\norm{1}{x} = i}
+    \lp| \theta_t(x) - p \rp| p^i (1-p)^{t-i}
+    \geq
+    \sum_{0 \leq i \leq t} \binom{t}{i} \lp|
+     \frac{\sum_{\norm{1}{x} = i} \theta_t(x)}{\binom{t}{i}}  - p \rp|
+    p^i (1-p)^{t-i}.
+  \]
+  Thus, without loss of generality we assume that
+  $\theta_t(\{0,1\}^t)$ contains at most $t+1$ discrete
+  points.
+
+  In the following, we work in the measure space
+  $(\R, \mcal{M}, \mu)$, where $\mu$ is the Lebesgue measure,
+  and $\mcal{M}$ is the $\sigma$-algebra of the Lebesgue measurable
+  sets.
+  Suppose that there exists no such $p \in [0,1]$.
+  Let
+  \[
+    A =
+    \{
+    p \in [0,1]\ :\ \lim_{t\to \infty}
+    t^2\ \Expnew{X \sim P^t}{\lp| \theta_t(X) - p \rp|} = 0
+    \}.
+  \]
+  Then $A = [0,1]$ and $A$ is measurable as an interval.
+  Notice that,
+  \[
+    A \subseteq \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} A_k,
+  \]
+  where \( A_k = \{ p\in[0,1]\ :\ R_k(p) < 1/2 \} \),
+  and \(R_k(p) = k^2\ \Expnew{X \sim P^k}{| \theta_k(X) - p|}\).
+  We have that $R_k: [0,1] \to [0, +\infty) $ is polynomial of
+  degree $t$ in $p$ and therefore it is a measurable function.
+  Thus, $A_k$ is measurable.
+  We now show that
+  \[ A_k \subseteq B_k \coloneqq \{ p \in [0,1]\ : \
+    k^2 \min_{0 \leq i \leq k} \lp| \theta_k(i) - p \rp| < 1 \}.
+  \]
+  We prove this by contradiction. Suppose that $p \in A_k$ but
+  $p \notin B_k$. Since $p \in A_k$ we have that
+  \begin{align*}
+    R_k(p)
+    =
+    k^2 \sum_{i=0}^k \binom{k}{i} \lp| \theta_k(i) - p \rp| p^i (1-p)^{k-i}
+    \geq
+    k^2 \min_{0 \leq i \leq k} \lp| \theta_k(i) - p \rp|
+    \sum_{i=0}^k \binom{k}{i} p^i (1-p)^{k-i}
+    \geq 1.
+  \end{align*}
+  Since the functions $p \mapsto k^2 \lp| \theta_k(i) - p \rp|$ are
+  measurable, their pointwise minimum is measurable and therefore
+  the sets $B_k$ are also measurable.  We next proceed to bound
+  $\mu(B_k)$. Since $\theta_k$ can only take $k$ different values
+  we have that there exist $k+1$ intervals $(a_{k_i}, b_{k_i})$
+  of length at most $2/k^2$ such that
+  \(
+    B_k = \bigcup_{i=0}^k \lp(a_{k_i}, b_{k_i} \rp).
+  \)
+  Since $\mu$ is subadditive we have
+  \[
+    \mu(B_k) \leq \sum_{i=0}^{k} \frac{2}{k^2} = \frac{2 (k+1)}{k^2}.  \]
+  Now observe that
+  \begin{align*}
+    \mu(A)
+    \leq \mu \lp( \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} A_k \rp)
+    \leq \mu \lp( \bigcup_{t=1}^{\infty} \bigcap_{k=t}^{\infty} B_k \rp)
+    \leq \sum_{t = 1}^{\infty} \mu\lp(\bigcap_{k=t}^{\infty} B_k \rp)
+    \leq \sum_{t = 1}^{\infty} \lim_{k \to \infty} \mu(B_k)
+    = 0
+  \end{align*}
+  Which is a contradiction since we assumed $A = [0,1]$.
+\end{proof}

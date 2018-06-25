@@ -43,6 +43,10 @@ Flavio Chierichetti, Jon~M. Kleinberg, and Sigal Oren.
 \newblock In {\em {ACM} Conference on Electronic Commerce, {EC} '13,
   Philadelphia, PA, USA, June 16-20, 2013}, pages 233--250, 2013.
 
+\bibitem[Duc]{duchi_stats311}
+John Duchi.
+\newblock Stats311, {Lecture} {Notes}.
+
 \bibitem[EFHS17]{EFHS17}
 Markos Epitropou, Dimitris Fotakis, Martin Hoefer, and Stratis Skoulakis.
 \newblock Opinion formation games with aggregation and negative influence.
@@ -88,11 +92,29 @@ Hart Sergiu and Mas‐Colell Andreu.
 \newblock A simple adaptive procedure leading to correlated equilibrium.
 \newblock {\em Econometrica}, 68(5):1127--1150.
 
+\bibitem[Tsy08]{Tsy08}
+Alexandre~B. Tsybakov.
+\newblock {\em Introduction to {Nonparametric} {Estimation}}.
+\newblock Springer, New York ; London, 1 edition edition, November 2008.
+
+\bibitem[Wal39]{Wal39}
+Abraham Wald.
+\newblock Contributions to the {Theory} of {Statistical} {Estimation} and
+  {Testing} {Hypotheses}.
+\newblock {\em The Annals of Mathematical Statistics}, 10(4):299--326, December
+  1939.
+
 \bibitem[YOA{\etalchar{+}}13]{YOASS13}
 Mehmet~Ercan Yildiz, Asuman~E. Ozdaglar, Daron Acemoglu, Amin Saberi, and Anna
   Scaglione.
 \newblock Binary opinion dynamics with stubborn agents.
 \newblock {\em {ACM} Trans. Economics and Comput.}, 1(4):19:1--19:30, 2013.
+
+\bibitem[Yu97]{Yu97}
+Bin Yu.
+\newblock Assouad, {Fano}, and {Le} {Cam}.
+\newblock In {\em Festschrift for {Lucien} {Le} {Cam}}, pages 423--435.
+  Springer, New York, NY, 1997.
 
 \bibitem[ZLZ17]{Zhou17}
 Yichi Zhou, Jialian Li, and Jun Zhu.
