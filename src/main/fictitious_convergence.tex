@@ -14,37 +14,28 @@ The main result of the section is Theorem~\ref{thm:convergence}.
   \]
   where $\rho = \min_i a_i$ and $C$ is a universal constant.
 \end{theorem}
-\noindent Before presenting the proof of the Theorem~\ref{thm:convergence} we
-illustrate the high level intuition.
-As sated in Algorithm~\ref{alg:fictitious_play}, each agent $i$ at round $t\geq 1$ updates her opinion 
+\noindent At first we present the high level idea of the proof of Theorem~\ref{thm:convergence}.
+According to Algorithm~\ref{alg:fictitious_play}, each agent $i$ at round $t\geq 1$ updates her opinion 
 as $x_i(t)=\argmin_{x \in [0,1]}\sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))$
-where $W_i^\tau$ denotes the agent $j$ that $i$ met at round $t$. 
+where $W_i^\tau$ is the random variable denoting the agent $j$ that $i$ met at round $\tau$ ($\Prob{W_i^\tau=j}=p_{ij}$). 
 The above update rule can be written equivalently as: \[x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}+ \alpha_i s_i\]
-We are interested in bounding the $\Expnew{}{\norm{\infty}{x(t)-x^*}}=\Expnew{}{\max_{i}|x_i(t)-x_i^*|}$. 
-We can bound the quantity $|x_i(t)-x_i^*|$ using the fact $x_i^*= (1-\alpha_i)\sum_{j \neq i}x_j^* + \alpha_is_i$.
+Since we are interested in bounding the $\Expnew{}{\norm{\infty}{x(t)-x^*}}$, we 
+can use the fact $x_i^*= (1-\alpha_i)\sum_{j \neq i}x_j^* + \alpha_is_i$ to bound $|x_i(t)-x_i^*|$ as follows: 
 \begin{eqnarray*}
  |x_i(t)-x_i^*| &=& (1-\alpha_i)|\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}-\sum_{j\neq i} p_{ij}x_j^*|\\
  &=& (1-\alpha_i)|\sum_{j\neq i}\frac{\sum_{\tau=1}^{t} \1{W_i^\tau=j}x_j(\tau-1)}{t}-\sum_{j\neq i} p_{ij}x_j^*|\\
  &\leq& (1-\alpha_i)\sum_{j\neq i}|\frac{\sum_{\tau=1}^{t} \1{W_i^\tau=j}x_j(\tau-1)}{t}- p_{ij}x_j^*|
 \end{eqnarray*}
-Now we can get some idea on the reason that fictitious play, converges to $x^*$. Observe that 
-if $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t}- p_{ij}|$ were $0$, meaning that agent $i$
-meets any other agent $j$ exactly $p_{ij}t$ times, then the error $e(t)=\norm{\infty}{x(t)-x^*}$
-would converge to zero. Since $e(t) \leq (1-\rho)\sum_{\tau=0}^{t-1}e(\tau)$ and thus $e(t) \leq 1/t^\rho$. 
-Obviously, $|\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}/t - p_{ij}|\neq 0$. However $W_i^\tau$ are independent
-random variables and $\Prob{W_i^\tau = j}=p_{ij}$, meaing that $|\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}/t - p_{ij}|$ 
-tends to $0$ with probability $1$ as $t$ grows. We use the above fact to obtain a recursive equation 
-for the error, this is done in Lemma~\ref{l:recursive_equation}. Then in Lemma~\ref{l:recursion_upper_bound} we bound
-the rate of convergence of the solution of this recursive equation.
-
-%We can see that the error $|x_i(t)-x_i^*|$ is due to two different types of errors. 
-%The first one is the error $|x_j(\tau)- x_j^*|$ and the second one is 
-%$|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t}- p_{ij}|$. Observe that if $\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}=p_{ij}$ then
-%the error $e(t)=\norm{\infty}{x(t)-x^*}$ satisfies the recursive equation $e(t) \leq (1-\rho)\sum_{\tau=1}^te(t-1)$
-%meaning that $e(t)=1/t^{1-\rho}$, where $\rho = \min_i \alpha_i$. Obviously, 
-%$|\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}/t - p_{ij}|\neq 0$ but since $\Prob{W_i^\tau = j}=p_{ij}$. 
-%As $t$ grows $|\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}/t - p_{ij}|$ tends to $0$ with probability $1$.
-%Our lemmas and theorems are just take into account the above fact.
+Now assume that $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t}- p_{ij}|$ were $0$ for all $t\geq 1$, 
+then with simple algebraic manipulations we can prove that $\norm{\infty}{x(t)-x^*} \leq e(t)$
+where $e(t)$ satisfies the recursive equation $e(t) = (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}$.
+It follows that $\norm{\infty}{x(t)-x^*} \leq 1/t^\rho$ meaning that $x(t)$ converges to $x^*$.
+Obviously $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|\neq 0$ and 
+the above analysis does not hold. In Lemma~\ref{l:recursive_equation} we use the 
+fact that $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|$ tends to $0$ with probability $1$
+($W_i^{\tau}$ are independent random variables)
+to obtain a similar recursive relation for $e(t)$. Then in Lemma~\ref{l:recursion_upper_bound} 
+we upper bound the solution of this recursive equation.
 
 \begin{lemma}\label{l:recursive_equation}
 Let $e(t)$ the solution of the following recursion,
@@ -61,32 +52,32 @@ with probability at least $1-p$, for all $t \geq 1$ and all agents $i$:
 \begin{equation}\label{eq:error_per_round}
     \lp|
     \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
-    \sum_{j \in N_i} p_{ij} x^*_j
+    \sum_{j \neq i} p_{ij} x^*_j
     \rp| \leq \delta(t)
 \end{equation}
 where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.\\
 Since $W_i^\tau$ are independent random variables with 
-$\Prob{W_i^\tau = j}=p_{ij}$ and \(\Exp{x^*_{W_i^\tau}} = \sum_{j \in N_i} p_{ij} x^*_j\).
+$\Prob{W_i^\tau = j}=p_{ij}$ and \(\Exp{x^*_{W_i^\tau}} = \sum_{j \neq i} p_{ij} x^*_j\).
 By the Hoeffding's inequality we get
-  \(
+  \[
     \Prob
     {
-      |
-      {(\sum_{\tau = 1}^{t} x^*_{W_i^\tau}})/{t}
-      - (\sum_{j \in N_i} p_{ij} x^*_j)
+      \lp|
+      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^\tau}}{t}
+      - \sum_{j \neq i} p_{ij} x^*_j \rp|
       > \delta(t)
-    }
+     }
     < 6 p / (\pi^2 n t^2).
-  \)
+  \]
 To bound the probability of error for all rounds $t=1$ to $\infty$
-and all agents $i$, we apply the Union Bound
+and all agents $i$, we apply the union bound
   \begin{align*}
     \sum_{t=1}^{\infty}
     \Prob
     { \max_{i}
       \lp|
       \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
-      - \sum_{j \in N_i} p_{ij} x^*_j \rp|
+      - \sum_{j \neq i} p_{ij} x^*_j \rp|
       > \delta(t)}
     \leq
     \sum_{t=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
@@ -96,7 +87,7 @@ and all agents $i$, we apply the Union Bound
   \begin{equation}\label{eq:error_per_round}
     \lp|
     \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
-    \sum_{j \in N_i} p_{ij} x^*_j
+    \sum_{j \neq i} p_{ij} x^*_j
     \rp| \leq \delta(t)
   \end{equation}
 \noindent Now we can prove our claim by induction. Assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all 
