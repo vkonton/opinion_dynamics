@@ -138,30 +138,30 @@ where $C_a^b$ is a constant depending only on $a,b$.
 Since the estimator $\hat{\theta}$ receives $t$ samples that are either zero or one, 
 we have
 \[
-\Expnew{p_i}{|\hat{\theta_t} - p|}= \sum_{(y^1,\ldots,y^t)\in
-      \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
-    p_i^{\sum_{i=1}^ty^i}(1-p_i)^{t-\sum_{i=1}^ty^i}
+\Expnew{p_i}{|\hat{\theta_t} - p|}= \sum_{(y_1,\ldots,y_t)\in
+      \{0,1\}^t}|\hat{\theta_t}(y_1,\ldots,y_t) -p| \cdot
+    p_i^{\sum_{i=1}^ty_i}(1-p_i)^{t-\sum_{i=1}^ty_i}
 \]
 
 Similarly
 \[
-\Expnew{p}{|\hat{\theta_t} - p|}= \sum_{(y^1,\ldots,y^t)\in
-      \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
-    p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}
+\Expnew{p}{|\hat{\theta_t} - p|}= \sum_{(y_1,\ldots,y_t)\in
+      \{0,1\}^t}|\hat{\theta_t}(y_1,\ldots,y_t) -p| \cdot
+    p^{\sum_{i=1}^ty_i}(1-p)^{t-\sum_{i=1}^ty_i}
 \]
 Since the two expectations are sums with the same number of summands, in order to 
 bound the ratio of the two expectations it suffices to 
 bound the ratio of each two individual terms of the two sums. 
 For each tuple $(y^1,\ldots,y^t)\in\{0,1\}^t$ we have:
 \begin{align*}
-\frac{|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
-    p_i^{\sum_{i=1}^ty^i}(1-p_i)^{t-\sum_{i=1}^ty^i}}
-    {|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
-    p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}} 
-    &= \frac{p_i^{\sum_{i=1}^ty^i}(1-p_i)^{t-\sum_{i=1}^ty^i}}
-    {p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}}
+\frac{|\hat{\theta_t}(y_1,\ldots,y_t) -p| \cdot
+    p_i^{\sum_{i=1}^ty_i}(1-p_i)^{t-\sum_{i=1}^ty_i}}
+    {|\hat{\theta_t}(y_1,\ldots,y_t) -p| \cdot
+    p^{\sum_{i=1}^ty_i}(1-p)^{t-\sum_{i=1}^ty_i}} 
+    &= \frac{p_i^{\sum_{i=1}^ty_i}(1-p_i)^{t-\sum_{i=1}^ty_i}}
+    {p^{\sum_{i=1}^ty_i}(1-p)^{t-\sum_{i=1}^ty_i}}
 \end{align*}
-Let $k = \sum_{i=1}^ty^i$.
+Let $k = \sum_{i=1}^ty_i$.
 Since $p \in [p_i -\frac{b-a}{2t},p_i + \frac{b-a}{2t}]$, there is an $\epsilon \in [-\frac{b-a}{2t}, \frac{b-a}{2t}]$ such that $p_i = p - \epsilon$. 
 Thus, the above ratio can be written as
 \begin{align*}
@@ -180,99 +180,7 @@ Since this bound holds for all respective terms of the sum, we get
 \Expnew{p_i}{\lp|\hat{\theta}^t-p\rp|} \leq \me^{\frac{1}{a} + \frac{2}{1-b}} \Expnew{p}{\lp|\hat{\theta}^t-p\rp|}
 \]
 \end{proof}
-Next, we state a lemma regarding an upper bound on the
-expectation of the error in each $p_i$.
-% \begin{lemma}\label{l:cauchy_schwarz}
-%   For every $p\in [-(b-a)/{2t} + p_i , p_i + (b-a)/{2t}]$ :
-%   \[
-%     \Exp{\lp|\hat{\theta}_t-p_i\rp|}_{p_i}
-%     \leq c_a^bR_p(t) + \lp|p - p_i\rp|
-%   \]
-%   where $c_a^b$ is a constant that depends on $a,b$.
 
-% \end{lemma}
-\begin{lemma}\label{l:cauchy_schwarz}
-  Let $p, q \in [0,1]$ and Let $P = B(p)$, $Q = B(q)$ be two Bernoulli
-  distributions with corresponding product distributions $P^t, Q^t$.
-  Moreover, let $\hat{\theta}_t: \{0,1\}^t \to [0,1]$ be an estimator.
-  Then
-  \[
-    \lp|
-    \Expnew{P^t}{|\hat{\theta}_t-p |}
-    - \Expnew{Q^t}{|\hat{\theta}_t-q |}
-    \rp|
-    \leq
-    \sqrt{\Expnew{P^t}{(\hat{\theta}_t-p)^2}}
-    \sqrt{ \lp( \frac{q^2}{p} + \frac{(1-q)^2}{1-p} \rp)^t - 1}
-    + |p - q|,
-  \]
-\end{lemma}
-\begin{proof}
-  By the triangle inequality we have
-  \begin{equation}\label{eq:triangle_inequality}
-    \lp|
-    \Expnew{P^t}{|\hat{\theta}_t-p |} -
-    \Expnew{Q^t}{|\hat{\theta}_t-q |}
-    \rp|
-    \leq
-    \lp|
-    \Expnew{P^t}{|\hat{\theta}_t-p |} -
-    \Expnew{Q^t}{|\hat{\theta}_t-p |}
-    \rp|
-    + |p - q|
-  \end{equation}
-  To simplify notation let $X = (X_1, \ldots, X_t)$ be the sample and let
-  $r(X) = | \hat{\theta}_t(X)  - p |$. Moreover, denote
-  by $p(x)$ resp. $q(x)$ the density functions of $B(p)$ resp. $B(q)$.
-  $p_t: \{0,1\}^t \to [0,1]$ resp. $q_t$ be the density functions of
-  the product distribution $P^t$, i.e.
-  namely $p_t(x) = \prod_{i=1}^t p(x_i)$.
-  We have
-  \begin{align*}
-    \Expnew{P_t}{r(X)} - \Expnew{Q^t}{r(X)}
-    &=
-    \sum_{x \in \{0,1\}^t} r(x) p_t(x) -
-    \sum_{x \in \{0,1\}^t} r(x) q_t(x)
-    \\
-    &=
-    \sum_{x \in \{0,1\}^t} r(x) (p_t(x) - q_t(x))  \\
-    &=
-    \sum_{x \in \{0,1\}^t} r(x) \sqrt{p_t(x)}\
-    \frac{p_t(x) - q_t(x)}{\sqrt{p_t(x)}}
-  \end{align*}
-  From Cauchy-Schwarz inequality we have
-  \begin{align}\label{eq:cauchy_schwarz}
-    \lp(\Expnew{P^t}{r(X)} - \Expnew{Q^t}{r(X)}\rp)^2
-    &\leq
-    \lp(
-    \sum_{x \in \{0,1\}^t} r^2(x) p_t(x)
-    \rp)
-    \lp(
-    \sum_{x \in \{0,1\}^t} \frac{(p_t(x) - q_t(x))^2}{p_t(x)}
-    \rp)
-  \end{align}
-  Notice that
-  \begin{align*}
-    \sum_{x \in \{0,1\}^t} \frac{(p_t(x) - q_t(x))^2}{p_t(x)}
-    &=
-    \sum_{x \in \{0,1\}^t} p_t(x) - 2 q_t(x) + \frac{q_t^2(x)}{p_t(x)}\\
-    &=
-    -1 + \sum_{x \in \{0,1\}^t} \frac{q_t^2(x)}{p_t^2(x)} p_t(x)\\
-    &=
-    -1 + \Expnew{P^t}{\frac{q_t^2(X)}{p_t^2(X)}}
-  \end{align*}
-  Since $X_i$ are independent we have
-  \begin{equation}\label{eq:bernoulli_square_diff}
-    \Expnew{P^t}{\prod_{i=1}^t\frac{ q^2(X_i)}{p^2(X_i)}}
-    =
-    \lp(\Expnew{P}{\frac{ q^2(X_1)}{p^2(X_1)}}\rp)^t
-    = \lp( \frac{q^2}{p} + \frac{(1-q)^2}{1-p} \rp)^t
-  \end{equation}
-  Combining equations
-  (\ref{eq:triangle_inequality}),
-  (\ref{eq:cauchy_schwarz}),
-  (\ref{eq:bernoulli_square_diff}) yields the result.
-\end{proof}
 
 Now, we find an upper bound for the quantity
 $\sum_{i=0}^{t-1} R_{p_i}(t)$.
