@@ -9,7 +9,7 @@ We restate \ref{t:reduction} for completeness.
   for all instances $I$, $\lim \limits_{t \rightarrow \infty} t^{1+c}
   \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.  Then there exists an estimator
   $\hat{\theta_A}$ such that for all
-  $q \in Q[0,1]$, \[\lim_{t \rightarrow \infty}t^{1+c}R_q(t)=0\]
+  $p \in [0,1]$, \[\lim_{t \rightarrow \infty}t^{1+c}R_p(t)=0\]
 
 \end{theorem}
 
@@ -34,49 +34,36 @@ We restate \ref{t:reduction} for completeness.
   $\{\hat{\theta_{t}}\}_{t=1}^{\infty}$
   \[
     \hat{\theta_t}(Y_1,\ldots,Y_t) =
-    \frac{1}{2}f_{t+1}(h_{Y_1}(1),\ldots,h_{Y_t}(t))
+    2f_{t+1}(h_{Y_1}(1),\ldots,h_{Y_t}(t))
   \]
   Observe that $\hat{\theta_t}: \{0,1\}^t \mapsto [0,1]$ meaning that
   $\hat{\theta_A}$ is a valid estimator for Bernoulli distributions.
-  Now for any $p \in Q([0,1])$, we construct an appropriate instance
+  Now for any $p \in [0,1]$, we construct an appropriate instance
   $I_p$ s.t. $R_p(t)=\Expnew{p}{|\hat{\theta_t} - p|} \leq
-  2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$.  For $p=\frac{k}{n}$ consider the
-  following instance $I_p$ with $n+1$ agents:
-
-  \begin{itemize}
-    \item A central agent with $s_c=0$ and $a_c=1/2$.
-
-    \item Directed edges from the central agent to all the other agents.
-
-    \item $k$ agents with $s_i=0$ and $a_i=1$
-
-    \item $n-k$ agents with $s_i=1$ and $a_i=1$
-  \end{itemize}
+  2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$.  
+  Consider the graph of Figure~\ref{fig:lb_instance}, which has a central node 
+  with $a_c = 1/2$ and $s_c = 0$ and two leaf nodes $1,2$ with 
+  $a_1 = a_2 = 1$, $s_1 = 1$ and $s_2 = 0$. The weights are $p_{c1} = p$ 
+  and $ p_{c2} = 1-p$. Obviously, nodes $1$ and $2$ always have constant 
+  opinions, $1$ and $0$ respectively. Hence, in each round the center node 
+  receives either $h_1(1)$ with probability $p$ or $h_2(0)$ with probability $1-p$. 
 
   We just need to prove that in $I_p$, $\Expnew{p}{|\hat{\theta_t}-p|} \leq
-  2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$. Notice that $x^*_c=\frac{p}{2}$ and
+  \frac{1}{2}\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$. Notice that $x^*_c=\frac{p}{2}$ and
   $x^*_i=s_i$ if $i\neq c$. .\\ At round $t$, if the oracle returns to the
-  center agent the value $h_1(t)$ of a $1$-agent, then $Y_t=1$ otherwise
+  center agent the value $h_1(t)$ of agent-$1$, then $Y_t=1$ otherwise
   $Y_t=0$. As a result, $\Prob{Y_t=1}=p$ and
 
   \begin{align*}
     \Expnew{I_p}{\norm{\infty}{x^t-x^*}}
     &\geq
-    \Expnew{I_p}{||x^t_c-x^*_c||}\\
+    \Expnew{I_p}{\lp|x^t_c-x^*_c\rp|}\\
+    &= \Expnew{I_p}{\lp| f_{t+1}(h_{Y_1}(1),\ldots,h_{Y_t}(t)) - \frac{p}{2}\rp|}\\
     &=
-    \Expnew{p}{|\frac{\widehat{\theta_t}}{2}-\frac{p}{2}}] = R_p(t)
-  \end{align*} \end{proof}
-
-\begin{theorem}\label{t:continuous}
-  Let $g(p) = \lim \limits_{t \to \infty} t^{1+c}R_p(t)$ be a continuous
-  function. Then there exists $q_0$ such that
-  \[
-    \lim \limits_{t \to \infty} t^{1+c}R_{q_0}(t) >0
-  \]
-\end{theorem}
-\begin{proof}
-  laksdokasodkaok
-\end{proof}
+    \Expnew{p}{\lp|\frac{\widehat{\theta_t}}{2}-\frac{p}{2}\rp|} = \frac{1}{2}R_p(t)
+  \end{align*} 
+  and the result follows.
+  \end{proof}
 
 We next give a rigorous measure-theoretic proof of Theorem~\ref{t:lower_bound}.
 \begin{theorem}

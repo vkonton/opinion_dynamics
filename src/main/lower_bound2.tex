@@ -21,7 +21,7 @@ the price of slow convergence to the equilibrium point.
 At first we show that any no-regret algorithm $A$, achieving the previous
 convergence rate, can be used as an estimator of the parameter
 $p \in [0,1] $ of Bernoulli random variable
-with the same asymptotic error rate. The reduction formally stated in
+with the same asymptotic error rate. The reduction is formally stated in
 Lemma~\ref{l:reduction}.
 
 \begin{lemma}\label{l:reduction}
@@ -36,21 +36,22 @@ Lemma~\ref{l:reduction}.
 \end{lemma}
 
 We sketch here the main idea. For a full proof see Section~\ref{app:s:lower_bound}
-of the Appendix.  For a given a $p \in [0,1]$, we construct an instance $I_p$ such that
+of the Appendix.  For a given $p \in [0,1]$, we construct an instance $I_p$ such that
 $x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
 receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
 This can be easily done using the star graph $K_{1,2}$.
-The agent corresponding to the center node, $c$, has $\alpha_c = 0$ and
-whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$.
+The agent corresponding to the center node, $c$, has $\alpha_c = 1/2$ and
+whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$, 
+as shown in Figure~\ref{fig:lb_instance}.
 %
-\begin{figure}
+\begin{figure}\
   \centering
 
   \begin{tikzpicture}
     \begin{scope}[every node/.style={circle,draw}]
-      \node (C) at (0,0) [label=below:$a_c \equal 0$][label=above:$s_c \equal 0$]{C};
-      \node (1) at (-4,0)[label=below:$a_1 \equal 1$][label=above:$s_1 \equal 0$]{1};
-      \node (2) at (4,0) [label=below:$a_2 \equal 1$][label=above:$s_2 \equal 1$]{2};
+      \node (C) at (0,0) [label=below:$a_c \equal 1/2$][label=above:$s_c \equal 0$]{C};
+      \node (1) at (-4,0)[label=below:$a_1 \equal 1$][label=above:$s_1 \equal 1$]{1};
+      \node (2) at (4,0) [label=below:$a_2 \equal 1$][label=above:$s_2 \equal 0$]{2};
     \end{scope}
 
     \begin{scope}[>={Stealth[black]},
