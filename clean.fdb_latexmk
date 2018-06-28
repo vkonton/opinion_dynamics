@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex clean"] 1529861526 "clean.aux" "clean.bbl" "clean" 1529861833
+["bibtex clean"] 1529944453 "clean.aux" "clean.bbl" "clean" 1529946402
   "/usr/share/texmf-dist/bibtex/bst/base/alpha.bst" 1520157249 23907 a5f93555796fb564b924339521f10a7c ""
-  "clean.aux" 1529861833 6502 1a196fcd62928b7785c5804ebca4747c ""
+  "clean.aux" 1529946402 6626 1227799e1985eaca9f6e55809adf2e77 ""
   "refs.bib" 1529852678 12953 4becc5abb22ef069c7ab8712fbed1ecf ""
   (generated)
-  "clean.blg"
   "clean.bbl"
-["pdflatex"] 1529861831 "clean.tex" "clean.pdf" "clean" 1529861833
+  "clean.blg"
+["pdflatex"] 1529946400 "clean.tex" "clean.pdf" "clean" 1529946402
   "/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc" 1520157250 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texmf-dist/fonts/map/fontname/texfonts.map" 1520157216 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/share/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm" 1520157222 2532 9ad73cf4dd2173a847f2a5f5608e0b9a ""
@@ -261,9 +261,9 @@
   "/usr/share/texmf-dist/web2c/texmf.cnf" 1520157258 32585 d82bbcf7626b7842c87671687479e852 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1525856715 2623954 0a6a6b46f4d66e54dc08a8252a5fd1fb ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1524049103 7738161 f8ed59071fd1e5f29933a0084b550116 ""
-  "clean.aux" 1529861833 6502 1a196fcd62928b7785c5804ebca4747c ""
-  "clean.bbl" 1529861526 4997 7b689a2200a0a6048dcc4a7266df5c08 "bibtex clean"
-  "clean.out" 1529861833 1064 478d69bf5ad83548708592da954117b9 ""
+  "clean.aux" 1529946402 6626 1227799e1985eaca9f6e55809adf2e77 ""
+  "clean.bbl" 1529944453 4997 7b689a2200a0a6048dcc4a7266df5c08 "bibtex clean"
+  "clean.out" 1529946402 1064 478d69bf5ad83548708592da954117b9 ""
   "clean.tex" 1529851822 1001 d8f6558aaa72971cfa04932299fe1685 ""
   "src/abstract.tex" 1526295574 2213 0f923d223aaaf807ce851cc178318484 ""
   "src/appendix/fictitious_convergence_appendix.tex" 1529605894 3736 1a98e3b885bdfffc9342ea593974a839 ""
@@ -271,7 +271,7 @@
   "src/main/fictitious_convergence.tex" 1529771850 7788 7f7cd433e1f2ba7cdcd89b3865b2357f ""
   "src/main/fictitious_noregret.tex" 1528649658 4488 2a1c1531ae81978d328acf5961a2bf00 ""
   "src/main/introduction.tex" 1528546920 13126 9c2f330411cb63465b7213fa30a0a367 ""
-  "src/main/lower_bound2.tex" 1529861829 11329 8bca9d7c5f2aebedfefade3fa722cbf3 ""
+  "src/main/lower_bound2.tex" 1529946395 12373 8d9941d2953f7af4935850f8b81d5c9f ""
   "src/main/preliminaries.tex" 1528546920 12614 e2a8457f88b0e2f399c876b0a2a14e10 ""
   "src/main/side_result.tex" 1528659743 8149 68a111716e921bf38c28f6b219d47c3c ""
   "templates/colors.tex" 1523879608 835 c894d71b899ffddd3560864fbbf34e54 ""
@@ -279,6 +279,6 @@
   "templates/packages.tex" 1525957856 2194 00e7339b16de62d5941ca3ca467c6f19 ""
   (generated)
   "clean.aux"
-  "clean.log"
-  "clean.out"
   "clean.pdf"
+  "clean.out"
+  "clean.log"
