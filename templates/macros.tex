@@ -1,5 +1,9 @@
 % MACROS.
 
+%display style in FRAC
+\newcommand\ddfrac[2]{\frac{\displaystyle #1}{\displaystyle #2}}
+
+
 \newcommand{\lp}{\left}
 \newcommand{\rp}{\right}
 \newcommand{\mrm}[1]{\mathrm{#1}}
@@ -9,6 +13,10 @@
 \DeclareMathOperator*{\argmin}{argmin}
 \DeclareMathOperator*{\argmax}{argmax}
 \DeclareMathOperator*{\maj}{maj}
+
+%Tikz crap.
+\newcommand*{\equal}{=}
+\newcommand*{\comma}{,}
 
 % Asymptotic Notation.
 \newcommand{\bigOh}[1]{O\lp(#1\rp)}
@@ -33,7 +41,7 @@
 
 % Functions.
 \newcommand{\tr}{\mathrm{tr}}
-\newcommand{\1}[1]{\mathds{1}_{\left[#1\right]}}
+\newcommand{\1}[1]{\bm{1}{\left[#1\right]}}
 \newcommand{\Real}[1]{\mathrm{Re}\lp(#1\rp)}
 \newcommand{\Imag}[1]{\mathrm{Im}\lp(#1\rp)}
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}

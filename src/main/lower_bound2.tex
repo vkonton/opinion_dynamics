@@ -1,225 +1,279 @@
 \section{Lower Bound for no-regret Dynamics}\label{s:lower_bound}
-As we have already discussed for any fixed instance $I$ with $\rho\geq 1/2$, \emph{fictitious play} acheives 
-convergence rate $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=\bigOh{1/\sqrt{t}}$, this rate is outperformed by
-the rate of the original \emph{FJ model} convergence rate $\Expnew{I}{\norm{\infty}{x(t)-x^*}}=\bigOh{1/2^{t}}$. 
-In this section we investigate whether there exists another no-regret algorithm $A$ that the agents can select
-and ensures a better convergence rate to the equilibrium. Our results indicate that for a general class of no-regret
-algorithms the following claim holds.
 
-\begin{claim}\label{claim}
-Let $A$ a no-regret algorithm and let $x_A(t)$ the opinion vector defined in \ref{alg:no_regret_dynamics}.
-For any $c>0$, there exists an instance $I_A$ such that $\Expnew{I_A}{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t^{1+c})$.
-\end{claim}
-
-
-The above claim states that rationality in selfish agents comes with the price of slow convergence to the equilibrium point.
-At first we show that any no-regret algorithm $A$, acheiving the previous convergence rate, can be used as an 
-estimator of the parameter $q \in Q[0,1]$ of Bernoulli random variable with the same asymptotic error rate. The reduction
-is quite straightforward is stated in Theorem~\ref{t:reduction}.
-\begin{theorem}\label{t:reduction}
-Let the no-regret algorithm $A$ such that for all instances $I$, $\lim \limits_{t \rightarrow \infty} t^{1+c} \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.
-Then there exists an estimator $\hat{\theta_A}$ such that for all  $q \in Q[0,1]$, \[\lim_{t \rightarrow \infty}t^{1+c}R_q(t)=0\]
+As we have already discussed for any fixed instance $I$ with
+$\rho\geq 1/2$, \emph{fictitious play} achieves convergence rate
+$\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=\bigOh{1/\sqrt{t}}$,
+this rate is outperformed by the rate of the original \emph{FJ model}
+convergence rate
+$\Expnew{I}{\norm{\infty}{x(t)-x^*}}=\bigOh{1/2^{t}}$.
+In this section we investigate whether there exists another no-regret
+algorithm $A$ that the agents can select and ensures a better convergence rate
+to the equilibrium.  We show the following
+\begin{theorem}\label{t:dynamics_lower_bound}
+  Let $A$ a no-regret algorithm and let $x_A(t)$ the
+  opinion vector defined in \ref{alg:no_regret_dynamics}.
+  For any $c>0$, there exists an instance $I_A$ such that
+  $\Expnew{I_A}{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t^{1+c})$.
 \end{theorem}
 
-The proof is quite straightforward: For a given a $q \in Q[0,1]$, we 
-construct an instance $I_q$ such that $x_c^*=q$ for an agent $c$. Moreover agent $c$ must receive
-only values $1$ or $0$ with probability $q$ and $1-q$ respectively. This can be done using a directed star graph with $n$ leaf agents 
-and central agent $c$. The $qn$ of the leaf agents admit $s_i=1,\alpha_i=1$ and $(1-q)n$ admit $s_i=0,\alpha_i=1$. 
-It follows that the estimator $\hat{\theta}$ with $\theta_A^t = x_A^c(t)$ has error $R_q(t)=\Expnew{I_q}{\norm{\infty}{x_A(t)-x^*}}$.
-Meaning that if $A$ does not satisfy Claim~\ref{claim} then $\lim\limits_{t \rightarrow \infty}t^{1+c}R_q(t)=0$ for all $q \in Q[0,1]$.
+The above theorem states that rationality in selfish agents comes with
+the price of slow convergence to the equilibrium point.
+At first we show that any no-regret algorithm $A$, achieving the previous
+convergence rate, can be used as an estimator of the parameter
+$p \in [0,1] $ of Bernoulli random variable
+with the same asymptotic error rate. The reduction formally stated in
+Lemma~\ref{l:reduction}.
 
-
-We need to prove that for any estimator there exists a $q_0 \in Q[0,1]$ where this error rate is not acheived.
-Our next Theorem states something significantly stronger in case $p \in [0,1]$. For \emph{almost all} $p \in [0,1]$, any estimator $\hat{\theta}$ 
-cannot achieve this error rate. 
-Suppose we select a $p$ uniformly at random in $[0,1]$ and run the estimator $\hat{\theta}$ with samples from the 
-distribution $B(p)$, then with probability 1 the error rate $R_p(t) \in \Omega(1/t^{1+c})$.  
-
-\begin{theorem}\label{t:lower_bound}
-  Let $\hat{\theta}$ an estimator for the parameter $p$ of a Bernoulli random variable with error rate $R_p(t)$.
-  If select $p$ uniformly at random in $[0,1]$
-  \[
-   \Prob{\lim_{t\to \infty} t^{1+c}R_{p}(t)\ > 0}=1.
-  \]
-\end{theorem}
-\begin{proof}
-Let an estimator $\hat{\theta} = \{\theta_t\}_{t=1}^{\infty}$, where $\theta_t: \{0,1\}^t\mapsto [0,1]$.
-The function $\theta_t$ can have at most $2^t$ different values. Without loss of generality we assume that 
-the $\theta_t$ admits the same value $\theta_t(x)$ for $x \in \{0,1\}^t$ with the same number of $1$'s. For example 
-$\theta_3(\{1,0,0\})=\theta_3(\{0,1,0\})=\theta_3(\{0,0,1\})$. This is because for any $p$, 
-
-  \[
-    \sum_{0 \leq i \leq t} \sum_{\norm{1}{x} = i}
-    \lp| \theta_t(x) - p \rp| p^i (1-p)^{t-i}
-    \geq
-    \sum_{0 \leq i \leq t} \binom{t}{i} \lp|
-     \frac{\sum_{\norm{1}{x} = i} \theta_t(x)}{\binom{t}{i}}  - p \rp|
-    p^i (1-p)^{t-i}.
-  \]
-\noindent Meaning that for any estimator error $R_p(t)$ there exists another estimator with $R'_p(t)$ that satisfies the
-above property and $R_p'(t) \leq R_p(t)$. Thus $\theta_t$ has at most $t+1$ different values.
-
-Let $A= \{p\in [0,1]: \lim_{t \to \infty}t^{1+c}R_p(t)=0\}$ the set where $\hat{\theta}$ achieves this error rate. We show
-that if we select $p$ uniformly at random in $[0,1]$ then $\Prob{p \in A} =0$. We also define the set $A_k=\{p\in [0,1]: \text{for all }t \geq k, t^{1+c}R_p(t)\leq 1/2\}$.
-By the definition of $A$ if $p \in A$ then there exits a $t_p$ such that for all $t\geq t_p$, $t^{1+c}R_p(t)\leq 1/2$. The latter means that
-if $p \in A$ then there exists $t_p$ such that $p \in A_{t_p}$ and it follows that $A \subseteq \cup_{k=1}^{\infty}A_k$. As a result, \[\Prob{p \in A} \leq\sum_{k=1}^{\infty}\Prob{p \in A_k}\]
-\noindent We prove that $\Prob{p \in A_k}=0$ for all $k$. Observe that $A_k \subseteq B_k$ where $B_k = \{p \in [0,1]: \text{for all }t\geq k, \text{min}_{0\leq i \leq t}|\theta_t(i)-p|\leq 1\}$. 
-We show that $\Prob{p \in B_k}=0$.
-\begin{eqnarray*}
-\Prob{p \in B_k} &= \Prob{p \in \{\text{for all }t \geq k: \text{min}_{i \leq i \leq t}|\theta_t(i)-p| \leq 1 \} }\\
- &= \Prob{p \in \{\text{min}_{i \leq i \leq t}|\theta_t(i)-p| \leq 1 \}}, \text{for all } t \geq k
-\end{eqnarray*}
-
-
-\end{proof}
-
-Theorem~\ref{t:lower_bound} does not only ensures that there does not exists an estimator with this 
-error rate for all $q \in [0,1]$ but also states that if we select $q$ uniformly at random 
-then $\Pr[\lim \limits_{t\to \infty} t^{1+c}R_{q}(t) = 0]=0$. Unfortunately it does not exclude the case
-that an estimator acheives this error rate for all $q \in Q[0,1]$, since the probability that
-$q$ is rational equals $0$. However it indicates that such estimator are highly unlike to exist.
-We were not able to indentify any sequence of funtion $R_q(t)$ that satisfy 
-$\lim \limits_{t \to \infty} t^{1+c}R_q(t)=0$ for all $q \in Q[0,1]$ and at the same $\lim \limits_{t \to \infty} t^{1+c}R_q(t)>0$ 
-for almost all $q \in [0,1]$. Even if such sequences exist, they admit very degenerate forms that 
-are highly unlike to be the error function of any reasonable estimator. Moreover Theorem~\ref{t:lower_bound} proves our
-claim for various assumptions of concerning $R_p(t)$. As an indicative case in Theorem~\ref{t:continous} we show that if 
-$g(q) = \lim \limits_{t \to \infty} t^{1+c}R_q(t)$ is a continous function then this error rate can be acheived for all 
-$q \in Q[0,1]$.
-
-\begin{theorem}\label{t:continous}
-Let $g(q) = \lim \limits_{t \to \infty} t^{1+c}R_q(t)$ be a continous function. Then there exists $q_0$ such that
-\[\lim \limits_{t \to \infty} t^{1+c}R_{q_0}(t) >0 \]
-\end{theorem}
-
-
-
-
-\noindent Now suppose that there exists a no-regret algorithm $A$ not statisfying Claim~\ref{claim} i.e. for all instances $I$, \[\lim_{t\rightarrow \infty}t^{1+c}\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}\]
-In Theorem~\ref{t:reduction} we show that $A$ can be used as an estimator $\hat{\theta_A}$ for Bernoulli distributions with risk asymptotically the same.
-
-
-\noindent As a result, the existence of such an algorithm $A$ implies the existence of an estimator $\hat{\theta_A}$
-whose risk $R_p(t)$ satisfy the following statements:
-
-\begin{itemize}
- \item for all $p \in Q([0,1]),~ \lim_{t \rightarrow \infty}t^{1+c}R_p(t)=0$
- \item for all $[a,b] \subseteq [0,1]$, $\lim_{t \to \infty}t^{1+c} \int_{a}^{b}R_p(t)dp = +\infty$
-\end{itemize}
-
-
-The above two statements are controversial for any function $R_p(t)$ that satisfies minimal technical
-assumptions (e.g. $R_p(t)=f(p)g(t)$), meaning that the first statement is violated (the second is ensured
-by Theorem~\ref{t:integral}). Unfortunately one can construct degenerate functions $R_p(t)$
-that simultaneously satisfy the above two statements. For example $R_p(t)=\Pi_{i=1}^t(p-q_i)^2$,
-where the sequence $\{q_i\}_{i=1}^{\infty}$ is an enumeration of the rationals in $[0,1]$. Although
-the existence of such function means that we cannot derive a full proof of Claim~\ref{claim}, their
-exremely degenerate form indicates that such a risk rate $R_p(t)$ cannot be obtained by any
-\emph{reasonable} estimator $\hat{\theta_A}$. Implying that Claim~$\ref{claim}$ must be satisfied by
-$A$.
-
-\subsection{Proof of Theorem \ref{t:reduction}}
-\noindent In the following Lemma we show how we can use algorithm $A$ to construct an estimator $\hat{\theta_A}$ for Bernoulli distributions.
 \begin{lemma}\label{l:reduction}
-For any algorithm $A$, we can construct a Bernoulli estimator $\hat{\theta_A}$ such that for all $p \in Q([0,1])$, there exists an instance $I_p$ such that $$R_p(t) \leq 2E_{I_p}[||x_A(t)-x^*||_{\infty}]$$
+
+  Let $A$ be a no-regret algorithm $A$ such that for all instances $I$,
+  $\lim \limits_{t \rightarrow \infty} t^{1+c}
+  \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.
+  Then there exists an estimator $\hat{\theta_A}$ such that
+  for all $p \in [0,1]$,
+  \[\lim_{t \rightarrow \infty}t^{1+c}R_p(\theta_t)=0\]
+
 \end{lemma}
 
+We sketch here the main idea. For a full proof see Section~\ref{app:s:lower_bound}
+of the Appendix.  For a given a $p \in [0,1]$, we construct an instance $I_p$ such that
+$x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
+receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
+This can be easily done using the star graph $K_{1,2}$.
+The agent corresponding to the center node, $c$, has $\alpha_c = 0$ and
+whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$.
+%
+\begin{figure}
+  \centering
+
+  \begin{tikzpicture}
+    \begin{scope}[every node/.style={circle,draw}]
+      \node (C) at (0,0) [label=below:$a_c \equal 0$][label=above:$s_c \equal 0$]{C};
+      \node (1) at (-4,0)[label=below:$a_1 \equal 1$][label=above:$s_1 \equal 0$]{1};
+      \node (2) at (4,0) [label=below:$a_2 \equal 1$][label=above:$s_2 \equal 1$]{2};
+    \end{scope}
+
+    \begin{scope}[>={Stealth[black]},
+      every node/.style={fill=white,circle},
+      every edge/.style={draw=black}]
+      \path [-] (C) edge node {$p$} (1);
+      \path [-] (C) edge node {$1-p$} (2);
+    \end{scope}
+  \end{tikzpicture}
+  \caption{The Lower Bound Instance} \label{fig:lb_instance}
+\end{figure}
+%
+It follows that the estimator $\theta_t$ with $\theta_A^t = x_A^c(t)$
+has error $R_p(\theta_t)=\Expnew{I_p}{\norm{\infty}{x_A(t)-x^*}}$.
+Meaning that if $A$ does not satisfy Theorem~\ref{t:dynamics_lower_bound}
+then $\lim\limits_{t \rightarrow \infty}t^{1+c}R_p(\theta_t)=0$ for all
+$p \in [0,1]$. Thus we want to prove the following claim
+\begin{claim}\label{cl:fixed_p}
+  For all sequences of estimators $\theta_t$
+  Then, there exists a fixed $p \in [0,1]$ such that
+  \[
+    \lim_{t \to \infty} t^{1+c} \Expnew{p}{|\theta_t - p} > 0.
+  \]
+\end{claim}
+The crucial point of Claim~\ref{cl:fixed_p} is the fact that
+in order to construct the hard instance for the estimator
+we first inspect the sequence of estimators and then choose
+a $p \in [0,1]$ so that \emph{all} estimators $\theta_t$ of
+the sequence have error rate $\omega(1/t^{1+c})$.
+
+At this point we should mention that it is known
+that $\Omega(1/\eps^2)$ samples are needed to estimate the parameter $p$
+of a Bernoulli random variable within additive error $\eps$.
+Another well-known result is that taking the average of the samples
+is the \emph{best} way to estimate the mean of a Bernoulli random variable.
+These results would indicate that the best possible rate of convergence
+for a no-regret dynamics would be $O(1/\sqrt{t})$.
+However, there is some fine print in these results which does not allow us
+to use them. In order to explain the various limitations of
+these methods and results we will briefly discuss some of them.
+
+Perhaps the oldest sample complexity lower bound for estimation problems
+is the well-known Cramer-Rao inequality.
+Assuming that $\theta_t$ is a sequence of unbiased estimators,
+that is $\Exp{\theta_t} = p$ for all $t$, the Cramer-Rao lower bound
+for estimating the mean $p$ of a Bernoulli random variable states
+that
+\begin{equation}\label{eq:crlb}
+  \Expnew{p}{(\theta_t - p)^2} \geq \frac{p(1-p)}{t}.
+\end{equation}
+In our setting, we can lower bound $\Expnew{p}{|\theta_t - p|}$ by
+$\Expnew{p}{(\theta_t - p)^2}$ since $|\theta_t - p| \leq 1$
+(making the natural assumption that estimators do not output values outside
+$[0,1]$).
+Simply setting $p=1/2$ in inequality (\ref{eq:crlb}) would give us a
+$p$ satisfying the requirements of Claim~\ref{cl:fixed_p}.
+The problem with this lower bound is that the assumption that the estimator
+is unbiased is considered rather restrictive and unrealistic even in
+the statistics literature in the sense that many efficient practical
+estimators are not unbiased.  Thus, we would like to get a lower bound
+with minimal assumptions about the estimator.
+
+To the best of our knowledge, sample complexity lower bounds without
+assumptions about the estimator are given as lower bounds for the
+\emph{minimax risk}, which was defined
+\footnote{
+Although the minimax risk is defined for any estimation problem and loss
+function, for simplicity, we write the minimax risk for estimating the mean
+of a Bernoulli random variable.}
+  by Wald in \cite{Wal39} as
+\[
+  \inf_{\theta_t} \sup_{p\in[0,1]} \Expnew{p}{|\theta_t - p|}.
+\]
+Minimax risk captures the idea that after we pick the best possible
+algorithm, an adversary inspects it and picks the worst possible
+$p \in[0,1]$ to generate the samples that our algorithm will get as input.
+The methods of Le'Cam, Fano, and Assouad are well-known
+information-theoretic methods to establish lower bounds for the minimax risk.
+For more on these methods see \cite{Yu97, Tsy08} and the
+very good lecture notes of Duchi, \cite{duchi_stats311}.
+As we stated before, it is well known that the minimax risk for the
+case of estimating the mean of a Bernoulli is lower bounded by
+$\Omega(1/\sqrt{t})$ and this lower bound can be established
+by Le Cam's method.
+In order to show why such arguments do no work for our purposes
+we shall sketch how one would apply Le Cam's method to get this lower bound.
+To apply Le Cam's method, one typically chooses two Bernoulli distributions
+whose means are far but their total variation distance is small.
+Le Cam showed that when two distributions are close in total variation then
+given a sequence of samples $X_1, \ldots, X_t$ it is hard to tell whether
+these samples were produced by $P_1$ or $P_2$. The hardness of this \emph{testing}
+problem implies the hardness of \emph{estimating} the parameters of
+a family of distribution.
+For our problem the two distributions would be $B(1/2 - 1/\sqrt{t})$
+and $B(1/2 + 1/\sqrt{t})$. It is not hard to see that their total variation
+distance is at most $O(1/t)$, which implies a lower bound
+$\Omega(1/\sqrt{t})$ for the minimax risk. The problem here is that
+the parameters of the two distributions depend on the number of
+samples $t$. The more samples the algorithm gets to see, the closer
+the adversary takes the $2$ distributions to be.
+For our problem we would like to \emph{fix} an instance and then argue
+about the rate of convergence of any algorithm on this instance.
+Namely, having an instance that depends on $t$ does not work for us.
+
+Trying to get a lower bound without assumptions about the estimators
+while respecting our need for a fixed (independent of $t$) $p$ we prove
+Lemma~\ref{l:estimation_lower_bound}.
+In fact, we show something stronger:
+for \emph{almost all} $p \in [0,1]$, any estimator $\hat{\theta}$ cannot
+achieve rate $o(1/t^{1+c})$.
+More precisely,  suppose we select a $p$ uniformly at
+random in $[0,1]$ and run the estimator $\hat{\theta}$ with samples from the
+distribution $B(p)$, then with probability $1$ the error rate $R_p(\theta_t) \in
+\Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
+$\Omega(1/\sqrt{t})$ we prove that no exponential convergence rate
+is possible.
+Finally, while we do not preclude the possibility of similar results to exist
+in the statistics literature, we remark that our proof is fairly simple,
+intuitive, and could be of independent interest.
+
+\begin{lemma}\label{l:estimation_lower_bound}
+
+  Let $\hat{\theta}$ an estimator for the parameter $p$ of a Bernoulli
+  random variable with error rate $R_p(\theta_t)$.
+  If we select $p$ uniformly at random in $[0,1]$ then
+  \[
+    \Prob{\lim_{t\to \infty} t^{1+c} R_p(\theta_t)\ > 0}=1,
+  \]
+  for any $c>0$.
+
+\end{lemma}
 \begin{proof}
-At first we remind that an estimator $\hat{\theta}$ is a sequence of fuctions $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where $\theta_t:~\{0,1\}^t\mapsto [0,1]$.  We construct such a sequence using the algorithm $A$.
-We also remind that when an agent $i$ runs algorithm $A$, she selects $x_i(t)$ according to the cost functions $\{C_i^{\tau}\}$ that she has already reveived \[x_i(t)=A_t(C_i^1,\ldots,C_i^{t-1})\]
 
-\noindent Consider an agent $i$ with $a_i=1$ and $s_i=0$ that runs $A$. Then $C_i^t(x)=x^2$ for all $t$ and $x_i(t)=A_t(x^2,\ldots,x^2)$.
-The latter means that $x_i(t)$ only depends on $t$, $x_i(t)=h_0(t)$. Equivalently, if $a_i=1$ and $s_i=1$ then $x_i(t)=A_t((1-x)^2,\ldots,(1-x)^2)$ and $x_i(t)=h_1(t)$. Finally, consider an agent $i$ with $a_i=1/2$ and $s_i=0$. In this case $C_i^t = \frac{1}{2}x^2 + \frac{1}{2}(x-y_t)^2$, where $y_t \in [0,1]$ is the opinion of the neighbor $j\in N_i$ that $i$ met at
-round $t$. As a result, $x_i(t)=A_t(\frac{1}{2}x^2+\frac{1}{2}(x-y_1)^2,\ldots,\frac{1}{2}x^2+\frac{1}{2}(x-y_{t-1})^2)=f_t(y_1,\ldots,y_{t-1})$. The estimator $\hat{\theta_A}$ is the following sequences $\{\hat{\theta_{t}}\}_{t=1}^{\infty}$ \[\hat{\theta_t}(Y_1,\ldots,Y_t) = \frac{1}{2}f_{t+1}(h_{Y_1}(1),\ldots,h_{Y_t}(t)) \]
+  Let an estimator $\hat{\theta} = \{\theta_t\}_{t=1}^{\infty}$, where
+  $\theta_t: \{0,1\}^t\mapsto [0,1]$.  The function $\theta_t$ can have at most
+  $2^t$ different values. Without loss of generality we assume that
+  $\theta_t$ takes the same value $\theta_t(x)$ for all $x \in \{0,1\}^t$
+  with the same number of $1$'s. For example,
+  $\theta_3(\{1,0,0\})=\theta_3(\{0,1,0\})=\theta_3(\{0,0,1\})$.
+  This is due to the fact that for any $p \in[0,1]$,
+  %
+  \[
+    \sum_{0 \leq i \leq t} \sum_{\norm{1}{x} = i} \lp| \theta_t(x) - p \rp|
+    p^i (1-p)^{t-i} \geq \sum_{0 \leq i \leq t} \binom{t}{i} \lp|
+    \frac{\sum_{\norm{1}{x} = i} \theta_t(x)}{\binom{t}{i}}  - p \rp| p^i
+    (1-p)^{t-i}.
+  \]
+  %
+  For any estimator with error $R_p(\theta_t)$ there exists another estimator
+  with $R'_p(t)$ that satisfies the above property and
+  $R_p'(t) \leq R_p(\theta_t)$.
+  Thus we can assume that $\theta_t$ takes at most $t+1$ different
+  values.
+  %
+  Let $A$ denote the set of $p$ for which the estimator has error
+  rate $o(1/t^{1+c})$, that is
+  %
+  \[
+    A= \{p\in [0,1]: \lim_{t \to \infty} t^{1+c}R_p(\theta_t)=0\}
+  \]
+  We show that if we select $p$ uniformly at random in $[0,1]$ then
+  $\Prob{p \in A} = 0$.  We also define the set
+  \[
+    A_k=\{p\in [0,1]: \text{for all }t \geq k,~ t^{1+c}R_p(\theta_t)\leq 1/2\}
+  \]
+  %
+  Observe that if $p \in A$ then there exists $t_p$ such that
+  $p \in A_{t_p}$, meaning that
+  $A \subseteq \cap_{k=1}^{\infty}A_k$.  As a result,
+  \[
+    \Prob{p \in A} \leq \Prob {p \in\bigcup_{k=1}^{\infty}A_k} \leq
+    \sum_{k=1}^{\infty}\Prob{p \in A_k}
+  \]
+  %
+  To complete the proof we show that $\Prob{p \in A_k}=0$ for all $k$.
+  Notice that $p \in A_k$ implies that for $t \geq k$, the estimator
+  $\hat{\theta}$ must always have a value $\theta_t(i)$ close to $p$.
+  Using this intuition we define the set
+  \[
+    B_k = \{p \in [0,1]: \text{for all
+    }t\geq k,~ t^{1+c}\min_{0\leq i \leq t}|\theta_t(i)-p| < 1\}
+  \]
 
-\noindent Observe that $\hat{\theta_t}: \{0,1\}^t \mapsto [0,1]$ meaning that $\hat{\theta_A}$ is a valid estimator for Bernoulli distributions.\\
+  We now show that $A_k \subseteq B_k$.
+  Since $p \in A_k$ we have that for all $t\geq k$
+  \[
+    t^{1 + c} \min_{0 \leq i \leq t} \lp| \theta_t(i) - p \rp|
+    \sum_{i=0}^t \binom{t}{i} p^i (1-p)^{t-i}
+    \leq
+    t^{1 + c} \sum_{i=0}^t \binom{t}{i} \lp| \theta_t(i) - p \rp| p^i (1-p)^{t-i}
+    = t^{1+c} R_p(\theta_t)
+    \leq
+    1/2.
+  \]
+  Thus, $\Prob{p \in A_k} \leq \Prob{p \in B_k}$.
+  At first we write the set $B_k$ in the following equivalent form
+  $
+  B_k = \cap_{t=k}^{\infty}\{p \in [0,1]:~ \min_{0 \leq
+    i \leq t} |\theta_t(i)-p|\leq 1/t^{1+c}
+  \}$.
+  As a result,
+  \[
+    \Prob{p \in B_k}
+    \leq \Prob{\min_{0 \leq i \leq t}|\theta_t(i)-p| \leq 1/t^{1+c} },
+    \text{for all } t \geq k
+  \]
+  Each value $\theta_t(i)$ \enquote{covers} length $1/t^{1+c}$ from
+  its left and right, and since there are at most $t+1$ such values
+  we have for all $t \geq k$ the set
+  \[
+    \{
+    p \in [0,1]\ :\ {\min_{0 \leq i \leq t} |\theta_t(i)-p| \leq 1/t^{1+c} }
+    \}
+    =
+    \bigcup_{i=0}^t
+    \lp(
+    \theta_t(i) - \frac{1}{t^{1+c}},\ \theta_t(i) + \frac{1}{t^{1+c}}
+    \rp).
+  \]
 
-\noindent Now for any $p \in Q([0,1])$, we construct an appropriate instance $I_p$ s.t. $R_p(t)=\Expnew{p}{|\hat{\theta_t} - p|} \leq 2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$.
-For $p=\frac{k}{n}$ consider the following instance $I_p$ with $n+1$ agents:
-\begin{itemize}
- \item A central agent with $s_c=0$ and $a_c=1/2$.
- \item Directed edges from the central agent to all the other agents.
- \item $k$ agents with $s_i=0$ and $a_i=1$
- \item $n-k$ agents with $s_i=1$ and $a_i=1$
- \end{itemize}
-We just need to prove that in $I_p$, $\Expnew{p}{|\hat{\theta_t}-p|} \leq 2\Expnew{I_p}{\norm{\infty}{x^t-x^*}}$. Notice that $x^*_c=\frac{p}{2}$ and $x^*_i=s_i$ if $i\neq c$. .\\
-At round $t$, if the oracle returns to the center agent the value $h_1(t)$ of a $1$-agent, then $Y_t=1$ otherwise $Y_t=0$. As a result, $\Prob{Y_t=1}=p$ and
-\begin{align*}
- \Expnew{I_p}{\norm{\infty}{x^t-x^*}} &\geq \Expnew{I_p}{||x^t_c-x^*_c||}\\
- &= \Expnew{p}{|\frac{\widehat{\theta_t}}{2}-\frac{p}{2}}] = R_p(t)
-\end{align*}
-\end{proof}
-
-\begin{theorem}
-Let the no-regret algorithm $A$ such that for all instances $I$, $\lim_{t \rightarrow \infty} t^{1+c} \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.
-Let $\hat{\theta_A}$ the estimator constructed from $A$. Then for all  $p \in Q[0,1]$, \[\lim_{t \rightarrow \infty}t^{1+c}R_p(t)=0\]
-\end{theorem}
-The proof follows by direct application of the Lemma \ref{l:reduction}
-
-\subsection{Proof of Theorem \ref{t:integral}}
-Our proof builts on a standard technique in the statistics literature, for proving lower bounds on the risk of estimators.
-This technique reduces the estimation problem to the canonical hypothesis testing problem for which information
-theoretic lower bounds exist. Due to lack of space we are not able to explain this very interesting reduction. The
-interested reader can find a detailed explanation in \cite{}[Duchi]. We present a major Definition and Lemma
-of this technique in the case of Bernoulli distribution i.e. Definition~\ref{d:2packing} and Lemma~\ref{l:fano} that are
-the starting point of our proof.
-
-\begin{definition}\label{d:2packing}
-A finite family of Bernoulli distribution $\mathcal{P}=\{B(p_1),\ldots,B(p_n)\}$ is called a $2\delta$-\emph{packing} if $|p_i-p_j|>2\delta$ for all $i \neq j$.
-\end{definition}
-
-
-
-\begin{lemma}[Fano's Inequality]\label{l:fano}
-Let $\hat{\theta}$ an estimator for the parameter $p$ of a Bernoulli distribution and $\mathcal{P}=\{B(p_1),\ldots,B(p_n)\}$ a $2\delta$-\emph{packing}.
-Then
-\[\frac{1}{n} \sum_{i=1}^n R_{p_i}(t) \geq \delta \lp(1-\frac{\log 2}{\log n} - \frac{t}{n^2\log n}\sum_{i,j}D_{kl}\lp(B(p_i),B(p_j)\rp)\rp)\]% \frac{t\sum_{i,j}D_{kl}(B(p_i),B(p_j))+\log 2 n^2}{n^2\log n}\rp)\]
-\end{lemma}
-
-
-
-\noindent At first for a fixed interval $[a,b]$ we select an appropriate $2\delta$-packing $\P$ and apply Lemma~\ref{l:fano}.
-The most challenging part is to appropriately select $\P$ such that the $\sum_{i,j}D_{kl}\lp(B(p_i),B(p_j)\rp)$ can be
-efficiently upper bounded. In our case $\P$ consists of $t$ different distributions and $\delta=\frac{b-a}{2t}$. For further details
-one can see the proof of the Lemma~\ref{l:fano_application}.
-
-\begin{lemma}\label{l:fano_application}
-For the interval $[a,b] \subseteq [0,1]$. Let the $2\delta$-packing $\P=\{B(p_1),\ldots,B(p_t)\}$ with $p_i = a+\frac{b-a}{2t} + i \frac{b-a}{t}$. Then,
-\[\frac{1}{t} \sum_{i=1}^t R_{p_i}(t) \geq \frac{b-a}{2t} \lp(c_1 - \frac{c_2}{t}\rp)\]
-where $c_1, c_2 >0$ and $c_1 > \frac{1}{2}$.
-\end{lemma}
-
-\noindent Now our goal is to upper bound the quantity $\frac{1}{t} \sum_{i=1}^{t} R_{p_i}(t)$ by the quantity $\int_{a}^b R_p(t)dp$.
-Our proof if based in the following simple idea. Assume that we draw $t$ samples from the $B(p)$ and $t$ samples
-from the $B(q)$, where $|p-q|\leq \frac{1}{t}$. These two product distribution are approximately the same since
-we only $t$ samples are drawn and their parameters differ only by $\frac{1}{t}$. At the same time we have that
-$|\hat{\theta_t}-p| \simeq |\hat{\theta_t}-q|$ meaning that $R_p(t)\simeq R_q(t)$ ($R_p(t)=\Expnew{p}{|\hat{\theta_t}-p|}$).
-The above intuition is formallized and proved in Lemma~\ref{l:cauchy_schwarz}.
-
-\begin{lemma}\label{l:cauchy_schwarz}
-For every $p\in [p_i -\frac{b-a}{2t},p_i + \frac{b-a}{2t}]$,
-%\[\Exp{\lp|\hat{\theta}^t-p_i\rp|}_{p_i} \leq c_a^b\Exp{\lp|\hat{\theta}^t-p\rp|}_p + \lp|p - p_i\rp|\]
-\[R_{p_i}(t) \leq C_a^b R_{p}(t) +  |p-p_i|\]
-where $C_a^b$ is a constant that depends on $a,b$.
- \end{lemma}
-\noindent Using Lemma~\ref{l:cauchy_schwarz}, we can easily upper bound $\frac{1}{t} \sum_{i=1}^{t} R_{p_i}(t)$ by $\int_{a}^b R_p(t)dp$.
-
-\begin{lemma}\label{l:upper}
-Let an interval $[a,b] \subseteq [0,1]$ and the parameters $p_i = a+\frac{b-a}{2t} + i \frac{b-a}{t}$. Then,
-%\[ \frac{1}{t} \sum_{i=0}^{t-1} E_i \leq \frac{c_a^b}{b-a} \int_a^b \Exp{\lp|\hat{\theta}^t-p\rp|} dp + \frac{b-a}{4t}\]
-\[ \frac{1}{t} \sum_{i=1}^{t} R_{p_i}(t) \leq \frac{C_a^b}{b-a} \int_a^b R_p(t) dp + \frac{b-a}{4t}\]
-\end{lemma}
-\noindent Now we are ready to prove Theorem~\ref{t:integral}.
-
-\begin{theorem}
-Let a Bernoulli estimator $\hat{\theta}$ with error rate $R_p(t)$. Then, for all $[a,b] \subseteq [0,1]$ and $c>0$,
-\[ \lim_{t \to \infty}t^{1+c} \int_{a}^{b}R_p(t)dp = +\infty\]
-\end{theorem}
-\begin{proof}
-By combining Lemmas~(\ref{l:fano_application}), ~(\ref{l:upper}) and multiplying by $t^{1+c}$ we get
-%\[\frac{c_a^b}{b-a} \int_a^b \Exp{\lp|\hat{\theta}^t-p\rp|}_p dp \geq \frac{b-a}{2t}\lp(\lp(c_1 - \frac{1}{2}\rp)- \frac{c_2}{t}\rp)\]
-%By :
-\begin{equation*}\label{eq:final}
-\frac{c_a^b}{b-a}t^{1+c} \int_a^b \Expnew{p}{\lp|\hat{\theta}^t-p\rp|}dp \geq \frac{b-a}{2}t^c\lp(\lp(c_1 - \frac{1}{2}\rp)- \frac{c_2}{t}\rp)
-\end{equation*}
-The coefficient of $t^c$ in the right hand side of~(\ref{eq:final}) is positive, so $\lim_{t\to\infty} t^{1+c}\int_{a}^b R_p(t)dp = +\infty$
+  For each interval in the above union we have that
+  $\Prob{|\theta_t(i)-p| \leq 1/t^{1+c}}\leq 2/t^{1+c}$
+  and by the union bound we get
+  $\Prob{p \in B_k} \leq 2(t+1)/t^{1+c}$, for all $t \geq k$.
+  We conclude that $\Prob{p \in B_k} =0$.
 \end{proof}
