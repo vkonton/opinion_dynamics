@@ -107,3 +107,28 @@ completeness.
       \end{align*}
   \end{itemize}
 \end{proof}
+
+\begin{theorem}\label{thm:convergence}
+  Let $I = (P,s, \alpha)$ be any instance of the opinion formation
+  game of Definition~\ref{d:random_payoff_game} with equilibrium
+  $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
+  Algorithm~\ref{alg:fictitious_play} after $t$ rounds satisfies
+  \[
+    \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
+    C \sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(1/2,\rho)}},
+  \]
+  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
+\end{theorem}
+
+\begin{proof}
+By Lemma~\ref{l:recursive_equation} we have that for all $t\geq 1$ and $p \in [0,1]$,
+\[\Prob{\norm{\infty}{x(t)-x^*} \leq e_p(t)} \geq 1-p\]
+where $e_p(t)$ is the solution of the recursion, $e_p(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e_p(\tau)}{t}$ with 
+$\delta(t)=\sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$. Setting $p=\frac{1}{12\sqrt{t}}$ we have that  
+\[\Prob{\norm{\infty}{x(t)-x^*} \leq e(t)} \geq 1-\frac{1}{12\sqrt{t}}\]
+where $e(t)$ is the solution of the recursion $e(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e_p(\tau)}{t}$ with 
+$\delta(t)=\sqrt{\frac{\log(2\pi^2 n t^{2.5})}{t}}$. Since $2\pi^2 \geq e^{2.5}$, Lemma~\ref{l:recursion_upper_bound} applies and 
+$e(t)\leq C\sqrt{\log n}\frac{\log t^{3/2}}{t^{\min(\rho,1/2)}}$ for some universal constant $C$. Finally,
+\[\Expnew{}{\norm{\infty}{x(t) - x^*}} \leq \frac{1}{12\sqrt{t}} + (1-\frac{1}{12\sqrt{t}})C\sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(\rho,1/2)}}
+\leq (C+\frac{1}{12})\sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(\rho,1/2)}}\]
+\end{proof}

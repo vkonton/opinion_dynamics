@@ -1,156 +1,98 @@
 \section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
-In this section we prove that the fictitious play described as
-Algorithm~\ref{alg:fictitious_play} convergences to the equilibrium.
-We shall use the following standard concentration inequality of Hoeffding.
-\begin{lemma}\label{l:hoeffding}
-  Let $X_1, \ldots, X_t$ be independent random variables such that
-  $0 \leq X_i \leq 1$ and let $X = (X_1 + \ldots + X_t) / t$. Then
-  for all $t > 0$,
-  \(
-    \Prob{ |X - \Exp X| \geq \lambda} \leq 2 \me^{-2 n \lambda^2}
-  \)
-\end{lemma}
-We break down the proof of Theorem~\ref{t:fictitious_converge}
-into two parts.  We first recursively define an upper bound $e(t)$
-of the error $\norm{\infty}{x^t - x^*}$ that holds with arbitrarily
-good probability $1-p$ for all $t \geq 1$. Then we work
-with the recursion in order to get an upper bound for $e(t)$.
-The following lemma provides a simple upper bound for the
-convergence rate of the recursion. Its technical proof can
-be found in Section~\ref{app:s:fictitious_convergence} of the Appendix.
-\begin{lemma}\label{l:recursion_upper_bound}
-  Let $e(t)$ be a function satisfying the recursion
-  \[
-    e(t) =
-    \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
-    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
-  \]
-  where \(\delta(t) = \sqrt{\frac{\ln(D t^2)}{t}} \), \(\delta(0) = 0 \),
-  and $D > \me^2$ is a positive constant.  Then
-  \(
-    e(t) \leq
-    \sqrt{2 \ln(D)} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
-  \)
-\end{lemma}
-% \begin{lemma}\label{l:error_recursion}
-%   With probability at least $1-p$, $\|x^t - x^*\|_{\infty} \leq e(t)$,
-%   where $e(t)$ satisfies the following recursive relation
-%   \[
-%     e(t) =
-%     \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
-%     \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
-%   \]
-%   where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$ for $t\geq 1$
-%   and $\delta(0) = 0$.
-% \end{lemma}
-We are now ready to fully prove Theorem~\ref{t:fictitious_convergence}.
-We restate it here for the sake of completeness.
-\begin{theorem}
-  Let $I = (G,s, \alpha)$ be any instance of the opinion formation
+In this section we prove that fictitious play described as
+Algorithm~\ref{alg:fictitious_play} converges to the unique equilibrium $x^*$.
+The main result of the section is Theorem~\ref{thm:convergence}.
+
+\begin{theorem}\label{thm:convergence}
+  Let $I = (P,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
-  $x^* \in [0,1]^n$.  The opinion vector $x^t$ produced by
+  $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
   Algorithm~\ref{alg:fictitious_play} after $t$ rounds satisfies
   \[
-    \Expnew{}{\norm{\infty}{x^t - x^*}} \leq
-    C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
+    \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
+    C \sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(1/2,\rho)}},
   \]
-  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
+  where $\rho = \min_i a_i$ and $C$ is a universal constant.
 \end{theorem}
-\begin{proof}
-  Let $W_i^t$ be the random variable corresponding to opinion of the
-  selected neighbor of agent $i$, at round $t$ of the
-  dynamics~\ref{alg:fictitious_play}. Namely,
-  %
-  \[
-    W_i^t = x_j(t-1),  \text{ with probability } p_{ij}.
-  \]
-  %
-  Therefore, each agent $i \in V$ updates her opinion as follows
-  \begin{align*}
-    x_i(t)
-    &=
-    \argmin_{x \in [0,1]}
-    \sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))
-    =
-    (1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}
-    + \alpha_i s_i
-  \end{align*}
-  We want to find a bound $e(t)$ for the random variable
-  of the error $\norm{\infty}{x^t - x^*}$ such that with probability
-  $1-p$ it holds for all $t \geq 1$, $\norm{\infty}{x^t - x^*} \leq e(t)$.
-  We derive a recursion for the error $e(t)$ as follows.
-  % First we assume that at round $t$ each agent $i$ observes
-  % the opinion of a random neighbor at the equilibrium, namely $x^*_{W_i^t}$.
-  % Using Lemma~\ref{l:error_recursion} we get a recursion for
-  % the error $e(t)$.
-  % Setting $p = 1/\sqrt{t}$ in Lemma~\ref{l:error_bound} yields the result.
-  As we have already mentioned for any instance $I$ there exists
-  a unique equilibrium vector $x^*$.
+\noindent At first we present the high level idea of the proof of Theorem~\ref{thm:convergence}.
+According to Algorithm~\ref{alg:fictitious_play}, each agent $i$ at round $t\geq 1$ updates her opinion 
+as $x_i(t)=\argmin_{x \in [0,1]}\sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))$
+where $W_i^\tau$ is the random variable denoting the agent $j$ that $i$ met at round $\tau$ ($\Prob{W_i^\tau=j}=p_{ij}$). 
+The above update rule can be written equivalently as: \[x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}+ \alpha_i s_i\]
+Since we are interested in bounding the $\Expnew{}{\norm{\infty}{x(t)-x^*}}$, we 
+can use the fact $x_i^*= (1-\alpha_i)\sum_{j \neq i}x_j^* + \alpha_is_i$ to bound $|x_i(t)-x_i^*|$ as follows: 
+\begin{eqnarray*}
+ |x_i(t)-x_i^*| &=& (1-\alpha_i)|\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}-\sum_{j\neq i} p_{ij}x_j^*|\\
+ &=& (1-\alpha_i)|\sum_{j\neq i}\frac{\sum_{\tau=1}^{t} \1{W_i^\tau=j}x_j(\tau-1)}{t}-\sum_{j\neq i} p_{ij}x_j^*|\\
+ &\leq& (1-\alpha_i)\sum_{j\neq i}|\frac{\sum_{\tau=1}^{t} \1{W_i^\tau=j}x_j(\tau-1)}{t}- p_{ij}x_j^*|
+\end{eqnarray*}
+Now assume that $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t}- p_{ij}|$ were $0$ for all $t\geq 1$, 
+then with simple algebraic manipulations we can prove that $\norm{\infty}{x(t)-x^*} \leq e(t)$
+where $e(t)$ satisfies the recursive equation $e(t) = (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}$.
+It follows that $\norm{\infty}{x(t)-x^*} \leq 1/t^\rho$ meaning that $x(t)$ converges to $x^*$.
+Obviously $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|\neq 0$ and 
+the above analysis does not hold. In Lemma~\ref{l:recursive_equation} we use the 
+fact that $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|$ tends to $0$ with probability $1$
+($W_i^{\tau}$ are independent random variables)
+to obtain a similar recursive relation for $e(t)$. Then in Lemma~\ref{l:recursion_upper_bound} 
+we upper bound the solution of this recursive equation.
 
-  Since in the definition of $W_i^T$ we see the opinion of neighbor $j$
-  with probability $p_{ij}$ we have
-  \(
-    \Exp{x^*_{W_i^\tau}} = \sum_{j \in N_i} p_{ij} x^*_j
-  \).
-  Since, $W_i^\tau$ are independent random variables,
-  we can use Hoeffding's inequality (Lemma~\ref{l:hoeffding}) to get
-  \(
+\begin{lemma}\label{l:recursive_equation}
+Let $e(t)$ the solution of the following recursion,
+\[e(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}\]
+where $e(0)=\|x(0) - x^*\|_{\infty}$ and \(\delta(t) = \sqrt{\frac{\ln(\pi^2n t^2/6p)}{t}} \). Then,
+\[\Prob{\text{for all }t \geq 1, ~\norm{\infty}{x(t)-x^*}\leq e(t)} \geq 1-p\] 
+\end{lemma}
+\begin{proof}
+We remind that $W_i^\tau$ denotes the agent
+$j$ that $i$ met at round $\tau$ and that this happens 
+with probability $p_{ij}$ and $x^*$ is the unique equilibrium point 
+of the instance $I=(P,s,\alpha)$. At first we prove that
+with probability at least $1-p$, for all $t \geq 1$ and all agents $i$:
+\begin{equation}\label{eq:error_per_round}
+    \lp|
+    \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
+    \sum_{j \neq i} p_{ij} x^*_j
+    \rp| \leq \delta(t)
+\end{equation}
+where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.\\
+Since $W_i^\tau$ are independent random variables with 
+$\Prob{W_i^\tau = j}=p_{ij}$ and \(\Exp{x^*_{W_i^\tau}} = \sum_{j \neq i} p_{ij} x^*_j\).
+By the Hoeffding's inequality we get
+  \[
     \Prob
     {
-      |
-      {(\sum_{\tau = 1}^{t} x^*_{W_i^\tau}})/{t}
-      - (\sum_{j \in N_i} p_{ij} x^*_j)
+      \lp|
+      \frac{\sum_{\tau = 1}^{t} x^*_{W_i^\tau}}{t}
+      - \sum_{j \neq i} p_{ij} x^*_j \rp|
       > \delta(t)
-    }
-    < 6 p / (\pi^2 n t^2),
-  \)
-  where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.
-  To bound the probability of error for all rounds $t=1$ to $\infty$
-  and all agents in $V$, we use the union bound to get
+     }
+    < 6 p / (\pi^2 n t^2).
+  \]
+To bound the probability of error for all rounds $t=1$ to $\infty$
+and all agents $i$, we apply the union bound
   \begin{align*}
-    \sum_{i=1}^{\infty}
+    \sum_{t=1}^{\infty}
     \Prob
-    { \max_{i \in V}
+    { \max_{i}
       \lp|
       \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
-      - \sum_{j \in N_i} p_{ij} x^*_j \rp|
+      - \sum_{j \neq i} p_{ij} x^*_j \rp|
       > \delta(t)}
     \leq
-    \sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
+    \sum_{t=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
     p
   \end{align*}
-  %
-  % \begin{align*}
-  %   &\Prob
-  %   {
-  %     \text{for all } t \geq 1 :
-  %     \max_{i \in V}
-  %     \lp|
-  %     \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
-  %     - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
-  %     > \delta(t)} \leq \\
-  %   &\sum_{t =1 }^{\infty} \Prob
-  %   {
-  %     \max_{i \in V}
-  %     \lp|
-  %     \frac{\sum_{\tau = 1}^{t} x^*_{W_i^{\tau}}}{t}
-  %     - \frac{\sum_{j \in N_i} x^*_j}{|N_i|} \rp|
-  %     > \delta(t)} \leq
-  %   \\
-  %   &\sum_{i=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
-  %   p
-  % \end{align*}
-  As a result with probability $1-p$ we have that for all $t$ and all $i \in V$
+\noindent As a result with probability $1-p$ we have that for all $t\geq 1$ and all agents $i$,
   \begin{equation}\label{eq:error_per_round}
     \lp|
     \frac{\sum_{\tau=1}^t x^*_{W_i^\tau}}{t} -
-    \sum_{j \in N_i} p_{ij} x^*_j
+    \sum_{j \neq i} p_{ij} x^*_j
     \rp| \leq \delta(t)
   \end{equation}
-  We will prove our claim by induction.
-  We assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all
-  $\tau \leq t-1$. Then
-  \begin{align}
+\noindent Now we can prove our claim by induction. Assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all 
+$\tau \leq t-1$. Then 
+\begin{align}
     x_i(t)
     &=
     (1-\alpha_i)\frac{\sum_{\tau=1}^{t}x_{W_i^{\tau}}(\tau-1)}{t}
@@ -183,30 +125,22 @@ We restate it here for the sake of completeness.
   \frac{\sum_{\tau=1}^t e(\tau)}{t}$.
   As a result $\norm{\infty}{x(t)-x^*} \leq e(t)$ and the induction
   is complete.  Therefore, we have that with probability at least $1-p$,
-  \(\norm{\infty}{x(t) - x^*} \leq e(t)\), where $e(t)$ satisfies the
-  following recursive relation
+  \(\norm{\infty}{x(t) - x^*} \leq e(t)\) for all $t\geq 1$.
+\end{proof}
+
+\begin{lemma}\label{l:recursion_upper_bound}
+  Let $e(t)$ be a function satisfying the recursion
   \[
     e(t) =
     \delta(t) + (1-\alpha)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
-    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
+    \text{ and } e(0)=\|x(0) - x^*\|_{\infty},
   \]
-  where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$ for $t\geq 1$
-  and $\delta(0) = 0$.
-  To get error $e(t)$ with probability $1-1/\sqrt{t}$ we set
-  $p = 1/(2\sqrt{t})$.
-  Thus if we set $D = \pi^2 n /6p > \me^2$ in
-  Lemma~\ref{l:recursion_upper_bound} we get that with probability at least
-  $1-1/\sqrt{t}$
-  \[
+  where \(\delta(t) = \sqrt{\frac{\ln(D t^{2.5})}{t}} \), \(\delta(0) = 0 \),
+  and $D > \me^{2.5}$ is a positive constant.  Then
+  \(
     e(t) \leq
-    \sqrt{\ln D} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
-  \]
-  Therefore, by the law of total expectation the expected error is upper
-  bounded by
-  \[
-    \Exp{\norm{\infty}{x_t - x^*}} \leq \frac{1}{\sqrt{t}} + e(t) \lp( 1 -\frac{1}{\sqrt{t}} \rp)
-    \leq C \sqrt{\ln n} \frac{(\ln t)^{2}}{t^{\min(\rho,\, 1/2)}},
-  \]
-  where $C$ is a sufficiently large universal constant.
-
-\end{proof}
+    \sqrt{2.5 \ln(D)} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
+  \)
+\end{lemma}
+\noindent The proof of Theorem~\ref{thm:convergence} folows by direct 
+application of Lemma~\ref{l:recursive_equation} and \ref{l:recursion_upper_bound}. 
