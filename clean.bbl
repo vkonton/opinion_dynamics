@@ -37,22 +37,9 @@ Johanne Cohen, Am{\'{e}}lie H{\'{e}}liou, and Panayotis Mertikopoulos.
   {SAGT} 2017, L'Aquila, Italy, September 12-14, 2017, Proceedings}, pages
   252--263, 2017.
 
-\bibitem[CKO13]{CKO13}
-Flavio Chierichetti, Jon~M. Kleinberg, and Sigal Oren.
-\newblock On discrete preferences and coordination.
-\newblock In {\em {ACM} Conference on Electronic Commerce, {EC} '13,
-  Philadelphia, PA, USA, June 16-20, 2013}, pages 233--250, 2013.
-
 \bibitem[Duc]{duchi_stats311}
 John Duchi.
 \newblock Stats311, {Lecture} {Notes}.
-
-\bibitem[EFHS17]{EFHS17}
-Markos Epitropou, Dimitris Fotakis, Martin Hoefer, and Stratis Skoulakis.
-\newblock Opinion formation games with aggregation and negative influence.
-\newblock In {\em Algorithmic Game Theory - 10th International Symposium,
-  {SAGT} 2017, L'Aquila, Italy, September 12-14, 2017, Proceedings}, pages
-  173--185, 2017.
 
 \bibitem[EMN09]{EMN09}
 Eyal Even{-}Dar, Yishay Mansour, and Uri Nadav.
@@ -60,11 +47,6 @@ Eyal Even{-}Dar, Yishay Mansour, and Uri Nadav.
 \newblock In {\em Proceedings of the 41st Annual {ACM} Symposium on Theory of
   Computing, {STOC} 2009, Bethesda, MD, USA, May 31 - June 2, 2009}, pages
   523--532, 2009.
-
-\bibitem[FGV16]{FGV16}
-Diodato Ferraioli, Paul~W. Goldberg, and Carmine Ventre.
-\newblock Decentralized dynamics for finite opinion games.
-\newblock {\em Theor. Comput. Sci.}, 648(C):96--115, October 2016.
 
 \bibitem[FJ90]{FJ90}
 Noah~E. Friedkin and Eugene~C. Johnsen.
@@ -91,11 +73,6 @@ Javad Ghaderi and R.~Srikant.
 Hart Sergiu and Mas‐Colell Andreu.
 \newblock A simple adaptive procedure leading to correlated equilibrium.
 \newblock {\em Econometrica}, 68(5):1127--1150.
-
-\bibitem[Tsy08]{Tsy08}
-Alexandre~B. Tsybakov.
-\newblock {\em Introduction to {Nonparametric} {Estimation}}.
-\newblock Springer, New York ; London, 1 edition edition, November 2008.
 
 \bibitem[Wal39]{Wal39}
 Abraham Wald.

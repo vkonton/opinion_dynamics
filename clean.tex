@@ -1,9 +1,7 @@
-\documentclass{article}
+\documentclass[runningheads]{templates/llncs/llncs}
 \input{./templates/packages}
 \input{./templates/colors}
 \input{./templates/macros}
-\usepackage{tikz}
-\usetikzlibrary{arrows.meta}
 
 
 \begin{document}
@@ -11,21 +9,48 @@
 \title{Fictitious Play in Opinion Formation Games with Random Payoffs}
 
 \author{
-  Dimitris Fotakis\\ NTUA
+  Dimitris Fotakis \inst{1,2}
   \and
-  Vardis Kandiros\\ NTUA
+  Vardis Kandiros \inst{2}
   \and
-  Vasilis Kontonis\\ NTUA
+  Vasilis Kontonis \inst{2}
   \and
-  Stratis Skoulakis\\ NTUA
+  Stratis Skoulakis \inst{2}
 }
+
+
+% \institute{Yahoo Research, New York, NY, USA and National Technical University of Athens, Greece. {\tt dfotakis@oath.com}}
+% \affil[2]{National Technical University of Athens, Greece. {\tt vkonton@gmail.com}}
+% \affil[3]{Department of Computer Science, University of Liverpool, UK.
+
+\institute{
+  Yahoo Research, New York, NY, USA. \\
+  \email{fotakis@oath.com}
+  \and
+  National Technical University of Athens, Greece. \\
+  \email{fotakis@cs.ntua.gr}, \email{vkonton@gmail.com}, \email{vkandiros@yahoo.gr}, \email{sskoul@gmail.com}
+}
+
+
+  % Princeton University, Princeton NJ 08544, USA \and
+% Springer Heidelberg, Tiergartenstr. 17, 69121 Heidelberg, Germany
+% \email{lncs@springer.com}\\
+% \url{http://www.springer.com/gp/computer-science/lncs} \and
+% ABC Institute, Rupert-Karls-University Heidelberg, Heidelberg, Germany\\
+% \email{\{abc,lncs\}@uni-heidelberg.de}}
+
+%
+%\titlerunning{Abbreviated paper title}
+% If the paper title is too long for the running head, you can set
+% an abbreviated paper title here
+%
+\maketitle
 
 % \date{}
 
-\maketitle
-
 \begin{abstract}
   \input{src/abstract}
+  \keywords{Opinion Dynamics \and No Regret \and Fictitious Play}
 \end{abstract}
 
 \setcounter{page}{0}

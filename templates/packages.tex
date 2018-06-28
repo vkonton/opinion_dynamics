@@ -7,8 +7,8 @@
 %\usepackage{fontspec}
 
 % linespread looks better for mathpazo
-\linespread{1.05}
-\usepackage[sc]{mathpazo}
+% \linespread{1.05}
+% \usepackage[sc]{mathpazo}
 % \usepackage{kpfonts}
 % \usepackage[boldsans]{ccfonts}
 % \usepackage{beton}
@@ -37,15 +37,16 @@
 \usepackage{mathtools}
 
 % Theorem Environments.
-\usepackage{amsthm}
-\renewcommand\qedsymbol{$\blacksquare$}
+% Comment out for llncs.
+% \usepackage{amsthm}
+% \renewcommand\qedsymbol{$\blacksquare$}
 
-\newtheorem{definition}{Definition}
-\newtheorem{theorem}{Theorem}
-\newtheorem{lemma}{Lemma}
-\newtheorem{corollary}{Corollary}
-\newtheorem{claim}{Claim}
-\newtheorem*{question}{Question}
+% \newtheorem{definition}{Definition}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}{Lemma}
+% \newtheorem{corollary}{Corollary}
+% \newtheorem{claim}{Claim}
+% \newtheorem*{question}{Question}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -107,3 +108,7 @@
 }
 
 \usepackage{subcaption}
+
+% Tikz.
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
