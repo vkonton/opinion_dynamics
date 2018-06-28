@@ -218,6 +218,7 @@ Finally, while we do not preclude the possibility of similar results to exist
 in the statistics literature, we remark that our proof is fairly simple,
 intuitive, and could be of independent interest.
 
+
 \begin{lemma}\label{l:estimation_lower_bound}
 
   Let $\hat{\theta}$ an estimator for the parameter $p$ of a Bernoulli
@@ -304,8 +305,27 @@ intuitive, and could be of independent interest.
     \leq \Prob{\min_{0 \leq i \leq t}|\theta_t(i)-p| \leq 1/t^{1+c} },
     \text{for all } t \geq k
   \]
+  \begin{figure}
+  \centering
+  \begin{tikzpicture}[scale=7]
+  \draw[-, thick] (0,0) -- (1,0);
+  \foreach \x/\xtext in {0/0,0.2/$\theta_t(0)$,0.4/$\theta_t(1)$,0.8/$\theta_t(t)$,1}
+      \draw[thick] (\x,0.5pt) -- (\x,-0.5pt) node[below] {\xtext};
+  %\draw (0.2,0.5pt) node[above] {$c$};
+  \draw[(-), thick, black] (0.12,0) -- (0.28,0);
+  \draw[(-), thick, black] (0.32,0) -- (0.48,0);
+  \draw (0.6,-1.2pt) node[below] {. . . };
+  \draw[(-), thick, black] (0.72,0) -- (0.88,0);
+  \draw[|-|] (0.12,1pt) -- (0.28,1pt) node[midway, above] {$\frac{2}{t^{1+c}}$};
+  \draw[|-|] (0.32,1pt) -- (0.48,1pt) node[midway, above] {$\frac{2}{t^{1+c}}$};
+  \draw[|-|] (0.72,1pt) -- (0.88,1pt) node[midway, above] {$\frac{2}{t^{1+c}}$};
+  %\draw (-0.25,0) node {At time $t$};
+  \end{tikzpicture}
+  \caption{Estimator output at time $t$} \label{fig:estimator}
+\end{figure}
   Each value $\theta_t(i)$ \enquote{covers} length $1/t^{1+c}$ from
-  its left and right, and since there are at most $t+1$ such values
+  its left and right, as shown in Figure~\ref{fig:estimator}
+  , and since there are at most $t+1$ such values
   we have for all $t \geq k$ the set
   \[
     \{
