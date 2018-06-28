@@ -80,7 +80,6 @@ does not hold in more general OCO settings. In section 4, we investigate whether
 %of the best opinion fixed in hindsight. For such an algorithm $A$ we define the following dynamical system.
 
 
-
 %\begin{definition}\label{d:regret}
 %  $A$ for OCO is a sequence of functions, $\{A_t\}_{t=1}^{\infty}$ where
 %  $A_t:\mcal{F}^{t-1} \mapsto K$.\\
@@ -125,52 +124,52 @@ does not hold in more general OCO settings. In section 4, we investigate whether
 
 %\end{definition}
 
-\subsection{Estimating Bernoulli distributions}
+% \subsection{Estimating Bernoulli distributions}
 
-Assume that we have access to the random variables $Y_1,\ldots,Y_t$, that are
-mutually independent and each
-$Y_i$ is distributed according to a Bernoulli distribution with $p \in [0,1]$,
-$Y_i\sim B(p)$.  Initially the parameter $p$ is unkown. The task is to observe
-the realization of $y_1,\ldots,y_t$ and output an estimate
-$\hat{p}=\theta_t(y_1,\ldots,y_t)$ according to a function $\hat{\theta_t}:
-\{0,1\}^t\mapsto [0,1]$, that is close to the unkown parameter $p$.
+% Assume that we have access to the random variables $Y_1,\ldots,Y_t$, that are
+% mutually independent and each
+% $Y_i$ is distributed according to a Bernoulli distribution with $p \in [0,1]$,
+% $Y_i\sim B(p)$.  Initially the parameter $p$ is unkown. The task is to observe
+% the realization of $y_1,\ldots,y_t$ and output an estimate
+% $\hat{p}=\theta_t(y_1,\ldots,y_t)$ according to a function $\hat{\theta_t}:
+% \{0,1\}^t\mapsto [0,1]$, that is close to the unkown parameter $p$.
 
-\begin{definition}
-  An estimator $\hat{\theta}$ is a collection of functions,
-  $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where
-  $\hat{\theta_t}: \{0,1\}^t\mapsto [0,1]$.
-\end{definition}
+% \begin{definition}
+%   An estimator $\hat{\theta}$ is a collection of functions,
+%   $\{\hat{\theta_t}\}_{t=1}^{\infty}$, where
+%   $\hat{\theta_t}: \{0,1\}^t\mapsto [0,1]$.
+% \end{definition}
 
-A well known example of such an estimator is the
-\emph{sample mean}, where $\hat{\theta_t}=\frac{\sum_{i=1}^tY_i}{t}$.
-\noindent Obviously for any efficient estimator, the estimate $\hat{p}$
-converges to the unkown parameter $p$ as $t$ grows. The following definition is
-the standard metric for the efficiency of an estimator $\hat{\theta}$.
+% A well known example of such an estimator is the
+% \emph{sample mean}, where $\hat{\theta_t}=\frac{\sum_{i=1}^tY_i}{t}$.
+% \noindent Obviously for any efficient estimator, the estimate $\hat{p}$
+% converges to the unkown parameter $p$ as $t$ grows. The following definition is
+% the standard metric for the efficiency of an estimator $\hat{\theta}$.
 
-\begin{definition}
-  For an estimator $\hat{\theta}
-  =\{\hat{\theta_t}\}_{t=1}^\infty$ we define its  error rate $R_p(t) =
-  E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ \[\text{where
-    }E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]= \sum_{(y_1,\ldots,y^t)\in
-      \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
-    p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}\]
-\end{definition}
+% \begin{definition}
+%   For an estimator $\hat{\theta}
+%   =\{\hat{\theta_t}\}_{t=1}^\infty$ we define its  error rate $R_p(t) =
+%   E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ \[\text{where
+%     }E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]= \sum_{(y_1,\ldots,y^t)\in
+%       \{0,1\}^t}|\hat{\theta_t}(y^1,\ldots,y^t) -p| \cdot
+%     p^{\sum_{i=1}^ty^i}(1-p)^{t-\sum_{i=1}^ty^i}\]
+% \end{definition}
 
-The quantity $E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ is the expected distance
-of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the
-distribution of the samples is $B(p)$. To simplify notation we also denote it
-as $E_p[|\hat{\theta_t} - p|]$. The error rate $R_p(t)$ quantifies the rate of
-convergence of the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the
-real parameter $p$. \\ Since $p$ is unkown, any meaningful estimator $\hat{p}$
-must guarantee that for all $p \in [0,1]$, $\lim_{t \rightarrow \infty}
-R_p(t)=0$. For example the \emph{sample mean} has error rate $R_p(t) \leq
-\frac{1}{2\sqrt{t}}$ for ant $p \in [0,1]$ and clearly statisfies the above
-requirement. In section~\ref{s:lower_bound} we investigate the following question,
+% The quantity $E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ is the expected distance
+% of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the
+% distribution of the samples is $B(p)$. To simplify notation we also denote it
+% as $E_p[|\hat{\theta_t} - p|]$. The error rate $R_p(t)$ quantifies the rate of
+% convergence of the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the
+% real parameter $p$. \\ Since $p$ is unkown, any meaningful estimator $\hat{p}$
+% must guarantee that for all $p \in [0,1]$, $\lim_{t \rightarrow \infty}
+% R_p(t)=0$. For example the \emph{sample mean} has error rate $R_p(t) \leq
+% \frac{1}{2\sqrt{t}}$ for ant $p \in [0,1]$ and clearly statisfies the above
+% requirement. In section~\ref{s:lower_bound} we investigate the following question,
 
-\begin{question}
-  Is there an estimator $\hat{\theta}$ such that for all $p \in
-  Q[0,1]$, $\lim_{t \rightarrow \infty}t R_p(t)=0$?
-\end{question}
+% \begin{question}
+%   Is there an estimator $\hat{\theta}$ such that for all $p \in
+%   Q[0,1]$, $\lim_{t \rightarrow \infty}t R_p(t)=0$?
+% \end{question}
 
 %\noindent Notice that $E_p[|\hat{\theta_t}-p|]$ does not serve as a good
 %metric since an effiencient estimator $\hat{\theta}$ must garantee good

@@ -2,11 +2,14 @@ We study opinion formation games based on the famous model proposed by Friedkin
 and Johsen.  In today's huge social networks the assumption that in each round
 all agents update their opinions by taking into account the opinions of
 \emph{all} their friends could be unrealistic. Therefore, we assume that in
-each round each agent gets to meet with only one (uniformly random) friend of
-hers.  Specifically, we define an opinion formation game, where at round $t$,
+each round each agent gets to meet with only one random friend of
+hers.  Since it is more likely to meet some friends than others we assume
+that agent $i$ meets agent $j$ with probability $p_{ij}$.
+Specifically, we define an opinion formation game, where at round $t$,
 agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
-\in[0,1]$ meets a random neighbor $j$ with opinion $x_j(t)$ and suffers cost
-that is a convex combination of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
+\in[0,1]$ meets with probability $p_{ij}$ neighbor $j$ with opinion $x_j(t)$
+and suffers cost that is a convex combination of $(x_i(t) - s_i)^2$ and
+$(x_i(t) - x_j(t))^2$.
 
 For a dynamics in the above setting to be considered as natural it must be
 simple, converge to the equilibrium $x^*$, and perhaps most importantly, it
@@ -19,14 +22,9 @@ thus, is a reasonable algorithm for agents to implement.
 The classical Friedkin-Johsen dynamics converges to the equilibrium within
 error $\eps$ after only $O(\log(1/\eps))$ rounds whereas in our setting
 fictitious play needs $\widetilde{O}(1/\eps^2)$ rounds. A natural question is
-whether there exists a natural dynamics for our problem with better rate of
-convergence.  To answer this question we show that from \emph{no-regret}
-dynamics in our setting, we can construct algorithms that estimate the mean of
-Bernoulli random variables.  By using information theoretic sample complexity
-lower bound techniques from statistics we show that no-regret algorithms are
-unlikely to converge with less than $O(1/\eps)$ rounds. Interestingly, the
-considerably worse convergence rate is not an inherent characteristic of our
-setting but rather of the class of no-regret dynamics since we show that, in
-general, there exists a dynamics that only needs $O(\log(1/\eps)^2)$ rounds in
-our setting, resembling the convergence rate of the original Friedkin-Johsen
-model.
+whether there exists a simple dynamics for our problem with better rate of
+convergence.  We answer this question in the negative by showing that
+no-regret algorithms cannot converge with less than $\mrm{poly}(1/\eps)$ rounds.
+Interestingly, we show that when agents meet a neighbor \emph{uniformly}
+at random, there exists a dynamics that only needs $O(\log(1/\eps)^2)$ rounds,
+resembling the convergence rate of the original Friedkin-Johsen model.
