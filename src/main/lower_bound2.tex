@@ -19,6 +19,11 @@ to the equilibrium.  We show the following
 The above theorem states that rationality in selfish agents comes with
 the price of slow convergence to the equilibrium point.
 
+At first we show that any no-regret algorithm $A$, achieving the previous
+convergence rate, can be used as an estimator of the parameter
+$p \in [0,1] $ of Bernoulli random variable
+with the same asymptotic error rate. The reduction is formally stated in
+Lemma~\ref{l:reduction}.
 Since we prove \ref{t:dynamics_lower_bound} using a reduction to
 an estimation problem we shall first briefly introduce some definitions and
 notation.
@@ -75,14 +80,15 @@ The reduction formally stated and in Lemma~\ref{l:reduction}.
 
 
 We sketch here the main idea. For a full proof see Section~\ref{app:s:lower_bound}
-of the Appendix.  For a given a $p \in [0,1]$, we construct an instance $I_p$ such that
+of the Appendix.  For a given $p \in [0,1]$, we construct an instance $I_p$ such that
 $x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
 receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
 This can be easily done using the star graph $K_{1,2}$.
-The agent corresponding to the center node, $c$, has $\alpha_c = 0$ and
-whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$.
+The agent corresponding to the center node, $c$, has $\alpha_c = 1/2$ and
+whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$,
+as shown in Figure~\ref{fig:lb_instance}.
 %
-\begin{figure}
+\begin{figure}\
   \centering
 
   \begin{tikzpicture}
