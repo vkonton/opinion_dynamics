@@ -143,8 +143,10 @@ to it. In Section~\ref{s:fictitious_noregret} we show the following
 theorem.
 
 \begin{theorem}\label{t:fictitious_noregret}
-For every instance $I=(P,s,a)$, for every agent $i$
-\[\sum_{\tau=1}^tC_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq \text{min}_{x \in [0,1]}\sum_{\tau=1}^tC_i(x,x_{W_i^\tau}(\tau)) + \bigOh{\log t}\]
+Let the function $f_i:\reals^2 \mapsto [0,1]$, $f_i(x,b) = (1-\alpha_i)(x-b)^2 + \alpha_i(x-s_i)^2$, where $\alpha_i \in (0,1]$ and $s_i \in [0,1]$.
+For any sequence of $\{b_t\}_{t=1}^\infty$ where $b_t \in [0,1]$. If 
+\[x_i(t) = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f_i(x,b_t)\] then for all $t$,
+\[\sum_{\tau=1}^tf_i^t(x_i(\tau),b_\tau) \leq \text{min}_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
 
 Even though our update rule (\ref{eq:fictitious_play}) has the above
