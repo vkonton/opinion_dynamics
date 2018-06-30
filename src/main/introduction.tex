@@ -15,143 +15,116 @@
 \section{Introduction}
 
 \subsection{Friedkin-Johsen Model and Opinion Formation Games}
-In the Friedkin-Johsen model (FJ-model), there exist a set of $n$ agents.
-Each agent $i$ poses an internal opinion $s_i \in [0,1]$ and a self
-confidence coefficient $\alpha_i \in (0,1]$. At each round $t \geq 1$,
-agent $i$ \emph{publicly} expresses the opinion $x_i(t)$ that is defined as follows:
+In \cite{BKO11} the following \emph{opinion formation game} was introduced.
+A weighted directed graph $G(V,E,w)$ is assumed were the vertices stand for the
+agent and the acres the social influence among them. Each agent $i \in V$ poses an
+\emph{internal opinion} $s_i \in [0,1]$ and a \emph{self confidence coefficient} $w_i>0$. The strategy of
+each agent $i$ is the opinion $x_i\in [0,1]$ that she publicly expresses incuring her cost
 
-\begin{equation}\label{eq:fj_dynamics}
-  x_i(t) = (1-\alpha_i) \sum_{j \neq i}p_{ij}x_j(t-1) + \alpha_i s_i
+\begin{equation}\label{eq:BKO_cost}
+  C_i(x_i,x_{-i}) = \sum_{j \in N_i}w_{ij}(x_i-x_j)^2 + w_i(x_i -s_i)^2
 \end{equation}
-where $p_{ij} \in [0,1]$ is the influence that $j$ has
-imposes on $i$ and it is assumed that $\sum_{j \neq i}p_{ij}=1$. The simplicity of the 
-update rule (\ref{eq:fj_dynamics}) makes the FJ-model plausible, because in real social
-networks it is very unlikely that agents change their opinions according
-to complex rules.
+\noindent where $N_i$ denotes $i$'s \emph{neighbors} and $w_{ij}$ stands for
+the social influence $j$ imposes on $i$. In \cite{BKO11} they proved that 
+the above game always admits a \emph{Pure Nash Equilibrium} (PNE) $x^* \in [0,1]^n$
+and studied the efficiency of $x^*$. The proved that the \emph{Price of Anarchy}
+is less than $9/8$ in case $G$ is bidirectional and $w_{ij}=w_{ji}$. 
 
-Based on the FJ-model, in \cite{BKO11}, they propose an \emph{opinion formation game} 
-in which the strategy that each agent
-$i$ adopts, is the opinion $x_i \in [0,1]$
-that she publicly expresses incurring her a cost
-
-\begin{equation}\label{eq:kleinberg_cost}
-  C_i(x_i,x_{-i})=(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i -x_j)^2 + \alpha_i(x_i-s_i)^2.
+In the repeated version of the game defined in \ref{eq:BKO_cost}, at each round $t$ each agent $i$
+selects an opinion $x_i(t)$ and then suffers cost $C_i(x_i(t),x_{-i}(t))$. If each agent updates
+her opinion to the \emph{best response} of $x(t-1)$,
+\begin{equation}\label{eq:FJ_model}
+x_i(t) = \text{argmin}_{x \in [0,1]}C_i(x,x_{-i}(t-1))=\frac{\sum_{j \in N_i}w_{ij}x_j(t-1) + w_is_i}{\sum_{j \in N_i}w_{ij} + w_i} 
 \end{equation}
-
-\noindent In \cite{BK011} they prove that it always admits a unique
-Nash Equilibrium $x^*$ and they provide bound for the Price of Anarchy.
-It is easy to see that if each agent $i$ at round $t \geq 1$ updates her opinion so as to minimize her
-individual cost defined in (\ref{eq:kleinberg_cost}), the resulting dynamics (\emph{best response dynamics}) 
-is the dynamics defined by the FJ-model. We denote an instance of the above game as $(P,s,\alpha)$ where
-$P_{n \times n}$ is a stochastic matrix with $P_{ij}=p_{ij}$ and zero diagonal entries, $s$ is the initial 
-opinion vector and $\alpha$ the self confidence vector. In \cite{GS14} it is proved that for any instance $I=(P,s,a)$ of the FJ-model, the opinion
-vector $x(t)=(x_1(t),\ldots,x_n(t))$ converges to the unique equilibrium point
-$x^*$. As a result, the game defined in \cite{BKO11} admits several nice properties. It admits
-a PNE $x^*$ and that a simple but more importantly a \emph{rational} update rule, 
-in the sense the agents they minimize their individual cost, that leads the agents to 
-the $x^*$.
+\noindent we obtain the Friedkin-Johsen model (FJ-model), which is one of the most influential models in opinion dynamics.
+The convergence properties of the FJ-model have been extensively studied. In \cite{GS14} the proved that the $x(t)$ always converges
+to the PNE $x^*$ and they provided bounds for the convergence time for various graph topologies. As a result, the 
+above \emph{opinion formation game} has some nice algorithmic properties: It always admits a unique equilibrium point $x^*$ and there
+exits a simple but most importantly rational update rule for selfish agents that leads the overall system to equilibrium.
 
 \subsection{Opinion Formation Games with Random Payoffs}
-In the game defined by (\ref{eq:kleinberg_cost}),
-agent's $i$ cost $C_i(x_i,x_{-i})$ is a deterministic function of the
-opinion vector $x$. Many recent works (see e.g. \cite{Zhou17}) study games
-with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
-random variable. The random payoff setting can be much more realistic,
-since randomness may naturally occur because of incomplete information, noise
-or other stochastic factors. Motivated by this
-line of research we introduce a random payoff variant of the opinion
-formation game (\ref{eq:kleinberg_cost}).
+Our work is motivated by the fact that the definition of the cost $C_i(x_i,x_{-i})$ 
+in~\ref{eq:BKO_cost} implies that agent $i$ meets with of her neighbors. This is more
+clear in the update rule \ref{eq:FJ_model}. Each agent in order to compute her best response
+has to learn the opinion of all her neighbors. The latter is seems quite unatural in today's
+huge social networks (e.g. Facebook, Twitter e.t.c.) in which each agent may have
+several hundreds of friends. With this in mind it is far more reasonable to assume 
+that each day an agent meets a small subset of her acquaintances and
+suffers a cost based on how much she disagrees with them.To capture the above thoughts, 
+we introduce the following variant of the opinion formation game with random
+payoffs.
 
 \begin{definition}\label{d:random_payoff_game}
-  Let $I=(P,s,a)$ an instance of the opinion formation game
-  and $x$ the opinion vector. Each agent $i$,
+  %Let $I$ and instance of the opinion formation game defined in \ref{eq:BKO_cost}. 
+  For a given opinion vector $x \in [0,1]^n$, the cost of agent $i$
+  is the random variable $C_i(x_i,x_{-i})$ defined as follows:
   \begin{itemize}
-    \item meets another agent $j$ with probability $p_{ij}$
-    \item suffers cost
-      $C_i(x_i,x_{-i}) = (1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$
+    \item $i$ meets one of her neighbors $j$ with probability $p_{ij}= w_{ij}/\sum_{j\in N_i}w_{ij}$
+    \item suffers cost $(1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$
   \end{itemize}
+  where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
 \end{definition}
-\noindent Our \emph{Opinion Formation Game with Random Payoffs} is similar to
-the \emph{Opinion Formation Game} defined in \cite{BKO11} with the main difference that
-for a given opinion vector $x \in [0,1]^n$, the cost $C_i(x_i,x_{-i})$ that agent $i$ 
-suffers, instead of being $(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$,
-is a random variable with $\Expnew{}{C_i(x_i,x_{-i})}=(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$. 
-This game is more compatible to a realistic setting since
-in real world networks (e.g. Facebook, Twitter e.t.c.), each agent may have
-several hundreds of friends. As a result it is far more reasonable to assume that
-every day, each agent meets a random small subset of her acquaintances and
-suffers a cost based on how much she disagrees with them.
-In our random payoff variant, we can define
-the Pure Nash Equilibrium (PNE) with respect to the expected cost of each agent.
-More precisely, an opinion vector $x^*$ is a PNE if and only if for each agent $i$,
-\[\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}, \text{ for all }x_i' \in [0,1]\]
-The existence of the unique the PNE $x^*$ follows directly by the results in \cite{BKO11}.
+\noindent Our variant has a very natural interpretation: The cost $C_i(x_i,x_{-i})$ in (\ref{eq:BKO_cost})
+can be written equivalently 
+\begin{equation}\label{eq:BKO11_cost_equivalent}
+C_i(x_i,x_{-i}) = W_i\lp( (1-\alpha_i)\sum_{j \in N_i} p_{ij}(x_i-x_j)^2  + \alpha_i(x_i-s_i)^2\rp)
+\end{equation}
+where $W_i=\sum_{j\in N_i}w_{ij} + w_i$ is a positive constant independent of the opinion vector $x\in [0,1]^n$. As a result, the coefficient $\alpha_i$
+measures the reluctancy of agent $i$ to adopt an opinion other than $s_i$, while the $p_{ij}$ can be seen the \emph{real} influence that $j$ poses on $i$.
+In Definiton~\ref{d:random_payoff_game}, $p_{ij}$ is frequency that $i$ meets $j$ aligning with the fact that we are influenced more by those we interact
+oftently. Equation \ref{eq:BKO11_cost_equivalent} also helps us to establish existence of PNE for the our random payoff variant. 
+In our variant the notion of PNE is propertly extended with respect to the expected cost of each agent i.e. $x^* \in [0,1]$ is PNE if and only if
+for each agent $i$, $\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}$ for all $x_i' \in [0,1]$. Since 
+$\Expnew{}{C_i(x_i,x_{-i})}=(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$, it follows
+from equation~\ref{eq:BKO11_cost_equivalent} that the two games admit the same equilibrium point $x^*$. 
 
-\noindent In the the repeated version of our game, all agents adopt their internal opinions i.e. $x_i(0)=s_i$. 
-At each round $t$,
+\begin{definition}\label{d:random_payof_game_instance}
+We denote an instance of opinion formation game with random payoffs as $(P,s,\alpha)$.
 \begin{itemize}
- \item each agent $i$ adopts an opinion $x_i(t)$
- \item meets one agent $j$ with probability $p_{ij}$
- \item suffers cost $C_i(x_i(t),x_j(t)) = (1-\alpha_i)(x_i(t)-x_j(t)) +\alpha_is_i$
-\end{itemize}
+ \item $P$ is a $n \times n$  matrix with non-negative elements $p_{ij}$,
+  with $p_{ii}=0$ and $\sum_{j=1}^n p_{ij}$ is either $0$ or $1$.
+ \item $s \in [0,1]^n$ is the internal opinion vector.
+ \item $\alpha \in [0,1]^n$ the self confidence coefficient vector.
+ \end{itemize}
+\end{definition}
+We use this matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ if $j \in N_i$ and $0$ otherwise.
+If $N_i \neq \emptyset$ then $\sum_{j=1}^n p_{ij}=1$ otherwise it is $0$. We remark that in case $N_i=\emptyset$, $\alpha_i=1$ 
+and agent $i$ suffers cost $(x_i-s_i)^2$.
 
-\noindent In this work we investigate whether there exists a simple and natural update rule that the agents can 
-adopt such that the respective opinion vector converges to the unique equilibrium point $x^*$.
-Since at each round $t$ each agent $i$ meets just one agent $j$, we require that this update
-rule to be a function of just the opinions that $i$ has seen until round $t$, the internal opinion 
-$s_i$ and the self confidence $\alpha_i$. Moreover, we would like this update rule to be 
-a \emph{rational} behavioral assumption for selfish agents.
-
-%In this work, we investigate whether there exists \emph{natural} update rules that the agents
-%can adopt and the resulting  vector opinion $x(t)$ converges to $x^*$. 
-%By \emph{natural} we mean that each agent $i$ at round $t$ just knows the opinions of the agents that 
-%she has met until round $t$ and this is the only information that she can 
-%use to update her opinion. For example, \emph{best response} is not natural in this sense because
-%each agent must be aware the opinion of all the other agents at round $t$ in order to update her opinion.
-%At the same time the update rule must be a \emph{rational} behavioral assumption for selfish agents. Thus,
-%we consider update rules $A$ having the following of the following form:
-%\begin{itemize}
-% \item $x_i(t)= A^t(Y_1^{t-1},\alpha_i,s_i)~\text{limited information assumption}$ 
-% \item $\sum \limits_{\tau=1}^tC_i(x_i(\tau),Y_\tau) \leq \argmin_{x \in [0,1]}\sum \limits_{\tau=1}^tC_i(x,Y_\tau) + o(t)~\text{no regret assumption}$
-%\end{itemize}
-
-
-%\begin{algorithm}
-%  \caption{Fictitious Play}
-%  \label{alg:fictitious_play}
-%  \begin{algorithmic}[1]
-%    \State Initially, each agent $i$ adopts the opinion $s_i$.
-%    \State At round $t \geq 1$, each agent $i$ meets another agent $j$ with probability $p_{ij}$.
-%    \State Suffers cost
-%    \(
-%      C^t_i(x_i(t-1),x_{j}(t-1))=(1-a_i)(x_i(t-1)
-%      -x_j(t-1))^2 + a_i(x_i(t-1)-s_i)^2
-%    \)
-%    \State Updates opinion as follows:
-%    \begin{equation}\label{eq:fictitious_play}
-%      x_i(t) =
-%      \argmin_{x \in [0,1]}
-%      \sum_{\tau=1}^tC^{\tau}_i(x,x_j(\tau-1))
-%    \end{equation}
-%\end{algorithmic}
-%\end{algorithm}
+%Many recent works (see e.g. \cite{Zhou17}) study games
+%with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
+%random variable. The random payoff setting can be much more realistic,
+%since randomness may naturally occur because of incomplete information, noise
+%or other stochastic factors. Motivated by this
+%line of research we introduce a random payoff variant of the opinion
+%formation game.
 
 \subsection{Our Results and Techniques}
-In this work, we study the convergence properties
-of the opinion vector $x(t)$ if all agents play according to \emph{fictitious play}.
-Namely, if $W_i^\tau$ denotes the agent that agent $i$ met at round $\tau$, then
+
+In this work we study the repeated version of the game defined in \ref{d:random_payoff_game}.
+At round $t$, each agent $i$ selects an opinion $x_i(t) \in [0,1]$ and then suffers the 
+random cost $C_i(x_i(t),x_{-i}(t))$. We are intested in simple and natural update rules
+that the agents can adopt such as the resulting opinion vector $x(t)$ converges to $x^*$.
+Moreover we require that this update rules are \emph{rational} behavioral assumption for 
+selfish agents.
+
+In Section~\ref{s:fictitious_convergence}, we study the convergence properties of $x(t)$ if all agents adopt \emph{fictitious play}
+as their update rule. At round $\tau < t$ each agent $i$ experiences disagreement cost 
+\[(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 \]where $W_i^\tau$
+denotes the agent that $i$ met at round $\tau$. We assume that $i$ selects her opinion 
+in order to minimize her aggregated cost until round $t$,
 \begin{equation}\label{eq:fictitious_play}
-x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
+x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 
 \end{equation}
-Generally speaking \emph{fictitious play} does not guarantee
-convergence to the equilibrium. In Section~\ref{s:fictitious_convergence} 
-we show that, for our game with random payoffs, fictitious play converges to equilibrium, with the following
+\noindent Generally speaking \emph{fictitious play} does not guarantee
+convergence to the equilibrium. We prove that \emph{fictitious play} 
+converges to equilibrium $x^*$ with the following
 rate.
 \begin{theorem}\label{t:fictitious_convergence}
   Let $I = (P,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
   $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
-  Algorithm~\ref{alg:fictitious_play} after $t$ rounds satisfies
+  update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
   \[
     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
     C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
@@ -161,12 +134,12 @@ rate.
 The update rule (\ref{eq:fictitious_play}) guarantees convergence
 while vastly reducing the information exchange between the agents
 at each round. In (\ref{eq:fictitious_play}) each agent $i$ learns the opinion of only one agent
-at each round whereas in the classical FJ-model (\ref{eq:fj_dynamics}), agent $i$ must
-learn the opinions of all the agents $j$ with with $p_{ij}>0$. In terms of
+at each round whereas in the classical FJ-model (\ref{eq:FJ_model}), agent $i$ must
+learn the opinions of all her neighbors. In terms of
 total communication needed to get within distance $\eps$ of the
 equilibrium $x^*$, the update rule (\ref{eq:fictitious_play}) needs
-$O(n \log n)$ communication while (\ref{eq:fj_dynamics}) needs
-$O(|E|)$, where $E$ is the set of positive entries in matrix $P$. 
+$O(n \log n)$ communication while (\ref{eq:FJ_model}) needs
+$O(|E|)$, where $E$ is the number of edges of graph $G$. 
 Of course for this difference to be significant we need
 each agent to have at least $O(\log n)$ friend (agents $j$ with $p_{ij}>0$). A large social
 network like Facebook has approximately $2$ billion users and each user
@@ -183,8 +156,10 @@ to it. In Section~\ref{s:fictitious_noregret} we show the following
 theorem.
 
 \begin{theorem}\label{t:fictitious_noregret}
-For every instance $I=(P,s,a)$, for every agent $i$
-\[\sum_{\tau=1}^tC_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq \text{min}_{x \in [0,1]}\sum_{\tau=1}^tC_i(x,x_{W_i^\tau}(\tau)) + \bigOh{\log t}\]
+Let the function $f_i:\reals^2 \mapsto [0,1]$, $f_i(x,b) = (1-\alpha_i)(x-b)^2 + \alpha_i(x-s_i)^2$, where $\alpha_i \in (0,1]$ and $s_i \in [0,1]$.
+For any sequence of $\{b_t\}_{t=1}^\infty$ where $b_t \in [0,1]$. If 
+\[x_i(t) = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f_i(x,b_t)\] then for all $t$,
+\[\sum_{\tau=1}^tf_i^t(x_i(\tau),b_\tau) \leq \text{min}_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
 
 Even though our update rule (\ref{eq:fictitious_play}) has the above
