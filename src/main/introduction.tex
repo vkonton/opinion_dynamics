@@ -60,7 +60,7 @@ payoffs.
   is the random variable $C_i(x_i,x_{-i})$ defined as follows:
   \begin{itemize}
     \item $i$ meets one of her neighbors $j$ with probability $p_{ij}= w_{ij}/\sum_{j\in N_i}w_{ij}$
-    \item and suffers cost $(1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$
+    \item suffers cost $(1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$
   \end{itemize}
   where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
 \end{definition}
@@ -76,7 +76,20 @@ oftently. Equation \ref{eq:BKO11_cost_equivalent} also helps us to establish exi
 In our variant the notion of PNE is propertly extended with respect to the expected cost of each agent i.e. $x^* \in [0,1]$ is PNE if and only if
 for each agent $i$, $\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}$ for all $x_i' \in [0,1]$. Since 
 $\Expnew{}{C_i(x_i,x_{-i})}=(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$, it follows
-from equation~\ref{eq:BKO11_cost_equivalent} that the two games admit the same equilibrium point $x^*$.
+from equation~\ref{eq:BKO11_cost_equivalent} that the two games admit the same equilibrium point $x^*$. 
+
+\begin{definition}\label{d:random_payof_game_instance}
+We denote an instance of opinion formation game with random payoffs as $(P,s,\alpha)$.
+\begin{itemize}
+ \item $P$ is a $n \times n$  matrix with non-negative elements $p_{ij}$,
+  with $p_{ii}=0$ and $\sum_{j=1}^n p_{ij}$ is either $0$ or $1$.
+ \item $s \in [0,1]^n$ is the internal opinion vector.
+ \item $\alpha \in [0,1]^n$ the self confidence coefficient vector.
+ \end{itemize}
+\end{definition}
+We use this matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ if $j \in N_i$ and $0$ otherwise.
+If $N_i \neq \emptyset$ then $\sum_{j=1}^n p_{ij}=1$ otherwise it is $0$. We remark that in case $N_i=\emptyset$, $\alpha_i=1$ 
+and agent $i$ suffers cost $(x_i-s_i)^2$.
 
 %Many recent works (see e.g. \cite{Zhou17}) study games
 %with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
