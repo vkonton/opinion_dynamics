@@ -41,18 +41,18 @@ close to the mean $p$ of the Bernoulli that generated the samples.
 To measure the efficiency of an estimator we define the \emph{risk}
 which corresponds to the expected loss of an estimator.
 \begin{definition}\label{d:risk}
-  For an estimator $\hat{\theta} =\{\hat{\theta_t}\}_{t=1}^\infty$ we define
+  For an estimator $\theta =\{\theta_t\}_{t=1}^\infty$ we define
   its convergence rate
-  $R_p(\theta_t) = E_p[|\hat{\theta_t}(X_1,\ldots,X_t) - p|]$,
+  $R_p(\theta_t) = E_p[|\theta_t(X_1,\ldots,X_t) - p|]$,
   where
   \[
-    E_p[|\hat{\theta_t}(X_1,\ldots,X_t) - p|]
+    E_p[|\theta_t(X_1,\ldots,X_t) - p|]
     = \sum_{(y_1,\ldots,y_t)\in\{0,1\}^t}
-    |\hat{\theta_t}(y_1,\ldots,y_t) -p|\
+    |\theta_t(y_1,\ldots,y_t) -p|\
     p^{\sum_{i=1}^t y_i}\ (1-p)^{t-\sum_{i=1}^t y_i}
   \]
 \end{definition}
-The quantity $E_p[|\hat{\theta_t}(Y_1,\ldots,Y_t) - p|]$ is the expected distance
+The quantity $E_p[|\theta_t(Y_1,\ldots,Y_t) - p|]$ is the expected distance
 of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the
 distribution that generated the samples is $B(p)$.
 To simplify notation we will also write it as $E_p[|\hat{\theta_t} - p|]$.

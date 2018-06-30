@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  28 JUN 2018 22:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  28 JUN 2018 23:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -445,7 +445,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip53
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 56.
+Package hyperref Info: Option `colorlinks' set `true' on input line 57.
 
 (/usr/share/texmf-dist/tex/latex/base/textcomp.sty
 Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
@@ -1084,12 +1084,20 @@ Package caption Info: listings package is loaded.
 \c@subfigure=\count271
 \c@subtable=\count272
 )
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+arrows.code.tex
+File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.1a (rcs-revision 1.1)
+
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2013/09/23 v3.0.1a (rcs-revision 1.16)
+\arrowsize=\dimen298
+))
 (/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
-\pgfarrowinset=\dimen298
-\pgfarrowlength=\dimen299
-\pgfarrowwidth=\dimen300
-\pgfarrowlinewidth=\dimen301
+\pgfarrowinset=\dimen299
+\pgfarrowlength=\dimen300
+\pgfarrowwidth=\dimen301
+\pgfarrowlinewidth=\dimen302
 )) (./templates/colors.tex) (./templates/macros.tex)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
@@ -1198,13 +1206,13 @@ LaTeX Info: Redefining \nameref on input line 7.
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count274
-\scratchdimen=\dimen302
+\scratchdimen=\dimen303
 \scratchbox=\box73
 \nofMPsegments=\count275
 \nofMParguments=\count276
 \everyMPshowfont=\toks50
 \MPscratchCnt=\count277
-\MPscratchDim=\dimen303
+\MPscratchDim=\dimen304
 \MPnumerator=\count278
 \makeMPintoPDFobject=\count279
 \everyMPtoPDFconversion=\toks51
@@ -1303,28 +1311,50 @@ ex
 
 LaTeX Warning: Citation `BK011' on page 1 undefined on input line 41.
 
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 99.
-[1] [2]
+[1]
 
-LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 227.
+LaTeX Warning: Reference `alg:fictitious_play' on page 2 undefined on input lin
+e 154.
 
+[2]
 
-LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 227.
-
-
-LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 227.
+LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 254.
 
 
-LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 236.
+LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 254.
+
+
+LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 254.
+
+
+LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 263.
 
 ) (./src/main/preliminaries.tex [3]
 Underfull \hbox (badness 10000) in paragraph at lines 42--46
 
  []
 
-) (./src/main/fictitious_convergence.tex [4] [5])
-(./src/main/fictitious_noregret.tex [6] [7]) (./src/main/lower_bound2.tex
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 53.
+
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+e 71.
+
+) (./src/main/fictitious_convergence.tex
+
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+e 3.
+
+
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+e 10.
+
+
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+e 18.
+
+[4] [5]) (./src/main/fictitious_noregret.tex [6] [7])
+(./src/main/lower_bound2.tex
 
 LaTeX Warning: Reference `alg:no_regret_dynamics' on page 8 undefined on input 
 line 14.
@@ -1350,7 +1380,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
 [15
 
-]) (./src/appendix/lower_bound_2_appendix.tex
+]
+
+LaTeX Warning: Reference `alg:fictitious_play' on page 16 undefined on input li
+ne 115.
+
+) (./src/appendix/lower_bound_2_appendix.tex
 
 LaTeX Warning: Reference `t:reduction' on page 16 undefined on input line 5.
 
@@ -1377,11 +1412,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 82.
  ) 
 Here is how much of TeX's memory you used:
- 34566 strings out of 492982
- 769490 string characters out of 6138579
- 998697 words of memory out of 5000000
- 37124 multiletter control sequences out of 15000+600000
- 105053 words of font info for 197 fonts, out of 8000000 for 9000
+ 35098 strings out of 492982
+ 784157 string characters out of 6138579
+ 1007073 words of memory out of 5000000
+ 37656 multiletter control sequences out of 15000+600000
+ 104804 words of font info for 194 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,13n,96p,939b,960s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fo
@@ -1405,10 +1440,10 @@ onts/type1/public/lm/lmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
 y6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
 -dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /lm/lmtt9.pfb>
-Output written on clean.pdf (19 pages, 481117 bytes).
+Output written on clean.pdf (19 pages, 479493 bytes).
 PDF statistics:
- 410 PDF objects out of 1000 (max. 8388607)
- 342 compressed objects within 4 object streams
+ 407 PDF objects out of 1000 (max. 8388607)
+ 337 compressed objects within 4 object streams
  97 named destinations out of 1000 (max. 500000)
  24597 words of extra memory for PDF output out of 24883 (max. 10000000)
 

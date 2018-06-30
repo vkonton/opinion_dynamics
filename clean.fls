@@ -299,6 +299,10 @@ INPUT /usr/share/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption3.sty
 INPUT /usr/share/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
 INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
 INPUT /usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
