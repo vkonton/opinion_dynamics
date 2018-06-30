@@ -419,10 +419,10 @@ INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmbx10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri10.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr7.tfm
 INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmr5.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
-INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
 INPUT src/main/preliminaries.tex
 INPUT src/main/preliminaries.tex
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
+INPUT /usr/share/texmf-dist/fonts/tfm/public/lm/ec-lmri7.tfm
 INPUT src/main/fictitious_convergence.tex
 INPUT src/main/fictitious_convergence.tex
 INPUT src/main/fictitious_noregret.tex

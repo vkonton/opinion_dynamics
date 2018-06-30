@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  28 JUN 2018 23:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  30 JUN 2018 19:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1105,9 +1105,6 @@ Package csquotes Info: ... none found.
 
 LaTeX Warning: Label `eq:error_per_round' multiply defined.
 
-
-LaTeX Warning: Label `thm:convergence' multiply defined.
-
 )
 \openout1 = `clean.aux'.
 
@@ -1309,27 +1306,75 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./src/main/introduction.t
 ex
 
-LaTeX Warning: Citation `BK011' on page 1 undefined on input line 41.
-
-[1]
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 2 undefined on input lin
-e 154.
-
-[2]
-
-LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 254.
+LaTeX Warning: Citation `BKO11' on page 1 undefined on input line 4.
 
 
-LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 254.
+LaTeX Warning: Citation `BKO11' on page 1 undefined on input line 14.
 
 
-LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 254.
+LaTeX Warning: Citation `GS14' on page 1 undefined on input line 26.
+
+[1] [2]
+
+LaTeX Warning: Citation `GS14' on page 3 undefined on input line 169.
 
 
-LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 263.
+LaTeX Warning: Reference `s:lower_bound' on page 3 undefined on input line 170.
 
-) (./src/main/preliminaries.tex [3]
+
+
+LaTeX Warning: Reference `s:exponential_update_rules' on page 3 undefined on in
+put line 195.
+
+
+LaTeX Warning: Citation `FJ90' on page 3 undefined on input line 228.
+
+
+LaTeX Warning: Citation `BKO11' on page 3 undefined on input line 228.
+
+
+LaTeX Warning: Citation `BGM13' on page 3 undefined on input line 232.
+
+
+LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 232.
+
+
+LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 232.
+
+
+LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 232.
+
+
+LaTeX Warning: Citation `GS14' on page 3 undefined on input line 233.
+
+
+LaTeX Warning: Citation `BFM16' on page 3 undefined on input line 236.
+
+
+LaTeX Warning: Citation `YOASS13' on page 3 undefined on input line 241.
+
+
+LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 241.
+
+
+LaTeX Warning: Citation `FV97' on page 3 undefined on input line 244.
+
+
+LaTeX Warning: Citation `FS99' on page 3 undefined on input line 244.
+
+
+LaTeX Warning: Citation `HM00' on page 3 undefined on input line 244.
+
+
+LaTeX Warning: Citation `BEL06' on page 3 undefined on input line 247.
+
+
+LaTeX Warning: Citation `EMN09' on page 3 undefined on input line 249.
+
+
+LaTeX Warning: Citation `CHM17' on page 3 undefined on input line 254.
+
+[3]) (./src/main/preliminaries.tex
 Underfull \hbox (badness 10000) in paragraph at lines 42--46
 
  []
@@ -1345,33 +1390,109 @@ e 71.
 LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 3.
 
+[4]
 
-LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
 e 10.
 
 
-LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
 e 18.
 
-[4] [5]) (./src/main/fictitious_noregret.tex [6] [7])
-(./src/main/lower_bound2.tex
+[5]) (./src/main/fictitious_noregret.tex [6] [7]) (./src/main/lower_bound2.tex
 
 LaTeX Warning: Reference `alg:no_regret_dynamics' on page 8 undefined on input 
 line 14.
 
 
-LaTeX Warning: Reference `t:lower_bound' on page 8 undefined on input line 68.
+LaTeX Warning: Reference `l:reduction' on page 8 undefined on input line 22.
+
+
+LaTeX Warning: Reference `t:dynamics_lower_bound' on page 8 undefined on input 
+line 23.
 
 [8]
 
-LaTeX Warning: Citation ` Tsy08' on page 9 undefined on input line 179.
+LaTeX Warning: Reference `l:reduction' on page 9 undefined on input line 69.
 
-[9] [10]) (./src/main/side_result.tex [11] [12]) [13] (./clean.bbl) [14
 
-]
-(./src/appendix/fictitious_convergence_appendix.tex
+LaTeX Warning: Reference `app:s:lower_bound' on page 9 undefined on input line 
+79.
+
+
+LaTeX Warning: Reference `fig:lb_instance' on page 9 undefined on input line 86
+.
+
+
+LaTeX Warning: Reference `t:dynamics_lower_bound' on page 9 undefined on input 
+line 113.
+
+
+LaTeX Warning: Reference `cl:fixed_p' on page 9 undefined on input line 123.
+
+[9]
+
+LaTeX Warning: Reference `eq:crlb' on page 10 undefined on input line 153.
+
+
+LaTeX Warning: Reference `cl:fixed_p' on page 10 undefined on input line 154.
+
+
+LaTeX Warning: Citation `Wal39' on page 10 undefined on input line 168.
+
+
+LaTeX Warning: Citation `Yu97' on page 10 undefined on input line 177.
+
+
+LaTeX Warning: Citation ` Tsy08' on page 10 undefined on input line 177.
+
+
+LaTeX Warning: Citation `duchi_stats311' on page 10 undefined on input line 178
+.
+
+
+LaTeX Warning: Reference `l:estimation_lower_bound' on page 10 undefined on inp
+ut line 205.
+
+[10]
+
+LaTeX Warning: Reference `fig:estimator' on page 11 undefined on input line 325
+.
+
+) (./src/main/side_result.tex
+
+LaTeX Warning: Reference `s:lower_bound' on page 11 undefined on input line 3.
+
+[11]
+
+LaTeX Warning: Reference `alg:frequencies' on page 12 undefined on input line 1
+19.
+
+
+LaTeX Warning: Reference `l:vc_inequality' on page 12 undefined on input line 1
+33.
+
+[12]
+
+LaTeX Warning: Reference `alg:line:counters' on page 13 undefined on input line
+ 141.
+
+
+LaTeX Warning: Reference `eq:empirical_distribution' on page 13 undefined on in
+put line 143.
+
+) [13] (./clean.bbl) [14
+
+] (./src/appendix/fictitious_convergence_appendix.tex
 
 LaTeX Warning: Reference `l:error_bound' on page 15 undefined on input line 4.
+
+
+LaTeX Warning: Reference `eq:recursion' on page 15 undefined on input line 34.
+
+
+LaTeX Warning: Reference `eq:recursion_zero' on page 15 undefined on input line
+ 34.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 94--95
@@ -1391,8 +1512,8 @@ LaTeX Warning: Reference `t:reduction' on page 16 undefined on input line 5.
 
 [16]
 
-LaTeX Warning: Reference `t:lower_bound' on page 17 undefined on input line 68.
-
+LaTeX Warning: Reference `fig:lb_instance' on page 17 undefined on input line 4
+4.
 
 [17]) [18]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 82.
@@ -1412,11 +1533,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 82.
  ) 
 Here is how much of TeX's memory you used:
- 35098 strings out of 492982
- 784157 string characters out of 6138579
- 1007073 words of memory out of 5000000
- 37656 multiletter control sequences out of 15000+600000
- 104804 words of font info for 194 fonts, out of 8000000 for 9000
+ 35100 strings out of 492982
+ 784238 string characters out of 6138579
+ 1004489 words of memory out of 5000000
+ 37655 multiletter control sequences out of 15000+600000
+ 104975 words of font info for 195 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,13n,96p,939b,960s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fo
@@ -1440,10 +1561,10 @@ onts/type1/public/lm/lmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
 y6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
 -dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /lm/lmtt9.pfb>
-Output written on clean.pdf (19 pages, 479493 bytes).
+Output written on clean.pdf (19 pages, 479844 bytes).
 PDF statistics:
- 407 PDF objects out of 1000 (max. 8388607)
- 337 compressed objects within 4 object streams
- 97 named destinations out of 1000 (max. 500000)
+ 357 PDF objects out of 1000 (max. 8388607)
+ 309 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
  24597 words of extra memory for PDF output out of 24883 (max. 10000000)
 

@@ -1,11 +1,11 @@
 This is BibTeX, Version 0.99d (TeX Live 2017/Arch Linux)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: clean.aux
-White space in argument---line 42 of file clean.aux
+White space in argument---line 39 of file clean.aux
  : \citation{BGM13,
  :                  EFHS17, CKO13, BFM16}
 I'm skipping whatever remains of this command
-White space in argument---line 45 of file clean.aux
+White space in argument---line 42 of file clean.aux
  : \citation{YOASS13,
  :                    FGV16}
 I'm skipping whatever remains of this command
@@ -17,49 +17,48 @@ The style file: alpha.bst
 Database file #1: refs.bib
 A bad cross reference---entry "CHM17"
 refers to entry "DBLP:conf/sagt/2017", which doesn't exist
-Warning--I didn't find a database entry for "BK011"
 Warning--I didn't find a database entry for ""
 Warning--I didn't find a database entry for "DBLP:conf/sagt/2017"
 Warning--empty year in HM00
-You've used 16 entries,
+You've used 15 entries,
             2543 wiz_defined-function locations,
-            682 strings with 7419 characters,
-and the built_in function-call counts, 7747 in all, are:
-= -- 797
-> -- 337
-< -- 11
-+ -- 115
-- -- 114
-* -- 551
-:= -- 1193
-add.period$ -- 50
-call.type$ -- 16
-change.case$ -- 103
-chr.to.int$ -- 16
-cite$ -- 17
-duplicate$ -- 316
-empty$ -- 587
-format.name$ -- 132
-if$ -- 1655
+            674 strings with 7162 characters,
+and the built_in function-call counts, 7137 in all, are:
+= -- 733
+> -- 312
+< -- 10
++ -- 106
+- -- 105
+* -- 512
+:= -- 1108
+add.period$ -- 47
+call.type$ -- 15
+change.case$ -- 96
+chr.to.int$ -- 15
+cite$ -- 16
+duplicate$ -- 288
+empty$ -- 540
+format.name$ -- 122
+if$ -- 1518
 int.to.chr$ -- 1
 int.to.str$ -- 0
-missing$ -- 15
-newline$ -- 83
-num.names$ -- 50
-pop$ -- 106
+missing$ -- 14
+newline$ -- 78
+num.names$ -- 47
+pop$ -- 97
 preamble$ -- 1
-purify$ -- 119
+purify$ -- 111
 quote$ -- 0
-skip$ -- 284
+skip$ -- 256
 stack$ -- 0
-substring$ -- 536
-swap$ -- 89
-text.length$ -- 11
+substring$ -- 489
+swap$ -- 76
+text.length$ -- 10
 text.prefix$ -- 3
 top$ -- 0
-type$ -- 128
+type$ -- 120
 warning$ -- 1
-while$ -- 80
-width$ -- 18
-write$ -- 212
+while$ -- 74
+width$ -- 17
+write$ -- 199
 (There were 4 error messages)

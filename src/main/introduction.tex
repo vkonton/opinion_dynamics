@@ -1,17 +1,3 @@
-
-
-%matrix with $P_{ij}=(1-a_i)p_{ij}$
-%matrix with $P_{ij}=(1-a_i)p_{ij}$
-%Equation~\ref{eq:fj_dynamics}
-%can also be written in the following matrix form:
-
-%\begin{equation}\label{eq:fj_matrix_form}
-%  x(t) =  P x(t-1) + A s,
-%\end{equation}
-%where $x(t)=(x_1(t),\ldots,x_n(t))$ is the opinion vector at round $t$, $s$ is the initial opinion vector, $P_{n \times n}$ is a substochastic
-%matrix with $P_{ij}=(1-a_i)p_{ij}$ and $A_{n \times n}$ is diagonal matrix with $A_{ii}=\alpha_i$. 
-
-
 \section{Introduction}
 
 \subsection{Friedkin-Johsen Model and Opinion Formation Games}
@@ -25,37 +11,37 @@ each agent $i$ is the opinion $x_i\in [0,1]$ that she publicly expresses incurin
   C_i(x_i,x_{-i}) = \sum_{j \in N_i}w_{ij}(x_i-x_j)^2 + w_i(x_i -s_i)^2
 \end{equation}
 \noindent where $N_i$ denotes $i$'s \emph{neighbors} and $w_{ij}$ stands for
-the social influence $j$ imposes on $i$. In \cite{BKO11} they proved that 
+the social influence $j$ imposes on $i$. In \cite{BKO11} they proved that
 the above game always admits a \emph{Pure Nash Equilibrium} (PNE) $x^* \in [0,1]^n$
 and studied the efficiency of $x^*$. The proved that the \emph{Price of Anarchy}
-is less than $9/8$ in case $G$ is bidirectional and $w_{ij}=w_{ji}$. 
+is less than $9/8$ in case $G$ is bidirectional and $w_{ij}=w_{ji}$.
 
 In the repeated version of the game defined in \ref{eq:BKO_cost}, at each round $t$ each agent $i$
 selects an opinion $x_i(t)$ and then suffers cost $C_i(x_i(t),x_{-i}(t))$. If each agent updates
 her opinion to the \emph{best response} of $x(t-1)$,
 \begin{equation}\label{eq:FJ_model}
-x_i(t) = \text{argmin}_{x \in [0,1]}C_i(x,x_{-i}(t-1))=\frac{\sum_{j \in N_i}w_{ij}x_j(t-1) + w_is_i}{\sum_{j \in N_i}w_{ij} + w_i} 
+x_i(t) = \text{argmin}_{x \in [0,1]}C_i(x,x_{-i}(t-1))=\frac{\sum_{j \in N_i}w_{ij}x_j(t-1) + w_is_i}{\sum_{j \in N_i}w_{ij} + w_i}
 \end{equation}
 \noindent we obtain the Friedkin-Johsen model (FJ-model), which is one of the most influential models in opinion dynamics.
 The convergence properties of the FJ-model have been extensively studied. In \cite{GS14} the proved that the $x(t)$ always converges
-to the PNE $x^*$ and they provided bounds for the convergence time for various graph topologies. As a result, the 
+to the PNE $x^*$ and they provided bounds for the convergence time for various graph topologies. As a result, the
 above \emph{opinion formation game} has some nice algorithmic properties: It always admits a unique equilibrium point $x^*$ and there
 exits a simple but most importantly rational update rule for selfish agents that leads the overall system to equilibrium.
 
 \subsection{Opinion Formation Games with Random Payoffs}
-Our work is motivated by the fact that the definition of the cost $C_i(x_i,x_{-i})$ 
+Our work is motivated by the fact that the definition of the cost $C_i(x_i,x_{-i})$
 in~\ref{eq:BKO_cost} implies that agent $i$ meets with of her neighbors. This is more
 clear in the update rule \ref{eq:FJ_model}. Each agent in order to compute her best response
 has to learn the opinion of all her neighbors. The latter is seems quite unatural in today's
 huge social networks (e.g. Facebook, Twitter e.t.c.) in which each agent may have
-several hundreds of friends. With this in mind it is far more reasonable to assume 
+several hundreds of friends. With this in mind it is far more reasonable to assume
 that each day an agent meets a small subset of her acquaintances and
-suffers a cost based on how much she disagrees with them.To capture the above thoughts, 
+suffers a cost based on how much she disagrees with them.To capture the above thoughts,
 we introduce the following variant of the opinion formation game with random
 payoffs.
 
 \begin{definition}\label{d:random_payoff_game}
-  %Let $I$ and instance of the opinion formation game defined in \ref{eq:BKO_cost}. 
+  %Let $I$ and instance of the opinion formation game defined in \ref{eq:BKO_cost}.
   For a given opinion vector $x \in [0,1]^n$, the cost of agent $i$
   is the random variable $C_i(x_i,x_{-i})$ defined as follows:
   \begin{itemize}
@@ -65,21 +51,24 @@ payoffs.
   where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
 \end{definition}
 \noindent Our variant has a very natural interpretation: The cost $C_i(x_i,x_{-i})$ in (\ref{eq:BKO_cost})
-can be written equivalently 
+can be written equivalently
 \begin{equation}\label{eq:BKO11_cost_equivalent}
 C_i(x_i,x_{-i}) = W_i\lp( (1-\alpha_i)\sum_{j \in N_i} p_{ij}(x_i-x_j)^2  + \alpha_i(x_i-s_i)^2\rp)
 \end{equation}
 where $W_i=\sum_{j\in N_i}w_{ij} + w_i$ is a positive constant independent of the opinion vector $x\in [0,1]^n$. As a result, the coefficient $\alpha_i$
 measures the reluctancy of agent $i$ to adopt an opinion other than $s_i$, while the $p_{ij}$ can be seen the \emph{real} influence that $j$ poses on $i$.
 In Definiton~\ref{d:random_payoff_game}, $p_{ij}$ is frequency that $i$ meets $j$ aligning with the fact that we are influenced more by those we interact
-oftently. Equation \ref{eq:BKO11_cost_equivalent} also helps us to establish existence of PNE for the our random payoff variant. 
-In our variant the notion of PNE is propertly extended with respect to the expected cost of each agent i.e. $x^* \in [0,1]$ is PNE if and only if
-for each agent $i$, $\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}$ for all $x_i' \in [0,1]$. Since 
+oftenly. Equation \ref{eq:BKO11_cost_equivalent} also helps us to establish existence of PNE for the our random payoff variant.
+In our variant the notion of PNE is properly extended with respect to the expected cost of each agent i.e. $x^* \in [0,1]$ is PNE if and only if
+for each agent $i$, $\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}$ for all $x_i' \in [0,1]$. Since
 $\Expnew{}{C_i(x_i,x_{-i})}=(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$, it follows
-from equation~\ref{eq:BKO11_cost_equivalent} that the two games admit the same equilibrium point $x^*$. 
+from equation~\ref{eq:BKO11_cost_equivalent} that the two games admit the same equilibrium point $x^*$.
+
+Instead of denoting an instance of the opinion formation game using a graph $G$
+and weights $w_{ij}$, $w_i$ we adopt the following more convenient notation.
 
 \begin{definition}\label{d:random_payof_game_instance}
-We denote an instance of opinion formation game with random payoffs as $(P,s,\alpha)$.
+We denote an instance of the opinion formation game with random payoffs as $(P,s,\alpha)$.
 \begin{itemize}
  \item $P$ is a $n \times n$  matrix with non-negative elements $p_{ij}$,
   with $p_{ii}=0$ and $\sum_{j=1}^n p_{ij}$ is either $0$ or $1$.
@@ -88,8 +77,9 @@ We denote an instance of opinion formation game with random payoffs as $(P,s,\al
  \end{itemize}
 \end{definition}
 We use this matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ if $j \in N_i$ and $0$ otherwise.
-If $N_i \neq \emptyset$ then $\sum_{j=1}^n p_{ij}=1$ otherwise it is $0$. We remark that in case $N_i=\emptyset$, $\alpha_i=1$ 
+If $N_i \neq \emptyset$ then $\sum_{j=1}^n p_{ij}=1$ otherwise it is $0$. We remark that in case $N_i=\emptyset$, $\alpha_i=1$
 and agent $i$ suffers cost $(x_i-s_i)^2$.
+Abusing notation we will sometimes refer to the graph $G$.
 
 %Many recent works (see e.g. \cite{Zhou17}) study games
 %with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
@@ -99,25 +89,25 @@ and agent $i$ suffers cost $(x_i-s_i)^2$.
 %line of research we introduce a random payoff variant of the opinion
 %formation game.
 
-\subsection{Our Results and Techniques}
+\subsection{Our Results}
 
 In this work we study the repeated version of the game defined in \ref{d:random_payoff_game}.
-At round $t$, each agent $i$ selects an opinion $x_i(t) \in [0,1]$ and then suffers the 
+At round $t$, each agent $i$ selects an opinion $x_i(t) \in [0,1]$ and then suffers the
 random cost $C_i(x_i(t),x_{-i}(t))$. We are intested in simple and natural update rules
 that the agents can adopt such as the resulting opinion vector $x(t)$ converges to $x^*$.
-Moreover we require that this update rules are \emph{rational} behavioral assumption for 
+Moreover we require that this update rules are \emph{rational} behavioral assumption for
 selfish agents.
 
 In Section~\ref{s:fictitious_convergence}, we study the convergence properties of $x(t)$ if all agents adopt \emph{fictitious play}
-as their update rule. At round $\tau < t$ each agent $i$ experiences disagreement cost 
+as their update rule. At round $\tau < t$ each agent $i$ experiences disagreement cost
 \[(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 \]where $W_i^\tau$
-denotes the agent that $i$ met at round $\tau$. We assume that $i$ selects her opinion 
+denotes the agent that $i$ met at round $\tau$. We assume that $i$ selects her opinion
 in order to minimize her aggregated cost until round $t$,
 \begin{equation}\label{eq:fictitious_play}
-x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 
+x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
 \end{equation}
 \noindent Generally speaking \emph{fictitious play} does not guarantee
-convergence to the equilibrium. We prove that \emph{fictitious play} 
+convergence to the equilibrium. We prove that \emph{fictitious play}
 converges to equilibrium $x^*$ with the following
 rate.
 \begin{theorem}\label{t:fictitious_convergence}
@@ -139,7 +129,7 @@ learn the opinions of all her neighbors. In terms of
 total communication needed to get within distance $\eps$ of the
 equilibrium $x^*$, the update rule (\ref{eq:fictitious_play}) needs
 $O(n \log n)$ communication while (\ref{eq:FJ_model}) needs
-$O(|E|)$, where $E$ is the number of edges of graph $G$. 
+$O(|E|)$, where $E$ is the number of edges of graph $G$.
 Of course for this difference to be significant we need
 each agent to have at least $O(\log n)$ friend (agents $j$ with $p_{ij}>0$). A large social
 network like Facebook has approximately $2$ billion users and each user
@@ -147,78 +137,91 @@ has usually more that $100$ friends which far more than $\log(2\ 10^9)$.
 
 Apart from converging to the equilibrium, our update rule
 (\ref{eq:fictitious_play}) also ensures \emph{no-regret} for the agents.
-Having no-regret means that the average cost for each agent $i$
-after $T$ rounds is close to the average cost that she would
-suffer by expressing any fixed opinion. This is a very important
-feature of our update rule because even players that selfishly
-will to minimize their incurred cost, could choose to play according
-to it. In Section~\ref{s:fictitious_noregret} we show the following
-theorem.
+This is a very important feature of our update rule because even players
+that selfishly will to minimize their incurred cost, could choose to play according
+to it.  In Section~\ref{s:fictitious_noregret} we show the following theorem.
 
 \begin{theorem}\label{t:fictitious_noregret}
-Let the function $f_i:\reals^2 \mapsto [0,1]$, $f_i(x,b) = (1-\alpha_i)(x-b)^2 + \alpha_i(x-s_i)^2$, where $\alpha_i \in (0,1]$ and $s_i \in [0,1]$.
-For any sequence of $\{b_t\}_{t=1}^\infty$ where $b_t \in [0,1]$. If 
-\[x_i(t) = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f_i(x,b_t)\] then for all $t$,
-\[\sum_{\tau=1}^tf_i^t(x_i(\tau),b_\tau) \leq \text{min}_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,b_\tau) + \bigOh{\log t}\]
+Let the function $f_i:\reals^2 \mapsto [0,1]$,
+$f_i(x,b) = (1-\alpha_i)(x-b)^2 + \alpha_i(x-s_i)^2$, where $\alpha_i \in (0,1]$ and $s_i \in [0,1]$.
+Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence, with $b_t \in [0,1]$.
+If \(x_i(t) = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f_i(x,b_t)\),
+then for all $t$,
+\[\sum_{\tau=1}^tf_i^t(x_i(\tau),b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
+Theorem~\ref{t:fictitious_noregret} explains why fictitious play
+is a rational choice for selfish agents. If agent $i$ updates her
+opinion according to fictitious play, then it is guarantied
+that the average cost that $i$ experiences,
+\[
+  \frac{1}{t}\sum_{\tau=1}^t
+  \lp(
+  (1-\alpha_i) (x_i(\tau) - x_{W_i^{\tau}}(\tau))^2 + \alpha_i (x_i(\tau) - s_i)^2
+  \rp)
+\]
+is always close to the average cost of choosing choosing the best fixed opinion in hindsight.
+Observe that the latter holds independently of the way other agents
+choose their opinions and of the sequence of neighbors that $i$ meets.
 
 Even though our update rule (\ref{eq:fictitious_play}) has the above
 desired properties, for a fixed instance $I=(P,s,\alpha)$ it only achieves convergence rate of
-$\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$, while the original FJ-model outperforms
-our update rule since it achieves convergence rate $O(e^{-\rho t})$ \cite{GS14}.
-In section 5 define the \emph{limited information update rules}, that it is the class
-of update rules that for each agent $i$: depend only on the opinions that she agent has met
-until time $t$ and her $s_i,\alpha_i$ (\emph{fictitious play} in \ref{eq:fictitious_play} 
-is clearly an \emph{limited information update rule}).
-In section 5, we prove if each agent $i$ updates her 
-opinion at round $t$ according to $A$. Then the resulting opinion vector $x_A(t)$ cannot converge to the equilibrium $x^*$ 
-with exponential asymptotic rate. More precisely,
-\begin{theorem}\label{thm:lower_bound}
-If all agents update their opinion according to limited information update rule $A$. Then for any $c>0$ there
-exists an instance $I=(P,s,a)$ such that $\Exp{\norm{\infty}{x_A(t) - x^*}} = \Omega(1/t^{1+c})$.
+$\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$, while the original FJ-model
+achieves convergence rate $O(e^{-\rho t})$ \cite{GS14}.
+In section \ref{s:lower_bound} we explain this exponential gap.
+The reason is that the update rule (\ref{eq:fictitious_play})
+only depends on the opinions of the agents that agent $i$ meets,
+$\alpha_i$, and $s_i$. We call such update rules \enquote{opinion dependent}.
+Observe that fictitious play (\ref{eq:fictitious_play}) is opinion dependent.
+  In Theorem~\ref{t:lower_bound} we
+show that for any opinion dependent update rule there exists an instance
+$I = (P,s,\alpha)$ such that $\poly(1/\eps)$ rounds are required to
+achieve convergence within error $\eps$.
+\begin{theorem}\label{t:lower_bound}
+  Let $A$ be an \emph{opinion dependent} update rule, which all
+  agents use to update their opinions.
+  For any $c>0$ there exists an instance $I=(P,s,a)$ such that
+  \[
+    \Exp{\norm{\infty}{x_A(t) - x^*}} = \Omega(1/t^{1+c}),
+  \]
+where $x_A(t)$ denotes the opinion vector produced by $A$.
 \end{theorem}
 
-To prove this we show that any \emph{limited information update rule} $A$
-(that achieves this convergence rate to the equilibrium) implies
-the existence of an algorithm that uses i.i.d samples from a Bernoulli random
-variable $B(p)$ to estimate its success probability $p$ with the same asymptotic
-error rate for all $p \in [0,1]$. Then we prove that such an estimator does not exists (Theorem ??).
+In order to bypass the lower bound of Theorem~\ref{t:lower_bound},
+the update rules must use more information than simply the opinions
+of the neighbors, e.g. the indices of the neighbors that agent $i$ meets.
+Observe that update rules that ensure no regret for the agents must be opinion
+dependent; Theorem~\ref{t:lower_bound} rules out the possibility
+that they achieve exponential convergence rate.
+In Section~\ref{s:exponential_update_rules} we also argue that
+update rules that converge exponentially fast,
+are an unrealistic choice for modelling the true behavior of
+the agents because of their complicated form.
+Precisely, we explicitly construct $2$ update rules that, while they
+achieve exponential convergence rate, they are indeed complicated.
+The first one if a function of the opinions and the indices of
+the agents that $i$ meets. The second one is a function of
+the opinions, and the number of neighbors of each agent $i$.
+In conclusion, the results of this work indicate that
+natural dynamics in our limited information exchange setting
+come at the price of slow convergence rate.
 
-In section 6, we investigate whether this lower bound can be extended to more
-general class of estimators. We present an update rule that also depends on some parameters of the influence matrix $P$ 
-and acheives exponential convergence. The latter implies that \emph{limited information update rules}
-is the maximal class that the lower bound applies.
 
-% In section 4, we investigate where a better convergence rate,
-% $E[||x(t)-x^*||_{\infty}]$ can be acheived if agent selected another no-regret
-% algorithm. More precisely, we investigate the following question, \emph{Is
-%   there a no-regret algorithm such that for every instance }
-% $I,~E[||x(t)-x^*||_{\infty}] \in \bigOh{\frac{1}{t}}?$  We reduce this question
-% to the following question in statistical estimation, \emph{Is there a Bernoulli
-%   estimator }$\hat{\theta}$\emph{, such that for all }$q \in [0,1]$, $\lim_{t
-%   \rightarrow \infty} t E_q[|\hat{\theta^t} -q|]=0?$  To the best of our
-% knowledge this question is not answered in statistics literature. However, we
-% use standard tecnhiques for lower bounds in the statistical estimation to prove
-% the following theorem.
+% observe that an update rule that ensures no regret must be opinion dependent.
+% Furthermore, in Section~\ref{s:exponential_update_rules} we provide $2$ examples of
+% update rules that while they converge exponentially fast, they are
+% unnatural in the sense that selfish agents wou
+%  If an update rule also depends on these indices,
+% then the lower bound of Theorem~\ref{t:lower_bound} does not hold.
 
-% \begin{theorem}
-%   For any Bernoulli estimator
-%   $\hat{\theta}$, for all $[a,b] \subseteq [0,1]:~$ $\lim_{t \rightarrow
-%     \infty}t \int_{a}^bE_p[|\hat{\theta^t} -p|]= +\infty$
-% \end{theorem}
-% This result indicates that the second question and consequently the
-% first is very unlike to hold, especially for any reasonable no-regret
-% algorithm. We believe that there exists no such algorithm and we leave this
-% proof as an open problem.\\
 
-% Finally in section 5, we present an interesting side result. The reason that
-% there does not exists a no-regret algorithm, that ensures faster convergence
-% rate, is the algorithm's ignorance to the instance $I$ that defines the
-% dynamics. More formally, a no-regret algorithm does needs the values $s_i,a_i$
-% and $Y_1,\ldots,Y_t$ to determine $x_i(t)$. We find interesting that we design
-% a distributed algorithm that uses $s_i,a_i,Y_1,\ldots,Y_t$ and additionally the
-% $d_\text{max}$ of $G$ that achieves for every instance $I$ convergence rate,
-% $E||x(t)-x^*||_{\infty} \in \bigOh{2^{-\frac{\sqrt{t}}{d^3}}}$.
+% To prove this we show that any \emph{limited information update rule} $A$
+% (that achieves this convergence rate to the equilibrium) implies
+% the existence of an algorithm that uses i.i.d samples from a Bernoulli random
+% variable $B(p)$ to estimate its success probability $p$ with the same asymptotic
+% error rate for all $p \in [0,1]$.
+% Then we prove that such an estimator does not exists (Theorem ??).
+
+
 
 \subsection{Related Work}
 Our work belongs to the line of work studying the seminal Friedkin-Jonhsen

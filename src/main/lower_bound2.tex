@@ -1,22 +1,20 @@
-\section{Lower Bound for no-regret Dynamics}\label{s:lower_bound}
+\section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
 
 As we have already discussed for any fixed instance $I$ with
 $\rho\geq 1/2$, \emph{fictitious play} achieves convergence rate
 $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=\bigOh{1/\sqrt{t}}$,
 this rate is outperformed by the rate of the original \emph{FJ model}
 convergence rate, $\Expnew{I}{\norm{\infty}{x(t)-x^*}}=O(2^{-t})$.
-In this section we investigate whether there exists another no-regret
-algorithm $A$ that the agents can select and ensures a better convergence rate
+In this section we investigate whether there exists another
+opinion dependent algorithm $A$ that the agents can select and ensures a better convergence rate
 to the equilibrium.
 We show the following lower bound for the convergence rate.
-\begin{theorem}\label{t:dynamics_lower_bound}
+\begin{theorem}
   Let $A$ a no-regret algorithm and let $x_A(t)$ the
   opinion vector defined in \ref{alg:no_regret_dynamics}.
   For any $c>0$, there exists an instance $I_A$ such that
   $\Expnew{I_A}{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t^{1+c})$.
 \end{theorem}
-The above theorem states that rationality in selfish agents comes
-with the price of slow convergence to the equilibrium point.
 
 At first we show that any no-regret algorithm $A$, achieving the previous
 convergence rate, can be used as an estimator of the parameter
