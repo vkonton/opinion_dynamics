@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  1 JUL 2018 18:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  1 JUL 2018 20:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1098,6 +1098,12 @@ Package csquotes Info: ... none found.
 LaTeX Warning: Label `eq:error_per_round' multiply defined.
 
 
+LaTeX Warning: Label `t:fictitious_noregret' multiply defined.
+
+
+LaTeX Warning: Label `t:fictitious_noregret' multiply defined.
+
+
 LaTeX Warning: Label `thm:convergence' multiply defined.
 
 )
@@ -1329,8 +1335,11 @@ e 25.
 LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 33.
 
-[4] [5]) (./src/main/fictitious_noregret.tex [6] [7])
-(./src/main/lower_bound.tex
+[4] [5]) (./src/main/fictitious_noregret.tex [6]
+
+LaTeX Warning: Reference `t:no_regret' on page 7 undefined on input line 133.
+
+[7]) (./src/main/lower_bound.tex
 
 LaTeX Warning: Reference `t:dynamics_lower_bound' on page 8 undefined on input 
 line 36.
@@ -1346,7 +1355,7 @@ LaTeX Warning: Citation ` Tsy08' on page 10 undefined on input line 190.
 
 [10]) (./src/main/side_result.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 11.
+put line 17.
  [11] [12]) [13] (./clean.bbl) [14
 
 ]
@@ -1388,11 +1397,11 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 81.
  ) 
 Here is how much of TeX's memory you used:
- 34776 strings out of 492982
- 778932 string characters out of 6138579
- 1002745 words of memory out of 5000000
+ 34770 strings out of 492982
+ 778864 string characters out of 6138579
+ 1000707 words of memory out of 5000000
  37309 multiletter control sequences out of 15000+600000
- 105224 words of font info for 198 fonts, out of 8000000 for 9000
+ 104928 words of font info for 195 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,13n,96p,939b,956s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fo
@@ -1416,10 +1425,10 @@ onts/type1/public/lm/lmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
 y6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
 -dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /lm/lmtt9.pfb>
-Output written on clean.pdf (19 pages, 480893 bytes).
+Output written on clean.pdf (19 pages, 481587 bytes).
 PDF statistics:
- 451 PDF objects out of 1000 (max. 8388607)
- 383 compressed objects within 4 object streams
+ 452 PDF objects out of 1000 (max. 8388607)
+ 384 compressed objects within 4 object streams
  121 named destinations out of 1000 (max. 500000)
  24597 words of extra memory for PDF output out of 24883 (max. 10000000)
 
