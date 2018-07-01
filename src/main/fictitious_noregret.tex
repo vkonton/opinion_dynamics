@@ -61,48 +61,50 @@ for fictitious play.
 
 \begin{lemma}
 Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
-then for all $t$, 
-\[\sum_{\tau=0}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}\]
+then for all $t$,
+\[
+\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
+\] 
 \end{lemma}
 
 \begin{proof}By definition of $y_t$,
   $\min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau) = \sum_{\tau=0}^t f(y_t,b_\tau)$, so
   \begin{align*}
     \sum_{\tau=0}^t f(y_\tau,b_\tau) - \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau) &=
-    \sum_{t=0}^T C^t(y^t) - \sum_{t=0}^T C^t(y^T)\\
-    &= \sum_{t=0}^{T-1} C^t(y^t) - \sum_{t=0}^{T-1} C^t(y^T)\\
-    &\leq \sum_{t=0}^{T-1} C^t(y^t) - \sum_{t=0}^{T-1} C^t(y^{T-1})\\
-    &= \sum_{t=0}^{T-2} C^t(y^t) - \sum_{t=0}^{T-2} C^t(y^{T-1})
+    \sum_{\tau=0}^t f(y_\tau,b_\tau) - \sum_{\tau=0}^t f(y_t,b_\tau)\\
+    &= \sum_{\tau=0}^{t-1} f(y_\tau,b_\tau) - \sum_{\tau=0}^{t-1} f(y_t,b_\tau)\\
+    &\leq \sum_{\tau=0}^{t-1} f(y_\tau,b_\tau) - \sum_{\tau=0}^{t-1} f(y_{t-1},b_\tau)\\
+    &= \sum_{\tau=0}^{t-2} f(y_\tau,b_\tau) - \sum_{\tau=0}^{t-2}f(y_{t-1},b_\tau) 
   \end{align*}
   Continuing in the same way, we get
-  $\sum_{t=0}^T C^t(y^t) \leq min_{ z \in [0,1]} \sum_{t=0}^T C^t(z)$.
+  $\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$.
 \end{proof}
 
 Now we can derive some intuition for the reason that \emph{fictitious play}
-admits no regret. Since the cost incurred by the sequence $y^t$ is at most that
-of the best fixed strategy, we can compare the cost incurred by $z^t$ with
-that of $y^t$.  However, the functions in $\mcal{F}_i$ are Lipschitz-continuous and more
+admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
+of the best fixed strategy, we can compare the cost incurred by $x_t$ with
+that of $y_t$.  However, the functions in $\mcal{F}_i$ are Lipschitz-continuous and more
 specifically quadratic.
-These functions are all "similar" to each other, so the extra function $C^t$ that $y^t$ takes
+These functions are all "similar" to each other, so the extra function $f(x_t,b_t)$ that $y_t$ takes
 as input doesn't change dramatically the minimum point of the sum.
-Thus, for each $t$ the numbers $z^t$ and $y^t$ are quite
+Thus, for each $t$ the numbers $x_t$ and $y_t$ are quite
 close and as a result the difference in their cost must be quite small.
 
 \begin{lemma}
   For all $t$,
-  \(C^t(z^t) \leq C^t(y^t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}\).
+  \(f(x_t,b_t) \leq f(y_t,b_t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}\).
 \end{lemma}
 \begin{proof}
   We first prove that for all $t$,
   \begin{equation}\label{eq:abs_value}
-    \lp|z^t - y^t \rp| \leq \frac{1-\alpha}{t+1}.
+    \lp|x_t - y_t \rp| \leq \frac{1-\alpha}{t+1}.
   \end{equation}
   By definition
-  \(z^t = \alpha s + (1-\alpha)\frac{\sum_{\tau = 0}^{t-1} b_\tau}{t}\)
+  \(x_t = \alpha s + (1-\alpha)\frac{\sum_{\tau = 0}^{t-1} b_\tau}{t}\)
   and
-  \( y^t = \alpha s + (1-\alpha)\frac{\sum_{\tau = 0}^t b_\tau}{t+1}\).
+  \( y_t = \alpha s + (1-\alpha)\frac{\sum_{\tau = 0}^t b_\tau}{t+1}\).
   \begin{align*}
-    \lp|z^t - y^t\rp|
+    \lp|x_t - y_t\rp|
     &=
     (1-\alpha)\lp|\frac{\sum_{\tau = 0}^{t-1}b_\tau}{t}
     - \frac{\sum_{\tau = 0}^t b_\tau}{t+1}\rp|\\
@@ -113,32 +115,32 @@ close and as a result the difference in their cost must be quite small.
   \end{align*}
   The last inequality follows from the fact that $b_\tau \in [0,1]$.
   We now use inequality~(\ref{eq:abs_value}) to bound the difference
-  \( C^t(z^t) - C^t(y^t) \).
+  \( f(x_t,b_t) - f(y_t,b_t) \).
   \begin{align*}
-    C^t(z^t)
+    f(x_t,b_t)
     &=
-    \alpha(z^t - s)^2 + (1 - \alpha)(z^t - y_t)^2 \\
+    \alpha(x_t - s)^2 + (1 - \alpha)(x_t - y_t)^2 \\
     &\leq
-    \alpha(y^t - s)^2 + 2\alpha\lp|y^t -
-    s\rp|\lp|z^t - y^t\rp| + \alpha \lp|z^t - y^t\rp|^2 \\
+    \alpha(y_t - s)^2 + 2\alpha\lp|y_t -
+    s\rp|\lp|x_t - y_t\rp| + \alpha \lp|x_t - y_t\rp|^2 \\
     &\quad + (1-\alpha)(y_t - y_t)^2 +
-    2(1-\alpha)\lp|y^t - y_t\rp|\lp|z^t-y^t\rp| + (1 - \alpha)\lp|z^t - y^t\rp|^2\\
+    2(1-\alpha)\lp|y_t - y_t\rp|\lp|x_t-y_t\rp| + (1 - \alpha)\lp|x_t - y_t\rp|^2\\
     &\leq
-    C^t(y^t) + 2\lp|z^t - y^t\rp| + \lp|y^t - z^t\rp|^2\\
+    f(y_t,b_t) + 2\lp|x_t - y_t\rp| + \lp|y_t - x_t\rp|^2\\
     &\leq
-    C^t(y^t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}
+    f(y_t,b_t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}
   \end{align*}
 \end{proof}
 
-Theorem~\ref{t:no_regret} easily follows since
+Theorem~\ref{t:fictitious_noregret} easily follows since
 \begin{align*}
-  \sum_{t=0}^T C^t(z^t)
+  \sum_{\tau=0}^T f(x_\tau,b_\tau)
   &\leq
-  \sum_{t=0}^T C^t(y^t) + \sum_{t=0}^T 2\frac{1-\alpha}{t+1} +
-  \sum_{t=0}^T \frac{(1-\alpha)^2}{(t+1)^2}\\
+  \sum_{\tau=0}^T f(y_\tau,b_\tau) + \sum_{\tau=0}^T 2\frac{1-\alpha}{\tau+1} +
+  \sum_{\tau=0}^T \frac{(1-\alpha)^2}{(\tau+1)^2}\\
   &\leq
-  \min_{ z \in [0,1]} \sum_{t=0}^T C^t(z) +
+  \min_{ x \in [0,1]} \sum_{\tau=0}^T f(x,y_\tau) +
   2(1-\alpha)(\log T + 1) + (1-\alpha)\frac{\pi^2}{6}\\
   &\leq
-  \min_{ z \in [0,1]} \sum_{t=0}^T C^t(z) + O(\log T)
+  \min_{ x \in [0,1]} \sum_{\tau=0}^T f(x,y_\tau) + O(\log T)
 \end{align*}
