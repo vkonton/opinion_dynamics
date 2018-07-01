@@ -1,44 +1,74 @@
 \section{Fictitious Play is no-regret}\label{s:fictitious_noregret}
 
-In this section we consider the Online Convex Optimization problem
-that we defined in Subsection~\ref{s:preliminaries:oco}.
-For every agent $i$ with $a_i, s_i$, the following OCO problem is defined.
-For $b\in [0,1]$ we define $C_b(z) = \alpha_i(z-s_i)^2 + (1-\alpha_i)(z-b)^2$.
-The feasibility set is $K = [0,1]$ and the set of functions that the
-adversary chooses from is $\mcal{F}_i = \{ C_b(z): b \in [0,1] \}$.
-Since the functions of $\mcal{F}_i$ are uniquely determined by $b$
-the adversary simply chooses a sequence $b^t$.
-We now show that fictitious play admits no-regret for this OCO problem.
-To simplify notation, since we have fixed an agent $i$, we drop the subscript
-$i$ from the following, i.e. we denote $\alpha_i$ by $\alpha$.
-Let $z^t$ be the choice that $A$ makes at time $t$.
-\begin{theorem}\label{t:no_regret}
-  Let
-  \(z^t = \argmin_{ z \in [0,1]} \sum_{\tau = 0}^{t-1} C^\tau (z) \)
-  then
-  \[
-    \sum_{t = 0}^{T} C^t(z^t) \leq
-    \min_{ z \in [0,1]} \sum_{t=0}^T C^t(z) + O(\log  T).
-  \]
+%As we have already mentioned in the repeated version of an instance $(P,s,\alpha)$,
+%At round $t$ agent $i$ each agent $i$,
+%\begin{enumerate}
+% \item selects an opinion $x_i(t)$
+% \item meets the neighbor $W_i^t$, $\Prob{W_i^t = j}=p_{ij}$
+% \item suffers cost $(1-\alpha_i)(x_i(t)-x_i(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
+%\end{enumerate}
+%In this section we prove that an agent $i$ could consider updating her opinion using 
+%update rule~\ref{eq:fictitious_play} i.e. $x_i(t)= \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_i(\tau))^2 + \alpha_i(x-s_i)^2$
+%since it ensures her no-regret.
+
+\noindent In this section we explain why \emph{fictitious play} is a rational behavioral assumption in
+the repeated version of the opinion formation game defined in \ref{d:random_payoff_game}. Based on this 
+game we consider an appropriate \emph{Online Convex Optimization} problem. This problem can be viewed 
+as the following a game played between an adversary and a player. \emph{At round }$t$,
+\begin{enumerate}
+  \item \emph{the player selects a value }$x_t \in [0,1]$.
+  \item \emph{the adversary observes the }$x_t$ \emph{and selects a} $b_t \in [0,1]$
+  \item \emph{the player receives cost} $f(x_t,b_t)=(1-\alpha)(x_t-b_t)^2 + \alpha(x_t -s)^2$.
+\end{enumerate}
+where $\alpha,s$ are constants in $[0,1]$. The goal of the player is to pick $x_t$ based on the history
+$(b_1,\ldots,b_{t-1})$ in a way that minimizes the total cost. We emphasize
+that the agent has to select $x_t$ before seeing $b_t$, otherwise the
+problem becomes trivial. We show that a good strategy that the player can follow is 
+\[x_t = \argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}f(x,b_\tau)\]
+which is known as \emph{fictitious play}. We prove that in our OCO problem,
+\emph{fictitious play} is a \emph{no-regret} algorithm meaning that
+it provides guarantees concerining the cost that agent $i$ receives. Informally speaking
+if an algorithm $A$ is \emph{no-regret} for an OCO problem then for any selection of the
+adversary, the the total cost that player suffers is less than 
+the cost that she would suffer by selecting any fixed value. The gaurantees that \emph{fictitious play} 
+ensures are presented in Theorem~\label{t:fictitious_noregret} which is the main result of this section.
+\begin{theorem}\label{t:fictitious_noregret}
+Consider the fuction $f:[0,1]^2 \mapsto [0,1]$ with $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$.
+Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}f(x_,b_\tau)$
+then for all $t$, 
+\[\sum_{\tau=1}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=1}^tf(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
 
-In order to prove this claim, we will first define a similar rule $y^t$
-that takes into account the function $C^t$ for the "prediction" at time $t$.
-Intuitively, this guarantees that the rule admits no regret.
+Theorem~\ref{t:fictitious_noregret} explains why update rule~(\ref{eq:fictitious_play}) is a
+reasonable choice for selfish agents. In our repeated game, agent $i$ selects at round each $t$ an opinion
+$x_i(t)\in [0,1]$ and then suffers cost $f_i(x_i(t),x_{W_i^t}(t))=(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2+\alpha_i(x_i(t)-s_i)^2$. 
+If agent $i$ selects $x_i(t)$ according  to the update rule \ref{eq:fictitious_play} then Theorem~\ref{t:fictitious_noregret}
+applies and\[\frac{1}{t}\sum_{\tau=1}^t f_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq
+\frac{1}{t}\min_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,x_{W_i^\tau}(\tau)) + \bigOh{\frac{\log t}{t}}\]
+meaning that the time averaged total disagreement cost that agent $i$ suffers is similar to the 
+time averaged cost of the best fixed opinion.
+
+%\noindent Theorem~\ref{t:fictitious_noregret} implies that in the repeated version our gaame. 
+%Updating the opinion according to \emph{Fictitious play} is a the rational choice for an agent $i$,
+%since it ensures that the time averaged aggregated cost that she experiences is similar to the 
+%is always close to the average cost of choosing choosing the best fixed opinion in hindsight no matter the way
+%that the other agents update their opinions and no matter which agents $i$ meets.
+
+The rest of the section is dedicated to prove Theorem~\ref{t:fictitious_noregret}. we first prove that a similar update rule that also takes into
+account the value $b_t$ admits no-regret. Obviously knowing the value $b_t$ before time selecting $x_t$ is direct contrast
+with the OCO framework, however proving the no-regret property for this algorithm easily extends to proving the no-regret property 
+for fictitious play. 
 
 \begin{lemma}
-  Let
-  \(y^t = \argmin_{z \in [0,1]} \sum_{\tau = 0}^t C^\tau (z)\)
-  then
-  \[
-    \sum_{t=0}^T C^t(y^t) \leq \min_{z \in [0,1]} \sum_{t=0}^T C^t(z)
-  \]
+Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
+then for all $t$, 
+\[\sum_{\tau=0}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}\]
 \end{lemma}
 
-\begin{proof}By definition of $y^t$,
-  $\min_{ z \in [0,1]} \sum_{t=0}^T C^t(z) = \sum_{t=0}^T C^t(y^T)$, so
+\begin{proof}By definition of $y_t$,
+  $\min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau) = \sum_{\tau=0}^t f(y_t,b_\tau)$, so
   \begin{align*}
-    \sum_{t=0}^T C^t(y^t) - \min_{ z \in [0,1]} \sum_{t=0}^T C^t(z) &=
+    \sum_{\tau=0}^t f(y_\tau,b_\tau) - \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau) &=
     \sum_{t=0}^T C^t(y^t) - \sum_{t=0}^T C^t(y^T)\\
     &= \sum_{t=0}^{T-1} C^t(y^t) - \sum_{t=0}^{T-1} C^t(y^T)\\
     &\leq \sum_{t=0}^{T-1} C^t(y^t) - \sum_{t=0}^{T-1} C^t(y^{T-1})\\

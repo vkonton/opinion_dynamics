@@ -46,7 +46,7 @@ payoffs.
   is the random variable $C_i(x_i,x_{-i})$ defined as follows:
   \begin{itemize}
     \item $i$ meets one of her neighbors $j$ with probability $p_{ij}= w_{ij}/\sum_{j\in N_i}w_{ij}$
-    \item suffers cost $(1-a_i)\sum_{j \in N_i}(x_i-x_j)^2 + a_i(x_i-s_i)^2$
+    \item suffers cost $(1-a_i)(x_i-x_j)^2 + a_i(x_i-s_i)^2$
   \end{itemize}
   where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
 \end{definition}
@@ -57,12 +57,15 @@ C_i(x_i,x_{-i}) = W_i\lp( (1-\alpha_i)\sum_{j \in N_i} p_{ij}(x_i-x_j)^2  + \alp
 \end{equation}
 where $W_i=\sum_{j\in N_i}w_{ij} + w_i$ is a positive constant independent of the opinion vector $x\in [0,1]^n$. As a result, the coefficient $\alpha_i$
 measures the reluctancy of agent $i$ to adopt an opinion other than $s_i$, while the $p_{ij}$ can be seen the \emph{real} influence that $j$ poses on $i$.
-In Definiton~\ref{d:random_payoff_game}, $p_{ij}$ is frequency that $i$ meets $j$ aligning with the fact that we are influenced more by those we interact
-oftenly. Equation \ref{eq:BKO11_cost_equivalent} also helps us to establish existence of PNE for the our random payoff variant.
-In our variant the notion of PNE is properly extended with respect to the expected cost of each agent i.e. $x^* \in [0,1]$ is PNE if and only if
-for each agent $i$, $\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}$ for all $x_i' \in [0,1]$. Since
-$\Expnew{}{C_i(x_i,x_{-i})}=(1-\alpha_i)\sum_{j \neq i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$, it follows
-from equation~\ref{eq:BKO11_cost_equivalent} that the two games admit the same equilibrium point $x^*$.
+Following the common belief that we are influence more by those we interact oftently, the \emph{real} influence $p_{ij}$ can intepreted as measure of how
+often $i$ meets with $j$. In our random payoff variant $p_{ij}$ (Definition ~\ref{d:random_payoff_game}) is exactly the frequency that $i$ meets $j$. 
+
+Equation (\ref{eq:BKO11_cost_equivalent}) also helps us to establish the existence of PNE for the our random payoff variant.
+The notion of \emph{Pure Nash Equilibrium} is properly extended in our case with respect to the expected cost of each agent. Namely, 
+$x^* \in [0,1]$ is PNE if and only if $\Exp{C(x_i, x_{-i})} \leq \Exp{C(x_i', x_{-i})}$ 
+for each agent $i$. Since $\Expnew{}{C_i(x_i,x_{-i})}=(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$, 
+it follows from (\ref{eq:BKO11_cost_equivalent}) that the \emph{opinion formation game with random payoffs} has the same equilibrium $x^*$ with 
+the original \emph{opinion formation game}.
 
 Instead of denoting an instance of the opinion formation game using a graph $G$
 and weights $w_{ij}$, $w_i$ we adopt the following more convenient notation.
@@ -91,24 +94,25 @@ Abusing notation we will sometimes refer to the graph $G$.
 
 \subsection{Our Results}
 
-In this work we study the repeated version of the game defined in \ref{d:random_payoff_game}.
+In this work we study the repeated version of the game in Definition~\ref{d:random_payoff_game}. 
 At round $t$, each agent $i$ selects an opinion $x_i(t) \in [0,1]$ and then suffers the
-random cost $C_i(x_i(t),x_{-i}(t))$. We are intested in simple and natural update rules
+random cost $C_i(x_i(t),x_{-i}(t))$, where $x(t) \in [0,1]$ is the opinion vector at round $t$. 
+We are intested in simple and natural update rules
 that the agents can adopt such as the resulting opinion vector $x(t)$ converges to $x^*$.
-Moreover we require that this update rules are \emph{rational} behavioral assumption for
+Moreover we require that this update rules be a \emph{rational} behavioral assumption for
 selfish agents.
 
 In Section~\ref{s:fictitious_convergence}, we study the convergence properties of $x(t)$ if all agents adopt \emph{fictitious play}
 as their update rule. At round $\tau < t$ each agent $i$ experiences disagreement cost
 \[(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 \]where $W_i^\tau$
-denotes the agent that $i$ met at round $\tau$. We assume that $i$ selects her opinion
-in order to minimize her aggregated cost until round $t$,
+denotes the agent that $i$ met at round $\tau$. For agent $i$ updating her opinion according to \emph{fictitious play}
+means that she selects selects her opinion $x_i(t)$ in order to minimize her aggregated cost until round $t$,
 \begin{equation}\label{eq:fictitious_play}
 x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
 \end{equation}
-\noindent Generally speaking \emph{fictitious play} does not guarantee
-convergence to the equilibrium. We prove that \emph{fictitious play}
-converges to equilibrium $x^*$ with the following
+\noindent Generally speaking if all agents adopt \emph{fictitious play} the resulting
+strategy vector does not converge to the equilibrium. However, in our case if all agent adopt update rule~\ref{eq:fictitious_play}
+the resulting opinion vector $x(t)$ converges to $x^*$ with the following
 rate.
 \begin{theorem}\label{t:fictitious_convergence}
   Let $I = (P,s, \alpha)$ be any instance of the opinion formation
@@ -135,33 +139,22 @@ each agent to have at least $O(\log n)$ friend (agents $j$ with $p_{ij}>0$). A l
 network like Facebook has approximately $2$ billion users and each user
 has usually more that $100$ friends which far more than $\log(2\ 10^9)$.
 
-Apart from converging to the equilibrium, our update rule
-(\ref{eq:fictitious_play}) also ensures \emph{no-regret} for the agents.
-This is a very important feature of our update rule because even players
-that selfishly will to minimize their incurred cost, could choose to play according
-to it.  In Section~\ref{s:fictitious_noregret} we show the following theorem.
-
+In Section~\ref{s:fictitious_noregret} we argue that update rule~(\ref{eq:fictitious_play})
+is a \emph{rational} behavioral assumption for selfish agents in the sense that 
+it ensures \emph{no-regret} for the agents that adopt it. Namely if agent $i$ uses (\ref{eq:fictitious_play})
+to select $x_i(t)$, then the average disagreement cost that she experiences is similar to the average cost that she would experience
+by expressing the best fixed opinion. The latter holds no matter the way that the other agents select
+their opinions and the agents that $i$ meets. The main result of this section is Theorem~\ref{t:fictitious_noregret},
 \begin{theorem}\label{t:fictitious_noregret}
-Let the function $f_i:\reals^2 \mapsto [0,1]$,
-$f_i(x,b) = (1-\alpha_i)(x-b)^2 + \alpha_i(x-s_i)^2$, where $\alpha_i \in (0,1]$ and $s_i \in [0,1]$.
-Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence, with $b_t \in [0,1]$.
-If \(x_i(t) = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f_i(x,b_t)\),
-then for all $t$,
-\[\sum_{\tau=1}^tf_i^t(x_i(\tau),b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,b_\tau) + \bigOh{\log t}\]
+Consider the fuction $f:[0,1]^2 \mapsto [0,1]$ with $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$.
+Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}f(x_,b_\tau)$
+then for all $t$, 
+\[\sum_{\tau=1}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=1}^tf(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
-Theorem~\ref{t:fictitious_noregret} explains why fictitious play
-is a rational choice for selfish agents. If agent $i$ updates her
-opinion according to fictitious play, then it is guarantied
-that the average cost that $i$ experiences,
-\[
-  \frac{1}{t}\sum_{\tau=1}^t
-  \lp(
-  (1-\alpha_i) (x_i(\tau) - x_{W_i^{\tau}}(\tau))^2 + \alpha_i (x_i(\tau) - s_i)^2
-  \rp)
-\]
-is always close to the average cost of choosing choosing the best fixed opinion in hindsight.
-Observe that the latter holds independently of the way other agents
-choose their opinions and of the sequence of neighbors that $i$ meets.
+The no-regret property of \emph{fictitious play} follows by direct application of Theorem~\ref{t:fictitious_noregret} 
+with $f(x,b) = (1-\alpha_i)(x-b)^2 + \alpha(x-s_i)^2$ and $b_t = x_{W_i^t}(t)$, where $\alpha_i,s_i$ are 
+respectively the self confidence coefficient,the internal opinion of $i$ and $W_i^t$ the neighbor 
+that agent $i$ meets at round $t$.
 
 Even though our update rule (\ref{eq:fictitious_play}) has the above
 desired properties, for a fixed instance $I=(P,s,\alpha)$ it only achieves convergence rate of
