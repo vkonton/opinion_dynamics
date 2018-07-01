@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  1 JUL 2018 18:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  1 JUL 2018 18:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1302,56 +1302,52 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ex [1] [2]
 
 LaTeX Warning: Reference `s:exponential_update_rules' on page 3 undefined on in
-put line 195.
+put line 188.
 
 
-LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 232.
+LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 225.
 
 
-LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 232.
+LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 225.
 
 
-LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 232.
+LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 225.
 
 
-LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 241.
+LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 234.
 
 [3]) (./src/main/fictitious_convergence.tex
 
 LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
-e 3.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
-e 10.
-
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 18.
 
-[4]) (./src/main/fictitious_noregret.tex
 
-LaTeX Warning: Reference `s:preliminaries:oco' on page 5 undefined on input lin
-e 4.
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+e 25.
 
-[5] [6]) (./src/main/lower_bound.tex
 
-LaTeX Warning: Reference `t:dynamics_lower_bound' on page 7 undefined on input 
-line 36.
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
+e 33.
 
-[7]
+[4] [5]) (./src/main/fictitious_noregret.tex [6] [7])
+(./src/main/lower_bound.tex
 
 LaTeX Warning: Reference `t:dynamics_lower_bound' on page 8 undefined on input 
-line 126.
+line 36.
 
 [8]
 
-LaTeX Warning: Citation ` Tsy08' on page 9 undefined on input line 190.
+LaTeX Warning: Reference `t:dynamics_lower_bound' on page 9 undefined on input 
+line 126.
 
-[9]) (./src/main/side_result.tex
+[9]
+
+LaTeX Warning: Citation ` Tsy08' on page 10 undefined on input line 190.
+
+[10]) (./src/main/side_result.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 11.
- [10] [11] [12]) [13] (./clean.bbl) [14
+ [11] [12]) [13] (./clean.bbl) [14
 
 ]
 (./src/appendix/fictitious_convergence_appendix.tex
@@ -1392,13 +1388,13 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 81.
  ) 
 Here is how much of TeX's memory you used:
- 34756 strings out of 492982
- 778737 string characters out of 6138579
- 1003745 words of memory out of 5000000
- 37310 multiletter control sequences out of 15000+600000
- 104289 words of font info for 189 fonts, out of 8000000 for 9000
+ 34776 strings out of 492982
+ 778932 string characters out of 6138579
+ 1002745 words of memory out of 5000000
+ 37309 multiletter control sequences out of 15000+600000
+ 105224 words of font info for 198 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 64i,13n,96p,939b,960s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 64i,13n,96p,939b,956s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fo
 nts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.
 enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-d
@@ -1420,10 +1416,10 @@ onts/type1/public/lm/lmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
 y6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
 -dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /lm/lmtt9.pfb>
-Output written on clean.pdf (19 pages, 475883 bytes).
+Output written on clean.pdf (19 pages, 480893 bytes).
 PDF statistics:
- 437 PDF objects out of 1000 (max. 8388607)
- 369 compressed objects within 4 object streams
- 118 named destinations out of 1000 (max. 500000)
+ 451 PDF objects out of 1000 (max. 8388607)
+ 383 compressed objects within 4 object streams
+ 121 named destinations out of 1000 (max. 500000)
  24597 words of extra memory for PDF output out of 24883 (max. 10000000)
 
