@@ -120,3 +120,13 @@
 % other.
 
 \newcommand{\sline}[1]{\textcolor{#1}{\linethickness{.5mm}\line(1,0){15}} }
+
+% Ident in algorithmic.
+\newlength\myindent
+\setlength\myindent{2em}
+\newcommand\bindent{%
+  \begingroup
+  \setlength{\itemindent}{\myindent}
+  \addtolength{\algorithmicindent}{\myindent}
+}
+\newcommand\eindent{\endgroup}

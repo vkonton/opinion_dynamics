@@ -1,21 +1,47 @@
-\section{A Graph Aware Update Rule}\label{s:graph_aware}
+\section{Faster Update Rules}\label{s:graph_aware}
 
-In Section~\ref{s:lower_bound} we saw that in our \emph{imperfect information}
-for any no-regret algorithm $\mcal{A}$ there exists a graph $G$ such that the
-corresponding dynamics needs \( \poly(1/\eps) \) rounds to achieve error
-$\eps$.  However, in the \emph{perfect information} FJ-model there exists a
-simple update rule that requires only $\log(1/\eps)$ rounds.  Notice that our
-lower bound crucially depends on the fact that $\mcal{A}$ is no-regret. At this
-point, a natural question is whether, this exponential gap is a generic
-restriction of our imperfect information model.  We answer this question in the
-negative. More precisely the reason that no-regret dynamics suffer slow
-convergence is that the update rule depends only on the expressed opinions. In
-this section we exhibit an update rule that depends on the graph $G$ and
-achieves exponentially fast convergence.  Precisely, our update rule
-depends on the expressed opinions, the number of neighbors of
-each agent, and the number of agents $n$.  The latter is interesting
-because information about the graph $G$ combined with agents that do not act
-selfishly, can restore the exponential convergence rate.
+We already discussed that the reason that opinion dependent dynamics suffer slow
+convergence is that the update rule depends only on the expressed opinions.
+In this section we provide $2$ update rules showing that information about the
+graph $G$ combined with agents that do not act selfishly,
+can restore the exponential convergence rate.
+Our first update rule, depends not only on the expressed opinions of the
+agents but also on their indices and matrix $P$.
+\begin{algorithm}
+  \caption{Tsitsiklis}
+  \label{alg:tsitsiklis}
+  \begin{algorithmic}[1]
+    \STATE $x_i(0) \gets s_i$.
+    \STATE Let $d_i$ be the number of non-negative entries of row $i$ of $P$.
+    \STATE Keep an array $A$ of length $d_i$.
+    \STATE At round $t$:
+    \bindent
+    \STATE Meet neighbor $k$, get the opinion $x_k(t-1)$ and the index $k$.
+    \STATE $A_k \gets x_k(t-1)$.
+    \STATE $x_i(t) = \sum_{j=1}^{d_i} p_{ij} A_j$
+    \eindent
+\end{algorithmic}
+\end{algorithm}
+
+In \cite{BT97}, section 6.3.5, they show a convergence rate guarantee for
+\ref{alg:tsitsiklis} assuming that there exists
+a window of $B$ rounds such that all agents get to meet all their
+neighbors at least once from round $t$ to round $t+B$.
+In our randomized setting this is not true but we can easily adapt this to
+hold with high probability. In our problem
+agent $i$ simply needs to wait to meet the neighbor $j$ with the smallest
+weight $p_{ik}$. Therefore, after $\log(1/\delta)/\min_{j} p_{ij}$ rounds
+we have that with probability at least $1-\delta$ agent $i$ saw all her
+neighbors at least once.  Since we want this to be true for all agents
+we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
+Omitting the details of this straightforward adaptation
+we get that with high probability
+\[
+  \norm{\infty}{x(t) - x^*} = O(\norm{\infty}{P}^{t/(B+1)}).
+\]
+
+Precisely, our update rule depends on the expressed opinions, the number of
+neighbors of each agent, and the number of agents $n$.
 
 The main idea of the protocol is straightforward: to counterbalance the
 imperfect information, the agents can spend some rounds to simulate one round
@@ -76,30 +102,30 @@ Chervonenkis.
   \caption{Graph Aware Update Rule}
   \label{alg:frequencies}
   \begin{algorithmic}[1]
-    \State $x_i(0) \gets s_i$.
-    \State $M_1 = O(\ln(n/\eps))$, $M_2 = O(d^2 \ln(d))$
+    \STATE $x_i(0) \gets s_i$.
+    \STATE $M_1 = O(\ln(n/\eps))$, $M_2 = O(d^2 \ln(d))$
 
-    \For{$l = 1, \ldots,\ln(1/\eps))$}
-    \State Keep a set $A$ of tuples $(x, \mrm{freq}(x))$
+    \FOR{$l = 1, \ldots,\ln(1/\eps))$}
+    \STATE Keep a set $A$ of tuples $(x, \mrm{freq}(x))$
     of and an array $B$ of length $M_1$.
 
-    \For{$j = 1, \ldots, M_1$}
-    \For{$k = 1, \ldots, M_2$}
+    \FOR{$j = 1, \ldots, M_1$}
+    \FOR{$k = 1, \ldots, M_2$}
 
-    \State Get the opinion $X_k$ of a random neighbor.
-    \If{$X_j$ is not in $A$}
-    \State Insert $(X_k, 1)$ to $A$.
-    \Else
-    \State $(X_k, \mrm{freq}(X_k))
+    \STATE Get the opinion $X_k$ of a random neighbor.
+    \IF{$X_j$ is not in $A$}
+    \STATE Insert $(X_k, 1)$ to $A$.
+    \ELSE
+    \STATE $(X_k, \mrm{freq}(X_k))
     \gets (X_k,  \mrm{freq}(X_k) +1) $.
-  \EndIf
-\EndFor
-\State Divide all frequencies of $A$ by $M_2$.  \label{alg:line:counters}
-\State Round all frequencies of $Α$ to the closest multiple of $1/d_i$.
-\State $B(j) \gets \alpha_i \sum_{x \in A} \mrm{freq}(x) + (1-\alpha_i) s_i$.
-\EndFor
-\State $x_i(t) \gets \mrm{majority}_j B(j)$.
-\EndFor
+  \ENDIF
+\ENDFOR
+\STATE Divide all frequencies of $A$ by $M_2$.  \label{alg:line:counters}
+\STATE Round all frequencies of $Α$ to the closest multiple of $1/d_i$.
+\STATE $B(j) \gets \alpha_i \sum_{x \in A} \mrm{freq}(x) + (1-\alpha_i) s_i$.
+\ENDFOR
+\STATE $x_i(t) \gets \mrm{majority}_j B(j)$.
+\ENDFOR
 \end{algorithmic}
 \end{algorithm}
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  30 JUN 2018 19:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  1 JUL 2018 18:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1023,26 +1023,16 @@ Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 \@float@every@algorithm=\toks49
 \c@algorithm=\count196
 )
-(/usr/share/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
-Package: algpseudocode 
-
-(/usr/share/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
-Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
-
-Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count197
-\c@ALG@rem=\count198
-\c@ALG@nested=\count199
-\ALG@tlm=\skip54
-\ALG@thistlm=\skip55
-\c@ALG@Lnr=\count266
-\c@ALG@blocknr=\count267
-\c@ALG@storecount=\count268
-\c@ALG@tmpcounter=\count269
-\ALG@tmplength=\skip56
+(/usr/share/texmf-dist/tex/latex/algorithms/algorithmic.sty
+Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
+\c@ALC@unique=\count197
+\c@ALC@line=\count198
+\c@ALC@rem=\count199
+\c@ALC@depth=\count266
+\ALC@tlm=\skip54
+\algorithmicindent=\skip55
 )
-Document Style - pseudocode environments for use with the `algorithmicx' style
-) (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
+(/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
 (/usr/share/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -1076,13 +1066,13 @@ Package caption Info: \@makecaption = \long macro:#1#2->\small \vskip \abovecap
 tionskip \sbox \@tempboxa {{\bfseries #1.} #2}\ifdim \wd \@tempboxa >\hsize {\b
 fseries #1.} #2\par \else \global \@minipagefalse \hb@xt@ \hsize {\hfil \box \@
 tempboxa \hfil }\fi \vskip \belowcaptionskip .
-\c@ContinuedFloat=\count270
+\c@ContinuedFloat=\count267
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
 Package caption Info: listings package is loaded.
 )
-\c@subfigure=\count271
-\c@subtable=\count272
+\c@subfigure=\count268
+\c@subtable=\count269
 )
 (/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
 arrows.code.tex
@@ -1098,12 +1088,17 @@ File: pgflibraryarrows.meta.code.tex 2015/05/13 v3.0.1a (rcs-revision 1.13)
 \pgfarrowlength=\dimen300
 \pgfarrowwidth=\dimen301
 \pgfarrowlinewidth=\dimen302
-)) (./templates/colors.tex) (./templates/macros.tex)
+)) (./templates/colors.tex) (./templates/macros.tex
+\myindent=\skip56
+)
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... none found.
  (./clean.aux
 
 LaTeX Warning: Label `eq:error_per_round' multiply defined.
+
+
+LaTeX Warning: Label `thm:convergence' multiply defined.
 
 )
 \openout1 = `clean.aux'.
@@ -1190,7 +1185,7 @@ Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count273
+\c@section@level=\count270
 )
 LaTeX Info: Redefining \ref on input line 7.
 LaTeX Info: Redefining \pageref on input line 7.
@@ -1202,16 +1197,16 @@ LaTeX Info: Redefining \nameref on input line 7.
 
  (/usr/share/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count274
+\scratchcounter=\count271
 \scratchdimen=\dimen303
 \scratchbox=\box73
-\nofMPsegments=\count275
-\nofMParguments=\count276
+\nofMPsegments=\count272
+\nofMParguments=\count273
 \everyMPshowfont=\toks50
-\MPscratchCnt=\count277
+\MPscratchCnt=\count274
 \MPscratchDim=\dimen304
-\MPnumerator=\count278
-\makeMPintoPDFobject=\count279
+\MPnumerator=\count275
+\makeMPintoPDFobject=\count276
 \everyMPtoPDFconversion=\toks51
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
@@ -1237,7 +1232,7 @@ ick labels; missing features). Consider writing \pgfplotsset{compat=1.15} into
 your preamble.
  on input line 7.
 
-\c@lstlisting=\count280
+\c@lstlisting=\count277
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 48.
@@ -1304,36 +1299,10 @@ File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [0
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./src/main/introduction.t
-ex
-
-LaTeX Warning: Citation `BKO11' on page 1 undefined on input line 4.
-
-
-LaTeX Warning: Citation `BKO11' on page 1 undefined on input line 14.
-
-
-LaTeX Warning: Citation `GS14' on page 1 undefined on input line 26.
-
-[1] [2]
-
-LaTeX Warning: Citation `GS14' on page 3 undefined on input line 169.
-
-
-LaTeX Warning: Reference `s:lower_bound' on page 3 undefined on input line 170.
-
-
+ex [1] [2]
 
 LaTeX Warning: Reference `s:exponential_update_rules' on page 3 undefined on in
 put line 195.
-
-
-LaTeX Warning: Citation `FJ90' on page 3 undefined on input line 228.
-
-
-LaTeX Warning: Citation `BKO11' on page 3 undefined on input line 228.
-
-
-LaTeX Warning: Citation `BGM13' on page 3 undefined on input line 232.
 
 
 LaTeX Warning: Citation ` EFHS17' on page 3 undefined on input line 232.
@@ -1345,154 +1314,49 @@ LaTeX Warning: Citation ` CKO13' on page 3 undefined on input line 232.
 LaTeX Warning: Citation ` BFM16' on page 3 undefined on input line 232.
 
 
-LaTeX Warning: Citation `GS14' on page 3 undefined on input line 233.
-
-
-LaTeX Warning: Citation `BFM16' on page 3 undefined on input line 236.
-
-
-LaTeX Warning: Citation `YOASS13' on page 3 undefined on input line 241.
-
-
 LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 241.
 
-
-LaTeX Warning: Citation `FV97' on page 3 undefined on input line 244.
-
-
-LaTeX Warning: Citation `FS99' on page 3 undefined on input line 244.
-
-
-LaTeX Warning: Citation `HM00' on page 3 undefined on input line 244.
-
-
-LaTeX Warning: Citation `BEL06' on page 3 undefined on input line 247.
-
-
-LaTeX Warning: Citation `EMN09' on page 3 undefined on input line 249.
-
-
-LaTeX Warning: Citation `CHM17' on page 3 undefined on input line 254.
-
-[3]) (./src/main/preliminaries.tex
-Underfull \hbox (badness 10000) in paragraph at lines 42--46
-
- []
-
-Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 53.
-
-LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
-e 71.
-
-) (./src/main/fictitious_convergence.tex
+[3]) (./src/main/fictitious_convergence.tex
 
 LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 3.
 
-[4]
 
-LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 10.
 
 
-LaTeX Warning: Reference `alg:fictitious_play' on page 5 undefined on input lin
+LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 18.
 
-[5]) (./src/main/fictitious_noregret.tex [6] [7]) (./src/main/lower_bound2.tex
+[4]) (./src/main/fictitious_noregret.tex
 
-LaTeX Warning: Reference `alg:no_regret_dynamics' on page 8 undefined on input 
-line 14.
+LaTeX Warning: Reference `s:preliminaries:oco' on page 5 undefined on input lin
+e 4.
 
+[5] [6]) (./src/main/lower_bound.tex
 
-LaTeX Warning: Reference `l:reduction' on page 8 undefined on input line 22.
+LaTeX Warning: Reference `t:dynamics_lower_bound' on page 7 undefined on input 
+line 36.
 
+[7]
 
 LaTeX Warning: Reference `t:dynamics_lower_bound' on page 8 undefined on input 
-line 23.
+line 126.
 
 [8]
 
-LaTeX Warning: Reference `l:reduction' on page 9 undefined on input line 69.
+LaTeX Warning: Citation ` Tsy08' on page 9 undefined on input line 190.
 
+[9]) (./src/main/side_result.tex
+Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
+put line 11.
+ [10] [11] [12]) [13] (./clean.bbl) [14
 
-LaTeX Warning: Reference `app:s:lower_bound' on page 9 undefined on input line 
-79.
-
-
-LaTeX Warning: Reference `fig:lb_instance' on page 9 undefined on input line 86
-.
-
-
-LaTeX Warning: Reference `t:dynamics_lower_bound' on page 9 undefined on input 
-line 113.
-
-
-LaTeX Warning: Reference `cl:fixed_p' on page 9 undefined on input line 123.
-
-[9]
-
-LaTeX Warning: Reference `eq:crlb' on page 10 undefined on input line 153.
-
-
-LaTeX Warning: Reference `cl:fixed_p' on page 10 undefined on input line 154.
-
-
-LaTeX Warning: Citation `Wal39' on page 10 undefined on input line 168.
-
-
-LaTeX Warning: Citation `Yu97' on page 10 undefined on input line 177.
-
-
-LaTeX Warning: Citation ` Tsy08' on page 10 undefined on input line 177.
-
-
-LaTeX Warning: Citation `duchi_stats311' on page 10 undefined on input line 178
-.
-
-
-LaTeX Warning: Reference `l:estimation_lower_bound' on page 10 undefined on inp
-ut line 205.
-
-[10]
-
-LaTeX Warning: Reference `fig:estimator' on page 11 undefined on input line 325
-.
-
-) (./src/main/side_result.tex
-
-LaTeX Warning: Reference `s:lower_bound' on page 11 undefined on input line 3.
-
-[11]
-
-LaTeX Warning: Reference `alg:frequencies' on page 12 undefined on input line 1
-19.
-
-
-LaTeX Warning: Reference `l:vc_inequality' on page 12 undefined on input line 1
-33.
-
-[12]
-
-LaTeX Warning: Reference `alg:line:counters' on page 13 undefined on input line
- 141.
-
-
-LaTeX Warning: Reference `eq:empirical_distribution' on page 13 undefined on in
-put line 143.
-
-) [13] (./clean.bbl) [14
-
-] (./src/appendix/fictitious_convergence_appendix.tex
+]
+(./src/appendix/fictitious_convergence_appendix.tex
 
 LaTeX Warning: Reference `l:error_bound' on page 15 undefined on input line 4.
-
-
-LaTeX Warning: Reference `eq:recursion' on page 15 undefined on input line 34.
-
-
-LaTeX Warning: Reference `eq:recursion_zero' on page 15 undefined on input line
- 34.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 94--95
@@ -1510,17 +1374,12 @@ ne 115.
 
 LaTeX Warning: Reference `t:reduction' on page 16 undefined on input line 5.
 
-[16]
-
-LaTeX Warning: Reference `fig:lb_instance' on page 17 undefined on input line 4
-4.
-
-[17]) [18]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 82.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 82.
+[16] [17]) [18]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 81.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 81.
  (./clean.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 82.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 82.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 81.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 81.
 Package rerunfilecheck Info: File `clean.out' has not changed.
 (rerunfilecheck)             Checksum: 463D7206B13B0F77EB633D99DE2B3BB1;97.
 
@@ -1530,14 +1389,14 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 82.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 81.
  ) 
 Here is how much of TeX's memory you used:
- 35100 strings out of 492982
- 784238 string characters out of 6138579
- 1004489 words of memory out of 5000000
- 37655 multiletter control sequences out of 15000+600000
- 104975 words of font info for 195 fonts, out of 8000000 for 9000
+ 34756 strings out of 492982
+ 778737 string characters out of 6138579
+ 1003745 words of memory out of 5000000
+ 37310 multiletter control sequences out of 15000+600000
+ 104289 words of font info for 189 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  64i,13n,96p,939b,960s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fo
@@ -1561,10 +1420,10 @@ onts/type1/public/lm/lmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
 y6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
 -dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
 /lm/lmtt9.pfb>
-Output written on clean.pdf (19 pages, 479844 bytes).
+Output written on clean.pdf (19 pages, 475883 bytes).
 PDF statistics:
- 357 PDF objects out of 1000 (max. 8388607)
- 309 compressed objects within 4 object streams
- 98 named destinations out of 1000 (max. 500000)
+ 437 PDF objects out of 1000 (max. 8388607)
+ 369 compressed objects within 4 object streams
+ 118 named destinations out of 1000 (max. 500000)
  24597 words of extra memory for PDF output out of 24883 (max. 10000000)
 

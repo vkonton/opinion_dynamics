@@ -29,6 +29,11 @@ David Bindel, Jon~M. Kleinberg, and Sigal Oren.
   Science, {FOCS} 2011, Palm Springs, CA, USA, October 22-25, 2011}, pages
   57--66, 2011.
 
+\bibitem[BT97]{BT97}
+Dimitri~P. Bertsekas and John~N. Tsitsiklis.
+\newblock {\em Parallel and Distributed Computation: Numerical Methods}.
+\newblock Athena Scientific, 1997.
+
 \bibitem[CHM17]{CHM17}
 Johanne Cohen, Am{\'{e}}lie H{\'{e}}liou, and Panayotis Mertikopoulos.
 \newblock Hedging under uncertainty: Regret minimization meets exponentially
