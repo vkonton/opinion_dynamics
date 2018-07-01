@@ -21,10 +21,10 @@ as the following a game played between an adversary and a player. \emph{At round
   \item \emph{the player receives cost} $f(x_t,b_t)=(1-\alpha)(x_t-b_t)^2 + \alpha(x_t -s)^2$.
 \end{enumerate}
 where $\alpha,s$ are constants in $[0,1]$. The goal of the player is to pick $x_t$ based on the history
-$(b_1,\ldots,b_{t-1})$ in a way that minimizes the total cost. We emphasize
+$(b_0,\ldots,b_{t-1})$ in a way that minimizes the total cost. We emphasize
 that the agent has to select $x_t$ before seeing $b_t$, otherwise the
 problem becomes trivial. We show that a good strategy that the player can follow is 
-\[x_t = \argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}f(x,b_\tau)\]
+\[x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)\]
 which is known as \emph{fictitious play}. We prove that in our OCO problem,
 \emph{fictitious play} is a \emph{no-regret} algorithm meaning that
 it provides guarantees concerining the cost that agent $i$ receives. Informally speaking
@@ -34,17 +34,17 @@ the cost that she would suffer by selecting any fixed value. The gaurantees that
 ensures are presented in Theorem~\label{t:fictitious_noregret} which is the main result of this section.
 \begin{theorem}\label{t:fictitious_noregret}
 Consider the fuction $f:[0,1]^2 \mapsto [0,1]$ with $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$.
-Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}f(x_,b_\tau)$
+Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
 then for all $t$, 
-\[\sum_{\tau=1}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=1}^tf(x,b_\tau) + \bigOh{\log t}\]
+\[\sum_{\tau=0}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
 
 Theorem~\ref{t:fictitious_noregret} explains why update rule~(\ref{eq:fictitious_play}) is a
 reasonable choice for selfish agents. In our repeated game, agent $i$ selects at round each $t$ an opinion
 $x_i(t)\in [0,1]$ and then suffers cost $f_i(x_i(t),x_{W_i^t}(t))=(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2+\alpha_i(x_i(t)-s_i)^2$. 
 If agent $i$ selects $x_i(t)$ according  to the update rule \ref{eq:fictitious_play} then Theorem~\ref{t:fictitious_noregret}
-applies and\[\frac{1}{t}\sum_{\tau=1}^t f_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq
-\frac{1}{t}\min_{x \in [0,1]}\sum_{\tau=1}^tf_i(x,x_{W_i^\tau}(\tau)) + \bigOh{\frac{\log t}{t}}\]
+applies and\[\frac{1}{t}\sum_{\tau=0}^t f_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq
+\frac{1}{t}\min_{x \in [0,1]}\sum_{\tau=0}^tf_i(x,x_{W_i^\tau}(\tau)) + \bigOh{\frac{\log t}{t}}\]
 meaning that the time averaged total disagreement cost that agent $i$ suffers is similar to the 
 time averaged cost of the best fixed opinion.
 
@@ -60,7 +60,7 @@ with the OCO framework, however proving the no-regret property for this algorith
 for fictitious play. 
 
 \begin{lemma}
-Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
+Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
 then for all $t$,
 \[
 \sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
