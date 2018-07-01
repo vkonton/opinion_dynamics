@@ -147,9 +147,9 @@ by expressing the best fixed opinion. The latter holds no matter the way that th
 their opinions and the agents that $i$ meets. The main result of this section is Theorem~\ref{t:fictitious_noregret},
 \begin{theorem}\label{t:fictitious_noregret}
 Consider the fuction $f:[0,1]^2 \mapsto [0,1]$ with $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$.
-Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=1}^{t-1}f(x_,b_\tau)$
+Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
 then for all $t$, 
-\[\sum_{\tau=1}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=1}^tf(x,b_\tau) + \bigOh{\log t}\]
+\[\sum_{\tau=0}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
 The no-regret property of \emph{fictitious play} follows by direct application of Theorem~\ref{t:fictitious_noregret} 
 with $f(x,b) = (1-\alpha_i)(x-b)^2 + \alpha(x-s_i)^2$ and $b_t = x_{W_i^t}(t)$, where $\alpha_i,s_i$ are 

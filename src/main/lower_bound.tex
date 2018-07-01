@@ -12,11 +12,11 @@ We show the following lower bound for the convergence rate.
 We first give a rigorous definition of update rules that only
 use the expressed opinions of the neighbors of an agent.
 \begin{definition}[Opinion Dependent Dynamics]\label{d:opinion_dependent_dynamics}
-  Let $A = (A_t)_{t=1}^{\infty}$, where $A_t : [0,1]^{t+2} \mapsto [0,1]$
+  Let $A = (A_t)_{t=1}^{\infty}$, where $A_t : [0,1]^{t+3} \mapsto [0,1]$
   be a sequence of functions. $A$ produces the opinion
   dependent dynamics $x_A(t)\in[0,1]^n$ defined as
   \[
-    x_{A,i}(t) = A_t(y_i(1),\ldots, y_i(t-1), a_i, s_i),
+    x_{A,i}(t) = A_t(y_i(0),\ldots, y_i(t-1), a_i, s_i),
   \]
   where $y_i(t)$ is the opinion of the neighbor that agent $i$ meets
   at round $t$.
