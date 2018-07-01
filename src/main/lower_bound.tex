@@ -1,10 +1,5 @@
 \section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
 
-As we have already discussed, for any instance $I$ with
-$\rho\geq 1/2$, \emph{fictitious play} achieves convergence rate
-$\Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=\bigOh{1/\sqrt{t}}$,
-this rate is outperformed by the rate of the original \emph{FJ model}
-convergence rate, $\Expnew{I}{\norm{\infty}{x(t)-x^*}}=O(\me^{-t/2})$.
 In this section we investigate whether there exists another
 opinion dependent update rule that the agents can select and
 ensures a better convergence rate to the equilibrium.
@@ -12,28 +7,33 @@ We show the following lower bound for the convergence rate.
 We first give a rigorous definition of update rules that only
 use the expressed opinions of the neighbors of an agent.
 \begin{definition}[Opinion Dependent Dynamics]\label{d:opinion_dependent_dynamics}
-  Let $A = (A_t)_{t=1}^{\infty}$, where $A_t : [0,1]^{t+2} \mapsto [0,1]$
-  be a sequence of functions. $A$ produces the opinion
+  Let $A = (A_t)_{t=1}^{\infty}$ be a sequence of functions,
+  where $A_t : [0,1]^{t+2} \mapsto [0,1]$. The sequence
+ $A$ produces the opinion
   dependent dynamics $x_A(t)\in[0,1]^n$ defined as
   \[
-    x_{A,i}(t) = A_t(y_i(1),\ldots, y_i(t-1), a_i, s_i),
+    x^A_i(t) = A_t(y_i(0),\ldots, y_i(t-1), a_i, s_i),
   \]
   where $y_i(t)$ is the opinion of the neighbor that agent $i$ meets
   at round $t$.
 \end{definition}
-For convenience we restate our lower bound, Theorem~\ref{t:lower_bound}.
+For example the update rule~(\ref{eq:fictitious_play}) is \emph{opinion dependent} since
+$x_i(t) = (1-\alpha_i)\sum_{\tau=0}^{t-1}y(\tau)/t + \alpha_is_i$
+meaning that for (\ref{eq:fictitious_play}), $A_t(y_0,\ldots,y_{t-1},\alpha,s) = 
+(1-\alpha)\sum_{\tau=0}^{t-1}y_\tau/t + \alpha s$. For convenience we restate our lower bound, 
+Theorem~\ref{t:lower_bound}.
 \begin{theorem}
   Let $A$ be a sequence of functions with corresponding opinion dependent
   dynamics $x_A(t)$.
   For any $c>0$, there exists an instance $I$ such that
-  $\Expnew{I}{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t^{1+c})$.
+  $\Exp{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t^{1+c})$.
 \end{theorem}
 
 At first we show that any opinion dependent $A$, achieving the previous
 convergence rate, can be used as an estimator of the parameter
 $p \in [0,1] $ of Bernoulli random variable with the same asymptotic error
-rate. The reduction is formally stated in Lemma~\ref{l:reduction}.
-Since we prove \ref{t:dynamics_lower_bound} using a reduction to
+rate. This reduction is formally stated in Lemma~\ref{l:reduction}.
+Since we prove Theorem~\ref{t:lower_bound} using a reduction to
 an estimation problem we shall first briefly introduce some definitions and
 notation. For simplicity we will restrict the following definitions
 of estimators and risk to the case of estimating the mean of Bernoulli
@@ -42,7 +42,7 @@ Given $t$ independent samples from a Bernoulli random variable $B(p)$
 an estimator is an algorithm that takes these samples as inputs and
 outputs an answer in $[0,1]$.
 \begin{definition}\label{d:estimator}
-  An estimator sequence $(\theta_t)_{t=1}^{\infty}$
+  An estimator $\theta=(\theta_t)_{t=1}^{\infty}$
   is a sequence of functions, $\theta_t: \{0,1\}^t\mapsto [0,1]$.
 \end{definition}
 Perhaps the first estimator that comes to one's mind is the
@@ -52,9 +52,9 @@ close to the mean $p$ of the Bernoulli that generated the samples.
 To measure the efficiency of an estimator we define the \emph{risk}
 which corresponds to the expected loss of an estimator.
 \begin{definition}\label{d:risk}
-  For an estimator $\theta =\{\theta_t\}_{t=1}^\infty$ we define
-  its convergence rate
-  $R_p(\theta_t) = E_p[|\theta_t(X_1,\ldots,X_t) - p|]$,
+  For an estimator $\theta =(\theta_t)_{t=1}^\infty$ we define
+  its risk
+  $E_p[|\theta_t(X_1,\ldots,X_t) - p|]$,
   where
   \[
     E_p[|\theta_t(X_1,\ldots,X_t) - p|]
@@ -63,37 +63,37 @@ which corresponds to the expected loss of an estimator.
     p^{\sum_{i=1}^t y_i}\ (1-p)^{t-\sum_{i=1}^t y_i}
   \]
 \end{definition}
-The quantity $E_p[|\theta_t(Y_1,\ldots,Y_t) - p|]$ is the expected distance
-of the estimated value $\hat{\theta_t}$ from the parameter $p$, when the
+The risk $E_p[|\theta_t(Y_1,\ldots,Y_t) - p|]$ is the expected distance
+of the estimated value $\theta_t$ from the parameter $p$, when the
 distribution that generated the samples is $B(p)$.
-To simplify notation we will also write it as $E_p[|\hat{\theta_t} - p|]$.
-The error rate $R_p(\theta_t)$ quantifies the rate of
-convergence of the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the
-real parameter $p$.  Since $p$ is unknown, any meaningful estimator $\hat{p}$
-must guarantee that for all $p \in [0,1]$, $\lim_{t \to \infty} R_p(t)=0$.
+To simplify notation we will also write it as $E_p[|\theta_t - p|]$.
+The risk $E_p[|\theta_t - p|]$ quantifies the error rate of 
+the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the 
+real parameter $p$ as the number of samples $t$ grows. Since $p$ is unknown, any meaningful estimator $\theta=(\theta_t)_{t=1}^\infty$
+must guarantee that for all $p \in [0,1]$, $\lim_{t \to \infty} E_p[|\theta_t - p|]=0$.
 For example, \emph{sample mean} has error rate
-$R_p(\theta_t) \leq \frac{1}{2\sqrt{t}}$ for any $p \in [0,1]$ and clearly satisfies
+$E_p[|\theta_t-p|] \leq \frac{1}{2\sqrt{t}}$ for any $p \in [0,1]$ and clearly satisfies
 the above requirement.
 
 We show now that any opinion dependent algorithm $A$, achieving the
 convergence rate of Theorem~\ref{t:lower_bound}, can be used as an
 estimator of the parameter $p \in [0,1]$ of a Bernoulli random variable with
-the same asymptotic error rate.
-The reduction formally stated and in Lemma~\ref{l:reduction}.
+asymptotically the same error rate.
+The reduction is formally stated and in Lemma~\ref{l:reduction}.
 \begin{lemma}\label{l:reduction}
   Let $A$ be a no-regret algorithm $A$ such that for all instances $I$,
   $\lim \limits_{t \rightarrow \infty} t^{1+c}
   \Expnew{I}{\norm{\infty}{x_A(t)-x^*}}=0$.
-  Then there exists an estimator $\hat{\theta_A}$ such that for all
+  Then there exists an estimator $\theta_A=(\theta_t^A)_{t=1}^\infty$ such that for all
   $p \in [0,1]$,
-  \[\lim_{t \rightarrow \infty}t^{1+c}R_p(\theta_t)=0\]
+  \[\lim_{t \rightarrow \infty}t^{1+c}E_p[|\theta_t^A-p|]=0\]
 \end{lemma}
 
 We sketch here the main idea. For a full proof see Section~\ref{app:s:lower_bound}
 of the Appendix.  For a given $p \in [0,1]$, we construct an instance $I_p$ such that
 $x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
 receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
-This can be easily done using the star graph $K_{1,2}$.
+This can be easily done using the directed star graph $K_{1,2}$.
 The agent corresponding to the center node, $c$, has $\alpha_c = 1/2$ and
 whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$,
 as shown in Figure~\ref{fig:lb_instance}.
@@ -106,7 +106,7 @@ as shown in Figure~\ref{fig:lb_instance}.
       % \node (C) at (0,0) [label=below:$a_c \equal 0$][label=above:$s_c \equal 0$]{C};
       % \node (1) at (-4,0)[label=below:$a_1 \equal 1$][label=above:$s_1 \equal 0$]{1};
       % \node (2) at (4,0) [label=below:$a_2 \equal 1$][label=above:$s_2 \equal 1$]{2};
-      \node (C) at (0,0) [label=below:$a_c \equal 0\comma s_c \equal 0$]{C};
+      \node (C) at (0,0) [label=below:$a_c \equal 1/2\comma s_c \equal 0$]{C};
       \node (1) at (-4,0)[label=below:$a_1 \equal 1\comma s_1 \equal 0$]{1};
       \node (2) at (4,0) [label=below:$a_2 \equal 1\comma s_2 \equal 1$]{2};
     \end{scope}
@@ -121,23 +121,27 @@ as shown in Figure~\ref{fig:lb_instance}.
   \caption{The Lower Bound Instance} \label{fig:lb_instance}
 \end{figure}
 %
-It follows that the estimator $\theta_t$ with $\theta_A^t = x_A^c(t)$
-has error $R_p(\theta_t)=\Expnew{I_p}{\norm{\infty}{x_A(t)-x^*}}$.
-Meaning that if $A$ does not satisfy Theorem~\ref{t:dynamics_lower_bound}
-then $\lim\limits_{t \rightarrow \infty}t^{1+c}R_p(\theta_t)=0$ for all
-$p \in [0,1]$. Thus we want to prove the following claim
+It follows that the estimator $\theta_t$ with $\theta_t^A = 2x_c^A(t)$
+has error $E_p[|\theta_t^A-p|]=\frac{1}{2}\Expnew{I_p}{\norm{\infty}{x_A(t)-x^*}}$.
+Meaning that $\lim\limits_{t \rightarrow \infty}t^{1+c}E_p[|\theta_t^A -p|]=0$ for all
+$p \in [0,1]$.
+
+\noindent It follows by Lemma~\ref{l:reduction} that in order to prove Theorem~\ref{t:lower_bound} we 
+just need to prove the following claim.
+
 \begin{claim}\label{cl:fixed_p}
-  For all sequences of estimators $\theta_t$
-  Then, there exists a fixed $p \in [0,1]$ such that
+For any estimator $\theta = (\theta_t)_{t=1}^\infty$
+  there exists a fixed $p \in [0,1]$ such that
   \[
     \lim_{t \to \infty} t^{1+c} \Expnew{p}{|\theta_t - p} > 0.
   \]
 \end{claim}
-The crucial point of Claim~\ref{cl:fixed_p} is the fact that
-in order to construct the hard instance for the estimator
-we first inspect the sequence of estimators and then choose
-a $p \in [0,1]$ so that \emph{all} estimators $\theta_t$ of
-the sequence have error rate $\omega(1/t^{1+c})$.
+The above claim states that for any estimator $\theta=(\theta_t)_{t=1}^\infty$,
+we can inspect the functions $\theta_t: \{0,1\}^t \mapsto [0,1]$ and then choose
+a $p \in [0,1]$ such that the function $E_p[|\theta_t-p|]= \Omega(1/t^{1+c})$. As 
+a result, we have reduced the construction of a lower bound concerning the round 
+complexity of a dynamical process to a lower bound concerning the sample complexity of
+estimating the parameter $p$ of a Bernoulli distribution.
 
 At this point we should mention that it is known
 that $\Omega(1/\eps^2)$ samples are needed to estimate the parameter $p$
@@ -145,31 +149,38 @@ of a Bernoulli random variable within additive error $\eps$.
 Another well-known result is that taking the average of the samples
 is the \emph{best} way to estimate the mean of a Bernoulli random variable.
 These results would indicate that the best possible rate of convergence
-for a no-regret dynamics would be $O(1/\sqrt{t})$.
+for a \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
 However, there is some fine print in these results which does not allow us
 to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.
 
+Before presenting Lemma~\ref{l:estimation_lower_bound} we briefly discuss some
+fundamental results concerning sample complixity lower bounds for statistical estimation.
 Perhaps the oldest sample complexity lower bound for estimation problems
-is the well-known Cramer-Rao inequality.
-Assuming that $\theta_t$ is a sequence of unbiased estimators,
-that is $\Exp{\theta_t} = p$ for all $t$, the Cramer-Rao lower bound
-for estimating the mean $p$ of a Bernoulli random variable states
-that
+is the well-known Cramer-Rao inequality. Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ 
+such that $E_p[\theta_t]=p$ for all $p \in [0,1]$,  then
 \begin{equation}\label{eq:crlb}
   \Expnew{p}{(\theta_t - p)^2} \geq \frac{p(1-p)}{t}.
 \end{equation}
-In our setting, we can lower bound $\Expnew{p}{|\theta_t - p|}$ by
-$\Expnew{p}{(\theta_t - p)^2}$ since $|\theta_t - p| \leq 1$
-(making the natural assumption that estimators do not output values outside
-$[0,1]$).
-Simply setting $p=1/2$ in inequality (\ref{eq:crlb}) would give us a
-$p$ satisfying the requirements of Claim~\ref{cl:fixed_p}.
-The problem with this lower bound is that the assumption that the estimator
-is unbiased is considered rather restrictive and unrealistic even in
-the statistics literature in the sense that many efficient practical
-estimators are not unbiased.  Thus, we would like to get a lower bound
-with minimal assumptions about the estimator.
+Since $\Expnew{p}{|\theta_t - p|}$ can be lower bounded
+by $\Expnew{p}{(\theta_t - p)^2}$ we can apply the Cramer-Rao inequality and
+prove Claim~\ref{cl:fixed_p} for the \emph{unbiased} estimators 
+$\theta =(\theta_t)_{t=1}^\infty$. An estimator $\theta =(\theta_t)_{t=1}^\infty$ is \emph{unbiased}
+if $E_p[\theta_t]=p$ for all $p \in [0,1]$. Obviously, we need to prove the claim for any
+estimator $\theta$, however this is a first indication that our claim holds.
+
+
+%Simply setting $p=1/2$ in inequality (\ref{eq:crlb}) would give us a
+%$p$ satisfying the requirements of Claim~\ref{cl:fixed_p}.
+%The problem with this lower bound is that the assumption that the estimator
+%is unbiased is considered rather restrictive and unrealistic even in
+%the statistics literature in the sense that many efficient practical
+%estimators are not unbiased.  Thus, we would like to get a lower bound
+%with minimal assumptions about the estimator.
+
+
+
+
 
 To the best of our knowledge, sample complexity lower bounds without
 assumptions about the estimator are given as lower bounds for the
@@ -180,8 +191,10 @@ function, for simplicity, we write the minimax risk for estimating the mean
 of a Bernoulli random variable.}
   by Wald in \cite{Wal39} as
 \[
-  \inf_{\theta_t} \sup_{p\in[0,1]} \Expnew{p}{|\theta_t - p|}.
+  \min_{\theta_t} \max_{p\in[0,1]} \Expnew{p}{|\theta_t - p|}.
 \]
+
+
 Minimax risk captures the idea that after we pick the best possible
 algorithm, an adversary inspects it and picks the worst possible
 $p \in[0,1]$ to generate the samples that our algorithm will get as input.
@@ -217,11 +230,11 @@ Trying to get a lower bound without assumptions about the estimators
 while respecting our need for a fixed (independent of $t$) $p$ we prove
 Lemma~\ref{l:estimation_lower_bound}.
 In fact, we show something stronger:
-for \emph{almost all} $p \in [0,1]$, any estimator $\hat{\theta}$ cannot
+for \emph{almost all} $p \in [0,1]$, any estimator $\theta$ cannot
 achieve rate $o(1/t^{1+c})$.
 More precisely,  suppose we select a $p$ uniformly at
-random in $[0,1]$ and run the estimator $\hat{\theta}$ with samples from the
-distribution $B(p)$, then with probability $1$ the error rate $R_p(\theta_t) \in
+random in $[0,1]$ and run the estimator $\theta$ with samples from the
+distribution $B(p)$, then with probability $1$ the error rate $\Expnew{p}{|\theta_t  - p |} \in
 \Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
 $\Omega(1/\sqrt{t})$ we prove that no exponential convergence rate
 is possible and we remark that our proof is fairly simple, intuitive,
@@ -233,10 +246,10 @@ and could be of independent interest.
 \begin{lemma}\label{l:estimation_lower_bound}
 
   Let $\hat{\theta}$ an estimator for the parameter $p$ of a Bernoulli
-  random variable with error rate $R_p(\theta_t)$.
+  random variable with error rate $\Expnew{p}{|\theta_t  - p |}$.
   If we select $p$ uniformly at random in $[0,1]$ then
   \[
-    \Prob{\lim_{t\to \infty} t^{1+c} R_p(\theta_t)\ > 0}=1,
+    \Prob{\lim_{t\to \infty} t^{1+c} \Expnew{p}{|\theta_t  - p |}\ > 0}=1,
   \]
   for any $c>0$.
 
@@ -258,9 +271,9 @@ and could be of independent interest.
     (1-p)^{t-i}.
   \]
   %
-  For any estimator with error $R_p(\theta_t)$ there exists another estimator
+  For any estimator with error $\Expnew{p}{|\theta_t  - p |}$ there exists another estimator
   with $R'_p(t)$ that satisfies the above property and
-  $R_p'(t) \leq R_p(\theta_t)$.
+  $R_p'(t) \leq \Expnew{p}{|\theta_t  - p |}$.
   Thus we can assume that $\theta_t$ takes at most $t+1$ different
   values.
   %
@@ -268,12 +281,12 @@ and could be of independent interest.
   rate $o(1/t^{1+c})$, that is
   %
   \[
-    A= \{p\in [0,1]: \lim_{t \to \infty} t^{1+c}R_p(\theta_t)=0\}
+    A= \{p\in [0,1]: \lim_{t \to \infty} t^{1+c}\Expnew{p}{|\theta_t  - p |}=0\}
   \]
   We show that if we select $p$ uniformly at random in $[0,1]$ then
   $\Prob{p \in A} = 0$.  We also define the set
   \[
-    A_k=\{p\in [0,1]: \text{for all }t \geq k,~ t^{1+c}R_p(\theta_t)\leq 1/2\}
+    A_k=\{p\in [0,1]: \text{for all }t \geq k,~ t^{1+c}\Expnew{p}{|\theta_t  - p |}\leq 1/2\}
   \]
   %
   Observe that if $p \in A$ then there exists $t_p$ such that
@@ -300,7 +313,7 @@ and could be of independent interest.
     \sum_{i=0}^t \binom{t}{i} p^i (1-p)^{t-i}
     \leq
     t^{1 + c} \sum_{i=0}^t \binom{t}{i} \lp| \theta_t(i) - p \rp| p^i (1-p)^{t-i}
-    = t^{1+c} R_p(\theta_t)
+    = t^{1+c} \Expnew{p}{|\theta_t  - p |}
     \leq
     1/2.
   \]
