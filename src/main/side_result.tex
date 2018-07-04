@@ -34,15 +34,18 @@ In \cite{BT97}, section 6.3.5, they show a convergence rate guarantee for
 \ref{alg:tsitsiklis} assuming that there exists
 a window of $B$ rounds such that all agents get to meet all their
 neighbors at least once from round $t$ to round $t+B$.
-Specifically, let $\tau_j^i(t)$ to be the last time that agent $i$
-learned $j$'s opinion until time $t$. Obviously, $0\leq \tau_j^i(t) \leq t$.
-The update rule is the following
+In the  following we briefly summarize their result. 
+Assume $f_i:\R^n \mapsto \R$ are functions for $i = 1,\ldots,n$. There is 
+a unique vector $x^*$ such that $f_i(x^*) = x_i^*$ for all $i$. 
+The update rule for agent $i$ is the following
 \begin{equation}\label{eq:rule}
 x_i(t+1) = f_i(x_1(\tau_1^i(t)),\ldots, x_n(\tau_n^i(t)))
 \end{equation}
+where $\tau_j^i(t)$ is the last time that agent $i$
+learned $j$'s opinion until time $t$. Obviously, $0\leq \tau_j^i(t) \leq t$.
 A straightforward implication is that at $t =0$ all agents have the same 
 vector $x(0)$ stored in their memory. 
-The first assumption that they take is that the information that every agent
+The first assumption that we take is that the information that every agent
 holds for the others has bounded outdateness i.e. it cannot be too old. 
 \begin{assumption}\label{a:outdateness}
 There exists an integer $B$ such that 
@@ -53,28 +56,29 @@ for all $i,j,t$.
 \end{assumption}
 Another assumption is a form of Lipschitz continuity for the function $f_i$.
 \begin{assumption}\label{a:lipschitz}
-There exists a scalar $a \in [0,1)$, such that 
+There exists a scalar $L \in [0,1)$, such that 
 \[
-\lp|f_i(x) - x_i^*\rp| \leq a \max_{j \neq i}\lp|x_j - x_j^*\rp|
+\lp|f_i(x) - x_i^*\rp| \leq L \max_{j \neq i}\lp|x_j - x_j^*\rp|
 \]
 for all $x \in \R^n$, $i = 1,\ldots, n$.
 \end{assumption}
 The main theorem that we use is the following. 
 \begin{theorem}[{{\cite{BT97}}}]\label{t:tsitsiklis}
-If Assumptions~\ref{a:outdateness} and ~\ref{a:lipschitz} holds, then the sequence of vectors generated 
+If Assumptions~\ref{a:outdateness} and ~\ref{a:lipschitz} hold, 
+then the sequence of vectors generated 
 by the asynchronous iteration~\ref{eq:rule} satisfies:
 \[
 \norm{\infty}{x(t) - x^*} \leq \rho_A^t\norm{\infty}{x(0) - x^*}
 \]
-where $\rho_A = a^{\frac{1}{B+1}}$
+where $\rho_A = L^{\frac{1}{B+1}}$
 \end{theorem}
 In our randomized setting Assumption~\ref{a:outdateness} is not true 
 but we can easily adapt this to
 hold with high probability. In our problem
 agent $i$ simply needs to wait to meet the neighbor $j$ with the smallest
-weight $p_{ik}$. Therefore, after $\log(1/\delta)/\min_{j} p_{ij}$ rounds
+weight $p_{ij}$. Therefore, after $\log(1/\delta)/\min_{j} p_{ij}$ rounds
 we have that with probability at least $1-\delta$ agent $i$ saw all her
-neighbors at least once.  Since we want this to be true for all agents
+neighbors at least once. Since we want this to be true for all agents
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
 In section~\ref{s:cc} we show that it suffices to take 
 $B = \frac{2}{\min_{p_{ij} > 0} {p_{ij}}}\ln\frac{nt}{p}$
@@ -85,13 +89,25 @@ f_i(x_1,\ldots,x_n) = (1-a_i)\sum_{j \neq i} p_{ij} x_j + a_i s_i
 \] 
 for $i = 1,\ldots,n$.
 One can easily show that Assumption~\ref{a:lipschitz} holds for all $f_i$
-with $a = 1 - \rho$. 
+with $L = 1 - \min_i a_i = 1 - \rho$. 
 Thus, by a direct application of Theorem~\ref{t:tsitsiklis} 
 we get that with high probability
 \[
   \norm{\infty}{x(t) - x^*} = O((1-\rho)^{t/(B+1)})
 \]
 
+We remark that it is necessary to know the matrix $P$ in order for this 
+protocol to work. We first observe that the lower bound of section REFERENCE
+also holds in case the alogrithm learns the index of the chosen neighbor
+, since the reduction involves only two neighbors with different opinions and
+are thus distinguishable. 
+Therefore, if we tried to guess the probabilities by observing 
+the frequencies of the indices of the neighbors and run Algorithm~\ref{alg:tsitsiklis}
+with the empirical frequencies instead of the $p_{ij}$, the lower bound
+ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.  
+Intuitively, if we knew the probabilities then the algorithm converges exponentially,
+but the slow part of the process is learning the probabilities 
+precisely.
 
 For our next example we focus on the important case where all neighbors
 are selected uniformly at random; if an agent has $d_i$ neighbors
