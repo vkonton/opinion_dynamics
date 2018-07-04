@@ -148,33 +148,53 @@ each agent to have at least $O(\log n)$ friends (agents $j$ with $p_{ij}>0$). A 
 network like Facebook has approximately $2$ billion users and each user
 has usually more that $100$ friends which is far more than $\log(2\ 10^9)$.
 
-In Section~\ref{s:fictitious_noregret} we argue that update rule~(\ref{eq:fictitious_play})
-is a \emph{rational} behavioral assumption for selfish agents in the sense that 
-it ensures \emph{no-regret} for the agents that adopt it. Namely if agent $i$ uses (\ref{eq:fictitious_play})
+\noindent In Section~\ref{s:fictitious_noregret} we argue apart that from its simplicity, update 
+rule~(\ref{eq:fictitious_play}) is a \emph{rational game play} 
+for selfish agents in a much stronger sense. 
+If agent $i$ uses (\ref{eq:fictitious_play})
 to select $x_i(t)$, then the average disagreement cost that she suffers is similar to the average cost that she would suffer 
 by expressing the best fixed opinion. The latter holds no matter how the other agents select
-their opinions and the agents that $i$ meets. The main result of this section is Theorem~\ref{t:fictitious_noregret},
+their opinions and which agents that $i$ meets.
+In terms of \emph{Online Convex Optimization}, the latter
+means that \emph{fictitious play} is a \emph{no-regret algorithm} for the online 
+convex optimization problem stated in Theorem~\ref{t:fictitious_noregret}.
 \begin{theorem}\label{t:fictitious_noregret}
 Consider the function $f:[0,1]^2 \mapsto [0,1]$ with $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$.
 Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
 then for all $t$, 
 \[\sum_{\tau=0}^{t}f(x_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}\]
 \end{theorem}
-The no-regret property of \emph{fictitious play} follows from a direct application of Theorem~\ref{t:fictitious_noregret} 
-with $f(x,b) = (1-\alpha_i)(x-b)^2 + \alpha(x-s_i)^2$ and $b_t = x_{W_i^t}(t)$, where $\alpha_i,s_i$ are 
-respectively the self confidence coefficient,the internal opinion of $i$ and $W_i^t$ the neighbor 
-that agent $i$ meets at round $t$.
+%The no-regret property of \emph{fictitious play} follows from a direct application of Theorem~\ref{t:fictitious_noregret} 
+%with $f(x,b) = (1-\alpha_i)(x-b)^2 + \alpha(x-s_i)^2$ and $b_t = x_{W_i^t}(t)$, where $\alpha_i,s_i$ are 
+%respectively the self confidence coefficient,the internal opinion of $i$ and $W_i^t$ the neighbor 
+%that agent $i$ meets at round $t$.
 
-Even though our update rule (\ref{eq:fictitious_play}) has the above
-desired properties, for a fixed instance $I=(P,s,\alpha)$ it only achieves convergence rate of
-$\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$, while the original FJ-model
-achieves convergence rate $O(e^{-\rho t})$ \cite{GS14}.
-In section \ref{s:lower_bound} we explain this exponential gap.
-The reason is that the update rule (\ref{eq:fictitious_play})
+Even though update rule (\ref{eq:fictitious_play}) has the above
+desired properties (convergence to equilibrium and no-regret to the agents), 
+the convergence rate of the produced dynamics is outperformed by
+the convergence rate of the classical FJ-model. For 
+a fixed instance $I=(P,s,\alpha)$, \emph{fictitious play} converges with rate
+$\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$ while FJ-model
+converges with rate $O(e^{-\rho t})$ \cite{GS14}.
+As a result the following question arises
+\begin{question}
+Can the agent adopt other \emph{no-regret algorithms} such that the respective \emph{no-regret
+dynamics} converges exponential fast?
+\end{question}
+
+In section \ref{s:lower_bound} we answer this question on the negative.
+The reason that \emph{fictitious play} converges slowly is that the update rule (\ref{eq:fictitious_play})
 only depends on the opinions of the agents that agent $i$ meets,
-$\alpha_i$, and $s_i$. We call such update rules \enquote{opinion dependent}.
-Observe that fictitious play (\ref{eq:fictitious_play}) is opinion dependent.
-  In Theorem~\ref{t:lower_bound} we
+$\alpha_i$, and $s_i$. This also holds if $i$ selects $x_i(t)$ 
+according to any \emph{no-regret algorithm} for the online convex 
+problem stated in Theorem~\ref{t:fictitious_noregret}.
+%To see this observe that the output 
+%of any \emph{no-regret algorithm} $x_t^A \in [0,1]$ at round $t$ 
+%(for the online convex problem stated in Theorem~\ref{t:fictitious_noregret})
+%only depends on the function $((1-\alpha_i)(x - b_\tau)^2 + \alpha_i(x - s_i)^2)_{\tau=0}^{t-1}$
+%meaning that $x_A^t$ is uniquely determined by the sequence $(b_\tau)\tau=0^{t-1},\alpha_i$ and $s_i$. 
+We call such update rules \enquote{\emph{opinion dependent}}.
+In Theorem~\ref{t:lower_bound} we
 show that for any opinion dependent update rule there exists an instance
 $I = (P,s,\alpha)$ where $\poly(1/\eps)$ rounds are required to
 achieve convergence within error $\eps$.
@@ -187,25 +207,49 @@ achieve convergence within error $\eps$.
   \]
 where $x_A(t)$ denotes the opinion vector produced by $A$.
 \end{theorem}
+\noindent To prove Theorem~\ref{t:lower_bound}, we show that opinion dependent rules with
+\enquote{small round complexity} for any instance $I$, imply the existence of estimators for Bernoulli distributions with 
+\enquote{small} sample complexity. Then with a simple argument 
+presented in Lemma~\ref{l:estimation_lower_bound},
+we show that such estimators cannot exist.
+In Section~\ref{s:lower_bound} we also
+briefly discuss two well-known sample complexity lower bounds develloped in the field of
+statistical estimation and explain why they do not work in our case. 
+We mention that Theorem~\ref{t:lower_bound} also applies for \enquote{opinion dependent rules} that
+also depend on the agents' indices that $i$ met.
 
-In order to bypass the lower bound of Theorem~\ref{t:lower_bound},
-the update rules must use more information than simply the opinions
-of the neighbors, e.g. the indices of the neighbors that agent $i$ meets.
-Observe that update rules that ensure no regret for the agents must be opinion
-dependent; Theorem~\ref{t:lower_bound} rules out the possibility
-that they achieve exponential convergence rate.
-In Section~\ref{s:exponential_update_rules} we also argue that
-update rules that converge exponentially fast
-are an unrealistic choice for modelling the true behavior of
-the agents because of their complicated form.
-Precisely, we explicitly construct $2$ update rules which, while
-achieving exponential convergence rate, are indeed complicated.
-The first one is a function of the opinions and the indices of
-the agents that $i$ meets. The second one is a function of
-the opinions, and the number of neighbors of each agent $i$.
-In conclusion, the results of this work indicate that
-natural dynamics in our limited information exchange setting
-come at the price of slow convergence rate.
+In Section~\ref{s:exponential_update_rules}, we present 
+a simple update rule that is not opinion dependent and  acheives 
+error rate $e^{-\bigOh{\sqrt{t}}}$. This update rule is a function of
+the opinions and the indices of the agents that $i$ met, $\alpha_i,s_i$ 
+and the $i$-th row the matrix $P$. Becase of Theorem~\ref{t:lower_bound} 
+the dependency on the row $P_i$ is inevitable in order to obtain exponential convergence.  
+This update rules also reveals that the slow convergence of \emph{opinion dependent} update
+rules is not due to the reduced information exchange (learning the opinion of only one agent)
+between the agent, but it is due to the fact that the agents are \enquote{oblivious} to influence matrix $P$ of 
+the game. The assumption that the agents are aware of the influence matrix $P$ is up to discussion,
+however our results indicate that learning it during the opinion formation process
+implies slow convergence.
+
+
+%In order to bypass the lower bound of Theorem~\ref{t:lower_bound},
+%the update rules must use more information than simply the opinions
+%of the neighbors, e.g. the indices of the neighbors that agent $i$ meets.
+%Observe that update rules that ensure no regret for the agents must be opinion
+%dependent; Theorem~\ref{t:lower_bound} rules out the possibility
+%that they achieve exponential convergence rate.
+%In Section~\ref{s:exponential_update_rules} we also argue that
+%update rules that converge exponentially fast
+%are an unrealistic choice for modelling the true behavior of
+%the agents because of their complicated form.
+%Precisely, we explicitly construct $2$ update rules which, while
+%achieving exponential convergence rate, are indeed complicated.
+%The first one is a function of the opinions and the indices of
+%the agents that $i$ meets. The second one is a function of
+%the opinions, and the number of neighbors of each agent $i$.
+%In conclusion, the results of this work indicate that
+%natural dynamics in our limited information exchange setting
+%come at the price of slow convergence rate.
 
 
 % observe that an update rule that ensures no regret must be opinion dependent.
