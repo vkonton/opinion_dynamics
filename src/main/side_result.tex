@@ -28,165 +28,77 @@ In \cite{BT97}, section 6.3.5, they show a convergence rate guarantee for
 \ref{alg:tsitsiklis} assuming that there exists
 a window of $B$ rounds such that all agents get to meet all their
 neighbors at least once from round $t$ to round $t+B$.
-In our randomized setting this is not true but we can easily adapt this to
+In the  following we briefly summarize their result. 
+Assume $f_i:\R^n \mapsto \R$ are functions for $i = 1,\ldots,n$. There is 
+a unique vector $x^*$ such that $f_i(x^*) = x_i^*$ for all $i$. 
+The update rule for agent $i$ is the following
+\begin{equation}\label{eq:rule}
+x_i(t+1) = f_i(x_1(\tau_1^i(t)),\ldots, x_n(\tau_n^i(t)))
+\end{equation}
+where $\tau_j^i(t)$ is the last time that agent $i$
+learned $j$'s opinion until time $t$. Obviously, $0\leq \tau_j^i(t) \leq t$.
+A straightforward implication is that at $t =0$ all agents have the same 
+vector $x(0)$ stored in their memory. 
+The first assumption that we take is that the information that every agent
+holds for the others has bounded outdateness i.e. it cannot be too old. 
+\begin{assumption}\label{a:outdateness}
+There exists an integer $B$ such that 
+\[
+t-B \leq \tau_j^i(t) \leq t
+\]
+for all $i,j,t$.
+\end{assumption}
+Another assumption is a form of Lipschitz continuity for the function $f_i$.
+\begin{assumption}\label{a:lipschitz}
+There exists a scalar $L \in [0,1)$, such that 
+\[
+\lp|f_i(x) - x_i^*\rp| \leq L \max_{j \neq i}\lp|x_j - x_j^*\rp|
+\]
+for all $x \in \R^n$, $i = 1,\ldots, n$.
+\end{assumption}
+The main theorem that we use is the following. 
+\begin{theorem}[{{\cite{BT97}}}]\label{t:tsitsiklis}
+If Assumptions~\ref{a:outdateness} and ~\ref{a:lipschitz} hold, 
+then the sequence of vectors generated 
+by the asynchronous iteration~\ref{eq:rule} satisfies:
+\[
+\norm{\infty}{x(t) - x^*} \leq \rho_A^t\norm{\infty}{x(0) - x^*}
+\]
+where $\rho_A = L^{\frac{1}{B+1}}$
+\end{theorem}
+In our randomized setting Assumption~\ref{a:outdateness} is not true 
+but we can easily adapt this to
 hold with high probability. In our problem
 agent $i$ simply needs to wait to meet the neighbor $j$ with the smallest
-weight $p_{ik}$. Therefore, after $\log(1/\delta)/\min_{j} p_{ij}$ rounds
+weight $p_{ij}$. Therefore, after $\log(1/\delta)/\min_{j} p_{ij}$ rounds
 we have that with probability at least $1-\delta$ agent $i$ saw all her
-neighbors at least once.  Since we want this to be true for all agents
+neighbors at least once. Since we want this to be true for all agents
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
-In section~\ref{s:cc} we show that it suffices to take $B = \frac{2}{\min_{p_{ij} > 0} {p_{ij}}}\ln\frac{nt}{p}$
-in order for this to hold with probability $1-p$. 
-Omitting the details of this straightforward adaptation
+In section~\ref{s:cc} we show that it suffices to take 
+$B = \frac{2}{\min_{p_{ij} > 0} {p_{ij}}}\ln\frac{nt}{p}$
+in order for this to hold with probability $1-p$.
+Also, the functions of the update rule are
+\[
+f_i(x_1,\ldots,x_n) = (1-a_i)\sum_{j \neq i} p_{ij} x_j + a_i s_i
+\] 
+for $i = 1,\ldots,n$.
+One can easily show that Assumption~\ref{a:lipschitz} holds for all $f_i$
+with $L = 1 - \min_i a_i = 1 - \rho$. 
+Thus, by a direct application of Theorem~\ref{t:tsitsiklis} 
 we get that with high probability
 \[
-  \norm{\infty}{x(t) - x^*} = O(\norm{\infty}{P}^{t/(B+1)}).
+  \norm{\infty}{x(t) - x^*} = O((1-\rho)^{t/(B+1)})
 \]
 
-Precisely, our update rule depends on the expressed opinions, the number of
-neighbors of each agent, and the number of agents $n$.
-
-The main idea of the protocol is straightforward: to counterbalance the
-imperfect information, the agents can spend some rounds to simulate one round
-of the original FJ-model. To do this, they agree to stop updating their
-expressed opinion for a large enough window of rounds so that everybody learns,
-with high probability, \emph{exactly} the average of the opinions of their
-neighbors.  Following the ideas of Section~\ref{s:fictitious_convergence} an
-agent could just average the opinions that she gets in this window.
-Unfortunately this would again result in a $\poly(1/\eps)$-round protocol.
-However this can be fixed by using the additional knowledge of the number
-of agents and the number of neighbors. Precisely, each agent
-$i$ keeps an array with the frequencies of the different opinions that she
-observes. The catch is that at the end of the window, she rounds each frequency
-to the closest multiple of $1/d_i$, where $d_i$ is the number of neighbors of
-agent $i$. This rounding step is crucial to ensure the exponential convergence
-rate. To see that this works, first notice that if all agents stop updating
-their opinions for a number of rounds, each agents just needs to specify
-exactly how many of her neighbors share a specific observed opinion.
-If the length of the window is large the frequency of
-a specific opinion at the end of the window will be sufficiently
-close to the true frequency.  Since the frequencies of
-the opinions that agent $i$ observes can only be multiples of $1/d_i$,
-we can round the estimated frequencies to the closest multiple of $1/d_i$ to
-recover the true frequencies and use them to get the exact average of the
-opinions of the neighbors.  To bound the length of the window we use a
-VC-dimension argument and show that with $n^2 \log n$ rounds each agent
-knows the frequencies within error smaller than $1/n$ with constant
-probability, which then can be trivially amplified by repeating the procedure.
-
-We next state a version of the standard VC-Inequality that we will use
-in our argument.  Let $P$ be a discrete distribution over $[n]$, and let
-$S_1, \ldots, S_t$ be $t$ i.i.d samples drawn from $P$, i.e.
-$(S_1, \ldots, S_t) \sim P^t$.  The empirical distribution $\hat{P}_t$ is the
-following estimator of the density of $P$.
-\begin{equation}\label{eq:empirical_distribution}
-  \hat{P}_t(A) = \frac{\sum_{i=1}^t \1{S_i \in A}}{t},
-\end{equation}
-where $A \subseteq [n]$. In words, $\hat{P}_t$ simply counts
-how many times the value $i$ appeared in the samples $S_1, \ldots S_t$.
-We will use the following version of the classical result of Vapnik and
-Chervonenkis.
-\begin{lemma}\label{l:vc_inequality}
-  Let $\mcal{A}$ be a collection of subsets of $\{1,\ldots, n\}$ and let
-  $S_{\mcal{A}}(t)$ be the Vapnik-Chervonenkis shatter coefficient, defined
-  by
-  \[
-    S_{\mcal{A}(t)} = \max_{x_1,\ldots, x_t \in [n]}
-    \lp| \{ \{x_1, \ldots, x_t\} \cap A : A \in \mcal{A} \} \rp|.
-  \]
-  Then
-  \[
-    \Expnew{P^t}{\max_{A \in \mcal{A}} \lp| \hat{P}_t(A) - P(A) \rp|}
-    \leq 2 \sqrt{\frac{\log{2 S_{\mcal{A}}(t)}}{t}}
-  \]
-\end{lemma}
-
-\begin{algorithm}
-  \caption{Graph Aware Update Rule}
-  \label{alg:frequencies}
-  \begin{algorithmic}[1]
-    \STATE $x_i(0) \gets s_i$.
-    \STATE $M_1 = O(\ln(n/\eps))$, $M_2 = O(d^2 \ln(d))$
-
-    \FOR{$l = 1, \ldots,\ln(1/\eps))$}
-    \STATE Keep a set $A$ of tuples $(x, \mrm{freq}(x))$
-    of and an array $B$ of length $M_1$.
-
-    \FOR{$j = 1, \ldots, M_1$}
-    \FOR{$k = 1, \ldots, M_2$}
-
-    \STATE Get the opinion $X_k$ of a random neighbor.
-    \IF{$X_j$ is not in $A$}
-    \STATE Insert $(X_k, 1)$ to $A$.
-    \ELSE
-    \STATE $(X_k, \mrm{freq}(X_k))
-    \gets (X_k,  \mrm{freq}(X_k) +1) $.
-  \ENDIF
-\ENDFOR
-\STATE Divide all frequencies of $A$ by $M_2$.  \label{alg:line:counters}
-\STATE Round all frequencies of $Α$ to the closest multiple of $1/d_i$.
-\STATE $B(j) \gets \alpha_i \sum_{x \in A} \mrm{freq}(x) + (1-\alpha_i) s_i$.
-\ENDFOR
-\STATE $x_i(t) \gets \mrm{majority}_j B(j)$.
-\ENDFOR
-\end{algorithmic}
-\end{algorithm}
-
-\begin{theorem}
-  Let $I = (G(V,E) ,s, a)$ be an instance of the opinion formation
-  game of Definition~\ref{d:random_payoff_game} with $a > 1/2$.
-  Let $d$ be the maximum degree of the graph $G$ and $n = |V|$.
-  There exists an update rule
-  after $O(d^2 \log^2 n \log^2(1/\eps))$ rounds
-  achieves expected error
-  \(
-    \Exp{\norm{\infty}{x_t- x^*}}
-    \leq \eps.
-  \)
-\end{theorem}
-\begin{proof}
-  According to the update rule~\ref{alg:frequencies}
-  all agents fix their opinions $x_i(t)$ for $M_1 \times M_2$ rounds.
-  To estimate the sum of the opinions each agent estimates the
-  frequencies $k_j/d_i$. Since the neighbors have at most $d_i$
-  different opinions we can map the opinions to natural
-  numbers in $[d_i]$.  At each round the agent gets the opinion
-  of a random neighbor and therefore the samples $X_i$ that she
-  observes are drawn from a discrete distribution $P$ supported on
-  $[d_i]$.
-  If $k_j$ be the (absolute) frequency of the opinion $j$
-  namely the number of neighbors that express $j$ as their
-  opinion, then the probability $P(j)$ of opinion $j$ is
-  $k_j/d_i$.  To learn the probabilities $P(j)$ using samples from $P$,
-  we let $\mcal{A} = \{\{1\},\{2\},\ldots, \{d_i\}\}$ and
-  use Lemma~\ref{l:vc_inequality} to get that
-  \[
-    \Expnew{P^m}{\max_{j \in [d_i]} \lp| \hat{P}_m(j) - P(j) \rp|}
-    \leq 2 \sqrt{\frac{\log{2 d_i}}{m}},
-  \]
-  since $S_{\mcal{A}} \leq n$. Therefore, an agent can draw
-  $m = 100 n^2 \log(2 n)$ to learn the frequencies $k_j/d_i$
-  within expected error $1/(5 d)$.
-  Notice now that the array $A$ after line~\ref{alg:line:counters}
-  corresponds to the empirical distribution of
-  equation~(\ref{eq:empirical_distribution}).
-  Notice that if the agents have estimations of the frequencies $k_j/d_i$
-  with error smaller than $1/d$, then by rounding them to the closest
-  multiple of $1/d_i$ they learn the frequencies exactly.
-  By Markov's inequality we have that with probability at least $4/5$ the
-  rounded frequencies are exactly correct.
-  By standard Chernoff bounds we have that if the agents repeat the
-  above procedure $\ln(1/\delta)$ times and keep the most frequent of the
-  answers $B(j)$, then they will obtain the correct answer with
-  probability at least $1-\delta$. We know that, having computed
-  the \emph{exact} average of the opinions of the neighbors $Ο(\log(1/\eps))$
-  rounds are enough to achieve error $\eps$.
-  Since we need all nodes to succeed at computing the exact averages for
-  $Ο(\log(1/\eps))$ rounds, from the union bound we get that for
-  $\delta < \frac{\eps}{n \ln(1/\eps)}$, with
-  probability at least $1-\eps$ the error is at most $\eps$.
-  Finally, from the law of total expectation, after
-  $T = O(d^2 \log d \log(\eps) (\log(n/\eps) + \log \log(1/\eps))$ rounds
-  the expected error is
-  $\Exp{\norm{\infty}{x_T - x^*}} = (1-\eps) \eps + \eps \leq 2 \eps$.
-\end{proof}
+We remark that it is necessary to know the matrix $P$ in order for this 
+protocol to work. We first observe that the lower bound of section REFERENCE
+also holds in case the alogrithm learns the index of the chosen neighbor
+, since the reduction involves only two neighbors with different opinions and
+are thus distinguishable. 
+Therefore, if we tried to guess the probabilities by observing 
+the frequencies of the indices of the neighbors and run Algorithm~\ref{alg:tsitsiklis}
+with the empirical frequencies instead of the $p_{ij}$, the lower bound
+ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.  
+Intuitively, if we knew the probabilities then the algorithm converges exponentially,
+but the slow part of the process is learning the probabilities 
+precisely.
