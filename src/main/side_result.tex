@@ -7,22 +7,29 @@ graph $G$ combined with agents that do not act selfishly,
 can restore the exponential convergence rate.
 Our first update rule, depends not only on the expressed opinions of the
 agents but also on their indices and matrix $P$.
+In Algorithm~\ref{alg:tsitsiklis} agent $i$
+keeps an array $C$ where she stores the most recent expressed opinions of
+her neighbors.  When she meets a neighbor she updates the array with the
+most recent opinion of this neighbor.
+At each round she updates her own opinion to be the weighted sum of the
+most recent opinions of her neighbors.
 \begin{algorithm}
   \caption{Tsitsiklis}
   \label{alg:tsitsiklis}
   \begin{algorithmic}[1]
     \STATE $x_i(0) \gets s_i$.
-    \STATE Let $d_i$ be the number of non-negative entries of row $i$ of $P$.
+    \STATE Let $d_i$ be the number of positive entries of row $i$ of $P$,
+    i.e. the number of neighbors of agent $i$.
     \STATE Keep an array $A$ of length $d_i$.
     \STATE At round $t$:
     \bindent
-    \STATE Meet neighbor $k$, get the opinion $x_k(t-1)$ and the index $k$.
-    \STATE $A_k \gets x_k(t-1)$.
-    \STATE $x_i(t) = \sum_{j=1}^{d_i} p_{ij} A_j$
+    \STATE Let $x_k(t-1)$ be the opinion and $k$ the index of
+    the neighbor that agent $i$ meets.
+    \STATE $C_k \gets x_k(t-1)$.
+    \STATE $x_i(t) \gets \sum_{j=1}^{d_i} p_{ij} C_j$.
     \eindent
 \end{algorithmic}
 \end{algorithm}
-
 In \cite{BT97}, section 6.3.5, they show a convergence rate guarantee for
 \ref{alg:tsitsiklis} assuming that there exists
 a window of $B$ rounds such that all agents get to meet all their
@@ -39,12 +46,17 @@ in order for this to hold with probability $1-p$.
 Omitting the details of this straightforward adaptation
 we get that with high probability
 \[
-  \norm{\infty}{x(t) - x^*} = O(\norm{\infty}{P}^{t/(B+1)}).
+  \norm{\infty}{x(t) - x^*} = O((1-\rho)^{t/(B+1)}),
 \]
+where $\rho = \min_{ij} p_{ij}$.
 
-Precisely, our update rule depends on the expressed opinions, the number of
-neighbors of each agent, and the number of agents $n$.
-
+For our next example we focus on the important case where all neighbors
+are selected uniformly at random; if an agent has $d_i$ neighbors
+all $p_{ij} = 1/d_i$.  In this case we show an update rule that (in contrast
+with Algorithm~\ref{alg:tsitsiklis} does not need the indices of the neighbors
+but only uses the number of neighbors $d_i$ of each agent.
+Our update rule depends on the expressed opinions, the number of neighbors of
+each agent, and the number of agents $n$.
 The main idea of the protocol is straightforward: to counterbalance the
 imperfect information, the agents can spend some rounds to simulate one round
 of the original FJ-model. To do this, they agree to stop updating their
@@ -123,7 +135,7 @@ Chervonenkis.
   \ENDIF
 \ENDFOR
 \STATE Divide all frequencies of $A$ by $M_2$.  \label{alg:line:counters}
-\STATE Round all frequencies of $Α$ to the closest multiple of $1/d_i$.
+\STATE Round all frequencies of $A$ to the closest multiple of $1/d_i$.
 \STATE $B(j) \gets \alpha_i \sum_{x \in A} \mrm{freq}(x) + (1-\alpha_i) s_i$.
 \ENDFOR
 \STATE $x_i(t) \gets \mrm{majority}_j B(j)$.

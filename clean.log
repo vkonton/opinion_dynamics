@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Arch Linux) (preloaded format=pdflatex 2018.4.18)  1 JUL 2018 20:10
+=======
 This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.4.27)  1 JUL 2018 23:19
+>>>>>>> a7eea9d9bee5db9886ec78bbd6b273e87ab1daad
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1153,6 +1157,12 @@ LaTeX Warning: Label `t:fictitious_noregret' multiply defined.
 
 
 LaTeX Warning: Label `t:fictitious_noregret' multiply defined.
+<<<<<<< HEAD
+
+
+LaTeX Warning: Label `thm:convergence' multiply defined.
+=======
+>>>>>>> a7eea9d9bee5db9886ec78bbd6b273e87ab1daad
 
 )
 \openout1 = `clean.aux'.
@@ -1372,14 +1382,32 @@ LaTeX Warning: Citation ` FGV16' on page 3 undefined on input line 234.
 LaTeX Warning: Reference `alg:fictitious_play' on page 4 undefined on input lin
 e 29.
 
+<<<<<<< HEAD
+[4] [5]) (./src/main/fictitious_noregret.tex [6]
+
+LaTeX Warning: Reference `t:no_regret' on page 7 undefined on input line 133.
+
+[7]) (./src/main/lower_bound.tex
+
+LaTeX Warning: Reference `t:dynamics_lower_bound' on page 8 undefined on input 
+line 36.
+
+[8]
+
+LaTeX Warning: Reference `t:dynamics_lower_bound' on page 9 undefined on input 
+line 126.
+
+[9]
+=======
 [4] [5]) (./src/main/fictitious_noregret.tex [6] [7])
 (./src/main/lower_bound.tex [8] [9]
+>>>>>>> a7eea9d9bee5db9886ec78bbd6b273e87ab1daad
 
 LaTeX Warning: Citation ` Tsy08' on page 10 undefined on input line 203.
 
 [10]) (./src/main/side_result.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
-put line 11.
+put line 17.
  [11] [12]) [13] (./clean.bbl) [14
 
 ]
@@ -1421,6 +1449,42 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 82.
  ) 
 Here is how much of TeX's memory you used:
+<<<<<<< HEAD
+ 34770 strings out of 492982
+ 778864 string characters out of 6138579
+ 1000707 words of memory out of 5000000
+ 37309 multiletter control sequences out of 15000+600000
+ 104928 words of font info for 195 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 64i,13n,96p,939b,956s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share/texmf-dist/fo
+nts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-rm.
+enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf-d
+ist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/share/texmf-dist/fonts/enc/dvips/lm/lm-
+mathex.enc}</usr/share/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/share/
+texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/share/texmf-dist/fonts/type1/
+public/lm/lmbx7.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmbx9.pfb></us
+r/share/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/share/texmf-dist/font
+s/type1/public/lm/lmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi5
+.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf-d
+ist/fonts/type1/public/lm/lmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/l
+m/lmmi9.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/share/
+texmf-dist/fonts/type1/public/lm/lmr5.pfb></usr/share/texmf-dist/fonts/type1/pu
+blic/lm/lmr6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/sh
+are/texmf-dist/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf-dist/fonts/type
+1/public/lm/lmri10.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmri9.pfb><
+/usr/share/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf-dist/f
+onts/type1/public/lm/lmsy5.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lms
+y6.pfb></usr/share/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></usr/share/texmf
+-dist/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf-dist/fonts/type1/public
+/lm/lmtt9.pfb>
+Output written on clean.pdf (19 pages, 481587 bytes).
+PDF statistics:
+ 452 PDF objects out of 1000 (max. 8388607)
+ 384 compressed objects within 4 object streams
+ 121 named destinations out of 1000 (max. 500000)
+ 24597 words of extra memory for PDF output out of 24883 (max. 10000000)
+=======
  34672 strings out of 494945
  778254 string characters out of 6181032
  995069 words of memory out of 5000000
@@ -1452,4 +1516,5 @@ PDF statistics:
  387 compressed objects within 4 object streams
  122 named destinations out of 1000 (max. 500000)
  24085 words of extra memory for PDF output out of 24883 (max. 10000000)
+>>>>>>> a7eea9d9bee5db9886ec78bbd6b273e87ab1daad
 
