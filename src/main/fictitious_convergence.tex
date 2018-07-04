@@ -1,33 +1,29 @@
 \section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
-In this section we prove that dynamics $x(t) \in [0,1]^n$ produced
-by the update rule~(\ref{eq:fictitious_play}) converges to the unique equilibrium $x^* \in [0,1]^n$.
-For an instance $(P,s,\alpha)$ the opinion vector $x(t) \in [0,1]^n$ is defied as follows:
-
+In this section that if all agent select their opinion according to update rule~(\ref{eq:fictitious_play})
+then the dynamics $x(t)$ converges to the unique equilibrium point $x^*$.
+For an instance $(P,s,\alpha)$ the opinion vector $x(t) \in [0,1]^n$ produced by (\ref{eq:fictitious_play})
+is defined as follows:
 \begin{itemize}
- \item Initially all agents adopt their internal opinion, $x_i(0)=s_i$
- \item At round $t \geq 1$ each agent $i$ 
- \begin{itemize}
-      \item selects 
- \end{itemize}
-
- \end{itemize}
-
-
-
-fictitious play described as
-Algorithm~\ref{alg:fictitious_play} converges to the unique equilibrium $x^*$.
-The main result of the section is Theorem~\ref{thm:convergence}.
-
-\begin{theorem}\label{thm:convergence}
+ \item Each agent $i$ adopts her internal opinion, $x_i(0)=s_i$
+ \item At round $t \geq 1$, each agent $i$ updates her opinion as follows:
+ \begin{equation}\label{eq:fictitious_play}
+  x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
+\end{equation}
+\end{itemize}
+where $W_i^t$ denotes the agent that $i$ met at round $t$. The opinion vector $x(t)$ 
+due to the random meeting of the agents. Our convergence metric is $\Expnew{}{\norm{\infty}{x(t) - x^*}}$
+where the expecation is taken over the random meeting of the agents. Our convergence result is stated in Theorem~\ref{thm:convergence}
+and it is the main result of the section.  
+\begin{theorem}\label{t:fictitious_convergence}
   Let $I = (P,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
   $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
-  Algorithm~\ref{alg:fictitious_play} after $t$ rounds satisfies
+  update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
   \[
     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
-    C \sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(1/2,\rho)}},
+    C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
   \]
-  where $\rho = \min_i a_i$ and $C$ is a universal constant.
+  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 \end{theorem}
 \noindent At first we present the high level idea of the proof of Theorem~\ref{thm:convergence}.
 According to Algorithm~\ref{alg:fictitious_play}, each agent $i$ at round $t\geq 1$ updates her opinion 
