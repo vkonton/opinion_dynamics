@@ -37,12 +37,11 @@ huge social networks (e.g. Facebook, Twitter e.t.c.), in which each agent may ha
 several hundreds of friends. Thus, it is far more reasonable to assume
 that each day an agent meets a small subset of her acquaintances and
 suffers a cost based on how much she disagrees with them. To capture the above thoughts,
-we introduce the following variant of the opinion formation game with random
-payoffs.
+we introduce a variant of the opinion formation game in which the disagreement cost of each agent 
+$i$ is a random variable due to the random meetings of $i$.  
 
 \begin{definition}\label{d:random_payoff_game}
-  %Let $I$ and instance of the opinion formation game defined in \ref{eq:BKO_cost}.
-  For a given opinion vector $x \in [0,1]^n$, the cost of agent $i$
+  For a given opinion vector $x \in [0,1]^n$, the disagreement cost of agent $i$
   is the random variable $C_i(x_i,x_{-i})$ defined as follows:
   \begin{itemize}
     \item $i$ meets one of her neighbors $j$ with probability $p_{ij}= w_{ij}/\sum_{j\in N_i}w_{ij}$
@@ -50,7 +49,18 @@ payoffs.
   \end{itemize}
   where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
 \end{definition}
-\noindent Our variant has a very natural interpretation: The cost $C_i(x_i,x_{-i})$ in (\ref{eq:BKO_cost})
+\noindent The main difference our variant with the original opinion formation model is that 
+in the first case an opinion vector $x\in [0,1]^n$ defines \emph{deterministically} (according to 
+equation (\ref{eq:BKO_cost})) the cost $C_i(x_i,x_{-i})$ of each agent $i$, while in the second 
+case it defines (according to Definition~\ref{d:random_payoff_game})
+a probability distribution for the $C_i(x_i,x_{-i})$ that $i$ suffers.
+Many recent works (see e.g. \cite{Zhou17,CLL16}) study games
+with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
+random variable since the random payoff setting can be much more realistic,
+since randomness may naturally occur because of incomplete information, noise
+or other stochastic factors.
+
+Our variant has a very natural interpretation: The cost $C_i(x_i,x_{-i})$ in (\ref{eq:BKO_cost})
 can be written equivalently
 \begin{equation}\label{eq:BKO11_cost_equivalent}
 C_i(x_i,x_{-i}) = W_i\lp( (1-\alpha_i)\sum_{j \in N_i} p_{ij}(x_i-x_j)^2  + \alpha_i(x_i-s_i)^2\rp)
@@ -90,13 +100,6 @@ If $N_i \neq \emptyset$ then $\sum_{j=1}^n p_{ij}=1$ otherwise it is $0$. We rem
 and agent $i$ suffers cost $(x_i-s_i)^2$.
 Abusing notation we will sometimes refer to the graph $G$.
 
-%Many recent works (see e.g. \cite{Zhou17}) study games
-%with random payoffs, that is agent's $i$ cost ($C_i(x_i,x_{-i})$) is a
-%random variable. The random payoff setting can be much more realistic,
-%since randomness may naturally occur because of incomplete information, noise
-%or other stochastic factors. Motivated by this
-%line of research we introduce a random payoff variant of the opinion
-%formation game.
 
 \subsection{Our Results}
 
