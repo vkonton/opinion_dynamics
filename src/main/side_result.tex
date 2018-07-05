@@ -5,8 +5,24 @@ convergence is that the update rule depends only on the expressed opinions.
 In this section we provide $2$ update rules showing that information about the
 graph $G$ combined with agents that do not act selfishly,
 can restore the exponential convergence rate.
-Our first update rule, depends not only on the expressed opinions of the
+Our update rule, depends not only on the expressed opinions of the
 agents but also on their indices and matrix $P$.
+Having this knowledge, the first thing that would probably
+come to ones mind would to be to try to come up with an
+update rule resembling the original update rule of the FJ model.
+To do this, each agent could store the opinions of the random neighbors
+that she meets in an array and then update her opinion according
+to their weighted sum (each agent knows row $i$ of $P$).
+In other words, each agent keeps an array with the \emph{most recent}
+opinions of her neighbors.
+The problem with this approach is that the opinions of the neighbors
+that she keeps in her array are \emph{outdated}, i.e. the opinion of
+neighbor of agent $i$ is different than what she expressed in their
+last meeting.  The good news are that as long as this outdatedness
+is bounded we can still achieve exponential convergence to the
+equilibrium.  By bounded outdatedness we mean that there exists a
+number of rounds $B$ such that all agents have met all their neighbors
+at least once from $t$ to $t+B$.
 \begin{algorithm}
   \caption{Tsitsiklis}
   \label{alg:tsitsiklis}
@@ -19,86 +35,75 @@ agents but also on their indices and matrix $P$.
     \STATE $x_i(t) = (1-\alpha_i)\sum_{j=1}^{d_i} p_{ij} M_i[j] + \alpha_is_i$
     \STATE Meets neighbor $W_i^t$ and learns the opinion $x_{W_i^t}(t)$.
     \STATE $M_i[W_i^t] \gets x_{W_i^t}(t-1)$.
-    
-    \eindent
-\end{algorithmic}
-\end{algorithm}
 
+    \eindent
+  \end{algorithmic}
+\end{algorithm}
 In \cite{BT97}, section 6.3.5, they show a convergence rate guarantee for
-\ref{alg:tsitsiklis} assuming that there exists
-a window of $B$ rounds such that all agents get to meet all their
-neighbors at least once from round $t$ to round $t+B$.
-In the  following we briefly summarize their result. 
-Assume $f_i:\R^n \mapsto \R$ are functions for $i = 1,\ldots,n$. There is 
-a unique vector $x^*$ such that $f_i(x^*) = x_i^*$ for all $i$. 
-The update rule for agent $i$ is the following
-\begin{equation}\label{eq:rule}
-x_i(t+1) = f_i(x_1(\tau_1^i(t)),\ldots, x_n(\tau_n^i(t)))
-\end{equation}
-where $\tau_j^i(t)$ is the last time that agent $i$
-learned $j$'s opinion until time $t$. Obviously, $0\leq \tau_j^i(t) \leq t$.
-A straightforward implication is that at $t =0$ all agents have the same 
-vector $x(0)$ stored in their memory. 
-The first assumption that we take is that the information that every agent
-holds for the others has bounded outdateness i.e. it cannot be too old. 
-\begin{assumption}\label{a:outdateness}
-There exists an integer $B$ such that 
-\[
-t-B \leq \tau_j^i(t) \leq t
-\]
-for all $i,j,t$.
-\end{assumption}
-Another assumption is a form of Lipschitz continuity for the function $f_i$.
-\begin{assumption}\label{a:lipschitz}
-There exists a scalar $L \in [0,1)$, such that 
-\[
-\lp|f_i(x) - x_i^*\rp| \leq L \max_{j \neq i}\lp|x_j - x_j^*\rp|
-\]
-for all $x \in \R^n$, $i = 1,\ldots, n$.
-\end{assumption}
-The main theorem that we use is the following. 
-\begin{theorem}[{{\cite{BT97}}}]\label{t:tsitsiklis}
-If Assumptions~\ref{a:outdateness} and ~\ref{a:lipschitz} hold, 
-then the sequence of vectors generated 
-by the asynchronous iteration~\ref{eq:rule} satisfies:
-\[
-\norm{\infty}{x(t) - x^*} \leq \rho_A^t\norm{\infty}{x(0) - x^*}
-\]
-where $\rho_A = L^{\frac{1}{B+1}}$
-\end{theorem}
-In our randomized setting Assumption~\ref{a:outdateness} is not true 
-but we can easily adapt this to
-hold with high probability. In our problem
+\ref{alg:tsitsiklis} assuming that there exists a such a window $B$.
+In the  following we briefly summarize their result.  For completeness we
+give here a prove tailored for our purposes.
+
+In our randomized setting there does not exist fixed length window is
+not true but we can easily adapt this to hold with high probability.
+In our problem
 agent $i$ simply needs to wait to meet the neighbor $j$ with the smallest
 weight $p_{ij}$. Therefore, after $\log(1/\delta)/\min_{j} p_{ij}$ rounds
-we have that with probability at least $1-\delta$ agent $i$ saw all her
+we have that with probability at least $1-\delta$ agent $i$ met all her
 neighbors at least once. Since we want this to be true for all agents
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
-In section~\ref{s:cc} we show that it suffices to take 
-$B = \frac{2}{\min_{p_{ij} > 0} {p_{ij}}}\ln\frac{nt}{p}$
-in order for this to hold with probability $1-p$.
-Also, the functions of the update rule are
-\[
-f_i(x_1,\ldots,x_n) = (1-a_i)\sum_{j \neq i} p_{ij} x_j + a_i s_i
-\] 
-for $i = 1,\ldots,n$.
-One can easily show that Assumption~\ref{a:lipschitz} holds for all $f_i$
-with $L = 1 - \min_i a_i = 1 - \rho$. 
-Thus, by a direct application of Theorem~\ref{t:tsitsiklis} 
-we get that with high probability
-\[
-  \norm{\infty}{x(t) - x^*} = O((1-\rho)^{t/(B+1)})
-\]
+In section~\ref{s:cc} we show that it suffices to take
+$B = \frac{2}{\min_{p_{ij} > 0} {p_{ij}}}\ln\frac{nt}{\delta}$
+in order for this to hold with probability $1-\delta$.
+% Also, the functions of the update rule are
+% \[
+%   f_i(x_1,\ldots,x_n) = (1-a_i)\sum_{j \neq i} p_{ij} x_j + a_i s_i
+% \]
+% for $i = 1,\ldots,n$.
+% One can easily show that Assumption~\ref{a:lipschitz} holds for all $f_i$
+% with $L = 1 - \min_i a_i = 1 - \rho$.
+% Thus, by a direct application of Theorem~\ref{t:tsitsiklis}
+% we get that with high probability
+% \[
+%   \norm{\infty}{x(t) - x^*} = O((1-\rho)^{t/(B+1)})
+% \]
 
-We remark that it is necessary to know the matrix $P$ in order for this 
-protocol to work. We first observe that the lower bound of section REFERENCE
-also holds in case the alogrithm learns the index of the chosen neighbor
-, since the reduction involves only two neighbors with different opinions and
-are thus distinguishable. 
-Therefore, if we tried to guess the probabilities by observing 
-the frequencies of the indices of the neighbors and run Algorithm~\ref{alg:tsitsiklis}
-with the empirical frequencies instead of the $p_{ij}$, the lower bound
-ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.  
+We remark that it is necessary to know the matrix $P$ in order for this
+protocol to work. We first observe that the lower bound of Section \ref{s:lower_bound}
+also holds in case the algorithm learns the index of the chosen neighbor,
+since the reduction involves only two neighbors with different opinions and are
+thus distinguishable.
+Therefore, if we tried to learn $P$ by observing the frequencies
+of the indices of the neighbors and run Algorithm~\ref{alg:tsitsiklis}
+with the empirical frequencies instead of the $p_{ij}$, our lower bound
+ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.
 Intuitively, if we knew the probabilities then the algorithm converges exponentially,
-but the slow part of the process is learning the probabilities 
-precisely.
+but the slow part of the process is learning the probabilities precisely.
+
+% Assume $f_i:\R^n \mapsto \R$ are functions for $i = 1,\ldots,n$. There is
+% a unique vector $x^*$ such that $f_i(x^*) = x_i^*$ for all $i$.
+% The update rule for agent $i$ is the following
+% \begin{equation}\label{eq:rule}
+% x_i(t+1) = f_i(x_1(\tau_1^i(t)),\ldots, x_n(\tau_n^i(t)))
+% \end{equation}
+% A straightforward implication is that at $t =0$ all agents have the same
+% vector $x(0)$ stored in their memory.
+% The main theorem that we use is the following.
+% \begin{theorem}[{{\cite{BT97}}}]\label{t:tsitsiklis}
+%   Let $\tau_j^i(t)$ is the last time that agent $i$ learned $j$'s opinion until
+%   time $t$.  There exists an integer $B$ such that
+%   for all $i,j,t$ \( t-B \leq \tau_j^i(t) \leq t \).
+%   There exists a scalar $L \in [0,1)$, such that
+%   \(
+%     \lp|f_i(x) - x_i^*\rp| \leq L \max_{j \neq i}\lp|x_j - x_j^*\rp|
+%   \)
+%   for all $x \in \R^n$, $i = 1,\ldots, n$.
+
+%   If Assumptions~\ref{a:outdatedness} and ~\ref{a:lipschitz} hold,
+%   then the sequence of vectors generated
+%   by the asynchronous iteration~\ref{eq:rule} satisfies:
+%   \[
+%     \norm{\infty}{x(t) - x^*} \leq \rho_A^t\norm{\infty}{x(0) - x^*}
+%   \]
+%   where $\rho_A = L^{\frac{1}{B+1}}$
+% \end{theorem}
