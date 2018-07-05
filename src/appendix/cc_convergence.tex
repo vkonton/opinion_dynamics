@@ -1,4 +1,5 @@
-\section{Full memory with limited information exchange}
+\section{Faster}\label{app:s:cc_convergence}
+
 In each round, every agent learns a neighbour's opinion and updates the appropriate cell in memory. Because an agent learns only one opinion in each round, he uses outdated information about his other neighbours in order to compute his opinion. We first introduce some convinient notation.
 \begin{definition}
 $\pi_{ij}(t)$ is the last time that $i$ learned $j$'s opinion until time $t$.
@@ -49,7 +50,7 @@ We now turn our attention to the problem of computing the appropriate length $D$
 
 \begin{lemma}
 Suppose that the collector picks coupons with mixed probabilities, where $n$ is the number of distinct coupons.
-Let $w$ be the minimum of these probabilities. If he selects $\ln n/w+ c/w$ coupons, then: 
+Let $w$ be the minimum of these probabilities. If he selects $\ln n/w+ c/w$ coupons, then:
 $$
 \Prob{\text{collector hasn't seen all coupons}} \leq \frac{1}{\me^c}
 $$
@@ -63,7 +64,7 @@ In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each n
 $$ \norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{D}} \leq (1-a)^{\frac{tw}{2\ln( \frac{nt}{p})} }$$
 
 \end{proof}
-We are now going to translate this result to one that involves the expected value of the error. 
+We are now going to translate this result to one that involves the expected value of the error.
 \begin{theorem}If we set $u(t) = \norm{\infty}{x^t-x^*}$, the error after $t$ rounds, then:
 $$
 \Exp{u(t)} \leq 2(1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}}
@@ -72,12 +73,12 @@ $$
 \begin{proof}
 Using the result of the previous theorem, we obtain:
 $$ \Prob{u(t) > (1-a)^{\frac{wt}{2\ln( \frac{nt}{p})} }} \leq p $$
-for every probability $p \in [0,1]$. Also, since all the parameters of the problem lie in $[0,1]$, we have 
+for every probability $p \in [0,1]$. Also, since all the parameters of the problem lie in $[0,1]$, we have
 $$\Exp{u(t)|u(t) > r} \leq 1$$
 Now, by the conditional expectations identity, we get:
 \begin{align*}
 \Exp{u(t)} &= \Exp{u(t)|u(t) > r}\Prob{u(t) > r} +\Exp{u(t)|u(t) \leq r}\Prob{u(t) \leq r}\\
-&\leq p + r 
+&\leq p + r
 \end{align*}
 where $r = (1-a)^{\frac{wt}{2\ln( \frac{nt}{p})} }$. If we set $p = (1-a)^{\frac{w\sqrt{t}}{2\ln nt}}$, then:
 $$
@@ -85,7 +86,7 @@ $$
 $$
 We now evaluate $r$ for our choice of probability $p$:
 \begin{align*}
-r 
+r
 &= (1-a)^{\frac{wt}{2\ln\lp( \frac{nt}{p}\rp)} }\\
 &= (1-a)^{\frac{wt}{2\ln\lp( \frac{nt}{(1-a)^{\frac{w\sqrt{t}}{2\ln nt}}}\rp)} }\\
 &= (1-a)^{\frac{wt}{2\ln nt + 2\frac{w\sqrt{t}}{2\ln nt}\ln\lp( \frac{1}{(1-a)}\rp) }}\\
@@ -96,7 +97,7 @@ r
 Using the previous calculation, we obtain:
 $$ \Exp{u(t)} \leq (1-a)^{\frac{w\sqrt{t}}{2\ln nt}} + (1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}} \leq 2(1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}}$$
 \end{proof}
-Therefore, this strategy achieves subexponential convergence rate in expectation. 
+Therefore, this strategy achieves subexponential convergence rate in expectation.
 
 \begin{lemma}\label{l:simple_induction}
 If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then
@@ -104,7 +105,7 @@ If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then
 \end{lemma}
 
 \begin{proof}
-To prove our claim we use induction on $k$. For the induction base $k=1$, 
+To prove our claim we use induction on $k$. For the induction base $k=1$,
 \begin{eqnarray*}
 |x_i(t) - x_i^*| &=& |(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_j(\pi_{ij}(t)-x_j^*)|\\
 &\leq& (1-\alpha_i)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|\leq (1-\rho)
@@ -113,7 +114,3 @@ For $k\geq 2$, we again have that $|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}
 Since $t-B \leq \pi_{ij}(t)$ and $t\geq kT$, we have that $\pi_{ij}(t) \geq (k-1)T$ and the induction hypothesis applies,
 $|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$.
 \end{proof}
-
-
-
-

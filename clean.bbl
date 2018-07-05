@@ -98,4 +98,11 @@ Bin Yu.
 \newblock In {\em Festschrift for {Lucien} {Le} {Cam}}, pages 423--435.
   Springer, New York, NY, 1997.
 
+\bibitem[ZLZ17]{Zhou17}
+Yichi Zhou, Jialian Li, and Jun Zhu.
+\newblock Identify the nash equilibrium in static games with random payoffs.
+\newblock In {\em Proceedings of the 34th International Conference on Machine
+  Learning, {ICML} 2017, Sydney, NSW, Australia, 6-11 August 2017}, pages
+  4160--4169, 2017.
+
 \end{thebibliography}
