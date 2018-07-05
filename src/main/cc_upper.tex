@@ -97,3 +97,23 @@ Using the previous calculation, we obtain:
 $$ \Exp{u(t)} \leq (1-a)^{\frac{w\sqrt{t}}{2\ln nt}} + (1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}} \leq 2(1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}}$$
 \end{proof}
 Therefore, this strategy achieves subexponential convergence rate in expectation. 
+
+\begin{lemma}\label{l:simple_induction}
+If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then
+\[\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\]
+\end{lemma}
+
+\begin{proof}
+To prove our claim we use induction on $k$. For the induction base $k=1$, 
+\begin{eqnarray*}
+|x_i(t) - x_i^*| &=& |(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_j(\pi_{ij}(t)-x_j^*)|\\
+&\leq& (1-\alpha_i)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|\leq (1-\rho)
+\end{eqnarray*}
+For $k\geq 2$, we again have that $|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|$.
+Since $t-B \leq \pi_{ij}(t)$ and $t\geq kT$, we have that $\pi_{ij}(t) \geq (k-1)T$ and the induction hypothesis applies,
+$|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$.
+\end{proof}
+
+
+
+
