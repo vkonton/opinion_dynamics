@@ -179,17 +179,20 @@ each agent to have at least $O(\log n)$ friends. A large social
 network like Facebook has approximately $2$ billion users and each user
 has usually more that $100$ friends which is far more than $\log(2\ 10^9)$.
 
-In Section~\ref{s:fictitious_noregret} we argue apart that from its simplicity,
-fictitious play is a \emph{rational game play} for selfish agents in a much
-stronger sense. At each round $t$ each agent $i$,
-selects an opinion $x_i(t) \in [0,1]$
+In Section~\ref{s:fictitious_noregret} we argue that, apart from its simplicity,
+fictitious play has no-regret, and therefore,
+is a \emph{rational game play} for selfish agents.
+At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
 and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
-Since agent $i$ is selfish and only interests in minimizing her cost, it is reasonable to assume
-that she selects $x_i(t)$ according to an \emph{no-regret algorithm A}
-for the \emph{online convex optimization problem} where the adversary at round $t$ chooses
-a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$.
+Since agent $i$ is selfish and only interests in minimizing her individual cost,
+it is reasonable to assume that she selects $x_i(t)$ according to
+an \emph{no-regret algorithm}
+for the \emph{online convex optimization problem} where the adversary chooses
+a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$ at each round $t$.
 In Theorem~\ref{t:fictitious_noregret} we prove that fictitious play is a
-no-regret algorithm for the above OCO problem.
+no-regret algorithm for the above OCO problem.  We remark that, in general,
+fictitious play does not guarantee no-regret if the adversary can pick
+functions from a larger class (see e.g. chapter 5 in \cite{Haz16}).
 
 \begin{reptheorem}{t:fictitious_noregret}
   Consider the function $f:[0,1]^2 \mapsto [0,1]$ with
@@ -211,17 +214,16 @@ $\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$ while FJ-model
 converges with rate $O(e^{-\rho t})$ \cite{GS14}.
 As a result the following question arises
 \begin{question}
-  Can the agent adopt other no-regret algorithms such that the resulting
-  dynamics converges exponential fast?
+  Can the agents adopt other no-regret algorithms such that the resulting
+  dynamics $x(t)$ converges exponential fast to $x^*$?
 \end{question}
 
-In section \ref{s:lower_bound} we answer this question in the negative.
+In Section~\ref{s:lower_bound} we answer this question in the negative.
 The reason that fictitious play converges slowly is that
-the update rule (\ref{eq:fictitious_play})
+update rule (\ref{eq:fictitious_play})
 only depends on the opinions of the agents that agent $i$ meets,
 $\alpha_i$, and $s_i$. This is also true for any no-regret algorithm
-that $i$ uses to select $x_i(t)$ (see Definition~\ref{d:no-regret_algorithms}
-in Section~\ref{s:fictitious_noregret}).
+that $i$ uses to select $x_i(t)$ (see Section~\ref{s:lower_bound}).
 We call such update rules \enquote{\emph{opinion dependent}}.
 In Theorem~\ref{t:lower_bound} we
 show that for any opinion dependent update rule there exists an instance
@@ -238,31 +240,29 @@ achieve convergence within error $\eps$.
 \end{reptheorem}
 %
 To prove Theorem~\ref{t:lower_bound}, we show that opinion dependent rules with
-\enquote{small round complexity} for any instance $I$, imply the existence
+\enquote{small round complexity}, imply the existence
 of estimators for Bernoulli distributions with
 \enquote{small} sample complexity. Then with a simple argument
 presented in Lemma~\ref{l:estimation_lower_bound},
 we show that such estimators cannot exist.
 In Section~\ref{s:lower_bound} we also
-briefly discuss two well-known sample complexity lower bounds developed in the field of
-statistical estimation and explain why they do not work in our case.
-We mention that Theorem~\ref{t:lower_bound} also applies for
-\enquote{opinion dependent rules} that also depend on the agents' indices
-that $i$ met.
+briefly discuss two well-known sample complexity lower bounds
+from the statistics literature and explain why they do not work in our case.
 
-In Section~\ref{s:exponential_update_rules}, we present a simple update rule that
+In Section~\ref{s:cc_convergence}, we present a simple update rule that
 is not opinion dependent and  achieves error rate $e^{-\bigOh{\sqrt{t}}}$.
 This update rule is a function of the opinions and the indices of the agents
-that $i$ met, $\alpha_i,s_i$ and the $i$-th row the matrix $P$. Because of
-Theorem~\ref{t:lower_bound} the dependency on the row $P_i$ is inevitable in
-order to obtain exponential convergence.  This update rules also reveals that
-the slow convergence of \emph{opinion dependent} update rules is not due to
-the reduced information exchange (learning the opinion of only one agent)
-between the agents, but due to the fact that the agents are \enquote{oblivious}
-to influence matrix $P$ of the game. The assumption that the agents are aware of
-the influence matrix $P$ is up to discussion, however our results suggest that
-exponential convergence is ensured by the knowledge $P$ and has much less
-to do with the information exchange among the agents.
+that $i$ met, $\alpha_i,s_i$ and the $i$-th row the matrix $P$.
+We mention that the lower bound presented in Theorem~\ref{t:lower_bound}
+applies for \enquote{opinion dependent rules} that also depend on the
+agents' indices that $i$ met.  Therefore, the dependency on the row $P_i$ is
+inevitable in order to obtain exponential convergence.
+Although, the assumption that the agents are aware of the influence matrix
+$P$ is up to discussion, this update rule reveals that the slow convergence of
+\emph{opinion dependent} update rules is not due to the reduced information exchange
+(learning the opinion of only one agent), but due to the fact
+that the agents are \enquote{oblivious} to the influence matrix $P$ of the
+game and they learn it during the game play.
 
 \subsection{Related Work}
 Our work belongs to the line of work studying the seminal Friedkin-Jonhsen
@@ -270,7 +270,7 @@ model \cite{FJ90}. Bindel et al. in \cite{BKO11} defined an opinion
 formation game based on the FJ-model and bounded the inefficiency
 of its equilibrium point with respect to the total disagreement cost.
 Subsequent work bounded the inefficiency of its equilibrium in variants
-of the latter game \cite{BGM13, EFHS17, CKO13, BFM16}.
+of the latter game \cite{BGM13,EFHS17,CKO13,BFM16}.
 In \cite{GS14} they show that the convergence time depends on
 the spectral radius of the adjacency matrix of the graph $G$
 and provided bounds in special graph topologies.
@@ -279,22 +279,36 @@ relations depend on the expressed opinions, is studied.
 They prove that, the discretized version of the above game admits
 a potential function and thus best-response converges to the
 Nash equilibrium. Convergence results in other discretized variants of
-the FJ-model can be found in \cite{YOASS13, FGV16}.
+the FJ-model can be found in \cite{YOASS13,FGV16}.
 
-In \cite{FV97}, \cite{FS99}, \cite{HM00} they prove that in a finite
-if each agent updated her mixed strategy according to a no-regret
-algorithm the resulting time-averaged distribution converges to
-Coarse Correlated Equilibrium. In the same spirit in \cite{BEL06}
-they proved that no-regret dynamics converge to NE in the
-case of congestion games. Later in \cite{EMN09} they studied no regret
-dynamics in games with infinite strategy space. They proved that for a large
-class of games with concave utility function (socially concave games), the
-time-averaged strategy vector converges to the pure Nash equilibrium.
+There is a vast amount of literature concerning the convergence
+properties of dynamics based on no-regret online learning algorithms.
+In \cite{FV97,FS99,SA00,SALS15} it is proved that in a finite $n$-person
+game if each agent updates her mixed strategy according to a no-regret
+algorithm the resulting \emph{time-averaged} strategy vector converges to
+Coarse Correlated Equilibrium. Blum et. al in \cite{BEL06,BHLR08}
+studied the efficiency of outcomes produced by no-regret
+learning algorithm in congestion games and showed that
+their quality is close to that of a NE.
+Kleinberg et al. in \cite{KPT09} treated load-balancing in distributed systems as
+a repeated game and analyzed the performance of protocols based on
+no-regret online learning algorithms.
+A subsequent similar work, which is perhaps closer to ours, is \cite{KPT11},
+where they assumed a more realistic \emph{limited information setting},
+namely \enquote{bulletin board model} for load balancing.
+The convergence properties of no-regret dynamics for games with
+infinite strategy spaces were considered in \cite{EMN09}.
+They proved that for a large class of games with concave utility function
+(socially concave games), the time-averaged strategy vector converges to
+the PNE.
 More recent work investigate a stronger notion of convergence of
 no-regret dynamics. In \cite{CHM17} they show that,
 in $n$-person finite generic games that admit unique Nash equilibrium,
 the strategy vector converges \emph{locally} and exponentially fast
 to the PNE. They also provide conditions for \emph{global} convergence.
 Our results fit in this line of research since we show that
-for a game with \emph{infinite} strategy space, the strategy vector (not the
-time-averaged) converges to the unique Nash equilibrium.
+for a game with \emph{infinite} strategy space, the strategy vector
+(and not the time-averaged) converges to the unique Nash equilibrium.
+% As is it also mentioned in \cite{CHM17} this stronger notion
+% of convergence cannot be derived from the Coarse Correlated convergence
+% results stated above.

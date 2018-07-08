@@ -1,8 +1,75 @@
+@book{CL06,
+  author = {Cesa-Bianchi, Nicolo and Lugosi, Gabor},
+  title = {Prediction, Learning, and Games},
+  year = {2006},
+  isbn = {0521841089},
+  publisher = {Cambridge University Press},
+  address = {New York, NY, USA},
+}
+
+@inproceedings{FLLST16,
+  added-at = {2016-12-16T00:00:00.000+0100},
+  author = {Foster, Dylan J. and Li, Zhiyuan and Lykouris, Thodoris and Sridharan, Karthik and Tardos, Éva},
+  booktitle = {NIPS},
+  crossref = {conf/nips/2016},
+  editor = {Lee, Daniel D. and Sugiyama, Masashi and von Luxburg, Ulrike and Guyon, Isabelle and Garnett, Roman},
+  ee = {http://papers.nips.cc/paper/6133-learning-in-games-robustness-of-fast-convergence},
+  keywords = {dblp},
+  pages = {4727-4735},
+  timestamp = {2017-03-04T11:37:29.000+0100},
+  title = {Learning in Games: Robustness of Fast Convergence.},
+  url = {http://dblp.uni-trier.de/db/conf/nips/nips2016.html#FosterLLST16},
+  year = 2016
+}
+
+@article{KPT11,
+  author="Kleinberg, Robert and Piliouras, Georgios and Tardos, {\'E}va",
+  title="Load balancing without regret in the bulletin board model",
+  journal="Distributed Computing",
+  year="2011",
+  month="Sep",
+  day="01",
+  volume="24",
+  number="1",
+  pages="21--29",
+  abstract="We analyze the performance of protocols for load balancing in distributed systems based on no-regret algorithms from online learning theory. These protocols treat load balancing as a repeated game and apply algorithms whose average performance over time is guaranteed to match or exceed the average performance of the best strategy in hindsight. Our approach captures two major aspects of distributed systems. First, in our setting of atomic load balancing, every single process can have a significant impact on the performance and behavior of the system. Furthermore, although in distributed systems participants can query the current state of the system they cannot reliably predict the effect of their actions on it. We address this issue by considering load balancing games in the bulletin board model, where players can find out the delay on all machines, but do not have information on what their experienced delay would have been if they had selected another machine. We show that under these more realistic assumptions, if all players use the well-known multiplicative weights algorithm, then the quality of the resulting solution is exponentially better than the worst correlated equilibrium, and almost as good as that of the worst Nash. These tighter bounds are derived from analyzing the dynamics of a multi-agent learning system.",
+  issn="1432-0452",
+  doi="10.1007/s00446-011-0129-5",
+  url="https://doi.org/10.1007/s00446-011-0129-5"
+}
+
+@inproceedings{KPT09,
+ author = {Kleinberg, Robert and Piliouras, Georgios and Tardos, Eva},
+ title = {Multiplicative Updates Outperform Generic No-regret Learning in Congestion Games: Extended Abstract},
+ booktitle = {Proceedings of the Forty-first Annual ACM Symposium on Theory of Computing},
+ series = {STOC '09},
+ year = {2009},
+ isbn = {978-1-60558-506-2},
+ location = {Bethesda, MD, USA},
+ pages = {533--542},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/1536414.1536487},
+ doi = {10.1145/1536414.1536487},
+ acmid = {1536487},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {game theory, learning theory, price of anarchy},
+}
+
+@inproceedings{SALS15,
+  author    = {Vasilis Syrgkanis and
+               Alekh Agarwal and
+               Haipeng Luo and
+               Robert E. Schapire},
+  title     = {Fast Convergence of Regularized Learning in Games},
+  booktitle = {{NIPS}},
+  pages     = {2989--2997},
+  year      = {2015}
+}
+
 @article{GS14,
-  author    = {Javad Ghaderi and
-    R. Srikant},
-  title     = {Opinion dynamics in social networks with stubborn agents: Equilibrium
-    and convergence rate},
+  author    = {Javad Ghaderi and R. Srikant},
+  title     = {Opinion dynamics in social networks with stubborn agents: Equilibrium and convergence rate},
   journal   = {Automatica},
   volume    = {50},
   number    = {12},
@@ -11,12 +78,9 @@
 }
 
 @inproceedings{EMN09,
-  author    = {Eyal Even{-}Dar and
-    Yishay Mansour and
-      Uri Nadav},
+  author    = {Eyal Even{-}Dar and Yishay Mansour and Uri Nadav},
   title     = {On the convergence of regret minimization dynamics in concave games},
-  booktitle = {Proceedings of the 41st Annual {ACM} Symposium on Theory of Computing,
-    {STOC} 2009, Bethesda, MD, USA, May 31 - June 2, 2009},
+  booktitle = {Proceedings of the 41st Annual {ACM} Symposium on Theory of Computing, {STOC} 2009, Bethesda, MD, USA, May 31 - June 2, 2009},
   pages     = {523--532},
   year      = {2009},
   url       = {http://doi.acm.org/10.1145/1536414.1536486},
@@ -27,12 +91,9 @@
 }
 
 @inproceedings{BKO11,
-  author    = {David Bindel and
-    Jon M. Kleinberg and
-      Sigal Oren},
+  author    = {David Bindel and Jon M. Kleinberg and Sigal Oren},
   title     = {How Bad is Forming Your Own Opinion?},
-  booktitle = {{IEEE} 52nd Annual Symposium on Foundations of Computer Science, {FOCS}
-    2011, Palm Springs, CA, USA, October 22-25, 2011},
+  booktitle = {{IEEE} 52nd Annual Symposium on Foundations of Computer Science, {FOCS} 2011, Palm Springs, CA, USA, October 22-25, 2011},
   pages     = {57--66},
   year      = {2011},
   url       = {https://doi.org/10.1109/FOCS.2011.43},
@@ -42,29 +103,29 @@
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 
-@incollection{Bro51,
-	Address = {New York},
-	Author = {George W. Brown},
-	Booktitle = {Activity Analysis of Production and Allocation},
-	Editor = {T. C. Koopmans},
-	Publisher = {Wiley},
-	Title = {Iterative Solution of Games by Fictitious Play},
-	Year = {1951}}
 
-@inproceedings{ZLZ17,
-  author    = {Yichi Zhou and
-    Jialian Li and
-      Jun Zhu},
-  title     = {Identify the Nash Equilibrium in Static Games with Random Payoffs},
-  booktitle = {Proceedings of the 34th International Conference on Machine Learning,
-    {ICML} 2017, Sydney, NSW, Australia, 6-11 August 2017},
-  pages     = {4160--4169},
-  year      = {2017},
-  url       = {http://proceedings.mlr.press/v70/zhou17b.html},
-  timestamp = {Wed, 16 Aug 2017 11:08:55 +0200},
-  biburl    = {https://dblp.org/rec/bib/conf/icml/ZhouLZ17},
-  bibsource = {dblp computer science bibliography, https://dblp.org}
-}
+@incollection{Bro51,
+  Address = {New York},
+  Author = {George W. Brown},
+  Booktitle = {Activity Analysis of Production and Allocation},
+  Editor = {T. C. Koopmans},
+  Publisher = {Wiley},
+  Title = {Iterative Solution of Games by Fictitious Play},
+  Year = {1951}}
+
+  @inproceedings{ZLZ17,
+    author    = {Yichi Zhou and
+      Jialian Li and
+	Jun Zhu},
+    title     = {Identify the Nash Equilibrium in Static Games with Random Payoffs},
+    booktitle = {Proceedings of the 34th International Conference on Machine Learning, {ICML} 2017, Sydney, NSW, Australia, 6-11 August 2017},
+    pages     = {4160--4169},
+    year      = {2017},
+    url       = {http://proceedings.mlr.press/v70/zhou17b.html},
+    timestamp = {Wed, 16 Aug 2017 11:08:55 +0200},
+    biburl    = {https://dblp.org/rec/bib/conf/icml/ZhouLZ17},
+    bibsource = {dblp computer science bibliography, https://dblp.org}
+  }
 
 @article{CLL16,
   title = "Random-payoff two-person zero-sum game with joint chance constraints",
@@ -81,9 +142,7 @@
 }
 
 @inproceedings{BGM13,
-  author    = {Kshipra Bhawalkar and
-    Sreenivas Gollapudi and
-      Kamesh Munagala},
+  author    = {Kshipra Bhawalkar and Sreenivas Gollapudi and Kamesh Munagala},
   title     = {Coevolutionary opinion formation games},
   booktitle = {Symposium on Theory of Computing Conference, STOC'13, Palo Alto, CA,
     USA, June 1-4, 2013},
@@ -97,13 +156,9 @@
 }
 
 @inproceedings{BBCN13,
-  author    = {Arnab Bhattacharyya and
-    Mark Braverman and
-      Bernard Chazelle and
-      Huy L. Nguyen},
+  author    = {Arnab Bhattacharyya and Mark Braverman and Bernard Chazelle and Huy L. Nguyen},
   title     = {On the convergence of the Hegselmann-Krause system},
-  booktitle = {Innovations in Theoretical Computer Science, {ITCS} '13, Berkeley,
-    CA, USA, January 9-12, 2013},
+  booktitle = {Innovations in Theoretical Computer Science, {ITCS} '13, Berkeley, CA, USA, January 9-12, 2013},
   pages     = {61--66},
   year      = {2013},
   url       = {http://doi.acm.org/10.1145/2422436.2422446},
@@ -114,9 +169,7 @@
 }
 
 @inproceedings{FPS16,
-  author    = {Dimitris Fotakis and
-    Dimitris Palyvos{-}Giannas and
-      Stratis Skoulakis},
+  author    = {Dimitris Fotakis and Dimitris Palyvos{-}Giannas and Stratis Skoulakis},
   title     = {Opinion Dynamics with Local Interactions},
   booktitle = {Proceedings of the Twenty-Fifth International Joint Conference on
     Artificial Intelligence, {IJCAI} 2016, New York, NY, USA, 9-15 July
@@ -130,10 +183,7 @@
 }
 
 @inproceedings{EFHS17,
-  author    = {Markos Epitropou and
-    Dimitris Fotakis and
-      Martin Hoefer and
-      Stratis Skoulakis},
+  author    = {Markos Epitropou and Dimitris Fotakis and Martin Hoefer and Stratis Skoulakis},
   title     = {Opinion Formation Games with Aggregation and Negative Influence},
   booktitle = {Algorithmic Game Theory - 10th International Symposium, {SAGT} 2017,
     L'Aquila, Italy, September 12-14, 2017, Proceedings},
@@ -155,13 +205,9 @@
 }
 
 @inproceedings{CHM17,
-  author    = {Johanne Cohen and
-    Am{\'{e}}lie H{\'{e}}liou and
-      Panayotis Mertikopoulos},
-  title     = {Hedging Under Uncertainty: Regret Minimization Meets Exponentially
-    Fast Convergence},
-  booktitle = {Algorithmic Game Theory - 10th International Symposium, {SAGT} 2017,
-    L'Aquila, Italy, September 12-14, 2017, Proceedings},
+  author    = {Johanne Cohen and Am{\'{e}}lie H{\'{e}}liou and Panayotis Mertikopoulos},
+  title     = {Hedging Under Uncertainty: Regret Minimization Meets Exponentially Fast Convergence},
+  booktitle = {Algorithmic Game Theory - 10th International Symposium, {SAGT} 2017, L'Aquila, Italy, September 12-14, 2017, Proceedings},
   pages     = {252--263},
   year      = {2017},
   crossref  = {DBLP:conf/sagt/2017},
@@ -173,12 +219,9 @@
 }
 
 @inproceedings{CKO13,
-  author    = {Flavio Chierichetti and
-    Jon M. Kleinberg and
-      Sigal Oren},
+  author    = {Flavio Chierichetti and Jon M. Kleinberg and Sigal Oren},
   title     = {On discrete preferences and coordination},
-  booktitle = {{ACM} Conference on Electronic Commerce, {EC} '13, Philadelphia, PA,
-    USA, June 16-20, 2013},
+  booktitle = {{ACM} Conference on Electronic Commerce, {EC} '13, Philadelphia, PA, USA, June 16-20, 2013},
   pages     = {233--250},
   year      = {2013},
   crossref  = {DBLP:conf/sigecom/2013},
@@ -203,11 +246,7 @@
 }
 
 @article{YOASS13,
-  author    = {Mehmet Ercan Yildiz and
-    Asuman E. Ozdaglar and
-      Daron Acemoglu and
-      Amin Saberi and
-      Anna Scaglione},
+  author    = {Mehmet Ercan Yildiz and Asuman E. Ozdaglar and Daron Acemoglu and Amin Saberi and Anna Scaglione},
   title     = {Binary Opinion Dynamics with Stubborn Agents},
   journal   = {{ACM} Trans. Economics and Comput.},
   volume    = {1},
@@ -281,9 +320,10 @@
   author = "Yoav Freund and Robert E. Schapire"
 }
 
-@article{HM00,
-  author = {Hart Sergiu and Mas‐Colell Andreu},
+@article{SA00,
+  author = {Hart Sergiu and Mas-Colell Andreu},
   title = {A Simple Adaptive Procedure Leading to Correlated Equilibrium},
+  year = "2000"
   journal = {Econometrica},
   volume = {68},
   number = {5},
@@ -321,6 +361,24 @@
   publisher = {ACM},
   address = {New York, NY, USA},
   keywords = {game theory, network games},
+}
+
+@inproceedings{BHLR08,
+ author = {Blum, Avrim and Hajiaghayi, MohammadTaghi and Ligett, Katrina and Roth, Aaron},
+ title = {Regret Minimization and the Price of Total Anarchy},
+ booktitle = {Proceedings of the Fortieth Annual ACM Symposium on Theory of Computing},
+ series = {STOC '08},
+ year = {2008},
+ isbn = {978-1-60558-047-0},
+ location = {Victoria, British Columbia, Canada},
+ pages = {373--382},
+ numpages = {10},
+ url = {http://doi.acm.org/10.1145/1374376.1374430},
+ doi = {10.1145/1374376.1374430},
+ acmid = {1374430},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {algorithmic game theory, nash equilibria, regret minimization},
 }
 
 
@@ -380,3 +438,21 @@
   publisher = {Athena Scientific},
 }
 
+@article{Haz16,
+  author = {Hazan, Elad},
+  title = {Introduction to Online Convex Optimization},
+  journal = {Found. Trends Optim.},
+  issue_date = {8 2016},
+  volume = {2},
+  number = {3-4},
+  month = aug,
+  year = {2016},
+  issn = {2167-3888},
+  pages = {157--325},
+  numpages = {169},
+  url = {https://doi.org/10.1561/2400000013},
+  doi = {10.1561/2400000013},
+  acmid = {3006428},
+  publisher = {Now Publishers Inc.},
+  address = {Hanover, MA, USA},
+}
