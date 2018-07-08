@@ -130,3 +130,21 @@
   \addtolength{\algorithmicindent}{\myindent}
 }
 \newcommand\eindent{\endgroup}
+
+
+%LLNCS repeat theorem.
+\newcommand{\repeattheorem}[1]{%
+  \begingroup
+  \renewcommand{\thetheorem}{\ref{#1}}%
+  \expandafter\expandafter\expandafter\theorem
+  \csname reptheorem@#1\endcsname
+  \endtheorem
+  \endgroup
+}
+
+\NewEnviron{reptheorem}[1]{%
+  \global\expandafter\xdef\csname reptheorem@#1\endcsname{%
+    \unexpanded\expandafter{\BODY}%
+  }%
+  \expandafter\theorem\BODY\unskip\label{#1}\endtheorem
+}

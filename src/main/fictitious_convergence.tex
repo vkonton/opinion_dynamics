@@ -1,63 +1,80 @@
 \section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
-In this section that if all agent select their opinion according to update rule~(\ref{eq:fictitious_play})
+In this section that if all agent select their opinion according to
+update rule~(\ref{eq:fictitious_play})
 then the dynamics $x(t)$ converges to the unique equilibrium point $x^*$.
-For an instance $(P,s,\alpha)$ the opinion vector $x(t) \in [0,1]^n$ produced by (\ref{eq:fictitious_play})
-is defined as follows:
+For an instance $(P,s,\alpha)$ the opinion vector $x(t) \in [0,1]^n$
+produced by (\ref{eq:fictitious_play}) is defined as follows:
 \begin{itemize}
  \item Each agent $i$ adopts her internal opinion, $x_i(0)=s_i$
  \item At round $t \geq 1$, each agent $i$ updates her opinion as follows:
- \begin{equation}\label{eq:fictitious_play}
-  x_i(t) =\argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
+ \begin{equation}
+  x_i(t) =
+  \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}
+  (1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 \tag{eq:fictitious\_play}
 \end{equation}
 \end{itemize}
-where $W_i^t$ denotes the agent that $i$ met at round $t$. The opinion vector $x(t)$ 
-due to the random meeting of the agents. Our convergence metric is $\Expnew{}{\norm{\infty}{x(t) - x^*}}$
-where the expecation is taken over the random meeting of the agents. Our convergence result is stated in Theorem~\ref{thm:convergence}
-and it is the main result of the section.  
-\begin{theorem}\label{t:fictitious_convergence}
-  Let $I = (P,s, \alpha)$ be any instance of the opinion formation
-  game of Definition~\ref{d:random_payoff_game} with equilibrium
-  $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
-  update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
-  \[
-    \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
-    C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
-  \]
-  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
-\end{theorem}
-\noindent At first we present the high level idea of the proof of Theorem~\ref{thm:convergence}.
-According to Algorithm~\ref{alg:fictitious_play}, each agent $i$ at round $t\geq 1$ updates her opinion 
+where $W_i^t$ denotes the agent that $i$ met at round $t$. The opinion vector $x(t)$
+due to the random meeting of the agents. Our convergence metric
+is $\Expnew{}{\norm{\infty}{x(t) - x^*}}$
+where the expectation is taken over the random meeting of the agents.
+Our convergence result is stated in Theorem~\ref{thm:convergence}
+and it is the main result of the section.
+
+\repeattheorem{t:fictitious_convergence}
+% \begin{theorem}\label{t:fictitious_convergence}
+%   Let $I = (P,s, \alpha)$ be any instance of the opinion formation
+%   game of Definition~\ref{d:random_payoff_game} with equilibrium
+%   $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
+%   update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
+%   \[
+%     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
+%     C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
+%   \]
+%   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
+% \end{theorem}
+%
+At first we present the high level idea of the proof of Theorem~\ref{thm:convergence}.
+According to Algorithm~\ref{alg:fictitious_play}, each agent $i$
+at round $t\geq 1$ updates her opinion
 as $x_i(t)=\argmin_{x \in [0,1]}\sum_{\tau=1}^tC^{\tau}_i(x,x_{W_i^{\tau}}(\tau-1))$
-where $W_i^\tau$ is the random variable denoting the agent $j$ that $i$ met at round $\tau$ ($\Prob{W_i^\tau=j}=p_{ij}$). 
-The above update rule can be written equivalently as: \[x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}+ \alpha_i s_i\]
-Since we are interested in bounding the $\Expnew{}{\norm{\infty}{x(t)-x^*}}$, we 
-can use the fact $x_i^*= (1-\alpha_i)\sum_{j \neq i}x_j^* + \alpha_is_i$ to bound $|x_i(t)-x_i^*|$ as follows: 
+where $W_i^\tau$ is the random variable denoting the agent $j$ that $i$ met at round
+$\tau$ ($\Prob{W_i^\tau=j}=p_{ij}$).
+The above update rule can be written equivalently as:
+\[
+  x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}+ \alpha_i s_i
+\]
+Since we are interested in bounding the $\Expnew{}{\norm{\infty}{x(t)-x^*}}$, we
+can use the fact $x_i^*= (1-\alpha_i)\sum_{j \neq i}x_j^* + \alpha_is_i$ to bound $|x_i(t)-x_i^*|$ as follows:
 \begin{eqnarray*}
- |x_i(t)-x_i^*| &=& (1-\alpha_i)|\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}-\sum_{j\neq i} p_{ij}x_j^*|\\
+ |x_i(t)-x_i^*|
+ &=& (1-\alpha_i)|\frac{\sum_{\tau=1}^{t} x_{W_i^\tau}(\tau-1)}{t}
+ - \sum_{j\neq i} p_{ij}x_j^*|\\
  &=& (1-\alpha_i)|\sum_{j\neq i}\frac{\sum_{\tau=1}^{t} \1{W_i^\tau=j}x_j(\tau-1)}{t}-\sum_{j\neq i} p_{ij}x_j^*|\\
  &\leq& (1-\alpha_i)\sum_{j\neq i}|\frac{\sum_{\tau=1}^{t} \1{W_i^\tau=j}x_j(\tau-1)}{t}- p_{ij}x_j^*|
 \end{eqnarray*}
-Now assume that $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t}- p_{ij}|$ were $0$ for all $t\geq 1$, 
+Now assume that
+$|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t}- p_{ij}|$
+were $0$ for all $t\geq 1$,
 then with simple algebraic manipulations we can prove that $\norm{\infty}{x(t)-x^*} \leq e(t)$
 where $e(t)$ satisfies the recursive equation $e(t) = (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}$.
 It follows that $\norm{\infty}{x(t)-x^*} \leq 1/t^\rho$ meaning that $x(t)$ converges to $x^*$.
-Obviously $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|\neq 0$ and 
-the above analysis does not hold. In Lemma~\ref{l:recursive_equation} we use the 
+Obviously $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|\neq 0$ and
+the above analysis does not hold. In Lemma~\ref{l:recursive_equation} we use the
 fact that $|\frac{\sum_{\tau=1}^{t} \1{W_i^{\tau}=j}}{t} - p_{ij}|$ tends to $0$ with probability $1$
 ($W_i^{\tau}$ are independent random variables)
-to obtain a similar recursive relation for $e(t)$. Then in Lemma~\ref{l:recursion_upper_bound} 
+to obtain a similar recursive relation for $e(t)$. Then in Lemma~\ref{l:recursion_upper_bound}
 we upper bound the solution of this recursive equation.
 
 \begin{lemma}\label{l:recursive_equation}
 Let $e(t)$ the solution of the following recursion,
 \[e(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}\]
 where $e(0)=\|x(0) - x^*\|_{\infty}$ and \(\delta(t) = \sqrt{\frac{\ln(\pi^2n t^2/6p)}{t}} \). Then,
-\[\Prob{\text{for all }t \geq 1, ~\norm{\infty}{x(t)-x^*}\leq e(t)} \geq 1-p\] 
+\[\Prob{\text{for all }t \geq 1, ~\norm{\infty}{x(t)-x^*}\leq e(t)} \geq 1-p\]
 \end{lemma}
 \begin{proof}
 We remind that $W_i^\tau$ denotes the agent
-$j$ that $i$ met at round $\tau$ and that this happens 
-with probability $p_{ij}$ and $x^*$ is the unique equilibrium point 
+$j$ that $i$ met at round $\tau$ and that this happens
+with probability $p_{ij}$ and $x^*$ is the unique equilibrium point
 of the instance $I=(P,s,\alpha)$. At first we prove that
 with probability at least $1-p$, for all $t \geq 1$ and all agents $i$:
 \begin{equation}\label{eq:error_per_round}
@@ -67,7 +84,7 @@ with probability at least $1-p$, for all $t \geq 1$ and all agents $i$:
     \rp| \leq \delta(t)
 \end{equation}
 where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.\\
-Since $W_i^\tau$ are independent random variables with 
+Since $W_i^\tau$ are independent random variables with
 $\Prob{W_i^\tau = j}=p_{ij}$ and \(\Exp{x^*_{W_i^\tau}} = \sum_{j \neq i} p_{ij} x^*_j\).
 By the Hoeffding's inequality we get
   \[
@@ -101,8 +118,8 @@ and all agents $i$, we apply the union bound
     \sum_{j \neq i} p_{ij} x^*_j
     \rp| \leq \delta(t)
   \end{equation}
-\noindent Now we can prove our claim by induction. Assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all 
-$\tau \leq t-1$. Then 
+\noindent Now we can prove our claim by induction. Assume that $\norm{\infty}{x^{\tau}-x^*} \leq e(\tau)$ for all
+$\tau \leq t-1$. Then
 \begin{align}
     x_i(t)
     &=
@@ -153,5 +170,5 @@ $\tau \leq t-1$. Then
     \sqrt{2.5 \ln(D)} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
   \)
 \end{lemma}
-\noindent The proof of Theorem~\ref{thm:convergence} folows by direct 
-application of Lemma~\ref{l:recursive_equation} and \ref{l:recursion_upper_bound}. 
+\noindent The proof of Theorem~\ref{thm:convergence} folows by direct
+application of Lemma~\ref{l:recursive_equation} and \ref{l:recursion_upper_bound}.
