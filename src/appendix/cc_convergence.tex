@@ -1,116 +1,96 @@
-\section{Faster}\label{app:s:cc_convergence}
+\section{Faster Update Rule}\label{app:s:cc_convergence}
+We are now going to state and prove a series of Lemmas that culminate in 
+the proof of Lemma~\ref{l:cc_convergence}. We first turn our attention to
+the problem of calculating the size of window $B$, such that with high probability
+all agents have outdateness at most $B$. 
+We first state a useful fact concerning the coupons collector problem.
 
-In each round, every agent learns a neighbour's opinion and updates the appropriate cell in memory. Because an agent learns only one opinion in each round, he uses outdated information about his other neighbours in order to compute his opinion. We first introduce some convinient notation.
-\begin{definition}
-$\pi_{ij}(t)$ is the last time that $i$ learned $j$'s opinion until time $t$.
-\end{definition}
-
-Obviously, if at time $t$ an agent $i$ learned $k$'s opinion, then $\pi_{ik}(t) = t$. The rule, according to which agent $i$ updates his opinion at time $t$ is the following(for simplicity, assume that $\alpha_i = \frac{1}{d+1}$ and that the graph is $d$-regular):$$x_{i}(t+1)=(1-\alpha_i)\frac{\sum_{j \in N_i}x_j(\pi_{ij}(t))}{d_i}+\alpha_i s_i$$
-Notice that in contrast with the traditional model, instead of $x_j(t)$ we have $x_j(\pi_{ij}(t))$. That is because the information about $j$ is probably outdated.
-Denote with $x^*$ the solution vector of the system. We would like to prove that such a process converges to the solution of the linear system involving the laplacian matrix of the graph. In order to analyse the algorithm, we will divide the time into "epochs". Each epoch has a length $D \ge d$, so the first epoch is from time 1 to time $D$, the second from $D+1$ to $2D$ e.t.c. Time $0$ does not belong at any epoch. The numbering of epochs begins from $1$. We will also assume that during each epoch, each agent picks every one of his neighbours for update at least once. Later we are going to find a suitable epoch length D, such that this holds with high probability. In other words, for a specific time in epoch $i$ every agent has information which has "bounded" outdateness, since every coordinate was updated at least once during the $i-1$ epoch. We are going to use this fact to prove the following lemma.
-
-\begin{lemma}
-Denote with $x^*$ the solution vector of the system. For every time $t$, which belongs to epoch $T$, it holds:
-$$ ||x(t)-x^*||_{\infty} \leq \left( 1-\alpha_i\right)^T||x(0)-x^*||_{\infty}$$
-\end{lemma}
-
-\begin{proof}
-We are going to use induction in time. The base case is for time $t=1$. We are going to prove that: $$ ||x(1)-x^*||_{\infty} \leq (1-\alpha_i)||x(0)-x^*||_{\infty}$$
-We assume that everybody has the same initial vector $x(0)$ stored in memory, so for each $i$ holds:
-$$x_i(1) = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j(0)}{d}+\alpha_i s_i (1)$$Since $x^*$ is the solution of the system, we have:
-$$ x_i^* = (1-\alpha_i)\frac{\sum_{j \in N_i}x_j^*}{d}+\alpha_i s_i (2)$$
-Subtracting $(2)$ from $(1)$ we get:
-\begin{eqnarray*}
-|x_i(1) - x_i^*| &=& |(1-\alpha_i)\frac{\sum_{j \in N_i}(x_j(0)-x_j^*)}{d}|\\
-&\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}|x_j(0)-x_j^*|}{d} \\
-&\leq& (1-\alpha_i) ||x(0)-x^*||_{\infty}
-\end{eqnarray*}
-$$ \Rightarrow ||x(1)-x^*||_{\infty} \leq (1-\alpha_i)||x(0)-x^*||_{\infty}$$
-So the base case is verified. Let the inductive hypothesis hold for all times until $t$. Suppose that time $t+1$ belongs to epoch $T$. We fix an agent $i$. Then, if $\pi_{ij}(t)$ belongs to the previous epoch, by the induction hypothesis it holds:
-$$ |x_j(\pi_{ij}(t)) - x_j^*| \leq \left( 1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}$$
- On the other hand, if $\pi_{ij}(t)$ belongs to the current epoch $T$, by the induction hypothesis we have:
- $$ |x_j(\pi_{ij}) - x_j^*| \leq \left( 1-\alpha_i\right)^{T}||x(0)-x^*||_{\infty} \leq \left( 1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}$$
- So, for every neighbour of agent $i$, the value that $i$ stores for this neighbour is "close" to the optimal. Now, using again equation $(1)$, we have:
- \begin{eqnarray*}
-|x_i(t+1) - x_i^*| &=& |(1-\alpha_i)\frac{\sum_{j \in N_i}(x_j(\pi_{ij}(t))-x_j^*)}{d}|\\
-&\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}|x_j(\pi_{ij}(t))-x_j^*|}{d}\\
-&\leq& (1-\alpha_i)\frac{\sum_{j \in N_i}||x(\pi_{ij}(t))-x^*||_\infty}{d}\\
-&\leq& \frac{\sum_{j \in N_i}\left(1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}}{d+1}\\
-&=& (1-\alpha_i)\left(1-\alpha_i\right)^{T-1}||x(0)-x^*||_{\infty}\\
-&=& \left(1-\alpha_i\right)^{T}||x(0)-x^*||_{\infty}
- \end{eqnarray*}
-
-\end{proof}
-
-\begin{corollary}
-If the algorithm runs for $O(D \log \frac{1}{\epsilon})$ iterations, it gets $\epsilon$-close to the solution $x^*$.
-\end{corollary}
-
-We now turn our attention to the problem of computing the appropriate length $D$ of epochs. A useful fact concerning the coupons collector problem is the following.
-
-\begin{lemma}
-Suppose that the collector picks coupons with mixed probabilities, where $n$ is the number of distinct coupons.
-Let $w$ be the minimum of these probabilities. If he selects $\ln n/w+ c/w$ coupons, then:
+\begin{lemma}\label{l:coupons_lemma}
+Suppose that the collector picks coupons with mixed 
+probabilities, where $n$ is the number of distinct coupons.
+Let $w$ be the minimum of these probabilities. 
+If he selects $\ln n/w+ c/w$ coupons, then:
 $$
 \Prob{\text{collector hasn't seen all coupons}} \leq \frac{1}{\me^c}
 $$
 \end{lemma}
 
-\begin{theorem}
-After $t$ rounds, with probability at least $1 - p$: $\norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{2d\ln( \frac{nt}{p})} }$
-\end{theorem}
+For convenience of reasoning, we will divide the time in "epochs". 
+The lenght of each epoch is $B$, so times $1$ to $B$ belong to the first 
+epoch etc. 
+The next lemma is a calculation of the appropriate size of $B$.
+\begin{lemma}
+Suppose we run Algorithm~\ref{alg:cc_upper} for $t$ rounds. If the size of
+each epoch is 
+\[
+B = \frac{2}{\min_{ij}p_{ij}}\ln \frac{nt}{p}
+\]
+then with probability at least $1-p$ all agents pich all their neighbours 
+at least once in every epoch. 
+\end{lemma}
 \begin{proof}
-In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a collector and wants to gather all $d_i$ coupons during each epoch. Suppose $d = \max_i d_i$ is the maximum degree of the graph. Then, if we set $n = d$ and $c = \ln (\frac{nt}{p})$ , using the previous lemma we get that a node hasn't seen at least one neigbour after $c/w + \ln d/w$ samples with probability at most $\frac{p}{nt}$. This means that if we set $D = c/w + \ln d/w =  \ln \frac{nt}{p}/w +  \ln d/w \geq 2/w\ln\frac{nt}{p} $ when $p$ is small enough, then the probability that a specific agent at a specific epoch hasn't collected all neighbouring opinions at least once is at most $\frac{p}{nt}$. By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs with probability at least $1 - p$. We observe that at time $t$ approximately $\frac{t}{D}$ epochs have passed. Therefore, using the previous result about the convergence rate, we get that with probability at least $1 - p$:
-$$ \norm{\infty}{x^{t}-x^*} \leq (1-a)^{\frac{t}{D}} \leq (1-a)^{\frac{tw}{2\ln( \frac{nt}{p})} }$$
-
+In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a 
+collector and wants to gather all $n-1$ coupons during each epoch. 
+Suppose $d = \max_i d_i$ is the maximum degree of the graph. 
+Then, if we set  $c = \ln (\frac{nt}{p})$ , using Lemma~\ref{l:coupons_lemma} 
+we get that a node hasn't seen at least one neigbour after $c/w + \ln d/w$ samples 
+with probability at most $\frac{p}{nt}$. This means that if we set 
+$D = c/w + \ln d/w =  \ln \frac{nt}{p}/w +  \ln d/w \geq 2/w\ln\frac{nt}{p} $ when $p$ is 
+small enough, then the probability that a specific agent at a specific epoch hasn't collected 
+all neighbouring opinions at least once is at most $\frac{p}{nt}$. By a simple union bound argument, 
+we get that all agents have seen all their neighbours during all epochs
+ with probability at least $1 - p$.
 \end{proof}
-We are now going to translate this result to one that involves the expected value of the error.
-\begin{theorem}If we set $u(t) = \norm{\infty}{x^t-x^*}$, the error after $t$ rounds, then:
-$$
-\Exp{u(t)} \leq 2(1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}}
-$$
-\end{theorem}
+Since all neigbours are picked at least once during each epoch,
+the outdateness of each agent is at most twice the length of the 
+epoch. Combining this with Lemma~\ref{l:outdateness_induction} we have 
+the following.
+\begin{corollary}\label{cor:window}
+If we run Algorithm~\ref{alg:cc_upper} for $t$ rounds, then with probability at least 
+$1-p$
+$$ \norm{\infty}{x^{t}-x^*} \leq (1-\rho)^{\frac{t}{2B}} 
+\leq \exp \lp(-\frac{\rho t\min_{ij}p_{ij}}{2\ln( \frac{nt}{p})} \rp)$$
+\end{corollary}
+We now prove Lemma~\ref{l:cc_convergence} using the previous results.
+
 \begin{proof}
-Using the result of the previous theorem, we obtain:
-$$ \Prob{u(t) > (1-a)^{\frac{wt}{2\ln( \frac{nt}{p})} }} \leq p $$
-for every probability $p \in [0,1]$. Also, since all the parameters of the problem lie in $[0,1]$, we have
+Let $u(t) = \norm{\infty}{x^t-x^*}$ and $w = \min_{ij}p_{ij}$.
+From Corollary~\ref{cor:window} we obtain:
+$$ \Prob{u(t) >\exp\lp(-\frac{\rho wt}{2\ln( \frac{nt}{p})} \rp)} \leq p $$
+for every probability $p \in [0,1]$. Also, since all the 
+parameters of the problem lie in $[0,1]$, we have
 $$\Exp{u(t)|u(t) > r} \leq 1$$
 Now, by the conditional expectations identity, we get:
 \begin{align*}
 \Exp{u(t)} &= \Exp{u(t)|u(t) > r}\Prob{u(t) > r} +\Exp{u(t)|u(t) \leq r}\Prob{u(t) \leq r}\\
 &\leq p + r
 \end{align*}
-where $r = (1-a)^{\frac{wt}{2\ln( \frac{nt}{p})} }$. If we set $p = (1-a)^{\frac{w\sqrt{t}}{2\ln nt}}$, then:
+where $r = \exp \lp(-\frac{\rho wt}{2\ln( \frac{nt}{p})}\rp)$. 
+If we set $p = \exp \lp(-\frac{\rho w\sqrt{t}}{2\ln nt}\rp)$, then:
 $$
-\Exp{u(t)} \leq (1-a)^{\frac{w\sqrt{t}}{2\ln nt}} + (1-a)^{\frac{wt}{2\ln( \frac{nt}{p})} }
+\Exp{u(t)} \leq \exp \lp(-\frac{\rho w\sqrt{t}}{2\ln nt}\rp) 
++ \exp \lp(-\frac{\rho wt}{2\ln( \frac{nt}{p})}\rp)
 $$
 We now evaluate $r$ for our choice of probability $p$:
 \begin{align*}
 r
-&= (1-a)^{\frac{wt}{2\ln\lp( \frac{nt}{p}\rp)} }\\
-&= (1-a)^{\frac{wt}{2\ln\lp( \frac{nt}{(1-a)^{\frac{w\sqrt{t}}{2\ln nt}}}\rp)} }\\
-&= (1-a)^{\frac{wt}{2\ln nt + 2\frac{w\sqrt{t}}{2\ln nt}\ln\lp( \frac{1}{(1-a)}\rp) }}\\
-&\leq (1-a)^{\frac{t}{4d\ln(nt)\ln\lp( \frac{1}{1-a}\rp) \sqrt{t}}}\\
-&= (1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}}
+&= \exp \lp(-\frac{\rho wt}{2\ln\lp( \frac{nt}{p}\rp)} \rp)\\
+&= \exp \lp(-\frac{\rho wt}{2\ln\lp( \frac{nt}{\exp \lp(-\frac{\rho w\sqrt{t}}{2\ln nt}\rp) }\rp) } \rp) \\
+&= \exp \lp(-\frac{\rho wt}{2\ln nt + 2\frac{\rho w\sqrt{t}}{2\ln nt} }\rp)\\
+&\leq \exp \lp(-\frac{\rho w t}{4\ln(nt) \sqrt{t}}\rp)\\
+&= \exp \lp(-\frac{\rho w\sqrt{t}}{4\ln(nt)}\rp)
 \end{align*}
 
 Using the previous calculation, we obtain:
-$$ \Exp{u(t)} \leq (1-a)^{\frac{w\sqrt{t}}{2\ln nt}} + (1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}} \leq 2(1-a)^{\frac{w\sqrt{t}}{4\ln(nt)\ln\lp( \frac{1}{1-a}\rp)}}$$
+\begin{align*}
+\Exp{u(t)} &\leq \exp \lp(-\frac{\rho w\sqrt{t}}{2\ln (nt)}\rp) + 
+\exp \lp(-\frac{\rho w\sqrt{t}}{4\ln(nt)}\rp) \\
+&\leq 2\exp \lp(-\frac{\rho w\sqrt{t}}{4\ln(nt)}\rp)\\
+&=
+    2\exp \lp(- \rho  \min_{ij} p_{ij} \frac{\sqrt{t}}{4\ln(nt)} \rp)
+\end{align*}
 \end{proof}
-Therefore, this strategy achieves subexponential convergence rate in expectation.
 
-\begin{lemma}\label{l:simple_induction}
-If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then
-\[\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\]
-\end{lemma}
 
-\begin{proof}
-To prove our claim we use induction on $k$. For the induction base $k=1$,
-\begin{eqnarray*}
-|x_i(t) - x_i^*| &=& |(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_j(\pi_{ij}(t)-x_j^*)|\\
-&\leq& (1-\alpha_i)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|\leq (1-\rho)
-\end{eqnarray*}
-For $k\geq 2$, we again have that $|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|$.
-Since $t-B \leq \pi_{ij}(t)$ and $t\geq kT$, we have that $\pi_{ij}(t) \geq (k-1)T$ and the induction hypothesis applies,
-$|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$.
-\end{proof}
+
+
