@@ -120,18 +120,24 @@ and weights $w_{ij}$, $w_i$ we adopt the following more convenient notation.
   \end{itemize}
 \end{definition}
 %
-We use the matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ if $j \in N_i$ and $0$ otherwise.
-If $N_i \neq \emptyset$ then $\sum_{j=1}^n p_{ij}=1$ otherwise it is $0$. We remark that in case $N_i=\emptyset$, $\alpha_i=1$
-and agent $i$ suffers cost $(x_i-s_i)^2$.
-Abusing notation we will sometimes refer to the graph $G$.
+We use the matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ 
+if $j \in N_i$ and $0$ otherwise. If $N_i \neq \emptyset$ then $\sum_{j \in N_i}p_{ij}=1$. 
+To properly define our game, we remark that if $N_i=\emptyset$ then
+$\alpha_i=1,\sum_{j=1}^np_{ij}=0$ and agent $i$ suffers cost $(x_i-s_i)^2$. 
+Abusing notation we will sometimes refer to the graph $G$. 
+Another parameter of an instance $I=(P,s,\alpha)$ that 
+we often use is $\rho=\min_{i \in V}\alpha_i$.
 
 
 \subsection{Our Results}
 
-We focus on the repeated version of the game in Definition~\ref{d:random_payoff_game}.
-At round $t$, each agent $i$ selects an opinion $x_i(t) \in [0,1]$ and then suffers
-disagreement cost \[(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 \]
-where $W_i^t$ denotes the neighbor that $i$ met at round $t$.
+We focus on the repeated version of the game in 
+Definition~\ref{d:random_payoff_game}. At the beginning 
+of round $t$, each agent $i$ selects an opinion 
+$x_i(t) \in [0,1]$. Then she randomly meets 
+one of her neighbors $W_i^t$ ($\Prob{W_i^t=j}=p_{ij}$)
+and suffers disagreement cost
+\[(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2+\alpha_i(x_i(t)-s_i)^2 \] 
 We are interested in simple and natural update rules
 that the agents can adopt such that the resulting opinion
 vector $x(t) \in [0,1]^n$ converges to $x^*$.
@@ -145,19 +151,25 @@ update their opinion as follows:
   \sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
 \end{equation}
 %
-Roughly speaking, the above update says
+The above update rule is a simple and
+reasonable. Since each agent $i$ must select $x_i(t)$ 
+at the beginning of the round, before knowing 
+which of her neighbors she will meet and 
+what opinion her neighbor will have, 
+update~\ref{eq:fictitious_play} says
 \enquote{\emph{play the best according to what you have observed}}.
-According to this principle Brown proposed \emph{fictitious play} \cite{Bro51},
-which is one of the most intuitive and simple models of playing in finite games.
-Abusing terminology we refer to (\ref{eq:fictitious_play})
-as fictitious play. We show that in our infinite strategy game, if all agents
+According to this principle Brown proposed \emph{fictitious play} 
+\cite{Bro51}, which is one of the most intuitive and simple 
+models of playing in finite games. Abusing terminology 
+we refer to (\ref{eq:fictitious_play}) as fictitious play. 
+We show that in our infinite strategy game, if all agents
 adopt fictitious play, the resulting opinion vector $x(t)$ converges to
 $x^*$ with the following rate.
 %
 \begin{reptheorem}{t:fictitious_convergence}
   Let $I = (P,s, \alpha)$ be an instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
-  $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
+  $x^* \in [0,1]^n$.  The opinion vector $x(t)\in[0,1]^n$ produced by
   update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
   \[
     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
@@ -179,18 +191,18 @@ each agent to have at least $O(\log n)$ friends. A large social
 network like Facebook has approximately $2$ billion users and each user
 has usually more that $100$ friends which is far more than $\log(2\ 10^9)$.
 
-In Section~\ref{s:fictitious_noregret} we argue that, apart from its simplicity,
-fictitious play has no-regret, and therefore,
-is a \emph{rational game play} for selfish agents.
-At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
-and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
-Since agent $i$ is selfish and only interests in minimizing her individual cost,
-it is reasonable to assume that she selects $x_i(t)$ according to
-an \emph{no-regret algorithm}
-for the \emph{online convex optimization problem} where the adversary chooses
-a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$ at each round $t$.
-In Theorem~\ref{t:fictitious_noregret} we prove that fictitious play is a
-no-regret algorithm for the above OCO problem.  We remark that, in general,
+In Section~\ref{s:fictitious_noregret} we argue that, 
+apart from its simplicity, fictitious play has no-regret
+and therefore is a \emph{rational game play} for selfish agents.
+%At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
+%and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
+Since each agent $i$ selfishly wants to minimizing her individual cost,
+it is natural to assume that she selects $x_i(t)$ according to
+an \emph{no-regret algorithm} for the \emph{online convex optimization problem}
+where the adversary chooses a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$
+at each round $t$. In Theorem~\ref{t:fictitious_noregret} 
+we prove that fictitious play is a no-regret algorithm 
+for the above OCO problem. We remark that, in general,
 fictitious play does not guarantee no-regret if the adversary can pick
 functions from a larger class (see e.g. chapter 5 in \cite{Haz16}).
 
