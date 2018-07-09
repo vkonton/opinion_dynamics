@@ -208,7 +208,8 @@ functions from a larger class (see e.g. chapter 5 in \cite{Haz16}).
 
 \begin{reptheorem}{t:fictitious_noregret}
   Consider the function $f:[0,1]^2 \mapsto [0,1]$ with
-  $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$.
+  $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$ for some
+  constants $s,\alpha \in [0,1]$.
   Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with
   $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
   then for all $t$,
