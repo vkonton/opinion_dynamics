@@ -1,6 +1,6 @@
 We study opinion formation games based on the famous model proposed by Friedkin
 and Johsen.  In today's huge social networks the assumption that in each round
-all agents update their opinions by taking into account the opinions of
+agents update their opinions by taking into account the opinions of
 \emph{all} their friends could be unrealistic. Therefore, we assume that in
 each round each agent gets to meet with only one random friend of
 hers.  Since it is more likely to meet some friends than others we assume
@@ -8,23 +8,24 @@ that agent $i$ meets agent $j$ with probability $p_{ij}$.
 Specifically, we define an opinion formation game, where at round $t$,
 agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
 \in[0,1]$ meets with probability $p_{ij}$ neighbor $j$ with opinion $x_j(t)$
-and suffers cost that is a convex combination of $(x_i(t) - s_i)^2$ and
-$(x_i(t) - x_j(t))^2$.
+and suffers a disagreement cost that is a convex combination of
+$(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
+
 
 For a dynamics in the above setting to be considered as natural it must be
 simple, converge to the equilibrium $x^*$, and perhaps most importantly, it
-must be a reasonable choice for selfish agents.  In this work we show that
-\emph{fictitious play}, is a natural dynamics for the above game.  We prove
-that, after $O(1/\eps^2)$ rounds, the opinion vector is within error $\eps$  of
-the equilibrium. Moreover, we show that fictitious play admits no-regret and
-thus, is a reasonable algorithm for agents to implement.
+must be a rational choice for selfish agents.  In this work we show that
+an intuitive game play, \emph{fictitious play}, is a natural dynamics for
+the above game.  We prove that, after $O(1/\eps^2)$ rounds, the opinion vector
+is within error $\eps$  of the equilibrium. Moreover, to show that selfish
+agents would choose to update their opinions according to fictitious play, we
+show that it has no-regret.
+
 
 The classical Friedkin-Johsen dynamics converges to the equilibrium within
-error $\eps$ after only $O(\log(1/\eps))$ rounds whereas in our setting
-fictitious play needs $\widetilde{O}(1/\eps^2)$ rounds. A natural question is
-whether there exists a simple dynamics for our problem with better rate of
-convergence.  We answer this question in the negative by showing that
-no-regret algorithms cannot converge with less than $\mrm{poly}(1/\eps)$ rounds.
-Interestingly, we show that when agents meet a neighbor \emph{uniformly}
-at random, there exists a dynamics that only needs $O(\log(1/\eps)^2)$ rounds,
-resembling the convergence rate of the original Friedkin-Johsen model.
+error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
+information setting, fictitious play needs $\widetilde{O}(1/\eps^2)$ rounds.
+We ask whether there exists a natural dynamics for our problem
+with better rate of convergence.  We answer this question in the negative
+by showing that dynamics based on no-regret algorithms cannot converge with
+less than $\mrm{poly}(1/\eps)$ rounds.
