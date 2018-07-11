@@ -1,26 +1,60 @@
 \section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
-In this section, we prove that for a
-certain class of update rules, the resulting dynamics
-$\{x(t)\}_{t=0}^\infty$ always admits slow convergence (Theorem~\ref{t:lower_bound}).
-As already mentioned, this class is called \emph{opinion dependent}
-and means that each agent $i$ updates her opinion according
-to the opinions that she observed, her $s_i$ and $\alpha_i$.
-\begin{definition}[Opinion Dependent Dynamics]\label{d:opinion_dependent_dynamics}
-  Let $A = (A_t)_{t=1}^{\infty}$ be a sequence of functions,
-  where $A_t : [0,1]^{t+2} \mapsto [0,1]$. The sequence
-  $A$ produces the opinion
-  dependent dynamics $x_A(t)\in[0,1]^n$ defined as
-  \[
-    x^A_i(t) = A_t(y_i(0),\ldots, y_i(t-1), a_i, s_i),
-  \]
-  where $y_i(t)$ is the opinions of the neighbor that agent $i$ meets
-  at round $t$.
+
+In the previous section we saw that if each
+agent $i$ updates her opinion according to
+update rule~\ref{eq:fictitious_convergence}
+the resulting opinion vector $x(t)$ produced
+for an instance $I=(P,s,\alpha)$ converges
+to the unique equilibrium point $x^*$ and
+that ensure no-regret for the OCO problem 
+with $F_{s_i,\alpha_i}$. In this section we 
+investigate whether we can establish exponential
+convergence while keeping the no-regret property
+for the agents. More precisely, can we select
+for each $(s,\alpha) \in [0,1]^2$ a no-regret algorithm
+$A_{s,\alpha}$ for the OCO problem with 
+$\mcal{F}_{s,\alpha}$ such that if for each instance
+$I=(P,s,\alpha)$ each agent $i$ updates her 
+opinion according to $A_{s_i,\alpha_i}$,
+the resulting opinion vector $x(t)$ converges 
+exponentially fast to $x^*$?
+
+%In this section, we prove that for a
+%certain class of update rules, the resulting dynamics
+%$\{x(t)\}_{t=0}^\infty$ always admits slow convergence (Theorem~\ref{t:lower_bound}).
+%As already mentioned, this class is called \emph{opinion dependent}
+%and means that each agent $i$ updates her opinion according
+%to the opinions that she observed, her $s_i$ and $\alpha_i$.
+
+\begin{definition}[opinion dependent update rule]\label{d:opinion_dependent_dynamics}
+An opinion dependent update rule $A$ is a sequence of functions $(A_t)_{t=0}^\infty$ where
+$A_t: [0,1]^{t+2}\mapsto [0,1]$.
 \end{definition}
-%
-For example the update rule~(\ref{eq:fictitious_play}) is \emph{opinion dependent} since
-$x_i(t) = (1-\alpha_i)\sum_{\tau=0}^{t-1}y(\tau)/t + \alpha_is_i$
-meaning that for (\ref{eq:fictitious_play}), $A_t(y_0,\ldots,y_{t-1},\alpha,s) =
-(1-\alpha)\sum_{\tau=0}^{t-1}y_\tau/t + \alpha s$.
+
+\begin{definition}[opinion dependent Dynamics]\label{d:opinion_dependent_dynamics}
+Let an opinion depedent update rule $A$. For a given instance $I=(P,s,\alpha)$
+the rule $A$ produces an opinion depedent dynamics $x_A(t)$ defined as follows:
+\begin{itemize}
+ \item Initially each agent $i$ has opinion $x_i^A(0)=A_0(s_i,\alpha_i)$
+ \item At each round $t\geq 1$, each agent $i$ updates her opinion as follows:
+ \[x_i^A(t)=A_t(x_{W_i^0}(0),\dots,x_{W_i^{t-1}}(t-1),\alpha_i,s_i)\]
+where $W_i^t$ is the neighbors that $i$ meets at round $t$.
+\end{itemize}
+\end{definition}
+By Definition~\ref{d:OCO_algo} any collection of no-regret algorithms
+$A_{s,\alpha}$ for all $s,\alpha \in [0,1]^2$, can be encoded as opinion dependent
+update rule ($A_t(b_0,\ldots,b_{t-1},s,\alpha)=A_{s,\alpha}^t(b_0,\dots,b_{t-1})$).
+As a result, a lower bound for the opinion dependent dynamics 
+answers our initial question. An \emph{opinion dependent} update rule $A$
+produces different \emph{opinion dependent dynamics} $x_A(t)$
+for different instances $I=(P,s,\alpha)$, since $I$ determines
+the $s_i,\alpha_i$ for each agent and the probability distribution
+according to which the random meetings take place. 
+An example of an opinion depedent update rule is
+(\ref{eq:fictitious_play}), since $x_i(t) = (1-\alpha_i)\sum_{\tau=0}^{t-1}x_{W_i^\tau}(\tau)/t 
++ \alpha_is_i$. For an instance $I=(P,s,\alpha)$, rule (\ref{eq:fictitious_play}) produces the 
+\emph{opinion dependent dynamics} $x(t)$ whose convergence properties 
+to $x^*$ were studied in Section~\ref{s:fictitious_convergence}. 
 
 One first thing that seems questionable about the above class is that
 $x_i(t)$ does not depend on the indices of the neighbors that $i$ met. Another
@@ -29,6 +63,36 @@ implies that whenever two agents $i,j$ admit the same self confidence coefficien
 and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$) then they adopt the same update rule.
 The only reason that these case are excluded is only to simplify notation and our
 results extend trivially them (see Remark~\ref{r:lower_bound_no-regret}).
+
+We are interested in lower bounds about the convergence rate of
+\emph{opinion dependent dynamics} because these bounds also hold
+for the convergence rate of the \emph{no-regret dynamics} for our repeated game.
+Consider the following collection of no-regret algorithm $\mcal{A}$.
+For each $(s_i,\alpha_i) \in [0,1]^2$ select a no-regret algorithm 
+for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$.
+For each instance $I=(P,s,\alpha)$, each agent $i$ selects
+her opinion $x_i(t)$ according to $A_{s_i,\alpha_i}$, 
+$x_i(t)=A_{s_i,\alpha_i}^t(x_{W_i^0},\ldots,x_{W_i^{t-1}})$.
+Observe that the resulting no-regret dynamics $x_{\mcal{A}}(t)$
+that collection $\mcal{A}$, produces is an opinion dependent dynamics, 
+since we can define a sequence $A_t:[0,1]^{t+2} \mapsto [0,1]$ as
+$A_t(b_0,\ldots,b_{t-1},s_i,\alpha_i)=A^t_{s,\alpha}(b_0,\ldots,b_{t-1})$.
+
+Assume that each agent $i$ updates $x_i(t)$ according to a no-regret algorithm $A^i$
+for the OCO problem where the adversary selects the functions
+$(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$. By Definition~\ref{d:no-regret_algorithms},
+we have that $x_i(t)= A^i_t(y_i(0),\ldots,y_i(t-1))$. Notice that
+each agent $i$ selects a no-regret algorithm for a different OCO
+problem defined by her $\alpha_i,s_i$. Obviously two agents $i,j$ with the same
+self confidence coefficient and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$)
+select the algorithms $A_i$ and $A_j$ that admit no-regret for the same OCO problem.
+If we assume that in this case $A_i$,$A_j$ are the same then
+the respective \emph{no-regret dynamics} $\{x(t)\}_{t=1}^\infty$
+are \emph{opinion dependent} since \[x_i(t) = A_t(y_i(0),\ldots,y_i(t-1),\alpha_i,s_i)\]
+where $A_t:\{0,1\}^{t+2} \mapsto [0,1]$. As already mentioned this assumption is removed
+at the end of the section.
+
+
 
 We are interested in lower bounds about the convergence rate of
 \emph{opinion dependent dynamics} because these bounds also hold

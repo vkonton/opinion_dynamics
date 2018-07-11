@@ -1,4 +1,212 @@
 \section{Introduction}
+The formation and dynamics of opinions are an important aspect in modern 
+society and have been studied extensively for decades (see e.g., \cite{Jackson}).
+Opinion formation is based on information exchange, between that socially 
+connected people (e.g., family, friends, colleagues) who interact often 
+and affect each other's opinion. Moreover, opinion
+formation is often \emph{dynamic} in the sense that discussions and 
+interactions lead to changes in the expressed opinions. With the 
+advent of the internet and social media the dynamic aspects of 
+opinion formation have become ever more dominant. To capture opinion formation 
+on a formal level, several models have been proposed 
+(see e.g., \cite{DeGroot,FJ90,HK,BKO11,GS14,BGM13} for 
+continuous opinions and \cite{FGV12,YOASS13,BFM16} for discrete ones). 
+A common assumption, that dates back to DeGroot \cite{DeGroot}, is 
+that opinions evolve through a form of repeated averaging of 
+information collected from the agent social neighborhoods.
+
+\subsection{Motivation}
+Our work builds on the influential model of Friedkin and
+Johnsen \cite{FJ90}. According to FJ-model, each agent $i$ holds an 
+internal opinion $s_i\in [0,1]$, which is private and
+invariant over time and a public opinion $x_i \in [0,1]$
+Initially, agents start with their internal opinion and at 
+each round $t\geq1$, update their public opinion
+$x_i(t)$ to a weighted average of public opinion of 
+their social neighbors and their internal opinion, i.e.
+\[x_i(t)= \frac{\sum_{j\neq i}w_{ij}x_j(t-1) + w_{ii}s_i}{\sum_{j\neq i}w_{ij}+w_{ii}}\]
+where the weights $w_{ij}$ indicate the influence between
+the agents and $w_{ii}$ the self confidence towards their 
+internal belief. 
+
+The FJ-model is one of the most intensively studied models
+in opinion dynamics. It admits a 
+unique equilibrium point $x^* \in [0,1]^n$ to which
+the opinion vector $x(t)$ converges fast exponentially fast
+\cite{GS14}. The FJ-model can also be seen as the \emph{best response
+dynamics} in the repeated version of the following one shot
+opinion formation game, introduced by Kleinberg et al. in \cite{BKO11}. 
+The strategy of each agent $i$ is the public opinion $x_i$ that she expresses,
+icuring her a disagreement cost \[C_i(x_i,x_{-i})=\sum_{j \neq i}w_{ij}(x_i-x_j)^2 + w_{ii}(x_i-s_i)^2\]
+In \cite{BKO11}, they studied the efficiency of equilibrium $x^*$ in terms
+of the total disagreement cost and proved that the 
+\emph{Price of Anarchy} is at most $9/8$ in case $w_{ij}=w_{ji}$.
+
+From a game-theoretic perspective FJ-model admits
+very nice properties. It has a simple update, making it
+a plausible choice for modeling natural behavior, that
+is also the \emph{best response} of a well 
+defined opinion formation game. Moreover it ensures
+convergence to the unique equilibrium $x^*$ of the opinion 
+formation game. However from a 
+distributed computing point of view, things are not
+so great. The update rule of FJ-model requires that each agent learns
+the opinion of all her social neighbors at each 
+round. In todays's large social networks each user
+may have several hundrends of friends and obviously
+she cannot learn the opinion of all them each day.
+This introduce some skeptism on how well the 
+FJ-model resembles the opinion formation process in such
+network.
+
+Our work is motivated by the following questions.
+\emph{
+Can we find models similar to FJ-model that 
+require less information exchange between the agents
+and ensure convergence to the equilibrium $x^*$?
+Can these models be justified as natural behavior for selfish
+agents under a game-theoretic solution concept?}
+
+Generally speaking, it is not hard to 
+design distributed protocols that simulate FJ-model
+and require each agent to learn \emph{just one} opinion 
+of her neighbors at each iteration. The problem is that these protocols 
+are way too \enquote{\emph{algorithmic}} and thus not suitable modeling 
+natural behavior. In order to formally establish what
+the word \enquote{\emph{natural}} means, we introduce a randomized 
+variant of the one shot game defined in \cite{BKO11},
+called \emph{opinion formation game with random payoffs}.
+For an public opinion vector $x \in [0,1]^n$, the disagreement 
+cost $C_i(x_i,x_{-i})$ that each agent $i$ receives is
+a random variable defined as follows:
+\begin{itemize}
+ \item each agent $i$ meets \emph{one} of her neighbors $j$ with probability
+ $p_{ij}=w_{ij}/(\sum_{j\neq i}w_{ij}+w_{ii})$
+ \item and receives disagreement cost, $(1-\alpha_i)(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$ 
+\end{itemize}
+where $\alpha_i=w_{ii}/(\sum_{j\neq i}w_{ij}+w_{ii})$. The above game
+has the same Nash equilibrium $x^*$ (w.r.t. the expected cost) as
+the original opinion formation game and admits a nice interpretation
+that we discuss latter.
+
+Throughout the paper, we consider the agents to be engaged in the repeated 
+version of the above one shot game. The reason for this
+consideration is twofold. The first is convience, the repeated
+version of the above specifies the way that the agents communicate i.e.
+at each round $t$ each agent $i$ learns just the opinion 
+of the agent that she randomly met. The second reason is that we can now define 
+what natural behavior is. Since at each round each agent
+suffers a (random) disagreement cost that she selfishly want 
+to minimize, a natural update rule must provide garantees about
+the cost that the agent experiences during the game play.
+This work provides answers to the following questons:
+
+\emph{How can the agents update their opinions in the above
+repeated game such that:}
+\begin{itemize}
+\item \emph{Their experienced disagreement cost of each agent is in a sense minimized.}
+\item \emph{The produced opinion vector $x(t)$ converges to equilibrium $x^*$
+ relatively fast.}
+\end{itemize}
+
+\subsection{Contribution}
+We introduce a simple and intuitive update rule,
+similar to that of FJ-model, that the agents can adopt
+and the resulting opinion vector $x(t)$ converges to $x^*$.
+Our update rule is a \emph{Follow the Leader alogrithm}
+meaning that each round $t$, each agent updates her opinion
+to the minimizer of total disagreement cost that
+she experienced until round $t-1$. In section~\ref{s:fictitious_convergence},
+we bound its convergence time and we show that in order
+to acheive $\eps$ distance form $x^*$, poly($1/\eps$) rounds 
+are needed. In section~\ref{s:fictitious_noregret},
+we show that any agent has \emph{no-regret} in adopting
+this update rule. Namely, the average disagreement cost (that
+the agent experiences) per round approaches that
+of expressing the best opinion in hindsight. The latter
+makes our algorithm a natural choice for agents that 
+selfishly want to minize their incured disagreement cost.
+Our results contribute to showing that the FJ-model 
+can be extended with simple variants to explain
+the opinion formation process in enviroments with limited
+information exchange. 
+
+In section~\ref{s:lower_bound}, we show 
+that for any update rule that ensures \emph{no-regret}
+to the agents, the resulting opinion vector $x(t)$
+cannot converge to $x^*$ faster than polynomially. We
+prove the latter for a larger class of update rules,
+\emph{opinion dependent update rules} using information
+theoretic arguments. This implies that in our limited 
+information setting natural models cannot converge exponentially
+fast. Finally in Section~\ref{s:cc_convergence}, we present 
+an update rule that is not opinion dependent and acheives exponential
+convergence. Our results indicate the fundamental reason that
+the FJ-model converges exponential fast and this has little 
+to do with the \enquote{large} information exchange that it requires,
+they also serve as an \enquote{algorithmic guide} for future 
+variants of the FJ-model. 
+
+
+\subsection{Related Work}
+Apart from the forementioned results there exists a large amount 
+of literature concerning the FJ-model.
+Many recent works \cite{BGM13,CKO13,BFM16,EFHS17} bound the 
+inefficiency of equilibrium in variants of opinion formation game 
+defined in \cite{BKO11}. In \cite{GS14} they bound that the convergence 
+time of the FJ-model in in special graph topologies.
+In \cite{BFM16}, a variant of the opinion formation game in which social
+relations depend on the expressed opinions, is studied.
+They prove that, the discretized version of the above game admits
+a potential function and thus best-response converges to the
+Nash equilibrium. Convergence results in other discretized variants of
+the FJ-model can be found in \cite{YOASS13,FGV16}. In \cite{FPS16} the convergence
+properties of limited information variants of the Heglesmann-Krause model \cite{HK} 
+and the FJ model, are examined.
+
+
+Other works, that relate to ours, concern the convergence
+properties of dynamics based on no-regret learning algorithms.
+In \cite{FV97,FS99,SA00,SALS15} it is proved that in a finite $n$-person
+game if each agent updates her mixed strategy according to a no-regret
+algorithm the resulting \emph{time-averaged} strategy vector converges to
+Coarse Correlated Equilibrium. The convergence properties of no-regret dynamics 
+for games with infinite strategy spaces were considered in \cite{EMN09}.
+They proved that for a large class of games with concave utility function
+(socially concave games), the time-averaged strategy vector converges to
+the PNE. More recent work investigate a stronger notion of convergence of
+no-regret dynamics. In \cite{CHM17} they show that,
+in $n$-person finite generic games that admit unique Nash equilibrium,
+the strategy vector converges \emph{locally} and exponentially fast
+to it. They also provide conditions for \emph{global} convergence.
+Our results fit in this line of research since we show that
+for a game with \emph{infinite} strategy space, the strategy vector
+(and not the time-averaged) converges to the unique Nash equilibrium.
+
+No-regret dynamics under limited information are also examined
+in other settings. In Kleinberg et al. in \cite{KPT09} treated 
+load-balancing in distributed systems as
+a repeated game and analyzed the convergence properties
+no-regret online algorithms under the \emph{full information assumption} 
+that each agent learns the load of every machine. 
+In a subsequent work \cite{KPT11}, the same authors consider the
+same problem in a \emph{limited information setting} (\enquote{bulletin board model})
+in which each agent learns the load of just the machine 
+that served him. In \cite{HCM17,MS17} they examine the convergence
+properties of online learnig algorithms in case the payoffs oberved 
+by the agents are contaminated with some random noise. 
+
+
+
+%Blum et. al in \cite{BEL06,BHLR08}
+%studied the efficiency of outcomes produced by no-regret
+%learning algorithm in congestion games and showed that
+%their quality is close to that of a NE.
+%.
+%A subsequent similar work, which is perhaps closer to ours, is \cite{KPT11},
+%where they assumed a more realistic \emph{limited information setting},
+%namely \enquote{bulletin board model} for load balancing.
+
 
 \subsection{Friedkin-Johsen Model and Opinion Formation Games}
 In \cite{BKO11} the following \emph{opinion formation game} was introduced.
@@ -249,7 +457,8 @@ achieve convergence within error $\eps$.
   \[
     \Exp{\norm{\infty}{x_A(t) - x^*}} = \Omega(1/t^{1+c}),
   \]
-  where $x_A(t)$ denotes the opinion vector produced by $A$.
+  where $x_A(t)$ denotes the opinion vector produced by $A$
+  for the instance $I=(P,s,\alpha)$.
 \end{reptheorem}
 %
 To prove Theorem~\ref{t:lower_bound}, we show that opinion dependent rules with
@@ -277,51 +486,6 @@ $P$ is up to discussion, this update rule reveals that the slow convergence of
 that the agents are \enquote{oblivious} to the influence matrix $P$ of the
 game and they learn it during the game play.
 
-\subsection{Related Work}
-Our work belongs to the line of work studying the seminal Friedkin-Jonhsen
-model \cite{FJ90}. Bindel et al. in \cite{BKO11} defined an opinion
-formation game based on the FJ-model and bounded the inefficiency
-of its equilibrium point with respect to the total disagreement cost.
-Subsequent work bounded the inefficiency of its equilibrium in variants
-of the latter game \cite{BGM13,EFHS17,CKO13,BFM16}.
-In \cite{GS14} they show that the convergence time depends on
-the spectral radius of the adjacency matrix of the graph $G$
-and provided bounds in special graph topologies.
-In \cite{BFM16}, a variant of the opinion formation game in which social
-relations depend on the expressed opinions, is studied.
-They prove that, the discretized version of the above game admits
-a potential function and thus best-response converges to the
-Nash equilibrium. Convergence results in other discretized variants of
-the FJ-model can be found in \cite{YOASS13,FGV16}.
-
-There is a vast amount of literature concerning the convergence
-properties of dynamics based on no-regret online learning algorithms.
-In \cite{FV97,FS99,SA00,SALS15} it is proved that in a finite $n$-person
-game if each agent updates her mixed strategy according to a no-regret
-algorithm the resulting \emph{time-averaged} strategy vector converges to
-Coarse Correlated Equilibrium. Blum et. al in \cite{BEL06,BHLR08}
-studied the efficiency of outcomes produced by no-regret
-learning algorithm in congestion games and showed that
-their quality is close to that of a NE.
-Kleinberg et al. in \cite{KPT09} treated load-balancing in distributed systems as
-a repeated game and analyzed the performance of protocols based on
-no-regret online learning algorithms.
-A subsequent similar work, which is perhaps closer to ours, is \cite{KPT11},
-where they assumed a more realistic \emph{limited information setting},
-namely \enquote{bulletin board model} for load balancing.
-The convergence properties of no-regret dynamics for games with
-infinite strategy spaces were considered in \cite{EMN09}.
-They proved that for a large class of games with concave utility function
-(socially concave games), the time-averaged strategy vector converges to
-the PNE.
-More recent work investigate a stronger notion of convergence of
-no-regret dynamics. In \cite{CHM17} they show that,
-in $n$-person finite generic games that admit unique Nash equilibrium,
-the strategy vector converges \emph{locally} and exponentially fast
-to the PNE. They also provide conditions for \emph{global} convergence.
-Our results fit in this line of research since we show that
-for a game with \emph{infinite} strategy space, the strategy vector
-(and not the time-averaged) converges to the unique Nash equilibrium.
 % As is it also mentioned in \cite{CHM17} this stronger notion
 % of convergence cannot be derived from the Coarse Correlated convergence
 % results stated above.
