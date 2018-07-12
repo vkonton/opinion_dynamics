@@ -23,7 +23,12 @@ Initially, agents start with their internal opinion and at
 each round $t\geq1$, update their public opinion
 $x_i(t)$ to a weighted average of public opinion of
 their social neighbors and their internal opinion, i.e.
-\[x_i(t)= \frac{\sum_{j\neq i}w_{ij}x_j(t-1) + w_{ii}s_i}{\sum_{j\neq i}w_{ij}+w_{ii}}\]
+%
+\begin{equation}\label{eq:FJ_model}
+  x_i(t)= \frac{\sum_{j\neq i}w_{ij}x_j(t-1)
+    + w_{ii}s_i}{\sum_{j\neq i}w_{ij}+w_{ii}}
+\end{equation}
+%
 where the weights $w_{ij}$ indicate the influence between
 the agents and $w_{ii}$ the self confidence towards their
 internal belief. The FJ-model is one of the most intensively studied models
@@ -39,11 +44,16 @@ as the minimizer of disagreement cost function
 and based on this they defined an one shot
 opinion formation game. The strategy of each agent $i$ is
 her public opinion $x_i$, incuring her a
-disagreement cost \[C_i(x_i,x_{-i})=\sum_{j \neq i}w_{ij}
-(x_i-x_j)^2 + w_{ii}(x_i-s_i)^2\]
+disagreement cost
+%
+\begin{equation}\label{eq:BKO_cost}
+  C_i(x_i,x_{-i})=
+  \sum_{j \neq i}w_{ij} (x_i-x_j)^2 + w_{ii}(x_i-s_i)^2
+\end{equation}
+%
 By definition the FJ-model is the
 \emph{simultaneous best response dynamics} in the repeated
-version of their one shot game and the Nash equilibrium
+version of their one shot game and the Nash equilibrium (NE)
 of their game concides with the equilibrium point
 $x^*$ of the FJ-model. The reason for this definition
 was to measure the inefficiency of the limiting behavior
@@ -86,15 +96,19 @@ agents under a game-theoretic solution concept?
 To model the opinion formation process in enviroments
 with limited information exchange, we consider
 that the agents repeatedly play the following one shot game.
-The disagreement cost $C_i(x_i,x_{-i})$, that
-agent $i$ suffers for expressing $x_i \in [0,1]$, is a random variable
-defined as follows:
-\begin{itemize}
- \item agent $i$ meets \emph{one} of her neighbors $j$ with probability
- $p_{ij}=w_{ij}/(\sum_{j\neq i}w_{ij}+w_{ii})$
- \item and receives disagreement cost, $(1-\alpha_i)(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2$
-\end{itemize}
-where $\alpha_i=w_{ii}/(\sum_{j\neq i}w_{ij}+w_{ii})$. This one shot game
+
+\begin{definition}\label{d:random_game}
+  For a given opinion vector $x \in [0,1]^n$, the disagreement cost of agent $i$
+  is the random variable $C_i(x_i,x_{-i})$ defined as follows:
+  \begin{itemize}
+    \item $i$ meets one of her neighbors $j$ with probability
+      $p_{ij}= w_{ij}/\sum_{j\in N_i}w_{ij}$
+    \item suffers cost $C_i(x_i , x_{-i}) = (1-a_i)(x_i-x_j)^2 + a_i(x_i-s_i)^2$,
+      where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
+  \end{itemize}
+\end{definition}
+
+This one shot game
 is a straightforward limited information variant of the opinion formation game
 defined in \cite{BKO11}, has the same Nash equilibrium (w.r.t
 to the expected cost of the agents) and admits a very

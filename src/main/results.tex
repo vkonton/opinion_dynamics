@@ -1,100 +1,33 @@
 \section{Our Results and Techniques}
-%In \cite{BKO11} the following \emph{opinion formation game} was introduced.
-%A weighted directed graph $G(V,E,w)$ is assumed where and the vertices
-%stand for the $n$ agents ($|V| = n$) and the acres for the social
-%influence among them. Each agent $i \in V$ possess an
-%\emph{internal opinion} $s_i \in [0,1]$ and a \emph{self confidence coefficient}
-%$w_i>0$. The strategy of each agent $i$ is the opinion $x_i\in [0,1]$ that
-%she publicly expresses incurring her cost
-%%
-%\begin{equation}\label{eq:BKO_cost}
-%  C_i(x_i,x_{-i}) = \sum_{j \in N_i}w_{ij}(x_i-x_j)^2 + w_i(x_i -s_i)^2
-%\end{equation}
-%%
-%where $N_i$ denotes $i$'s \emph{neighbors} and $w_{ij}$ stands for
-%the social influence $j$ imposes on $i$. In \cite{BKO11} they proved that
-%the above game always admits a \emph{Pure Nash Equilibrium} (PNE) $x^* \in [0,1]^n$
-%and studied its efficiency with respect to the total disagreement cost.
-%They proved that the \emph{Price of Anarchy}
-%is less than $9/8$ in case $G$ is bidirectional and $w_{ij}=w_{ji}$.
-
-%In the repeated version of the game defined in (\ref{eq:BKO_cost}),
-%at each round $t$ each agent $i$ selects an opinion $x_i(t)$ and then suffers
-%cost $C_i(x_i(t),x_{-i}(t))$. If each agent updates her opinion to be the
-%\emph{best response} of $x(t-1)$,
-%%
-%\begin{equation}\label{eq:FJ_model}
-%  x_i(t) =
-%  \argmin_{x \in [0,1]}C_i(x,x_{-i}(t-1))=
-%  \frac{\sum_{j \in N_i}w_{ij}x_j(t-1) + w_is_i}{\sum_{j \in N_i}w_{ij} + w_i}
-%\end{equation}
-%%
-%we obtain the Friedkin-Johsen model (FJ-model), which is one of
-%%the most influential models in opinion dynamics.
-%The convergence properties of the FJ-model have been extensively studied.
-%In \cite{GS14} they proved that $x(t)$ always converges
-%to the PNE $x^*$ and provided bounds for the convergence time for various
-%graph topologies. As a result, the
-%above \emph{opinion formation game} has some nice algorithmic properties: It
-%always admits a unique equilibrium point $x^*$ and there
-%exists a simple but most importantly rational update rule for selfish agents
-%that leads the overall system to equilibrium.
-
-Our work is motivated by the fact that the definition of the cost $C_i(x_i,x_{-i})$
-in~(\ref{eq:BKO_cost}) implies that agent $i$ meets with all of
-her neighbors.  This is more clear in the update rule (\ref{eq:FJ_model}).
-Each agent, in order to compute her best response, has to learn the opinion of
-all her neighbors.
-The latter seems quite unnatural in today's huge social networks
-(e.g. Facebook, Twitter etc.), in which each user may have
-several hundreds of friends. Thus, it is far more reasonable to assume
-that each day an agent meets a small subset of her acquaintances and
-suffers a cost based on how much she disagrees with them. To capture the above thoughts,
-we use a variant of the opinion formation game in which the
-disagreement cost of each agent $i$ is a random variable depending
-on the random meetings of $i$.
-We first present our variant of the one shot game defined in \cite{BKO11} in which
-we assume that only the opinion of one random neighbor is known at each round.
-%
-\begin{definition}\label{d:random_game}
-  For a given opinion vector $x \in [0,1]^n$, the disagreement cost of agent $i$
-  is the random variable $C_i(x_i,x_{-i})$ defined as follows:
-  \begin{itemize}
-    \item $i$ meets one of her neighbors $j$ with probability
-      $p_{ij}= w_{ij}/\sum_{j\in N_i}w_{ij}$
-    \item suffers cost $C_i(x_i , x_{-i}) = (1-a_i)(x_i-x_j)^2 + a_i(x_i-s_i)^2$,
-      where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
-  \end{itemize}
-\end{definition}
-%
-The main difference of the original opinion formation game with our variant is that
-in the first case an opinion vector $x\in [0,1]^n$ defines \emph{deterministically}
-the cost $C_i(x_i,x_{-i})$ of each agent $i$, whereas in the second
-case it defines (according to Definition~\ref{d:random_game})
-a probability distribution on the cost $C_i(x_i,x_{-i})$ that $i$ suffers.
-The reason is that the random payoff setting is more suitable to model realistic
-situations in which randomness naturally occurs because of incomplete information.
-
+We now introduce the necessary notions to present our results in detail.
+We start with some remarks on our limited information opinion formation game
+defined in Definition~\ref{d:random_game}.
+In the original opinion formation game an opinion vector $x\in [0,1]^n$ defines
+\emph{deterministically} the cost $C_i(x_i,x_{-i})$ of each agent $i$,
+whereas in our variant it defines a probability distribution on the cost
+$C_i(x_i,x_{-i})$ that $i$ suffers.
 The cost $C_i(x_i,x_{-i})$ in (\ref{eq:BKO_cost}) can be written equivalently
 \begin{equation}\label{eq:BKO11_cost_equivalent}
   C_i(x_i,x_{-i}) =
   W_i\lp( (1-\alpha_i)\sum_{j \in N_i} p_{ij}(x_i-x_j)^2
-  + \alpha_i(x_i-s_i)^2\rp)
+  + \alpha_i(x_i-s_i)^2\rp),
 \end{equation}
-where $W_i=\sum_{j\in N_i}w_{ij} + w_i$ is a positive constant independent
-of the opinion vector $x\in [0,1]^n$.
-Thus, the random cost in Definition~\ref{d:random_game} has a natural
+where $W_i=\sum_{j\in N_i}w_{ij} + w_i$ and
+$\alpha_i = w_i/(\sum_{j} w_{ij} + w_i)$ are positive constants independent of
+the opinion vector $x$.
+The random cost in Definition~\ref{d:random_game} has a natural
 interpretation: the coefficient $\alpha_i$ measures the reluctance of agent
 $i$ to adopt an opinion other than $s_i$, while $p_{ij}$ can be seen as the
 \emph{real} influence that $j$ poses on $i$.
-In Definition~\ref{d:random_game}, $p_{ij}$ is the frequency that
-$i$ meets $j$, meaning that the influence that $j$ poses on $i$ is just a measure
-on how often they meet. The latter aligns with the common belief
+In our repeated version of the limited information game of Definition~\ref{d:random_game},
+$p_{ij}$ is the frequency that $i$ meets $j$, meaning that the influence that
+$j$ poses on $i$ can also be interpreted as a measure
+of how often they meet. The latter aligns with the common belief
 that we are influenced more by those we interact more often.
 Equation (\ref{eq:BKO11_cost_equivalent}) also helps to establish the existence
-of PNE for the game of Definition~\ref{d:random_game}.
-In our case, the notion of PNE extends with respect to the expected cost of each
-agent. Namely, $x^* \in [0,1]$ is a PNE if and only if
+of NE for the game of Definition~\ref{d:random_game}.
+In our case, the notion of NE extends with respect to the expected cost of each
+agent. Namely, $x^* \in [0,1]$ is a NE if and only if
 $\Exp{C(x_i^*, x_{-i}^*)} \leq \Exp{C(x_i, x_{-i}^*)}$
 for each agent $i$.
 Since
@@ -104,9 +37,8 @@ it follows from (\ref{eq:BKO11_cost_equivalent}) that the
 opinion formation game with random payoffs has the same equilibrium $x^*$ as
 the original opinion formation game.
 
-Instead of denoting an instance of the opinion formation game of
-Definition~\ref{d:random_game} using a graph $G$ and weights $w_{ij}$, $w_i$
-we adopt the following more convenient notation.
+In the following, we shall adopt the following notation for
+an instance of the game of Definition~\ref{d:random_game}.
 %
 \begin{definition}\label{d:instance}
   We denote an instance of the opinion formation game of Definition~\ref{d:random_game}
@@ -115,55 +47,59 @@ we adopt the following more convenient notation.
     \item $P$ is a $n \times n$  matrix with non-negative elements $p_{ij}$,
       with $p_{ii}=0$ and $\sum_{j=1}^n p_{ij}$ is either $0$ or $1$.
     \item $s \in [0,1]^n$ is the internal opinion vector.
-    \item $\alpha \in [0,1]^n$ the self confidence coefficient vector.
+    \item $\alpha \in (0,1]^n$ the self confidence coefficient vector.
   \end{itemize}
 \end{definition}
 %
 We use the matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$
-if $j \in N_i$ and $0$ otherwise. If $N_i \neq \emptyset$ then $\sum_{j \in N_i}p_{ij}=1$.
-To properly define our game, we remark that if $N_i=\emptyset$ then
-$\alpha_i=1,\sum_{j=1}^np_{ij}=0$ and agent $i$ suffers cost $(x_i-s_i)^2$.
+if $j \in N_i$ and $0$ otherwise.
+% If $N_i \neq \emptyset$ then $\sum_{j \in N_i}p_{ij}=1$.
+% To properly define our game, we remark that if $N_i=\emptyset$ then
+% $\alpha_i=1,\sum_{j=1}^n p_{ij}=0$ and agent $i$ suffers cost $(x_i-s_i)^2$.
 Abusing notation we will sometimes refer to the graph $G$.
 Another parameter of an instance $I=(P,s,\alpha)$ that we often use is
 $\rho=\min_{i \in V}\alpha_i$.
 
 In Section~\ref{s:fictitious_convergence}, we study the convergence properties
-of $x(t)$ if it is generated according to a \enquote{follow the leader}
-style update rule \ref{alg:fictitious_dynamics}.
+of the dynamics $x(t)$ when all agents update their opinions
+according to the \enquote{follow the leader} principle.
+Each agent $i$ must select $x_i(t)$, before knowing which of her neighbors she
+will meet and what opinion her neighbor will express. The update rule
+(\ref{eq:fictitious_play}) says \enquote{\emph{play the best according to what you have observed}}.
+For a given instance $(P,s,a)$ of the game of Definition~\ref{d:random_game}
+the FTL dynamics $x(t)$ is defined in \ref{alg:fictitious_dynamics} and
+Theorem \ref{t:fictitious_convergence} shows the convergence rate of $x(t)$ to $x^*$.
+%
 \begin{algorithm}
-  \caption{Dynamics}
+  \caption{FTL Dynamics}
   \label{alg:fictitious_dynamics}
   \begin{algorithmic}[1]
     \STATE Initially $x_i(0) = s_i$ for all agents $i$.
-    \STATE At round $t\geq 1$ each agent $i$:
+    \STATE At round $t\geq 0$ each agent $i$:
     \bindent
     \STATE Meets neighbor with index $W_i^t$.
-  \STATE Suffers cost \( C_i(x_i,x_{-i}) = (1-\alpha_i) (x_i(t-1) - x_{W_i^t}(t-1))^2 + a_i (x_i(t-1) - s_i)^2\).
+    \STATE Suffers cost \((1-\alpha_i) (x_i(t) - x_{W_i^t}(t))^2 + a_i (x_i(t) - s_i)^2\).
   \item Updates her opinion
     \begin{equation}\label{eq:fictitious_play}
-      x_i(t) =
+      x_i(t+1) =
       \argmin_{x \in [0,1]}
-      \sum_{\tau=0}^{t-1}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
+      \sum_{\tau=0}^{t}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
     \end{equation}
     \eindent
   \end{algorithmic}
 \end{algorithm}
 %
-Since each agent $i$ must select $x_i(t)$ at the beginning of the round, before knowing
-which of her neighbors she will meet and what opinion her neighbor will have,
-update~\ref{eq:fictitious_play} says
-\enquote{\emph{play the best according to what you have observed}}.
-According to this principle Brown proposed \emph{fictitious play}
-\cite{Bro51}, which is one of the most intuitive and simple
-models of playing in finite games. Abusing terminology
-we refer to (\ref{eq:fictitious_play}) as fictitious play.
-We show that in our infinite strategy game, if all agents
-adopt fictitious play, the resulting opinion vector $x(t)$ converges to
-$x^*$ with the following rate.
+
+% According to this principle Brown proposed \emph{fictitious play}
+% \cite{Bro51}, which is one of the most intuitive and simple
+% models of playing in finite games.
+% Abusing terminology we refer to (\ref{eq:fictitious_play}) as fictitious play.
+% We show that in our infinite strategy game, if all agents
+% adopt fictitious play, the resulting opinion vector
 %
 \begin{reptheorem}{t:fictitious_convergence}
   Let $I = (P,s, \alpha)$ be an instance of the opinion formation
-  game of Definition~\ref{d:random_payoff_game} with equilibrium
+  game of Definition~\ref{d:random_game} with equilibrium
   $x^* \in [0,1]^n$.  The opinion vector $x(t)\in[0,1]^n$ produced by
   update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
   \[
@@ -173,22 +109,10 @@ $x^*$ with the following rate.
   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 \end{reptheorem}
 
-The update rule (\ref{eq:fictitious_play}) guarantees convergence
-while vastly reducing the information exchange between the agents
-at each round. In (\ref{eq:fictitious_play}) each agent $i$ learns the opinion of only one agent
-at each round whereas in the classical FJ-model (\ref{eq:FJ_model}), agent $i$ must
-learn the opinions of all her neighbors. In terms of
-total communication needed to get within distance $\eps$ of the
-equilibrium $x^*$, the update rule (\ref{eq:fictitious_play}) needs
-$O(n \log n)$ communication while (\ref{eq:FJ_model}) needs
-$O(|E|)$. Of course for this difference to be significant we need
-each agent to have at least $O(\log n)$ friends. A large social
-network like Facebook has approximately $2$ billion users and each user
-has usually more that $100$ friends which is far more than $\log(2\ 10^9)$.
 
 In Section~\ref{s:fictitious_noregret} we argue that,
-apart from its simplicity, update rule \ref{eq:fictitious_play} has
-no-regret and therefore is a \emph{rational game play} for selfish agents.
+apart from its simplicity, update rule \ref{eq:fictitious_play} ensures
+no-regret for the agents, and therefore is a \emph{rational game play} for selfish agents.
 %At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
 %and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
 Since each agent $i$ selfishly wants to minimizing her individual cost,
@@ -213,6 +137,22 @@ functions from a larger class (see e.g. chapter 5 in \cite{Haz16}).
     \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}
   \]
 \end{reptheorem}
+The FTL-dynamics can efficiently simulate the opinion formation
+process in limited information exchange environments.  It ensures
+convergence to the same equilibrium as the original FJ-model
+while vastly reducing the information exchange between the agents
+per round; it only requires each agent to learn the opinion
+of just one neighbor.
+In terms of total communication needed to get within distance $\eps$ of the
+equilibrium $x^*$, the update rule (\ref{eq:fictitious_play}) needs
+$O(n \log n)$ communication while (\ref{eq:FJ_model}) needs
+$O(|E|)$.
+Of course for this difference to be significant we need
+each agent to have at least $O(\log n)$ friend which
+not unusual in today's large social networks.
+% A large social network like Facebook has approximately $2$ billion users
+% and each user has usually more that $100$ friends which is far more
+% than $\log(2\ 10^9)$.
 
 Even though the update rule (\ref{eq:fictitious_play}) has the above
 desired properties, the convergence rate of the produced dynamics is
