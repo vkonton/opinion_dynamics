@@ -142,6 +142,23 @@
   \endgroup
 }
 
+\newcommand{\repeatlemma}[1]{%
+  \begingroup
+  \renewcommand{\thelemma}{\ref{#1}}%
+  \expandafter\expandafter\expandafter\lemma
+  \csname replemma@#1\endcsname
+  \endlemma
+  \endgroup
+}
+
+\NewEnviron{replemma}[1]{%
+  \global\expandafter\xdef\csname replemma@#1\endcsname{%
+    \unexpanded\expandafter{\BODY}%
+  }%
+  \expandafter\lemma\BODY\unskip\label{#1}\endlemma
+}
+
+
 \NewEnviron{reptheorem}[1]{%
   \global\expandafter\xdef\csname reptheorem@#1\endcsname{%
     \unexpanded\expandafter{\BODY}%
