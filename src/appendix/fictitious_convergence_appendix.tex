@@ -1,22 +1,23 @@
 \section{Fictitious Play Convergence Rate}\label{app:s:fictitious_convergence}
 We give here the proof of the following technical lemma that we used to derive
 an upper bound on the rate of convergence of the fictitious play dynamics in
-Section~\ref{s:fictitious_convergence}.  We restate Lemma~\ref{l:error_bound} for
+Section~\ref{s:fictitious_convergence}.  We restate Lemma~\ref{l:recursion_upper_bound} for
 completeness.
-\begin{lemma}
-  Let $e(t)$ be a function satisfying the recursion
-  \[
-    e(t) =
-    \delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
-    \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
-  \]
-  where \(\delta(t) = \sqrt{\frac{\ln(D t^2)}{t}} \), \(\delta(0) = 0 \),
-  and $D > \me^2$ is a positive constant.  Then
-  \(
-    e(t) \leq
-    \sqrt{2 \ln(D)} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
-  \)
-\end{lemma}
+\repeatlemma{l:recursion_upper_bound}
+% \begin{lemma}
+%   Let $e(t)$ be a function satisfying the recursion
+%   \[
+%     e(t) =
+%     \delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+%     \text{ and } e(0)=\|x^0 - x^*\|_{\infty},
+%   \]
+%   where \(\delta(t) = \sqrt{\frac{\ln(D t^2)}{t}} \), \(\delta(0) = 0 \),
+%   and $D > \me^2$ is a positive constant.  Then
+%   \(
+%     e(t) \leq
+%     \sqrt{2 \ln(D)} \frac{(\ln t)^{3/2}}{t^{\min(\rho,\, 1/2)}}.
+%   \)
+% \end{lemma}
 \begin{proof}
   Observe that for all $t\geq 0$ the function $e(t)$ the following recursive
   relation
@@ -112,7 +113,8 @@ completeness.
   Let $I = (P,s, \alpha)$ be any instance of the opinion formation
   game of Definition~\ref{d:random_payoff_game} with equilibrium
   $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
-  Algorithm~\ref{alg:fictitious_play} after $t$ rounds satisfies
+  update rule~\ref{eq:fictitious_play}
+  after $t$ rounds satisfies
   \[
     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
     C \sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(1/2,\rho)}},

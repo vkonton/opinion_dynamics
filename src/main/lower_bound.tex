@@ -2,7 +2,7 @@
 
 In the previous sections we saw that if each
 agent $i$ updates her opinion according to
-update rule~\ref{eq:fictitious_convergence}
+update rule~\ref{eq:fictitious_play}
 the resulting opinion vector $x(t)$ produced
 for an instance $I=(P,s,\alpha)$ converges
 to the unique equilibrium point $x^*$ and
@@ -248,8 +248,8 @@ However, there is some fine print in these results which does not allow us
 to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.
 
-Before presenting Theorem~\ref{t:estimation_lower_bound} we briefly discuss some
-fundamental results concerning sample complixity lower bounds for statistical estimation.
+Before presenting Lemma~\ref{l:estimation_lower_bound} we briefly discuss some
+fundamental results concerning sample complexity lower bounds for statistical estimation.
 Perhaps the oldest sample complexity lower bound for estimation problems
 is the well-known Cramer-Rao inequality.
 Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ such that $E_p[\theta_t]=p$ for
