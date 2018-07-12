@@ -1,12 +1,12 @@
 \section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
 
-In the previous section we saw that if each
+In the previous sections we saw that if each
 agent $i$ updates her opinion according to
 update rule~\ref{eq:fictitious_convergence}
 the resulting opinion vector $x(t)$ produced
 for an instance $I=(P,s,\alpha)$ converges
 to the unique equilibrium point $x^*$ and
-that ensure no-regret for the OCO problem 
+ensures no-regret for the OCO problem 
 with $F_{s_i,\alpha_i}$. In this section we 
 investigate whether we can establish exponential
 convergence while keeping the no-regret property
@@ -27,7 +27,8 @@ exponentially fast to $x^*$?
 %to the opinions that she observed, her $s_i$ and $\alpha_i$.
 
 \begin{definition}[opinion dependent update rule]\label{d:opinion_dependent_dynamics}
-An opinion dependent update rule $A$ is a sequence of functions $(A_t)_{t=0}^\infty$ where
+An opinion dependent update rule $A$ is a sequence of 
+functions $(A_t)_{t=0}^\infty$ where
 $A_t: [0,1]^{t+2}\mapsto [0,1]$.
 \end{definition}
 
@@ -56,13 +57,13 @@ An example of an opinion depedent update rule is
 \emph{opinion dependent dynamics} $x(t)$ whose convergence properties 
 to $x^*$ were studied in Section~\ref{s:fictitious_convergence}. 
 
-One first thing that seems questionable about the above class is that
+One thing that seems questionable about the above class is that
 $x_i(t)$ does not depend on the indices of the neighbors that $i$ met. Another
 may be the fact that Definition~\ref{d:opinion_dependent_dynamics}
 implies that whenever two agents $i,j$ admit the same self confidence coefficient
 and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$) then they adopt the same update rule.
 The only reason that these case are excluded is only to simplify notation and our
-results extend trivially them (see Remark~\ref{r:lower_bound_no-regret}).
+results extend trivially to them (see Remark~\ref{r:lower_bound_no-regret}).
 
 We are interested in lower bounds about the convergence rate of
 \emph{opinion dependent dynamics} because these bounds also hold
@@ -74,7 +75,7 @@ For each instance $I=(P,s,\alpha)$, each agent $i$ selects
 her opinion $x_i(t)$ according to $A_{s_i,\alpha_i}$, 
 $x_i(t)=A_{s_i,\alpha_i}^t(x_{W_i^0},\ldots,x_{W_i^{t-1}})$.
 Observe that the resulting no-regret dynamics $x_{\mcal{A}}(t)$
-that collection $\mcal{A}$, produces is an opinion dependent dynamics, 
+that collection $\mcal{A}$ produces is an opinion dependent dynamics, 
 since we can define a sequence $A_t:[0,1]^{t+2} \mapsto [0,1]$ as
 $A_t(b_0,\ldots,b_{t-1},s_i,\alpha_i)=A^t_{s,\alpha}(b_0,\ldots,b_{t-1})$.
 
@@ -239,7 +240,7 @@ of a Bernoulli random variable within additive error $\eps$.
 Another well-known result is that taking the average of the samples
 is the \emph{best} way to estimate the mean of a Bernoulli random variable.
 These results would indicate that the best possible rate of convergence
-for a \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
+for an \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
 However, there is some fine print in these results which does not allow us
 to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.

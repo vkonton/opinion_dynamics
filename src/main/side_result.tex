@@ -2,7 +2,7 @@
 
 We already discussed that the reason that opinion dependent dynamics suffer slow
 convergence is that the update rule depends only on the expressed opinions.
-In this section we provide an update rules showing that information about the
+In this section we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly, can restore the
 exponential convergence rate.
 Our update rule, depends not only on the expressed opinions of the
@@ -25,8 +25,8 @@ at least once from $t$ to $t+B$.
 It is necessary to know the matrix $P$ in order for this
 update rule to work. We first observe that the lower bound of
 Section~\ref{s:lower_bound} also holds in case the algorithm learns the index
-of the chosen neighbor, since the reduction involves only two neighbors
-with different opinions and therefore, they are distinguishable.
+of the chosen neighbor. The reason is that the reduction involves only two neighbors
+with different opinions, so they are distinguishable.
 Therefore, if we tried to learn $P$ by observing the frequencies
 of the indices of the neighbors and run update rule \ref{alg:cc_upper}
 with the empirical frequencies instead of the $p_{ij}$, our lower bound
