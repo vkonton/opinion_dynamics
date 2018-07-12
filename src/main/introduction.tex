@@ -1,7 +1,7 @@
 \section{Introduction}
 The formation and dynamics of opinions are an important aspect in modern 
 society and have been studied extensively for decades (see e.g., \cite{Jackson}).
-Opinion formation is based on information exchange, between that socially 
+Opinion formation is based on information exchange between socially 
 connected people (e.g., family, friends, colleagues) who interact often 
 and affect each other's opinion. Moreover, opinion
 formation is often \emph{dynamic} in the sense that discussions and 
@@ -22,7 +22,7 @@ internal opinion $s_i\in [0,1]$, which is private and
 invariant over time and a public opinion $x_i \in [0,1]$
 Initially, agents start with their internal opinion and at 
 each round $t\geq1$, update their public opinion
-$x_i(t)$ to a weighted average of public opinion of 
+$x_i(t)$ to a weighted average of public opinions of 
 their social neighbors and their internal opinion, i.e.
 \[x_i(t)= \frac{\sum_{j\neq i}w_{ij}x_j(t-1) + w_{ii}s_i}{\sum_{j\neq i}w_{ij}+w_{ii}}\]
 where the weights $w_{ij}$ indicate the influence between
@@ -32,18 +32,18 @@ internal belief.
 The FJ-model is one of the most intensively studied models
 in opinion dynamics. It admits a 
 unique equilibrium point $x^* \in [0,1]^n$ to which
-the opinion vector $x(t)$ converges fast exponentially fast
+the opinion vector $x(t)$ converges exponentially fast
 \cite{GS14}. The FJ-model can also be seen as the \emph{best response
 dynamics} in the repeated version of the following one shot
 opinion formation game, introduced by Kleinberg et al. in \cite{BKO11}. 
 The strategy of each agent $i$ is the public opinion $x_i$ that she expresses,
-icuring her a disagreement cost \[C_i(x_i,x_{-i})=\sum_{j \neq i}w_{ij}(x_i-x_j)^2 + w_{ii}(x_i-s_i)^2\]
+incurring her a disagreement cost \[C_i(x_i,x_{-i})=\sum_{j \neq i}w_{ij}(x_i-x_j)^2 + w_{ii}(x_i-s_i)^2\]
 In \cite{BKO11}, they studied the efficiency of equilibrium $x^*$ in terms
 of the total disagreement cost and proved that the 
 \emph{Price of Anarchy} is at most $9/8$ in case $w_{ij}=w_{ji}$.
 
 From a game-theoretic perspective FJ-model admits
-very nice properties. It has a simple update, making it
+very nice properties. It has a simple update rule, making it
 a plausible choice for modeling natural behavior, that
 is also the \emph{best response} of a well 
 defined opinion formation game. Moreover it ensures
@@ -54,10 +54,10 @@ so great. The update rule of FJ-model requires that each agent learns
 the opinion of all her social neighbors at each 
 round. In todays's large social networks each user
 may have several hundrends of friends and obviously
-she cannot learn the opinion of all them each day.
-This introduce some skeptism on how well the 
+she cannot learn the opinion of all of them each day.
+This introduces some skepticism on how well the 
 FJ-model resembles the opinion formation process in such
-network.
+networks.
 
 Our work is motivated by the following questions.
 \emph{
@@ -71,12 +71,12 @@ Generally speaking, it is not hard to
 design distributed protocols that simulate FJ-model
 and require each agent to learn \emph{just one} opinion 
 of her neighbors at each iteration. The problem is that these protocols 
-are way too \enquote{\emph{algorithmic}} and thus not suitable modeling 
+are way too \enquote{\emph{algorithmic}} and thus not suitable for modeling 
 natural behavior. In order to formally establish what
 the word \enquote{\emph{natural}} means, we introduce a randomized 
 variant of the one shot game defined in \cite{BKO11},
 called \emph{opinion formation game with random payoffs}.
-For an public opinion vector $x \in [0,1]^n$, the disagreement 
+For a public opinion vector $x \in [0,1]^n$, the disagreement 
 cost $C_i(x_i,x_{-i})$ that each agent $i$ receives is
 a random variable defined as follows:
 \begin{itemize}
@@ -96,7 +96,7 @@ version of the above specifies the way that the agents communicate i.e.
 at each round $t$ each agent $i$ learns just the opinion 
 of the agent that she randomly met. The second reason is that we can now define 
 what natural behavior is. Since at each round each agent
-suffers a (random) disagreement cost that she selfishly want 
+suffers a (random) disagreement cost that she selfishly wants 
 to minimize, a natural update rule must provide garantees about
 the cost that the agent experiences during the game play.
 This work provides answers to the following questons:
@@ -114,37 +114,37 @@ We introduce a simple and intuitive update rule,
 similar to that of FJ-model, that the agents can adopt
 and the resulting opinion vector $x(t)$ converges to $x^*$.
 Our update rule is a \emph{Follow the Leader alogrithm}
-meaning that each round $t$, each agent updates her opinion
+meaning that at each round $t$, each agent updates her opinion
 to the minimizer of total disagreement cost that
 she experienced until round $t-1$. In section~\ref{s:fictitious_convergence},
 we bound its convergence time and we show that in order
-to acheive $\eps$ distance form $x^*$, poly($1/\eps$) rounds 
+to achieve $\eps$ distance from $x^*$, poly($1/\eps$) rounds 
 are needed. In section~\ref{s:fictitious_noregret},
 we show that any agent has \emph{no-regret} in adopting
 this update rule. Namely, the average disagreement cost (that
 the agent experiences) per round approaches that
 of expressing the best opinion in hindsight. The latter
 makes our algorithm a natural choice for agents that 
-selfishly want to minize their incured disagreement cost.
+selfishly want to minize their incurred disagreement cost.
 Our results contribute to showing that the FJ-model 
 can be extended with simple variants to explain
-the opinion formation process in enviroments with limited
+the opinion formation process in environments with limited
 information exchange. 
 
 In section~\ref{s:lower_bound}, we show 
 that for any update rule that ensures \emph{no-regret}
-to the agents, the resulting opinion vector $x(t)$
+for the agents, the resulting opinion vector $x(t)$
 cannot converge to $x^*$ faster than polynomially. We
 prove the latter for a larger class of update rules,
 \emph{opinion dependent update rules} using information
 theoretic arguments. This implies that in our limited 
 information setting natural models cannot converge exponentially
 fast. Finally in Section~\ref{s:cc_convergence}, we present 
-an update rule that is not opinion dependent and acheives exponential
+an update rule that is not opinion dependent and achieves exponential
 convergence. Our results indicate the fundamental reason that
-the FJ-model converges exponential fast and this has little 
-to do with the \enquote{large} information exchange that it requires,
-they also serve as an \enquote{algorithmic guide} for future 
+the FJ-model converges exponential fast, which has little 
+to do with the \enquote{large} information exchange that it requires.
+They also serve as an \enquote{algorithmic guide} for future 
 variants of the FJ-model. 
 
 
@@ -184,7 +184,7 @@ for a game with \emph{infinite} strategy space, the strategy vector
 (and not the time-averaged) converges to the unique Nash equilibrium.
 
 No-regret dynamics under limited information are also examined
-in other settings. In Kleinberg et al. in \cite{KPT09} treated 
+in other settings. In Kleinberg et al. \cite{KPT09} they treated 
 load-balancing in distributed systems as
 a repeated game and analyzed the convergence properties
 no-regret online algorithms under the \emph{full information assumption} 
@@ -404,9 +404,9 @@ apart from its simplicity, fictitious play has no-regret
 and therefore is a \emph{rational game play} for selfish agents.
 %At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
 %and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
-Since each agent $i$ selfishly wants to minimizing her individual cost,
+Since each agent $i$ selfishly wants to minimize her individual cost,
 it is natural to assume that she selects $x_i(t)$ according to
-an \emph{no-regret algorithm} for the \emph{online convex optimization problem}
+a \emph{no-regret algorithm} for the \emph{online convex optimization problem}
 where the adversary chooses a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$
 at each round $t$. In Theorem~\ref{t:fictitious_noregret} 
 we prove that fictitious play is a no-regret algorithm 
@@ -418,7 +418,7 @@ functions from a larger class (see e.g. chapter 5 in \cite{Haz16}).
   Consider the function $f:[0,1]^2 \mapsto [0,1]$ with
   $f(x,b) = (1-\alpha)(x-b)^2 + \alpha(x-s)^2$ for some
   constants $s,\alpha \in [0,1]$.
-  Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with
+  Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with
   $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
   then for all $t$,
   \[
@@ -474,7 +474,7 @@ from the statistics literature and explain why they do not work in our case.
 In Section~\ref{s:cc_convergence}, we present a simple update rule that
 is not opinion dependent and  achieves error rate $e^{-\bigOh{\sqrt{t}}}$.
 This update rule is a function of the opinions and the indices of the agents
-that $i$ met, $\alpha_i,s_i$ and the $i$-th row the matrix $P$.
+that $i$ met, $\alpha_i,s_i$ and the $i$-th row of the matrix $P$.
 We mention that the lower bound presented in Theorem~\ref{t:lower_bound}
 applies for \enquote{opinion dependent rules} that also depend on the
 agents' indices that $i$ met.  Therefore, the dependency on the row $P_i$ is
@@ -484,7 +484,7 @@ $P$ is up to discussion, this update rule reveals that the slow convergence of
 \emph{opinion dependent} update rules is not due to the reduced information exchange
 (learning the opinion of only one agent), but due to the fact
 that the agents are \enquote{oblivious} to the influence matrix $P$ of the
-game and they learn it during the game play.
+game and learn it during the game play.
 
 % As is it also mentioned in \cite{CHM17} this stronger notion
 % of convergence cannot be derived from the Coarse Correlated convergence
