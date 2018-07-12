@@ -1,12 +1,12 @@
 \section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
 
-In the previous section we saw that if each
+In the previous sections we saw that if each
 agent $i$ updates her opinion according to
-update rule~\ref{eq:fictitious_convergence}
+update rule~\ref{eq:fictitious_play}
 the resulting opinion vector $x(t)$ produced
 for an instance $I=(P,s,\alpha)$ converges
 to the unique equilibrium point $x^*$ and
-that ensure no-regret for the OCO problem 
+ensures no-regret for the OCO problem 
 with $F_{s_i,\alpha_i}$. In this section we 
 investigate whether we can establish exponential
 convergence while keeping the no-regret property
@@ -27,7 +27,8 @@ exponentially fast to $x^*$?
 %to the opinions that she observed, her $s_i$ and $\alpha_i$.
 
 \begin{definition}[opinion dependent update rule]\label{d:opinion_dependent_dynamics}
-An opinion dependent update rule $A$ is a sequence of functions $(A_t)_{t=0}^\infty$ where
+An opinion dependent update rule $A$ is a sequence of 
+functions $(A_t)_{t=0}^\infty$ where
 $A_t: [0,1]^{t+2}\mapsto [0,1]$.
 \end{definition}
 
@@ -56,60 +57,63 @@ An example of an opinion depedent update rule is
 \emph{opinion dependent dynamics} $x(t)$ whose convergence properties 
 to $x^*$ were studied in Section~\ref{s:fictitious_convergence}. 
 
-One first thing that seems questionable about the above class is that
-$x_i(t)$ does not depend on the indices of the neighbors that $i$ met. Another
-may be the fact that Definition~\ref{d:opinion_dependent_dynamics}
-implies that whenever two agents $i,j$ admit the same self confidence coefficient
-and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$) then they adopt the same update rule.
-The only reason that these case are excluded is only to simplify notation and our
-results extend trivially them (see Remark~\ref{r:lower_bound_no-regret}).
+% One thing that seems questionable about the above class is that
+% $x_i(t)$ does not depend on the indices of the neighbors that $i$ met. Another
+% may be the fact that Definition~\ref{d:opinion_dependent_dynamics}
+% implies that whenever two agents $i,j$ admit the same self confidence coefficient
+% and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$) then they adopt the same update rule.
+% The only reason that these case are excluded is only to simplify notation and our
+% results extend trivially to them (see Remark~\ref{r:lower_bound_no-regret}).
+
+% We are interested in lower bounds about the convergence rate of
+% \emph{opinion dependent dynamics} because these bounds also hold
+% for the convergence rate of the \emph{no-regret dynamics} for our repeated game.
+% Consider the following collection of no-regret algorithms $\mcal{A}$.
+% For each $(s_i,\alpha_i) \in [0,1]^2$ select a no-regret algorithm 
+% for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$.
+% For each instance $I=(P,s,\alpha)$, each agent $i$ selects
+% her opinion $x_i(t)$ according to $A_{s_i,\alpha_i}$, 
+% $x_i(t)=A_{s_i,\alpha_i}^t(x_{W_i^0},\ldots,x_{W_i^{t-1}})$.
+% Observe that the resulting no-regret dynamics $x_{\mcal{A}}(t)$
+% that collection $\mcal{A}$ produces is an opinion dependent dynamics, 
+% since we can define a sequence $A_t:[0,1]^{t+2} \mapsto [0,1]$ as
+% $A_t(b_0,\ldots,b_{t-1},s_i,\alpha_i)=A^t_{s,\alpha}(b_0,\ldots,b_{t-1})$.
+
+% Assume that each agent $i$ updates $x_i(t)$ according to a no-regret algorithm $A^i$
+% for the OCO problem where the adversary selects the functions
+% $(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$. By Definition~\ref{d:no-regret_algorithms},
+% we have that $x_i(t)= A^i_t(y_i(0),\ldots,y_i(t-1))$. Notice that
+% each agent $i$ selects a no-regret algorithm for a different OCO
+% problem defined by her $\alpha_i,s_i$. Obviously two agents $i,j$ with the same
+% self confidence coefficient and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$)
+% select the algorithms $A_i$ and $A_j$ that admit no-regret for the same OCO problem.
+% If we assume that in this case $A_i$,$A_j$ are the same then
+% the respective \emph{no-regret dynamics} $\{x(t)\}_{t=1}^\infty$
+% are \emph{opinion dependent} since \[x_i(t) = A_t(y_i(0),\ldots,y_i(t-1),\alpha_i,s_i)\]
+% where $A_t:\{0,1\}^{t+2} \mapsto [0,1]$. As already mentioned this assumption is removed
+% at the end of the section.
+
+
 
 We are interested in lower bounds about the convergence rate of
 \emph{opinion dependent dynamics} because these bounds also hold
 for the convergence rate of the \emph{no-regret dynamics} for our repeated game.
-Consider the following collection of no-regret algorithm $\mcal{A}$.
-For each $(s_i,\alpha_i) \in [0,1]^2$ select a no-regret algorithm 
-for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$.
-For each instance $I=(P,s,\alpha)$, each agent $i$ selects
-her opinion $x_i(t)$ according to $A_{s_i,\alpha_i}$, 
-$x_i(t)=A_{s_i,\alpha_i}^t(x_{W_i^0},\ldots,x_{W_i^{t-1}})$.
-Observe that the resulting no-regret dynamics $x_{\mcal{A}}(t)$
-that collection $\mcal{A}$, produces is an opinion dependent dynamics, 
-since we can define a sequence $A_t:[0,1]^{t+2} \mapsto [0,1]$ as
-$A_t(b_0,\ldots,b_{t-1},s_i,\alpha_i)=A^t_{s,\alpha}(b_0,\ldots,b_{t-1})$.
-
 Assume that each agent $i$ updates $x_i(t)$ according to a no-regret algorithm $A^i$
 for the OCO problem where the adversary selects the functions
-$(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$. By Definition~\ref{d:no-regret_algorithms},
-we have that $x_i(t)= A^i_t(y_i(0),\ldots,y_i(t-1))$. Notice that
+$(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$. By Definition~\ref{d:no_regret_algo},
+we have that $x_i(t)= A^i_t(b_0, \ldots, b_{t-1})$. Notice that
 each agent $i$ selects a no-regret algorithm for a different OCO
-problem defined by her $\alpha_i,s_i$. Obviously two agents $i,j$ with the same
-self confidence coefficient and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$)
-select the algorithms $A_i$ and $A_j$ that admit no-regret for the same OCO problem.
-If we assume that in this case $A_i$,$A_j$ are the same then
-the respective \emph{no-regret dynamics} $\{x(t)\}_{t=1}^\infty$
-are \emph{opinion dependent} since \[x_i(t) = A_t(y_i(0),\ldots,y_i(t-1),\alpha_i,s_i)\]
-where $A_t:\{0,1\}^{t+2} \mapsto [0,1]$. As already mentioned this assumption is removed
-at the end of the section.
+problem defined by her $\alpha_i,s_i$. 
+Also, $b_t$ is the neigboring opinion that $i$ learns at time $t$, 
+so $b_t = x_{W_i^t}(t)$.
+% Obviously two agents $i,j$ with the same
+% self confidence coefficient and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$)
+% select the algorithms $A_i$ and $A_j$ that admit no-regret for the same OCO problem.
+Hence, the respective \emph{no-regret dynamics} $\{x(t)\}_{t=1}^\infty$
+are \emph{opinion dependent} since 
+\[x_i(t) = A^i_t\lp(x_{W_i^0}(0),\ldots,x_{W_i^{t-1}}(t-1)\rp)\]
+where $A_t:\{0,1\}^{t+2} \mapsto [0,1]$. 
 
-
-
-We are interested in lower bounds about the convergence rate of
-\emph{opinion dependent dynamics} because these bounds also hold
-for the convergence rate of the \emph{no-regret dynamics} for our repeated game.
-Assume that each agent $i$ updates $x_i(t)$ according to a no-regret algorithm $A^i$
-for the OCO problem where the adversary selects the functions
-$(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$. By Definition~\ref{d:no-regret_algorithms},
-we have that $x_i(t)= A^i_t(y_i(0),\ldots,y_i(t-1))$. Notice that
-each agent $i$ selects a no-regret algorithm for a different OCO
-problem defined by her $\alpha_i,s_i$. Obviously two agents $i,j$ with the same
-self confidence coefficient and internal opinion ($\alpha_i=\alpha_j,s_i=s_j$)
-select the algorithms $A_i$ and $A_j$ that admit no-regret for the same OCO problem.
-If we assume that in this case $A_i$,$A_j$ are the same then
-the respective \emph{no-regret dynamics} $\{x(t)\}_{t=1}^\infty$
-are \emph{opinion dependent} since \[x_i(t) = A_t(y_i(0),\ldots,y_i(t-1),\alpha_i,s_i)\]
-where $A_t:\{0,1\}^{t+2} \mapsto [0,1]$. As already mentioned this assumption is removed
-at the end of the section.
 \repeattheorem{t:lower_bound}
 % \begin{theorem}
 %   Let $A$ be a sequence of functions with corresponding opinion dependent
@@ -239,13 +243,13 @@ of a Bernoulli random variable within additive error $\eps$.
 Another well-known result is that taking the average of the samples
 is the \emph{best} way to estimate the mean of a Bernoulli random variable.
 These results would indicate that the best possible rate of convergence
-for a \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
+for an \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
 However, there is some fine print in these results which does not allow us
 to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.
 
-Before presenting Theorem~\ref{t:estimation_lower_bound} we briefly discuss some
-fundamental results concerning sample complixity lower bounds for statistical estimation.
+Before presenting Lemma~\ref{l:estimation_lower_bound} we briefly discuss some
+fundamental results concerning sample complexity lower bounds for statistical estimation.
 Perhaps the oldest sample complexity lower bound for estimation problems
 is the well-known Cramer-Rao inequality.
 Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ such that $E_p[\theta_t]=p$ for
