@@ -7,13 +7,16 @@ the resulting opinion vector $x(t)$ produced
 for an instance $I=(P,s,\alpha)$ converges
 to the unique equilibrium point $x^*$ and
 ensures no-regret for the OCO problem 
-with $F_{s_i,\alpha_i}$. In this section we 
-investigate whether we can establish exponential
-convergence while keeping the no-regret property
-for the agents. 
-Assume that each agent $i$ updates $x_i(t)$ 
-according to a no-regret algorithm $A_{a_i,s_i}$.
-The answer to this question is negative, 
+with $F_{s_i,\alpha_i}$. In this section we investigate whether we
+can select
+for each $(s,\alpha) \in [0,1]^2$ a no-regret algorithm
+$A_{s,\alpha}$ for the OCO problem with 
+$\mcal{F}_{s,\alpha}$ such that if for each instance
+$I=(P,s,\alpha)$ each agent $i$ updates her 
+opinion according to $A_{s_i,\alpha_i}$,
+the resulting opinion vector $x(t)$ always converges 
+exponentially fast to $x^*$.
+We answer this question in the negative, 
 because such a selection of no-regret algorithms yields an
 opinion dependent update rule. Specifically, the function
 $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
