@@ -59,13 +59,14 @@ $x^*$ of the FJ-model. The reason for this definition
 was to measure the inefficiency of the limiting behavior
 of the FJ-model with respect to the total disagreement cost.
 They proved that Price of Anarchy is less than $9/8$
-in case $w_{ij}=w_{ji}$. Additionally, their work also introduced
+in case $w_{ij}=w_{ji}$. Additionally, their work introduces
 an alternative framework for opinion dynamics.
-Instead of defining update rules that model the
-way opinions evolve, agents are considered to repeatedly
+Instead of defining specific models that
+simulate how opinions evolve, agents can be considered to repeatedly
 play a suitable one shot game. This consideration is
 much more fruitful since it permits the agents to
-update their opinions in more abstract ways.
+update their opinions in more abstract ways than
+the update rule specified by the model.
 For example it would be reasonable to consider
 that in the above repeated game, agents instead of
 adopting \emph{best response}, they update their opinions according
@@ -83,12 +84,13 @@ may have several hundrends of friends and obviously
 she cannot learn all these opinions each day.
 This introduces some skeptism on how well the
 FJ-model resembles the opinion formation in such
-networks. As a result the following questions arise.
+networks. Our work is motivated by the following 
+questions.
 
 \begin{question}
 Can we find variants of the FJ-model that
 require less information exchange between the agents
-and share similar convergence properties?
+and converge to same equilibrium point?
 Can these models be justified as natural behavior for selfish
 agents under a game-theoretic solution concept?
 \end{question}
@@ -117,14 +119,14 @@ At each round $t$, the agents play the above one-shot game i.e.
 each agent $i$ selects an opinion $x_i(t)\in [0,1]$ and
 suffers a disagreement cost based on the opinion of the neighbor
 that she met. At the end of the round she is only informed about
-the opinion and the index of the neighbor that she met. Our work
+the opinion of the neighbor that she met. Our work
 deals with the following questions:
 \begin{question}
 Can the agents update their opinions according to the
-infomation that they receive such that
-$1$) the disagreement cost that they experience is in a
-sense minimized, $2)$ the opinion vector $x(t)$ convergences
-to the Nash equilibrium?
+limited infomation that they receive such that
+$1$) the total disagreement cost that they experience is in a
+sense minimized, $2)$ the produced opinion vector $x(t)$ convergences
+the equilibrium $x^*$?
 \end{question}
 
 \subsection{Contribution}
