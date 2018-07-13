@@ -93,13 +93,13 @@ In Section~\ref{app:s:cc_convergence} of the Appendix we give the detailed
 argument that leads to the Lemma~\ref{l:cc_convergence},
 showing that the convergence rate of update rule \ref{alg:cc_upper} is exponential.
 
-\begin{lemma}\label{l:cc_convergence}
+\begin{replemma}{l:cc_convergence}
   Let $x(t)$ be the dynamics corresponding
   to update rule \ref{alg:cc_upper}.
   We have
   \[
     \Exp{\norm{\infty}{x(t) - x^*}}
     \leq
-    2\exp \lp(- \rho (1-\rho) \min_{ij} p_{ij} \frac{\sqrt{t}}{4\ln(nt)} \rp)
+    2\exp \lp(- \rho  \min_{ij} p_{ij} \frac{\sqrt{t}}{4\ln(nt)} \rp)
   \]
-\end{lemma}
+\end{replemma}
