@@ -191,13 +191,23 @@ The reduction is formally stated and in Lemma~\ref{l:reduction}.
 \end{lemma}
 \begin{proof}
   We sketch here the main idea. For a full proof see Section~\ref{app:s:lower_bound}
-  of the Appendix.  For a given $p \in [0,1]$, we construct an instance $I_p$ such that
-  $x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
-  receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
-  This can be easily done using the directed star graph $K_{1,2}$.
-  The agent corresponding to the center node, $c$, has $\alpha_c = 1/2$ and
-  whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$,
-  as shown in Figure~\ref{fig:lb_instance}.
+  of the Appendix. We will employ the graph of Figure~\ref{fig:lb_instance}.
+  By straightforward computation, we get that the equilibrium point of
+  the graph is $x_c^* = q/3, x_1 = q/6+1/2, x_2 = q/6$. 
+  For a given $p \in [0,1]$, we construct an instance $I_q$ of 
+  Figure~\ref{fig:lb_instance} with $q = p$
+  and simulate the update rule for all three nodes at the same time.
+  For the center node, the choice of neighbor is given by the value
+  of the bernoulli random variable that the estimator takes
+  as input. Then, the value of the center node converges to $p/3$ with
+  rate $1/t^{1+c}$. 
+  % such that
+  % $x_c^*=p$ for an agent $c$. Moreover, agent $c$ must
+  % receive only values $1$ or $0$ with probability $p$ and $1-p$ respectively.
+  % This can be easily done using the directed star graph $K_{1,2}$.
+  % The agent corresponding to the center node, $c$, has $\alpha_c = 1/2$ and
+  % whereas the leaf nodes have $a_{1,2} = 1$, $s_1 = 0$, $s_2 = 1$,
+  % as shown in Figure~\ref{fig:lb_instance}.
   %
   \begin{figure}\
     \centering
@@ -208,22 +218,24 @@ The reduction is formally stated and in Lemma~\ref{l:reduction}.
         % \node (1) at (-4,0)[label=below:$a_1 \equal 1$][label=above:$s_1 \equal 0$]{1};
         % \node (2) at (4,0) [label=below:$a_2 \equal 1$][label=above:$s_2 \equal 1$]{2};
         \node (C) at (0,0) [label=below:$a_c \equal 1/2\comma s_c \equal 0$]{C};
-        \node (1) at (-4,0)[label=below:$a_1 \equal 1\comma s_1 \equal 0$]{1};
-        \node (2) at (4,0) [label=below:$a_2 \equal 1\comma s_2 \equal 1$]{2};
+        \node (1) at (-4,0)[label=below:$a_1 \equal 1/2\comma s_1 \equal 1$]{1};
+        \node (2) at (4,0) [label=below:$a_2 \equal 1/2\comma s_2 \equal 0$]{2};
       \end{scope}
 
       \begin{scope}[>={Stealth[black]},
         every node/.style={fill=white,circle},
         every edge/.style={draw=black}]
-        \path [-] (C) edge node {$p$} (1);
-        \path [-] (C) edge node {$1-p$} (2);
+        \path [->] (C) edge[bend right] node {$q$} (1);
+        \path [->] (C) edge[bend right] node {$1-q$} (2);
+        \path [->] (1) edge[bend right] node {$1$} (C);
+        \path [->] (2) edge[bend right] node {$1$} (C);
       \end{scope}
     \end{tikzpicture}
     \caption{The Lower Bound Instance} \label{fig:lb_instance}
   \end{figure}
   %
-  It follows that the estimator $\theta_t$ with $\theta_t^A = 2x_c^A(t)$
-  has error $E_p[|\theta_t^A-p|]=\frac{1}{2}\Expnew{I_p}{\norm{\infty}{x_A(t)-x^*}}$.
+  It follows that the estimator $\theta_t$ with $\theta_t^A = 3x_c^A(t)$
+  has error $E_p[|\theta_t^A-p|]=3\Expnew{I_p}{\norm{\infty}{x_A(t)-x^*}}$.
   Meaning that $\lim\limits_{t \rightarrow \infty}t^{1+c}E_p[|\theta_t^A -p|]=0$ for all
   $p \in [0,1]$.
 \end{proof}
