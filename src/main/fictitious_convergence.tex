@@ -1,4 +1,4 @@
-\section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
+\section{The Convergence Rate of FTL Dynamics}\label{s:fictitious_convergence}
 In this section that we prove that FTL dynamics
 converges to the unique equilibrium point $x^*$.
 Notice that for an instance $I=(P,s,\alpha)$, the opinion vector $x(t) \in [0,1]^n$
@@ -9,7 +9,7 @@ of the FTL dynamics (see \ref{alg:FTL_dynamics}) can be written equivalently as 
  \begin{equation}
 x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=0}^{t-1} x_{W_i^\tau}(\tau)}{t}+ \alpha_i s_i\end{equation}
 \end{itemize}
-where $W_i^\tau$ is the neighbor that $i$ met at round $t$. 
+where $W_i^\tau$ is the neighbor that $i$ met at round $t$.
 Since the opinion vector $x(t)$ is a random vector,
 our convergence metric is $\Expnew{}{\norm{\infty}{x(t) - x^*}}$
 where the expectation is taken over the random meeting of the agents.
@@ -29,8 +29,8 @@ and it is the main result of the section.
 %   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 % \end{theorem}
 %
-\noindent At first we present a high level idea of the proof. 
-Notice that the unique equilibrium point $x^* \in [0,1]^n$ of the 
+\noindent At first we present a high level idea of the proof.
+Notice that the unique equilibrium point $x^* \in [0,1]^n$ of the
 instance $I=(P,s,\alpha)$ satisfies the following equations
 for each agent $i \in V$,
 \[x_i^*= (1-\alpha_i)\sum_{j \in N_i}p_{ij}x_j^* + \alpha_is_i\]
@@ -43,19 +43,19 @@ can use the above equations to bound $|x_i(t)-x_i^*|$.
  &=& (1-\alpha_i)|\sum_{j \in N_i}\frac{\sum_{\tau=0}^{t-1} \1{W_i^\tau=j}x_j(\tau)}{t}-\sum_{j \in N_i} p_{ij}x_j^*|\\
  &\leq& (1-\alpha_i)\sum_{j \in N_i}|\frac{\sum_{\tau=0}^{t-1} \1{W_i^\tau=j}x_j(\tau)}{t}- p_{ij}x_j^*|
 \end{eqnarray*}
-Now assume that $|\frac{\sum_{\tau=0}^{t-1} \1{W_i^{\tau}=j}}{t}- p_{ij}| = 0$ 
-for all $t\geq 1$, then with simple algebraic manipulations 
-one can prove that $\norm{\infty}{x(t)-x^*} \leq e(t)$ where $e(t)$ 
+Now assume that $|\frac{\sum_{\tau=0}^{t-1} \1{W_i^{\tau}=j}}{t}- p_{ij}| = 0$
+for all $t\geq 1$, then with simple algebraic manipulations
+one can prove that $\norm{\infty}{x(t)-x^*} \leq e(t)$ where $e(t)$
 satisfies the recursive equation $e(t) = (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}$.
-It follows that $\norm{\infty}{x(t)-x^*} \leq 1/t^\rho$ 
+It follows that $\norm{\infty}{x(t)-x^*} \leq 1/t^\rho$
 meaning that $x(t)$ converges to $x^*$.
 Obviously the latter assumption does not hold,
 however since $W_i^{\tau}$ are independent random variables
 with $\Prob{W_i^\tau}=p_{ij}$,
-$|\frac{\sum_{\tau=0}^{t-1} \1{W_i^{\tau}=j}}{t} - p_{ij}|$ 
-tends to $0$ with probability $1$. 
+$|\frac{\sum_{\tau=0}^{t-1} \1{W_i^{\tau}=j}}{t} - p_{ij}|$
+tends to $0$ with probability $1$.
 In Lemma~\ref{l:recursive_equation} we use this fact
-to obtain a similar recursive relation for $e(t)$ 
+to obtain a similar recursive relation for $e(t)$
 and then in Lemma~\ref{l:recursion_upper_bound}
 we upper bound the solution of this recursive equation.
 \begin{lemma}\label{l:recursive_equation}
@@ -163,6 +163,6 @@ $\tau \leq t-1$. Then
 \end{replemma}
 \noindent The proof of Lemma~\ref{l:recursion_upper_bound}
 and Theorem~\ref{t:fictitious_convergence}
-can be found in the appendix. Theorem~\ref{t:fictitious_convergence} 
+can be found in the appendix. Theorem~\ref{t:fictitious_convergence}
 is proved by a direct application of Lemma~\ref{l:recursive_equation}
 and \ref{l:recursion_upper_bound}.
