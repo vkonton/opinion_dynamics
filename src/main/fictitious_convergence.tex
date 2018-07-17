@@ -1,18 +1,13 @@
 \section{Fictitious Play Convergence Rate}\label{s:fictitious_convergence}
-In this section that we prove if all agents select 
-their opinion according to update rule
-~(\ref{eq:fictitious_play}) then the produced dynamics 
-$x(t)$ converges to the unique equilibrium point $x^*$.
-For an instance $(P,s,\alpha)$ the opinion vector $x(t) \in [0,1]^n$
-produced by (\ref{eq:fictitious_play}) is defined as follows:
+In this section that we prove that FTL dynamics
+converges to the unique equilibrium point $x^*$.
+Notice that for an instance $I=(P,s,\alpha)$, the opinion vector $x(t) \in [0,1]^n$
+of the FTL dynamics (see \ref{alg:FTL_dynamics}) can be written equivalently as follows:
 \begin{itemize}
  \item Initially all agents adopt their internal opinion, $x_i(0)=s_i$
  \item At round $t \geq 1$, each agent $i$ updates her opinion as follows:
  \begin{equation}
-  x_i(t) =
-  \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}
-  (1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2 \tag{\ref{eq:fictitious_play}}
-\end{equation}
+x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=0}^{t-1} x_{W_i^\tau}(\tau)}{t}+ \alpha_i s_i\end{equation}
 \end{itemize}
 where $W_i^\tau$ is the neighbor that $i$ met at round $t$. 
 Since the opinion vector $x(t)$ is a random vector,
@@ -35,10 +30,6 @@ and it is the main result of the section.
 % \end{theorem}
 %
 \noindent At first we present a high level idea of the proof. 
-Update rule~(\ref{eq:fictitious_play}) can be written equivalently as:
-\[
-  x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=0}^{t-1} x_{W_i^\tau}(\tau)}{t}+ \alpha_i s_i
-\]
 Notice that the unique equilibrium point $x^* \in [0,1]^n$ of the 
 instance $I=(P,s,\alpha)$ satisfies the following equations
 for each agent $i \in V$,

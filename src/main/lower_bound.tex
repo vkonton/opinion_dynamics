@@ -1,4 +1,30 @@
 \section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
+In this section we prove that exponential convergence
+cannot be established for any \emph{opinion dependent dynamics}
+produced by an \emph{opinion dependent update rule}. The reason
+that this class of update rules is of particular interest is that
+it includes the dynamics produced by different no-regret OCO algorithms.
+More precisely, consider that for any instance $I=(P,s,\alpha)$, each
+agent $i$ selects her selects her opinion $x_i(t)$ according
+to Zinkevic's online learning algorithm \cite{Z03}, producing 
+an opinion vector $x(t)$. This dynamical process can be fairly 
+considered natural since Zinkevic's algorithm ensures no-regret 
+for any OCO problem with $\mcal{F}_{\alpha_i,s_i}$ and $\mcal{K}=[0,1]$.
+Our result states that there exists an instance $I=(P,s,\alpha)$
+such that the produced vector $x(t)$ does not converge to $x^*$ faster than 
+polynomially. 
+
+The reason is fairly simple. 
+
+
+that if agents update their opinions
+using Zinkevic's algorithm then by specifying the values $\alpha_i,s_i$ 
+and the opinions that agent $i$ observed until round $t-1$, 
+one can deterministically derive the opinion $x_i(t)$ without knowing anything 
+else about the instance $I=(P,s,\alpha)$. Meaning that the above dynamical
+process can be produced by suitable \emph{opinion dependent update rule}. 
+
+
 
 In the previous sections we saw that if each
 agent $i$ updates her opinion according to
@@ -28,23 +54,6 @@ as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
 %As already mentioned, this class is called \emph{opinion dependent}
 %and means that each agent $i$ updates her opinion according
 %to the opinions that she observed, her $s_i$ and $\alpha_i$.
-
-\begin{definition}[opinion dependent update rule]\label{d:opinion_dependent_dynamics}
-An opinion dependent update rule $A$ is a sequence of 
-functions $(A_t)_{t=0}^\infty$ where
-$A_t: [0,1]^{t+2}\mapsto [0,1]$.
-\end{definition}
-
-\begin{definition}[opinion dependent Dynamics]\label{d:opinion_dependent_dynamics}
-Let an opinion depedent update rule $A$. For a given instance $I=(P,s,\alpha)$
-the rule $A$ produces an opinion depedent dynamics $x_A(t)$ defined as follows:
-\begin{itemize}
- \item Initially each agent $i$ has opinion $x_i^A(0)=A_0(s_i,\alpha_i)$
- \item At each round $t\geq 1$, each agent $i$ updates her opinion as follows:
- \[x_i^A(t)=A_t(x_{W_i^0}(0),\dots,x_{W_i^{t-1}}(t-1),\alpha_i,s_i)\]
-where $W_i^t$ is the neighbors that $i$ meets at round $t$.
-\end{itemize}
-\end{definition}
 % By Definition~\ref{d:OCO_algo} any collection of no-regret algorithms
 % $A_{s,\alpha}$ for all $s,\alpha \in [0,1]^2$, can be encoded as opinion dependent
 % update rule ($A_t(b_0,\ldots,b_{t-1},s,\alpha)=A_{s,\alpha}^t(b_0,\dots,b_{t-1})$).

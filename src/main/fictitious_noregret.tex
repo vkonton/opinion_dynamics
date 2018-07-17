@@ -1,13 +1,12 @@
 \section{Fictitious Play is no-regret}\label{s:fictitious_noregret}
 
-In this section we explain why \emph{fictitious play} 
-is a rational behavioral assumption in
-the repeated version of the opinion formation 
-game (Definition~\ref{d:random_payoff_game}). 
-Based on this game we consider an appropriate 
-\emph{Online Convex Optimization} problem. This 
-problem can be viewed
-as the following game played between an 
+In this section we explain why the 
+update rule~\ref{eq:fictitious_play} (\enquote{Follow the Leader}) ensures no-regret
+to the agents that play the repeated version of the one shot 
+game of Definition~\ref{d:random_game}. 
+Based on the disagreement cost that each agent experiences, 
+we consider an appropriate \emph{Online Convex Optimization} problem. 
+This problem can be viewed as the following \enquote{game} played between an 
 adversary and a player. \emph{At round }$t\geq 0$,
 \begin{enumerate}
   \item \emph{the player selects a value }$x_t \in [0,1]$.
@@ -17,11 +16,11 @@ adversary and a player. \emph{At round }$t\geq 0$,
 where $\alpha,s$ are constants in $[0,1]$. The goal of 
 the player is to pick $x_t$ based on the history
 $(b_0,\ldots,b_{t-1})$ in a way that minimizes her total cost. 
-Generally, different OCO problems can be defined by the set of functions
-$\mcal{F}$ that the adversary chooses from and the feasibility 
+Generally, different OCO problems can be defined by a set of functions
+$\mcal{F}$ that the adversary chooses from and a feasibility 
 set $\mcal{K}$ from which the player picks her value (see \cite{Haz16}
 for an introduction to the OCO framework).
-In our case $\mcal{K}=[0,1]$ and $\mcal{F}_{\alpha,s} = \{(1-\alpha)(x-b)^2 + 
+In our case the feasibility set is $\mcal{K}=[0,1]$ and the set of functions is $\mcal{F}_{\alpha,s} = \{(1-\alpha)(x-b)^2 + 
 \alpha(x -s)^2,~\text{for all }b \in [0,1]\}$.
 As a result, each selection of the 
 constants $s,\alpha$ lead to a different OCO problem.
@@ -41,9 +40,9 @@ Informally speaking if the player selects the value
 $x_t$ according to a \emph{no-regret algorithm} then
 she does not regret for not playing any fixed value no
 matter what the choices of the adversary are.
-We prove that \emph{fictitious play} i.e. 
+We prove that the \enquote{Follow the Leader} i.e. 
 $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
-is a no-regret algorithm for all OCO problems $\mcal{F}_{\alpha,s}$.
+is a no-regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
 This is formally stated in Theorem~\ref{t:fictitious_noregret} 
 and is the main result of this section.
 \repeattheorem{t:fictitious_noregret}
@@ -96,12 +95,12 @@ then for all $t$,
   Inductuvely, we prove that $\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$.
 \end{proof}
 
-Now we can understand reason why \emph{fictitious play}
+Now we can understand reason why \enquote{Follow the Leader}
 admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
 of the best fixed strategy, we can compare the cost incurred by $x_t$ with
 that of $y_t$.  However, the functions in $\mcal{F}_{\alpha,s}$ are 
 Lipschitz-continuous and more specifically quadratic.
-These functions are all "similar" to each other, so the extra 
+These functions are all similar to each other, so the extra 
 term $f(x_t,b_t)$ that $y_t$ takes into account doesn't change 
 dramatically the minimum point of the sum. Thus, for each $t$ the 
 numbers $x_t$ and $y_t$ are quite close and as a result the 
