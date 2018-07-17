@@ -15,17 +15,17 @@ $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
 For a dynamics in the above setting to be considered as natural it must be
 simple, converge to the equilibrium $x^*$, and perhaps most importantly, it
 must be a rational choice for selfish agents.  In this work we show that
-an intuitive game play, \emph{fictitious play}, is a natural dynamics for
-the above game.  We prove that, after $O(1/\eps^2)$ rounds, the opinion vector
+an intuitive game play, is a natural dynamics for the above game.
+We prove that, after $O(1/\eps^2)$ rounds, the opinion vector
 is within error $\eps$  of the equilibrium. Moreover, to show that selfish
-agents would choose to update their opinions according to fictitious play, we
-show that it has no-regret.
+agents would choose to update their opinions according to our update rule,
+we show that it has no-regret.
 
 
 The classical Friedkin-Johsen dynamics converges to the equilibrium within
 error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
-information setting, fictitious play needs $\widetilde{O}(1/\eps^2)$ rounds.
-We ask whether there exists a natural dynamics for our problem
+information setting, our update rule needs $\widetilde{O}(1/\eps^2)$ rounds.
+We ask whether there exists a different natural dynamics for our problem
 with better rate of convergence.  We answer this question in the negative
 by showing that dynamics based on no-regret algorithms cannot converge with
 less than $\mrm{poly}(1/\eps)$ rounds.

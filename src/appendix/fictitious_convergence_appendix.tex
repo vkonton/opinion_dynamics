@@ -1,4 +1,4 @@
-\section{Fictitious Play Convergence Rate}\label{app:s:fictitious_convergence}
+\section{The Convergence Rate of FTL Dynamics}\label{app:s:fictitious_convergence}
 We give here the proof of the following technical lemma that we used to derive
 an upper bound on the rate of convergence of the fictitious play dynamics in
 Section~\ref{s:fictitious_convergence}.  We restate Lemma~\ref{l:recursion_upper_bound} for
@@ -125,11 +125,11 @@ completeness.
 \begin{proof}
 By Lemma~\ref{l:recursive_equation} we have that for all $t\geq 1$ and $p \in [0,1]$,
 \[\Prob{\norm{\infty}{x(t)-x^*} \leq e_p(t)} \geq 1-p\]
-where $e_p(t)$ is the solution of the recursion, $e_p(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e_p(\tau)}{t}$ with 
-$\delta(t)=\sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$. Setting $p=\frac{1}{12\sqrt{t}}$ we have that  
+where $e_p(t)$ is the solution of the recursion, $e_p(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e_p(\tau)}{t}$ with
+$\delta(t)=\sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$. Setting $p=\frac{1}{12\sqrt{t}}$ we have that
 \[\Prob{\norm{\infty}{x(t)-x^*} \leq e(t)} \geq 1-\frac{1}{12\sqrt{t}}\]
-where $e(t)$ is the solution of the recursion $e(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e_p(\tau)}{t}$ with 
-$\delta(t)=\sqrt{\frac{\log(2\pi^2 n t^{2.5})}{t}}$. Since $2\pi^2 \geq e^{2.5}$, Lemma~\ref{l:recursion_upper_bound} applies and 
+where $e(t)$ is the solution of the recursion $e(t) =\delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e_p(\tau)}{t}$ with
+$\delta(t)=\sqrt{\frac{\log(2\pi^2 n t^{2.5})}{t}}$. Since $2\pi^2 \geq e^{2.5}$, Lemma~\ref{l:recursion_upper_bound} applies and
 $e(t)\leq C\sqrt{\log n}\frac{\log t^{3/2}}{t^{\min(\rho,1/2)}}$ for some universal constant $C$. Finally,
 \[\Expnew{}{\norm{\infty}{x(t) - x^*}} \leq \frac{1}{12\sqrt{t}} + (1-\frac{1}{12\sqrt{t}})C\sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(\rho,1/2)}}
 \leq (C+\frac{1}{12})\sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(\rho,1/2)}}\]
