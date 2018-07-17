@@ -17,12 +17,11 @@ information collected from the agent social neighborhoods.
 
 Our work builds on the influential model for opinion formation
 proposed by Friedkin and Johnsen \cite{FJ90}.
-The FJ-model is a variation on the DeGroot model 
+The FJ-model is a variation on the DeGroot model
 that captures the fact consensus on the opinions
-of a social group is not generally reached.  
+of a social group is not generally reached.
 According to FJ-model there exists a set of $n$ agents.
-Each agent $i$ holds an
-internal opinion $s_i\in [0,1]$, which is private and
+Each agent $i$ holds an internal opinion $s_i\in [0,1]$, which is private and
 invariant over time and a public opinion $x_i \in [0,1]$
 Initially, agents start with their internal opinion and at
 each round $t\geq1$, update their public opinion
@@ -36,22 +35,22 @@ their social neighbors and their internal opinion, i.e.
 %
 where the weights $w_{ij}$ quantify the influence between
 the agents and $w_{ii}$ the self confidence of the agents
-towards their internal belief. 
+towards their internal belief.
 
 The FJ-model is one of most influential models for opinion formation.
 Its has a very simple update rule, consisting it a plausible choice
-for modeling natural behavior and 
-its basic assumptions are aligned with empirical 
+for modeling natural behavior and
+its basic assumptions are aligned with empirical
 findings on the way political orientation is formed \cite{AFH05,K47}.
-At the same time, it admits a unique equilibrium point 
+At the same time, it admits a unique equilibrium point
 $x^* \in [0,1]^n$ to which it converges exponentially fast \cite{GS14}.
 
 The FJ-model has also been studied under a game theoretic
 view point. Bindel et al. considered its update rule
-as the minimizer of a quadradic disagreement cost function
+as the minimizer of a quadratic disagreement cost function
 and based on it they defined the following one shot
 opinion formation game \cite{BKO11}. The strategy of each agent $i$ is
-her public opinion $x_i$, incuring her a
+her public opinion $x_i$, incurring her a
 disagreement cost
 %
 \begin{equation}\label{eq:BKO_cost}
@@ -59,22 +58,22 @@ disagreement cost
   \sum_{j \neq i}w_{ij} (x_i-x_j)^2 + w_{ii}(x_i-s_i)^2
 \end{equation}
 %
-Note that the the FJ-model is the \emph{simultaneous best response dynamics} 
+Note that the FJ-model is the \emph{simultaneous best response dynamics}
 in the repeated version of this one shot game. In \cite{BKO11}
-they quantified the inefficiency of the equilibrium $x^*$ with 
-respect to the total disagreement cost. Namely, the Price of Anarchy 
+they quantified the inefficiency of the equilibrium $x^*$ with
+respect to the total disagreement cost. Namely, the Price of Anarchy
 is less than $9/8$ in case $w_{ij}=w_{ji}$.
 We remark that their work also introduced an alternative
 framework for studying the dynamics of opinions.
 Instead of modeling the way opinions evolve
 by precise dynamical processes, agents can be considered to repeatedly
-play a suitable one shot opinion formation game and update their 
-opinions so as to minimize their individual disagreement cost. 
-This framework is much more fruitful since 
-different angles of the opinion formation process can be easily 
-captured by suitable one shot games e.g. in \cite{BGM13,EFHS17} 
+play a suitable one shot opinion formation game and update their
+opinions so as to minimize their individual disagreement cost.
+This framework is much more fruitful since
+different angles of the opinion formation process can be easily
+captured by suitable one shot games e.g. in \cite{BGM13,EFHS17}
 variants of the above opinion formation game are introduced.
-This framework also permits that the agents 
+This framework also permits that the agents
 update their opinions in more abstract ways than
 a specific update rule of a precise dynamical process.
 For example in the above repeated game, agents instead of
@@ -83,53 +82,44 @@ to a \emph{no-regret} learning algorithm.
 
 \subsection{Motivation}
 
-As already mentioned FJ-model is one of the most 
-well accepted models. The equilibrium point $x^*$ is 
-generally considered as a good estimation about the 
-opinions formed in a social network and many recent 
-algorithmic problems concerning the influence of opinions 
-(for product advertising, influencing political views e.t.c.) 
-are defined with respect to it \cite{GTT13,AKPT18}. 
-Our work is motivated by the fact that the FJ-model
-implies a large amount of information exchange
-between the agents. At each round its update rule requires 
-that every agent learns all the opinions of her social neighbors.
-In todays's large social networks each user
-may have several hundrends of friends and obviously
-she cannot learn all these opinions each day.
-In such enviroments it is far more reasonable to assume
-that individuals randomly meet a small subset of their 
-acquitances and these are the only opinions that the learn.
-Such information exchange constraints consist the FJ-model
-unsuitable for modeling the opinion formation process
-in such large networks. The latter introduces some skeptisism 
-on how well the equilibrium point $x^*$ resembles the 
-limiting behavior of the opinions. 
-Our work is motivated by the following 
-questions.
-
-\begin{question}
-Does the equilibrium point $x^*$ tell anything about 
-the final opinions in large social networks?
-Are there simple update rules that require limited information
-exchange and lead the opinions to $x^*$? Can these update rules be 
-justified as natural behavior for selfish
+As already mentioned FJ-model is one of the most influential models in opinion
+dynamics. The equilibrium point $x^*$ is generally considered to be a good
+estimation of the opinions formed in a social network and many recent algorithmic
+problems concerning the influence of opinions (for product advertising,
+influencing political views etc.) are defined with respect to it
+\cite{GTT13,AKPT18}.
+Our work is motivated by the fact that the FJ-model assumes a large amount of
+information exchange between the agents. At each round its update rule requires
+that every agent learns all the opinions of her social neighbors.  In today's
+large social networks where users usually have several hundreds of friends it
+is unlikely that they can learn the opinions of all their social neighbors each
+day.
+In such environments it is far more reasonable to assume that individuals randomly
+meet a small subset of their acquaintances and these are the only opinions that
+they learn.  Such information exchange constraints consist the FJ-model
+unsuitable for modeling the opinion formation process in such large networks.
+We see shortly that the equilibrium $x^*$ of the FJ-model is a reasonable
+estimate of the final opinions in our limited information exchange model.
+Thus, in this work we ask the following.
+\begin{question}\label{q:motivation1}
+Are there simple update rules requiring limited information
+exchange and leading the opinions to $x^*$? Perhaps more importantly:
+can these update rules be justified as natural behavior for selfish
 agents under a game-theoretic solution concept?
 \end{question}
 
-To model the fact that in large networks, agents 
-meet a small random subset of their friends each day, 
-we consider an imperfect-information version of the 
-opinion formation game defined in \cite{BKO11}. In equation~(\ref{eq:BKO_cost}) the 
-coefficient $w_{ij}$ measures the influence that $j$ poses on $i$. 
+To model the fact that in large networks, agents meet a small random subset of
+their friends each day, we consider an imperfect-information variant of the
+opinion formation game defined in \cite{BKO11}. In equation~(\ref{eq:BKO_cost})
+the coefficient $w_{ij}$ measures the influence that $j$ poses on $i$.
 Following the common belief that \enquote{we are influenced more by
-those we interact more often}, $w_{ij}$ can be interpreted as 
-a measure on how frequently $i$ meets $j$. In our  imperfect-infomation
-version, each agent $i$ randomly meets an agent $j$ 
-(with respect to her weights) and experiences disagreement cost
-based on the distance of their opinions and on how susceptible is $i$
-on her internal opinion. More formally, we consider the
+those we interact more often}, $w_{ij}$ can be interpreted as
+a measure on how frequently $i$ meets $j$. In our imperfect-information
+variant, each agent $i$ randomly meets an agent $j$ (with respect to her weights)
+and experiences disagreement cost based on the distance of their opinions and on
+how susceptible is $i$ on her internal opinion. More formally, we consider the
 following one shot game.
+%
 \begin{definition}\label{d:random_game}
   For a given opinion vector $x \in [0,1]^n$, the disagreement cost of agent $i$
   is the random variable $C_i(x_i,x_{-i})$ defined as follows:
@@ -140,32 +130,31 @@ following one shot game.
       where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$
   \end{itemize}
 \end{definition}
-
-\noindent The main difference of the original opinion formation game in \cite{BKO11} 
+%
+The main difference of the original opinion formation game in \cite{BKO11}
 and our variant is that in the first case an opinion vector $x\in [0,1]^n$ defines
 \emph{deterministically} the cost $C_i(x)$ of each agent $i$,
 whereas in the second it defines a probability distribution on the cost
-$C_i(x)$ that $i$ suffers. Notice that the expected 
+$C_i(x)$ that $i$ suffers. Notice that the expected
 disagreement cost of each agent $i$ (scaled by the constant $\sum_{j\neq i}w_{ij}+w_{ii}$)
 is the same as the disagreement cost defined in equation~(\ref{eq:BKO_cost}).
 As a result, the Nash equilibrium with respect to the expected cost of the agents,
 is the equilibrium point $x^*$.
 
-In order to model the opinion formation process in limited information 
-exchange enviroments, we consider that the agents to be engaged in the 
-above one-shot game. At round $t$, each agent $i$ selects an opinion 
-$x_i(t)$ and suffers a disagreement cost based on the opinion 
-of the neighbor that she randomly met. At the end of the round she is 
-informed only about the opinion of this neighbor and may use this infomation
+In order to model the opinion formation process in limited information
+exchange environments, we consider that the agents to be engaged in the
+above one-shot game. At round $t$, each agent $i$ selects an opinion
+$x_i(t)$ and suffers a disagreement cost based on the opinion
+of the neighbor that she randomly met. At the end of the round she is
+informed only about the opinion of this neighbor and may use this information
 to update her opinion. The reduction in information exchange is evident:
 At each round each agent learns the opinion of \emph{just one} of her neighbors.
-Our work deals with the following questions:
-\begin{question}
+Question~\ref{q:motivation1} now takes the following more concrete form.
+\begin{question}\label{q:motivation2}
 Can the agents update their opinions according to the
-limited infomation that they receive such that
-$1$) the total disagreement cost that they experience is in a
-sense minimized, $2)$ the produced opinion vector $x(t)$ convergences
-fast to the equilibrium $x^*$?
+limited information that they receive such that the produced opinion vector
+$x(t)$ convergences fast to the equilibrium $x^*$ and the total disagreement cost
+that they experience is minimal?
 \end{question}
 
 \subsection{Contribution}
@@ -178,43 +167,43 @@ she experienced until $t-1$. It also admits a very simple form,
 it is just the time average of the opinions that the agent observes.
 In section~\ref{s:fictitious_convergence},
 we bound its convergence time and we show that in order
-to acheive $\eps$ distance from $x^*$, poly($1/\eps$) rounds
+to achieve $\eps$ distance from $x^*$, poly($1/\eps$) rounds
 are needed. In section~\ref{s:fictitious_noregret},
 we show that this rule ensures \emph{no-regret} to any agent
 that adopts it. Namely, the average disagreement cost (that
 the agent experiences) per round approaches that
 of expressing the best opinion in hindsight. The latter
 makes our algorithm a natural behavioral assumption for
-agents that selfishly want to minize their incured disagreement cost.
-Our results imply that even if agents are subjected to  
-information exchange constraints, there exists natural 
-dynamics that converge to equilibrium $x^*$, consisting it 
+agents that selfishly want to minimize their incurred disagreement cost.
+Our results imply that even if agents are subjected to
+information exchange constraints, there exists natural
+dynamics that converge to equilibrium $x^*$, consisting it
 a robust choice for modeling the limiting behavior of the opinions.
 
 In section~\ref{s:lower_bound}, we show
 that for any update rule that ensures \emph{no-regret}
 to the agents, the resulting opinion vector $x(t)$
-cannot converge to $x^*$ faster than polynomially. 
+cannot converge to $x^*$ faster than polynomially.
 We use an information theoretic argument to prove
 the latter for a larger class of update rules,
 \emph{opinion dependent update rules}. This class includes
 all the update rules that only depend on the observed
-opinions. Interestingly polynomial convergence is not a 
+opinions. Interestingly polynomial convergence is not a
 generic property our limited information exchange setting.
-In Section~\ref{s:cc_convergence}, we present an update rule 
+In Section~\ref{s:cc_convergence}, we present an update rule
 that depends on the observed opinions but also on the weights
 $w_{ij}$ and converges exponentially fast to $x^*$. Our results
-provide a clear and intuitive characterization on the update 
-rules that can acheive exponential convergence and serve as 
+provide a clear and intuitive characterization on the update
+rules that can achieve exponential convergence and serve as
 an \enquote{algorithmic guide} for future limited information exchange
 variants of the FJ-model. Moreover they indicate the fundamental reason that
 the FJ-model converges exponential fast and this has little
-to do with the \enquote{large} information exchange 
-that it requires and much more to do with the fact that 
+to do with the \enquote{large} information exchange
+that it requires and much more to do with the fact that
 the it uses the values of the weights $w_{ij}$.
 
 \subsection{Related Work}
-Apart from the forementioned results there exists a large amount
+Apart from the aforementioned results there exists a large amount
 of literature concerning the FJ-model.
 Many recent works \cite{BGM13,CKO13,BFM16,EFHS17} bound the
 inefficiency of equilibrium in variants of opinion formation game
@@ -258,12 +247,8 @@ In a subsequent work \cite{KPT11}, the same authors consider the
 same problem in a \emph{limited information setting} (\enquote{bulletin board model})
 in which each agent learns the load of just the machine
 that served him. In \cite{HCM17,MS17} they examine the convergence
-properties of online learnig algorithms in case the payoffs oberved
+properties of online learning algorithms in case the payoffs observed
 by the agents are contaminated with some random noise.
-
-
-
-
 
 % As is it also mentioned in \cite{CHM17} this stronger notion
 % of convergence cannot be derived from the Coarse Correlated convergence
