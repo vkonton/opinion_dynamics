@@ -1,40 +1,4 @@
 \section{Our Results and Techniques}
-%We now introduce the necessary notions to present our results in detail.
-%We start with some remarks on our limited information opinion formation game
-%defined in Definition~\ref{d:random_game}.
-%In the original opinion formation game an opinion vector $x\in [0,1]^n$ defines
-%\emph{deterministically} the cost $C_i(x_i,x_{-i})$ of each agent $i$,
-%whereas in our variant it defines a probability distribution on the cost
-%$C_i(x_i,x_{-i})$ that $i$ suffers.
-%The cost $C_i(x_i,x_{-i})$ in (\ref{eq:BKO_cost}) can be written equivalently
-%\begin{equation}\label{eq:BKO11_cost_equivalent}
-%  C_i(x_i,x_{-i}) =
-%  W_i\lp( (1-\alpha_i)\sum_{j \in N_i} p_{ij}(x_i-x_j)^2
-%  + \alpha_i(x_i-s_i)^2\rp),
-%\end{equation}
-%where $W_i=\sum_{j\in N_i}w_{ij} + w_i$ and
-%$\alpha_i = w_i/(\sum_{j} w_{ij} + w_i)$ are positive constants independent of
-%the opinion vector $x$. 
-%The coefficient $\alpha_i$ measures the reluctance of agent
-%$i$ to adopt an opinion other than $s_i$ and since $\sum_{j \in N_i}p_{ij}=1$,
-%the parameter $p_{ij}$ can be seen as the \emph{real} influence that $j$ poses on $i$.
-%In our repeated version of the limited information game of Definition~\ref{d:random_game},
-%$p_{ij}$ is the frequency that $i$ meets $j$, meaning that the influence that
-%$j$ poses on $i$ can also be interpreted as a measure
-%of how often they meet. The latter aligns with the common belief
-%that we are influenced more by those we interact more often.
-%Equation (\ref{eq:BKO11_cost_equivalent}) also helps to establish the existence
-%of NE for the game of Definition~\ref{d:random_game}.
-%In our case, the notion of NE extends with respect to the expected cost of each
-%agent. Namely, $x^* \in [0,1]$ is a NE if and only if
-%$\Exp{C(x_i^*, x_{-i}^*)} \leq \Exp{C(x_i, x_{-i}^*)}$
-%for each agent $i$.
-%Since
-%$\Expnew{}{C_i(x_i,x_{-i})}=
-%(1-\alpha_i) \sum_{j \in N_i}p_{ij}(x_i-x_j)^2 + \alpha_i(x_i-s_i)^2 $,
-%it follows from (\ref{eq:BKO11_cost_equivalent}) that the
-%opinion formation game with random payoffs has the same equilibrium $x^*$ as
-%the original opinion formation game.
 
 For simplicity we adopt the following notation for
 an instance of the game of Definition~\ref{d:random_game}.
@@ -52,35 +16,32 @@ an instance of the game of Definition~\ref{d:random_game}.
 %
 %We use the matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$
 %if $j \in N_i$ and $0$ otherwise.
-We remind that $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij})$ and 
+We remind that $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij})$ and
 $\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})$. The coefficient
 $\alpha_i \in (0,1]$ since by the definition of FJ-model $w_{ii}>0$
 and measures the reluctance of agent $i$ to adopt opinion other
-than $s_i$. Note that a given instance $I=(P,s,\alpha)$ also 
+than $s_i$. Note that a given instance $I=(P,s,\alpha)$ also
 defines an instance of the FJ-model and we denote as $x^* \in [0,1]^n$
 its equilibrium point. We remind that $x^*$ is also the Nash equilibrium
 of one shot game of Definition~\ref{d:random_game} defined by instance $I=(P,s,\alpha)$.
 Another parameter of an instance $I=(P,s,\alpha)$ that we often use is
-$\rho=\min_{i \in V}\alpha_i$. Throughout the paper we consider that 
+$\rho=\min_{i \in V}\alpha_i$. Throughout the paper we consider that
 the agents repeatedly play the one shot game of Definition~\ref{d:random_game}.
 We denote as $W_i^t$ the neighbor that agent $i$ met
-at round $t$, which is a random variable whose 
-probability distribution is determined by the 
+at round $t$, which is a random variable whose
+probability distribution is determined by the
 instance $I=(P,s,\alpha)$ of the game, $\Prob{W_i^t}=p_{ij}$.
-
-
-
 
 % If $N_i \neq \emptyset$ then $\sum_{j \in N_i}p_{ij}=1$.
 % To properly define our game, we remark that if $N_i=\emptyset$ then
 % $\alpha_i=1,\sum_{j=1}^n p_{ij}=0$ and agent $i$ suffers cost $(x_i-s_i)^2$.
 %Abusing notation we will sometimes refer to the graph $G$.
 %Another parameter of an instance $I=(P,s,\alpha)$ that we often use is
-%$\rho=\min_{i \in V}\alpha_i$. Throughout the paper we consider that the agents repeatedly 
+%$\rho=\min_{i \in V}\alpha_i$. Throughout the paper we consider that the agents repeatedly
 %play the one shot game of Definition~\ref{d:random_game}.
 %We denote as $W_i^t$ the neighbor that agent $i$ met
-%at round $t$, which is a random variable whose 
-%probability distribution is determined by the 
+%at round $t$, which is a random variable whose
+%probability distribution is determined by the
 %instance $I=(P,s,\alpha)$ of the game, $\Prob{W_i^t}=p_{ij}$.
 
 
@@ -147,7 +108,7 @@ where the adversary chooses a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(
 at each round $t$. In Theorem~\ref{t:fictitious_noregret}
 we prove that \enquote{Follow the Leader} is a no-regret algorithm
 for the above OCO problem. We remark that this does not hold,
-if the adversary can pick functions from a different class 
+if the adversary can pick functions from a different class
 (see e.g. chapter 5 in \cite{Haz16}).
 
 \begin{reptheorem}{t:fictitious_noregret}
@@ -164,23 +125,23 @@ if the adversary can pick functions from a different class
 \end{reptheorem}
 
 On the positive side, the FTL dynamics is a simple and natural
-stochastic process that ensures convergence to $x^*$ while 
+stochastic process that ensures convergence to $x^*$ while
 vastly reducing the information exchange between the agents
 per round; it only requires each agent to learn the opinion
-of just one neighbor. In terms of total communication exchange 
-needed to get within distance $\eps$ of the equilibrium $x^*$, 
-the FTL dynamics requires $\widetilde{O}(n)$ communication 
+of just one neighbor. In terms of total communication exchange
+needed to get within distance $\eps$ of the equilibrium $x^*$,
+the FTL dynamics requires $\widetilde{O}(n)$ communication
 exchange while the FJ model needs $\bigOh{|E|}$.
-%Of course for this difference 
-%to be significant we need each agent to have at least 
+%Of course for this difference
+%to be significant we need each agent to have at least
 %$O(\log n)$ friend which not unusual in today's large social networks.
 % A large social network like Facebook has approximately $2$ billion users
 % and each user has usually more that $100$ friends which is far more
 % than $\log(2\ 10^9)$.
-On the negative side, its convergence rate  
-is outperformed by the rate of FJ model. 
-For a fixed instance $I=(P,s,\alpha)$, the 
-FTL dynamics converges with rate 
+On the negative side, its convergence rate
+is outperformed by the rate of FJ model.
+For a fixed instance $I=(P,s,\alpha)$, the
+FTL dynamics converges with rate
 $\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$ while FJ-model
 converges with rate $O(e^{-\rho t})$ \cite{GS14}.
 As a result the following question arises
@@ -199,24 +160,24 @@ We call such update rules \enquote{\emph{opinion dependent}}
 and the produced dynamics \emph{opinion dependent dynamics}.
 
 \begin{definition}[opinion dependent update rule]\label{d:opinion_dependent_dynamics}
-An opinion dependent update rule $A$ is a sequence of 
+An opinion dependent update rule $A$ is a sequence of
 functions $(A_t)_{t=0}^\infty$ where
 $A_t: [0,1]^{t+2}\mapsto [0,1]$.
 \end{definition}
 
 \begin{definition}[opinion dependent dynamics]\label{d:opinion_dependent_dynamics}
-Let an opinion depedent update rule $A$. For a given instance $I=(P,s,\alpha)$
+Let an opinion dependent update rule $A$. For a given instance $I=(P,s,\alpha)$
 the rule $A$ produces an opinion depedent dynamics $x_A(t)$ defined as follows:
 \begin{itemize}
  \item Initially each agent $i$ selects her opinion $x_i^A(0)=A_0(s_i,\alpha_i)$
- \item At each round $t\geq 1$, each agent $i$ selects her opinion as follows:
- \[x_i^A(t)=A_t(x_{W_i^0}(0),\dots,x_{W_i^{t-1}}(t-1),\alpha_i,s_i)\]
+ \item At each round $t\geq 1$, each agent $i$ selects her opinion as:
+   \(x_i^A(t)=A_t(x_{W_i^0}(0),\dots,x_{W_i^{t-1}}(t-1),\alpha_i,s_i)\),
 where $W_i^t$ is the neighbors that $i$ meets at round $t$.
 \end{itemize}
 \end{definition}
 
 Note that FTL dynamics is an opinion dependent dynamics
-since updare rule~\ref{eq:fictitious_play} can 
+since update rule~\ref{eq:fictitious_play} can
 be written equivalently, $x_i(0)=s_i$ and $x_i(t)=(1-\alpha_i)\sum_{\tau=0}^{t-1}x_{W_i^\tau}(\tau)/t + \alpha_i s_i$.
 In Theorem~\ref{t:lower_bound} we
 show that for any opinion dependent update rule there exists an instance
@@ -226,9 +187,9 @@ achieve convergence within error $\eps$.
   Let $A$ be an \emph{opinion dependent} update rule, which all
   agents use to update their opinions.
   For any $c>0$ there exists an instance $I=(P,s,a)$ such that
-  \[
+  \(
     \Exp{\norm{\infty}{x_A(t) - x^*}} = \Omega(1/t^{1+c}),
-  \]
+  \)
   where $x_A(t)$ denotes the opinion vector produced by $A$
   for the instance $I=(P,s,\alpha)$.
 \end{reptheorem}

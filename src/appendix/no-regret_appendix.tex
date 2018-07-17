@@ -1,0 +1,71 @@
+\section{Fictitious Play is no-regret}\label{app:s:fictitious_noregret}
+We prove here Lemma~\ref{l:y_t}, which we restate for
+convenience.
+\begin{lemma}
+Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
+then for all $t$,
+\[
+\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
+\]
+\end{lemma}
+\begin{proof}By definition of $y_t$,
+  $\sum_{\tau=0}^t f(y_t,b_\tau)=\min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$, so
+  \begin{align*}
+    \sum_{\tau=0}^t f(y_\tau,b_\tau) - \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau) &=
+    \sum_{\tau=0}^t f(y_\tau,b_\tau) - \sum_{\tau=0}^t f(y_t,b_\tau)\\
+    &= \sum_{\tau=0}^{t-1} f(y_\tau,b_\tau) - \sum_{\tau=0}^{t-1} f(y_t,b_\tau)\\
+    &\leq \sum_{\tau=0}^{t-1} f(y_\tau,b_\tau) - \sum_{\tau=0}^{t-1} f(y_{t-1},b_\tau)\\
+%    &= \sum_{\tau=0}^{t-2} f(y_\tau,b_\tau) - \sum_{\tau=0}^{t-2}f(y_{t-1},b_\tau)
+  \end{align*}
+  The last inequality follows by the fact that $y_{t-1} = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
+  Inductively, we prove that $\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$.
+\end{proof}
+
+We next prove Lemma~\ref{l:no_regret_lemma} which we combine with
+Lemma~\ref{l:y_t} to show that the update rule~\ref{eq:fictitious_play}
+ensures no regret for the agents. We first restate the Lemma for
+convenience.
+\begin{lemma}
+  For all $t\geq 0$,
+  \(
+    f(x_t,b_t) \leq f(y_t,b_t) + 2\frac{1-\alpha}{t+1} +
+    \frac{(1-\alpha)^2}{(t+1)^2}
+  \).
+\end{lemma}
+\begin{proof}
+  We first prove that for all $t$,
+  \begin{equation}\label{eq:abs_value}
+    \lp|x_t - y_t \rp| \leq \frac{1-\alpha}{t+1}.
+  \end{equation}
+  By definition
+  \(x_t = \alpha s + (1-\alpha)\frac{\sum_{\tau = 0}^{t-1} b_\tau}{t}\)
+  and
+  \( y_t = \alpha s + (1-\alpha)\frac{\sum_{\tau = 0}^t b_\tau}{t+1}\).
+  \begin{align*}
+    \lp|x_t - y_t\rp|
+    &=
+    (1-\alpha)\lp|\frac{\sum_{\tau = 0}^{t-1}b_\tau}{t}
+    - \frac{\sum_{\tau = 0}^t b_\tau}{t+1}\rp|\\
+    &=
+    (1-\alpha)\lp|\frac{\sum_{\tau = 0}^{t-1}b_\tau -tb_t}{t(t+1)}\rp|\\
+    &\leq
+    \frac{1-\alpha}{t+1}
+  \end{align*}
+  The last inequality follows from the fact that $b_\tau \in [0,1]$.
+  We now use inequality~(\ref{eq:abs_value}) to bound the difference
+  \( f(x_t,b_t) - f(y_t,b_t) \).
+  \begin{align*}
+    f(x_t,b_t)
+    &=
+    \alpha(x_t - s)^2 + (1 - \alpha)(x_t - y_t)^2 \\
+    &\leq
+    \alpha(y_t - s)^2 + 2\alpha\lp|y_t -
+    s\rp|\lp|x_t - y_t\rp| + \alpha \lp|x_t - y_t\rp|^2 \\
+    &\quad + (1-\alpha)(y_t - y_t)^2 +
+    2(1-\alpha)\lp|y_t - y_t\rp|\lp|x_t-y_t\rp| + (1 - \alpha)\lp|x_t - y_t\rp|^2\\
+    &\leq
+    f(y_t,b_t) + 2\lp|x_t - y_t\rp| + \lp|y_t - x_t\rp|^2\\
+    &\leq
+    f(y_t,b_t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}
+  \end{align*}
+\end{proof}

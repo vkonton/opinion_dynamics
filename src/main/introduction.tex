@@ -35,7 +35,7 @@ their social neighbors and their internal opinion,
 %
 where the weights $w_{ij}\geq 0$ quantify the influence between
 the agents and $w_{ii}>0$ the self confidence of the agents
-towards their internal belief. 
+towards their internal belief.
 
 The FJ model is one of most influential models for opinion formation.
 Its has a very simple update rule, consisting it plausible
@@ -59,10 +59,10 @@ disagreement cost
 %
 Note that the FJ model is the \emph{simultaneous best response dynamics}
 in the repeated version of this one shot game and that the Nash equilibrium
-of the above game is $x^*$. In \cite{BKO11} they quantified 
-the inefficiency of the equilibrium with respect to the total 
-disagreement cost. Namely, the Price of Anarchy is less than $9/8$ 
-in case $w_{ij}=w_{ji}$. 
+of the above game is $x^*$. In \cite{BKO11} they quantified
+the inefficiency of the equilibrium with respect to the total
+disagreement cost. Namely, the Price of Anarchy is less than $9/8$
+in case $w_{ij}=w_{ji}$.
 
 We remark in \cite{BKO11}, Bindel et al. also introduced an alternative
 framework for studying the dynamics of opinions.
@@ -84,16 +84,16 @@ to a \emph{no-regret} learning algorithm.
 
 \subsection{Motivation and our setting}
 The equilibrium point $x^*$ is generally considered
-as a good estimation of the final opinions 
-formed in a social network. For example, Gionis et al. \cite{GTT13} 
+as a good estimation of the final opinions
+formed in a social network. For example, Gionis et al. \cite{GTT13}
 considered the problem of identifying $k$ agents in an network to set their
-internal opinion equal to 1 so as to maximize the sum of the opinions 
+internal opinion equal to 1 so as to maximize the sum of the opinions
 in the equilibrium point $x^*$ ($\norm{1}{x^*}$). This work belongs to
-a recent line of research concerning influence maximization problems 
+a recent line of research concerning influence maximization problems
 with respect to $x^*$ \cite{GTT13,AKPT18,MMT17}. The reason for modeling
-such problems by the equilibrium $x^*$ is evident, 
-the FJ model is one of the standard models for opinion formation 
-and it converges exponentially fast to $x^*$. 
+such problems by the equilibrium $x^*$ is evident,
+the FJ model is one of the standard models for opinion formation
+and it converges exponentially fast to $x^*$.
 
 Our work is motivated by the fact that the FJ model assumes a large amount of
 information exchange between the agents. At each round its update rule requires
@@ -105,11 +105,11 @@ In such environments it is far more reasonable to assume that individuals random
 meet a small subset of their acquaintances and these are the only opinions that
 they learn.  Such information exchange constraints consist the FJ model
 unsuitable for modeling the opinion formation process in such large networks
-and consequently it is doubtful whether $x^*$ captures the limiting behavior 
+and consequently it is doubtful whether $x^*$ captures the limiting behavior
 of the opinions. This work ask the following questions:
 \begin{question}\label{q:motivation1}
 Is the equilibrium $x^*$ an adequate way to model
-the final formed opinions in a large social network? Namely, are there 
+the final formed opinions in a large social network? Namely, are there
 simple variants of the FJ model that require limited information exchange and
 imply fast convergence to $x^*$? Can they be justified as natural behavior
 for selfish agents under a game-theoretic solution concept?
@@ -186,7 +186,7 @@ makes our algorithm a natural behavioral assumption for
 agents that selfishly want to minimize their incurred disagreement cost.
 The no regret property of our update rule can be easily derived by the
 more general results in \cite{HAK07}. However, we present a short a simple
-proof that may have some interest. Our results imply that even 
+proof that may have some interest. Our results imply that even
 if agents are subjected to information exchange constraints, there exists natural
 dynamics that converge to equilibrium $x^*$, consisting it
 a robust choice for modeling the limiting behavior of the opinions.
@@ -250,19 +250,22 @@ Our results fit in this line of research since we show that
 for a game with \emph{infinite} strategy space, the strategy vector
 (and not the time-averaged) converges to the unique Nash equilibrium.
 
-No-regret dynamics under limited information are also examined
-in other settings. In Kleinberg et al. in \cite{KPT09} treated
-load-balancing in distributed systems as
-a repeated game and analyzed the convergence properties
-no-regret online algorithms under the \emph{full information assumption}
+Imperfect information settings have recently received substantial attention
+from the scientific community since they provide realistic models for
+the practical applications of game theory.  Perfect payoff information
+is rare in practise; agents act based on random or noisy past payoff observations.
+Kleinberg et al. in \cite{KPT09} treated load-balancing in distributed systems
+as a repeated game and analyzed the convergence properties
+no-regret online learning algorithms under the \emph{full information assumption}
 that each agent learns the load of every machine.
 In a subsequent work \cite{KPT11}, the same authors consider the
-same problem in a \emph{limited information setting} (\enquote{bulletin board model})
+same problem in a \emph{limited information setting}
+(\enquote{bulletin board model})
 in which each agent learns the load of just the machine
 that served him. In \cite{HCM17,MS17} they examine the convergence
 properties of online learning algorithms in case the payoffs observed
-by the agents are contaminated with some random noise.
-
-% As is it also mentioned in \cite{CHM17} this stronger notion
-% of convergence cannot be derived from the Coarse Correlated convergence
-% results stated above.
+by the agents are contaminated with random noise.
+Finally, in \cite{BM17} they show stochastic dynamics that
+lead to no regret regardless of the amount of noise in the
+player's observations and show that in specific zero-sum games
+time averages converge to the NE for any noise level.

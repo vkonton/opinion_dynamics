@@ -35,6 +35,7 @@ Intuitively, if we know $P$ then the algorithm converges exponentially,
 since the slow part of the process is learning the probabilities $p_{ij}$
 precisely.
 \end{remark}
+\vspace{-5mm}
 \begin{algorithm}
   \caption{Asynchronous Update Rule}
   \label{alg:cc_upper}
@@ -56,7 +57,8 @@ In \cite{BT97}, they show a convergence rate guarantee for
 In the  following we briefly summarize their result.  For completeness we
 give here a prove tailored for our purposes.
 Using a simple induction we get that bounded outdatedness
-preserves the exponential convergence.
+preserves the exponential convergence.  Its simple proof can be found in
+Appendix~\ref{app:s:cc_convergence}.
 \begin{lemma}\label{l:outdatedness_induction}
   Let $\rho = \min_i a_i$, and $\pi_{ij}(t) \in \N$ be the most recent round
   before round $t$, that agent $i$ met agent $j$.
@@ -64,22 +66,22 @@ preserves the exponential convergence.
   all $t \geq k B$,
   \(\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\).
 \end{lemma}
-\begin{proof}
-  To prove our claim we use induction on $k$. For the induction base $k=1$,
-  \begin{align*}
-    |x_i(t) - x_i^*|
-    &=
-    |(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_j(\pi_{ij}(t)) -x_j^*)|\\
-    &\leq
-    (1-\alpha_i)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|\leq (1-\rho)
-  \end{align*}
-  From the induction hypothesis we have for $\pi_{ij}(t) \geq (k-1)B$,
-  that $|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$.
-  For $k\geq 2$, we again have that
-  $|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|$.
-  Since $t-B \leq \pi_{ij}(t)$ and $t\geq kB$, we have
-  that $\pi_{ij}(t) \geq (k-1)B$ and the induction hypothesis applies.
-\end{proof}
+% \begin{proof}
+%   To prove our claim we use induction on $k$. For the induction base $k=1$,
+%   \begin{align*}
+%     |x_i(t) - x_i^*|
+%     =
+%     |(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_j(\pi_{ij}(t)) -x_j^*)|
+%     \leq
+%     (1-\alpha_i)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|\leq (1-\rho)
+%   \end{align*}
+%   From the induction hypothesis we have for $\pi_{ij}(t) \geq (k-1)B$,
+%   that $|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$.
+%   For $k\geq 2$, we again have that
+%   $|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|$.
+%   Since $t-B \leq \pi_{ij}(t)$ and $t\geq kB$, we have
+%   that $\pi_{ij}(t) \geq (k-1)B$ and the induction hypothesis applies.
+% \end{proof}
 
 In our randomized setting there does not exist fixed length window is
 not true but we can easily adapt this to hold with high probability.
@@ -92,7 +94,6 @@ we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
 In Section~\ref{app:s:cc_convergence} of the Appendix we give the detailed
 argument that leads to the Lemma~\ref{l:cc_convergence},
 showing that the convergence rate of update rule \ref{alg:cc_upper} is exponential.
-
 \begin{replemma}{l:cc_convergence}
   Let $x(t)$ be the dynamics corresponding
   to update rule \ref{alg:cc_upper}.
