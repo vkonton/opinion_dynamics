@@ -170,25 +170,25 @@ the resulting opinion vector $x(t)$ converges to $x^*$.
 Our update rule is a \emph{Follow the Leader algorithm}
 meaning that at round $t$, each agent updates her opinion
 to the minimizer of total disagreement cost that
-she experienced until $t-1$. It also admits a very simple form,
-it is just the time average of the opinions that the agent observes.
-In section~\ref{s:fictitious_convergence},
+she experienced until $t-1$. It also has a very simple form;
+it is the time average of the opinions that the agent observes.
+In Section~\ref{s:fictitious_convergence},
 we bound its convergence time and we show that in order
 to achieve $\eps$ distance from $x^*$, poly($1/\eps$) rounds
 are needed. The main technical difficulty lies on stochastic nature
 of our process, we deal it with by using elegant concetration arguments.
-In section~\ref{s:fictitious_noregret},
+In Section~\ref{s:fictitious_noregret},
 we show that this rule ensures \emph{no-regret} to any agent
 that adopts it. Namely, the average disagreement cost (that
 the agent experiences) per round approaches that
 of expressing the best opinion in hindsight. The latter
 makes our algorithm a natural behavioral assumption for
 agents that selfishly want to minimize their incurred disagreement cost.
-The no regret property of our update rule can be easily derived by the
-more general results in \cite{HAK07}. However, we present a short a simple
-proof that may have some interest. Our results imply that even
+The no regret property of our update rule can be derived by the more general
+results in \cite{HAK07}.  However, we present a short and simple proof that may
+have some interest. Our results imply that even
 if agents are subjected to information exchange constraints, there exists natural
-dynamics that converge to equilibrium $x^*$, consisting it
+dynamics that converge to equilibrium $x^*$, making it
 a robust choice for modeling the limiting behavior of the opinions.
 
 In section~\ref{s:lower_bound}, we show
@@ -201,19 +201,18 @@ all the update rules that only depend on the observed
 opinions. We deploy a reduction to the existence of
 Bernoulli estimators with small error rate and we present
 a novel information theoretic argument to rule out their
-existence. Interestingly polynomial convergence is not a
+existence.  Interestingly, polynomial convergence is not a
 generic property our limited information exchange setting.
 In Section~\ref{s:cc_convergence}, we present an update rule
 that depends on the observed opinions but also on the weights
 $w_{ij}$ and converges exponentially fast to $x^*$. Our results
-provide a clear and intuitive characterization on the update
+provide a clear and intuitive characterization of the update
 rules that can achieve exponential convergence and serve as
 an \enquote{algorithmic guide} for future limited information exchange
-variants of the FJ model. Moreover they indicate the fundamental reason that
-the FJ model converges exponential fast and this has little
-to do with the \enquote{large} information exchange
-that it requires and much more to do with the fact that
-the it uses the values of the weights $w_{ij}$.
+variants of the FJ model.  Moreover, they indicate the fundamental reason that
+the FJ model converges exponentially fast. This has little
+to do with the \enquote{large} information exchange that it requires and much
+more to do with the fact that the it uses the exact values of the weights $w_{ij}$.
 
 \subsection{Related Work}
 Apart from the aforementioned results there exists a large amount
