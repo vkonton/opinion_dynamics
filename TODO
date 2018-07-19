@@ -1,5 +1,6 @@
-1. Abstract
-2. Fictitious play only appears in intro.
-3. Learns index or opinion of neighbor.
-4. Estimating Bernoulli distributions is shit.
-5. Preliminaries.
+1. page 6 top broken reference.
+2. Theorem 1 it is log^(3/2) instead of log^2.
+3. fictitious play -> FTL dynamics everywhere in the paper remove fictitious play.
+4. Neighborhood N_i in sums instead of i \neq j.
+5. reptheorem 1 in appendix of fictitious convergence.
+6. get the paper to be 14 pages with the refs, strict.
