@@ -46,13 +46,14 @@ the outdatedness of each agent is at most twice the length of the
 epoch. We now show Lemma~\ref{l:outdatedness_induction}
 from which we get that bounded outdatedness preserves the exponential
 convergence.
-\begin{lemma}
-  Let $\rho = \min_i a_i$, and $\pi_{ij}(t) \in \N$ be the most recent round
-  before round $t$, that agent $i$ met agent $j$.
-  If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then, for
-  all $t \geq k B$,
-  \(\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\).
-\end{lemma}
+\repeatlemma{l:cc_convergence}
+% \begin{lemma}
+%   Let $\rho = \min_i a_i$, and $\pi_{ij}(t) \in \N$ be the most recent round
+%   before round $t$, that agent $i$ met agent $j$.
+%   If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then, for
+%   all $t \geq k B$,
+%   \(\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\).
+% \end{lemma}
 \begin{proof}
   To prove our claim we use induction on $k$. For the induction base $k=1$,
   \begin{align*}
