@@ -77,7 +77,7 @@ We next give a rigorous measure-theoretic proof of Theorem~\ref{t:lower_bound}.
 \end{theorem}
 \begin{proof}
   Observe that $\theta_t(\{0,1\}^t)$ has cardinality at most $2^t$.
-  Since
+  Jensen's inequality for the convex function $x \mapsto |x|$ yields
   \[
     \sum_{0 \leq i \leq t} \sum_{\norm{1}{x} = i}
     \lp| \theta_t(x) - p \rp| p^i (1-p)^{t-i}
