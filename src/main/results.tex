@@ -17,13 +17,11 @@ an instance of the game of Definition~\ref{d:random_game}.
 %We use the matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$
 %if $j \in N_i$ and $0$ otherwise.
 We remind that $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij})$ and
-$\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})$. The coefficient
-$\alpha_i \in (0,1]$ since by the definition of FJ-model $w_{ii}>0$
-and measures the reluctance of agent $i$ to adopt opinion other
-than $s_i$. Note that a given instance $I=(P,s,\alpha)$ also
-defines an instance of the FJ-model and we denote as $x^* \in [0,1]^n$
-its equilibrium point. We remind that $x^*$ is also the Nash equilibrium
-of one shot game of Definition~\ref{d:random_game} defined by instance $I=(P,s,\alpha)$.
+$\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})>0$ since $w_{ii}>0$.
+Note that a given instance $I=(P,s,\alpha)$ also defines an instance 
+of the FJ model and we denote as $x^* \in [0,1]^n$
+its equilibrium point, which coincides with the Nash equilibrium
+of one shot game of Definition~\ref{d:random_game}.
 Another parameter of an instance $I=(P,s,\alpha)$ that we often use is
 $\rho=\min_{i \in V}\alpha_i$. Throughout the paper we consider that
 the agents repeatedly play the one shot game of Definition~\ref{d:random_game}.
@@ -47,7 +45,7 @@ instance $I=(P,s,\alpha)$ of the game, $\Prob{W_i^t}=p_{ij}$.
 
 In Section~\ref{s:fictitious_convergence}, we study the convergence properties
 of the dynamics $x(t)$ when all agents update their opinions
-according to the \enquote{follow the leader} principle.
+according to the \enquote{Follow the Leader} principle.
 Since each agent $i$ must select $x_i(t)$, before knowing which of her neighbors she
 will meet and what opinion her neighbor will express, their update rule
 says \enquote{\emph{play the best according to what you have observed}}.
@@ -64,7 +62,7 @@ Theorem \ref{t:fictitious_convergence} shows its convergence rate to $x^*$.
     \bindent
     \STATE Meets neighbor with index $W_i^t$, $\Prob{W_i^t=j}=p_{ij}$.
     \STATE Suffers cost \((1-\alpha_i) (x_i(t) - x_{W_i^t}(t))^2 + a_i (x_i(t) - s_i)^2\)
-    and learns the opinion $x_{W_i^t}$.
+    and learns the opinion $x_{W_i^t}(t)$.
   \item Updates her opinion
     \begin{equation}\label{eq:fictitious_play}
       x_i(t+1) =
@@ -142,7 +140,7 @@ On the negative side, its convergence rate
 is outperformed by the rate of FJ model.
 For a fixed instance $I=(P,s,\alpha)$, the
 FTL dynamics converges with rate
-$\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$ while FJ-model
+$\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$ while FJ model
 converges with rate $O(e^{-\rho t})$ \cite{GS14}.
 As a result the following question arises
 \begin{question}
@@ -177,7 +175,7 @@ where $W_i^t$ is the neighbors that $i$ meets at round $t$.
 \end{definition}
 
 Note that FTL dynamics is an opinion dependent dynamics
-since update rule~\ref{eq:fictitious_play} can
+since update rule~(\ref{eq:fictitious_play}) can
 be written equivalently, $x_i(0)=s_i$ and $x_i(t)=(1-\alpha_i)\sum_{\tau=0}^{t-1}x_{W_i^\tau}(\tau)/t + \alpha_i s_i$.
 In Theorem~\ref{t:lower_bound} we
 show that for any opinion dependent update rule there exists an instance

@@ -1,6 +1,6 @@
 \section{An Update Rule with Exponential Convergence Rate}\label{app:s:cc_convergence}
 We are now going to state and prove a series of Lemmas that culminate in
-the proof of Lemma~\ref{l:cc_convergence}. We first turn our attention to
+the proof of Theorem~\ref{t:exponential_update_rule}. We first turn our attention to
 the problem of calculating the size of window $B$, such that with high probability
 all agents have outdateness at most $B$.
 We first state a useful fact concerning the coupons collector problem.
@@ -43,10 +43,10 @@ we get that all agents have seen all their neighbours during all epochs
 \end{proof}
 Since all neighbours are picked at least once during each epoch,
 the outdatedness of each agent is at most twice the length of the
-epoch. We now show Lemma~\ref{l:outdatedness_induction}
+epoch. We now show %Lemma~\ref{l:outdatedness_induction}
 from which we get that bounded outdatedness preserves the exponential
 convergence.
-\repeatlemma{l:cc_convergence}
+\repeatlemma{l:outdatedness_induction}
 % \begin{lemma}
 %   Let $\rho = \min_i a_i$, and $\pi_{ij}(t) \in \N$ be the most recent round
 %   before round $t$, that agent $i$ met agent $j$.
@@ -79,8 +79,8 @@ $1-p$
 $$ \norm{\infty}{x^{t}-x^*} \leq (1-\rho)^{\frac{t}{2B}}
 \leq \exp \lp(-\frac{\rho t\min_{ij}p_{ij}}{2\ln( \frac{nt}{p})} \rp)$$
 \end{corollary}
-We now prove Lemma~\ref{l:cc_convergence} using the previous results.
-\repeatlemma{l:cc_convergence}
+We now prove Theorem~\ref{t:exponential_update_rule} using the previous results.
+\repeattheorem{t:exponential_update_rule}
 \begin{proof}
 Let $u(t) = \norm{\infty}{x^t-x^*}$ and $w = \min_{ij}p_{ij}$.
 From Corollary~\ref{cor:window} we obtain:

@@ -69,3 +69,21 @@ convenience.
     f(y_t,b_t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}
   \end{align*}
 \end{proof}
+
+\repeattheorem{t:fictitious_noregret}
+\begin{proof}
+ Theorem~\ref{t:fictitious_noregret} easily follows by Lemma~\ref{l:y_t}
+\begin{align*}
+  \sum_{\tau=0}^t f(x_\tau,b_\tau)
+  &\leq
+  \sum_{\tau=0}^t f(y_\tau,b_\tau) + \sum_{\tau=0}^T 2\frac{1-\alpha}{\tau+1} +
+  \sum_{\tau=0}^t \frac{(1-\alpha)^2}{(\tau+1)^2}\\
+  &\leq
+  \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,y_\tau) +
+  2(1-\alpha)(\log t + 1) + (1-\alpha)\frac{\pi^2}{6}\\
+  &\leq
+  \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,y_\tau) + O(\log t)
+\end{align*}
+
+\end{proof}
+

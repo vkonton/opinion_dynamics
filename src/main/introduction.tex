@@ -20,25 +20,28 @@ agent social neighborhoods.
 
 Our work builds on the model proposed by Friedkin and Johnsen \cite{FJ90}(FJ
 model).  The FJ model is a variation on the DeGroot model that captures the
-fact consensus on the opinions of a social group is not generally reached.
-According to FJ model there exists a set of $n$ agents.  Each agent $i$ holds
-an internal opinion $s_i\in [0,1]$, which is private and invariant over time
-and a public opinion $x_i \in [0,1]$.  Initially, agents start with their
-internal opinion and at each round $t\geq1$, update their public opinion
-$x_i(t)$ to a weighted average of public opinion of their social neighbors and
-their internal opinion,
+fact consensus on the opinions of a social group is rarely reached.
+According to FJ model each person $i$ has a public opinion $x_i \in [0,1]$
+and an internal opinion $s_i\in [0,1]$, which is private and invariant 
+over time. There also exists a weighted graph $G(V,E)$ representing a social
+network where $V$ stands for the persons ($|V|=n$) and $E$ their social  
+relations. Initially, all nodes start with their internal opinion and 
+at each round $t\geq1$, update their public opinion $x_i(t)$ to a weighted 
+average of public opinion of their social neighbors and their internal opinion,
 %
 \begin{equation}\label{eq:FJ_model}
   %
-  x_i(t)= \frac{\sum_{j\neq i}w_{ij}x_j(t-1) + w_{ii}s_i}{\sum_{j\neq
-      i}w_{ij}+w_{ii}}
+  x_i(t)= \frac{\sum_{j\in N_i}w_{ij}x_j(t-1) + w_{ii}s_i}{\sum_{j\in
+      N_i}w_{ij}+w_{ii}}
   %
 \end{equation}
 %
-where the weights $w_{ij}\geq 0$ quantify the influence between the agents and
-$w_{ii}>0$ the self confidence of the agents towards their internal belief.
+where $N_i =\{j \in V:(i,j) \in E\}$ is the set of $i$'s neighbors, 
+the weight $w_{ij}$ associated with the edge $(i,j) \in E$ measures the extend
+of the influence that $j$ poses on $i$ and the weight $w_{ii}>0$ quantifies how susceptible
+is $i$ in adopting different opinions from her internal opinion $s_i$.
 
-The FJ model is one of most influential models for opinion formation.  Its has
+The FJ model is one of most influential models for opinion formation. It has
 a very simple update rule, making it plausible for modeling natural behavior
 and its basic assumptions are aligned with empirical findings on the way
 opinions are formed \cite{AFH05,K47}.  At the same time, it admits a unique
@@ -46,23 +49,25 @@ equilibrium point $x^* \in [0,1]^n$ to which it converges exponentially fast
 \cite{GS14}.  The FJ model has also been studied under a game theoretic view
 point.  Bindel et al. considered its update rule as the minimizer of a
 quadratic disagreement cost function and based on it they defined the following
-one shot opinion formation game \cite{BKO11}. The strategy of each agent $i$ is
-her public opinion $x_i$, incurring her a disagreement cost
+one shot opinion formation game \cite{BKO11}. Each node $i$ is a selfish agent
+whose strategy is the public opinion $x_i$ that she expresses incurring her a 
+disagreement cost
 %
 \begin{equation}\label{eq:BKO_cost}
   %
-  C_i(x_i,x_{-i})= \sum_{j \neq i}w_{ij} (x_i-x_j)^2 + w_{ii}(x_i-s_i)^2
+  C_i(x_i,x_{-i})= \sum_{j \in N_i}w_{ij} (x_i-x_j)^2 + w_{ii}(x_i-s_i)^2
   %
 \end{equation}
 %
 Note that the FJ model is the \emph{simultaneous best response dynamics} in the
 repeated version of this one shot game and that the Nash equilibrium of the
 above game is $x^*$. In \cite{BKO11} they quantified the inefficiency of the
-equilibrium with respect to the total disagreement cost. Namely, the Price of
-Anarchy is less than $9/8$ when $w_{ij}=w_{ji}$.
+equilibrium with respect to the total disagreement cost. They proved that 
+the Price of Anarchy is less than $9/8$ in case $G$ is undirected and 
+$w_{ij}=w_{ji}$. 
 
-We remark that in \cite{BKO11}, Bindel et al. also introduced an alternative,
-game-theoretic, framework for studying the dynamics of opinions.  Instead of
+We remark that in \cite{BKO11} an alternative framework for studying 
+the dynamics of opinions were introduced. Instead of
 modeling the way opinions evolve by precise dynamical processes, agents can be
 considered to repeatedly play a suitable one shot opinion formation game and
 update their opinions so as to minimize their individual disagreement cost.
@@ -90,13 +95,13 @@ standard models for opinion formation and it converges exponentially fast to
 $x^*$.
 
 Our work is motivated by the fact that the FJ model assumes a large amount of
-information exchange between σthe agents. At each round, its update rule
-requires that every agent learns all the opinions of her social neighbors.  In
+information exchange between the agents. At each round, its update rule
+requires that every agent learns all the opinions of her social neighbors. In
 today's large social networks where users usually have several hundreds of
 friends it is unlikely that, each day, they learn the opinions of all their
 social neighbors.  In such environments it is far more reasonable to assume
 that individuals randomly meet a small subset of their acquaintances and these
-are the only opinions that they learn.  Information exchange constraints
+are the only opinions that they learn. Such information exchange constraints
 render the FJ model unsuitable for modeling the opinion formation process in
 such large networks and therefore, it is not clear whether $x^*$ captures the
 limiting behavior of the opinions. In this work we ask:
@@ -133,7 +138,7 @@ formally, we consider the following one shot game.
       w_{ij}/\sum_{j\in N_i}w_{ij}$.
       %
     \item Agent $i$ suffers cost $C_i(x_i , x_{-i}) = (1-a_i)(x_i-x_j)^2 +
-      a_i(x_i-s_i)^2$, where $\alpha_i = w_i/(\sum_{j\in N_i}w_{ij}+w_i)$.
+      a_i(x_i-s_i)^2$, where $\alpha_i = w_{ii}/(\sum_{j\in N_i}w_{ij}+w_i)$.
       %
   \end{itemize}
   %
@@ -144,8 +149,8 @@ Our one shot game departs from the original opinion formation game of
 defines \emph{deterministically} the cost $C_i(x)$ of each agent $i$, whereas
 in our variant of Definition~\ref{d:random_game} it defines a probability
 distribution on the cost $C_i(x)$ that $i$ suffers.  Notice that the expected
-disagreement cost of each agent $i$ (scaled by the constant $\sum_{j\neq
-  i}w_{ij}+w_{ii}$) is the same as the disagreement cost defined in
+disagreement cost of each agent $i$ (scaled by the constant $\sum_{j\in
+  N_i}w_{ij}+w_{ii}$) is the same as the disagreement cost defined in
 equation~(\ref{eq:BKO_cost}).  As a result, the Nash equilibrium with respect
 to the expected cost of the agents, is the equilibrium point $x^*$.
 
@@ -180,7 +185,7 @@ of the opinions that the agent observes.  In
 Section~\ref{s:fictitious_convergence}, we bound its convergence rate and we
 show that in order to achieve $\eps$ distance from $x^*$, $\mrm{poly}(1/\eps)$ rounds
 are needed. The main technical difficulty, which lies in the stochastic nature of our
-process, is overcome by using elegant concentration arguments.  In
+process, is overcomed by using elegant concentration arguments.  In
 Section~\ref{s:fictitious_noregret}, we show that this rule ensures
 \emph{no-regret} to any agent that adopts it.  Namely, the average disagreement
 cost (that the agent experiences) per round approaches that of expressing the

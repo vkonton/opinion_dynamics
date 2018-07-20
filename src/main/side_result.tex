@@ -2,7 +2,8 @@
 
 We already discussed that the reason that opinion dependent dynamics suffer slow
 convergence is that the update rule depends only on the expressed opinions.
-In this section we provide an update rule showing that information about the
+Based on works for distributed convex optimization \cite{BT97}, 
+we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly can restore the
 exponential convergence rate.
 Our update rule, depends not only on the expressed opinions of the
@@ -42,12 +43,19 @@ precisely.
   \begin{algorithmic}[1]
     \STATE Initially $x_i(0) = s_i$ for all agent $i$.
     %\STATE Let $d_i$ be the number of non-negative entries of row $i$ of $P$.
-    \STATE Each agent $i$ keeps an array $M_i$ of length $d_i$.
-    \STATE At round $t\geq 1$ each agent $i$:
+    \STATE Each agent $i$ keeps an array $M_i$ of length $|N_i|$,
+    randomly initialized.
+    \STATE At round $t\geq 0$ each agent $i$:
+
     \bindent
-    \STATE $x_i(t) = (1-\alpha_i)\sum_{j=1}^{d_i} p_{ij} M_i[j] + \alpha_is_i$
-    \STATE Meets neighbor $W_i^t$ and learns the opinion $x_{W_i^t}(t)$.
-    \STATE $M_i[W_i^t] \gets x_{W_i^t}(t-1)$.
+    \STATE Meets neighbor with index $W_i^t$, $\Prob{W_i^t=j}=p_{ij}$.
+    \STATE Suffers cost \((1-\alpha_i) (x_i(t) - x_{W_i^t}(t))^2 + a_i (x_i(t) - s_i)^2\)
+    and learns $(x_{W_i^t}(t),W_i^t)$.
+    \STATE Updates her array $M_i$ and opinion as follows:
+      \bindent
+      \STATE $M_i[W_i^t] \gets x_{W_i^t}(t)$.
+      \STATE $x_i(t+1) = (1-\alpha_i)\sum_{j \in N_i} p_{ij} M_i[j] + \alpha_is_i$
+      \eindent
     \eindent
   \end{algorithmic}
 \end{algorithm}
@@ -59,13 +67,15 @@ give here a prove tailored for our purposes.
 Using a simple induction we get that bounded outdatedness
 preserves the exponential convergence.  Its simple proof can be found in
 Appendix~\ref{app:s:cc_convergence}.
-\begin{lemma}\label{l:outdatedness_induction}
+
+\begin{replemma}{l:outdatedness_induction}
   Let $\rho = \min_i a_i$, and $\pi_{ij}(t) \in \N$ be the most recent round
   before round $t$, that agent $i$ met agent $j$.
   If for all $t\geq B$, $t-B \leq \pi_{ij}(t) \leq t-1$ then, for
   all $t \geq k B$,
   \(\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\).
-\end{lemma}
+\end{replemma}
+
 % \begin{proof}
 %   To prove our claim we use induction on $k$. For the induction base $k=1$,
 %   \begin{align*}
@@ -92,15 +102,18 @@ $1-\delta$ agent $i$ met all her neighbors at least once.
 Since we want this to be true for all agents
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
 In Section~\ref{app:s:cc_convergence} of the Appendix we give the detailed
-argument that leads to the Lemma~\ref{l:cc_convergence},
+argument that leads to the Theorem~\ref{t:exponential_update_rule},
 showing that the convergence rate of update rule \ref{alg:cc_upper} is exponential.
-\begin{replemma}{l:cc_convergence}
-  Let $x(t)$ be the dynamics corresponding
-  to update rule \ref{alg:cc_upper}.
-  We have
+
+\begin{reptheorem}{t:exponential_update_rule}
+  Let $I = (P,s, \alpha)$ be an instance of the opinion formation
+  game of Definition~\ref{d:random_game} with equilibrium
+  $x^* \in [0,1]^n$.  The opinion vector $x(t)\in[0,1]^n$ produced by
+  update rule~(\ref{alg:cc_upper}) after $t$ rounds satisfies
   \[
     \Exp{\norm{\infty}{x(t) - x^*}}
     \leq
     2\exp \lp(- \rho  \min_{ij} p_{ij} \frac{\sqrt{t}}{4\ln(nt)} \rp)
   \]
-\end{replemma}
+  where $\rho = \min_{i \in V} a_i$.
+\end{reptheorem}
