@@ -14,11 +14,13 @@ an instance of the game of Definition~\ref{d:random_game}.
   \end{itemize}
 \end{definition}
 %
-%We use the matrix $P$ to simplify notation, $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$
-%if $j \in N_i$ and $0$ otherwise.
-We remind that $p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij})$ and
-$\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})>0$ since $w_{ii}>0$.
-Note that a given instance $I=(P,s,\alpha)$ also defines an instance 
+Following the notation introduced earlier we have that
+$p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ if $j \in N_i$ and $0$ otherwise.
+Obviously, if an agent $i$ does not have outgoing edges then $N_i = \emptyset$ and
+$p_{ij} = 0$ for all $j$. Therefore, $\sum_{j=1}^n p_{ij}$ is $0$ if $N_i= \emptyset$
+and $1$ otherwise.
+Moreover, $\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})>0$ since $w_{ii}>0$.
+Note that a given instance $I=(P,s,\alpha)$ also defines an instance
 of the FJ model and we denote as $x^* \in [0,1]^n$
 its equilibrium point, which coincides with the Nash equilibrium
 of one shot game of Definition~\ref{d:random_game}.
