@@ -1,19 +1,19 @@
 1.v OK page 6 top broken reference.
 2.v OK Theorem 1 it is log^(3/2) instead of log^2.
-3. fictitious play -> FTL dynamics everywhere in the paper remove fictitious play.
-4. Neighborhood N_i in sums instead of i \neq j. Fix notation of FJ model before equation 1 in introduction.
+3.s fictitious play -> FTL dynamics everywhere in the paper remove fictitious play.
+4.s Neighborhood N_i in sums instead of i \neq j. Fix notation of FJ model before equation 1 in introduction.
 5.v OK reptheorem 1 in appendix of fictitious convergence.
 6.v OK get the paper to be 14 pages with the refs, strict.
-7. Fix Remark 1, in lower bound section.
+7.s Fix Remark 1, in lower bound section.
 8.v OK In Algorithm 2 d_i = |N_i|.
 9.v Remove Algorithm from algorithmic.
-10. Lemma 8 should be in the same form as Theorem 1. For any instance (P,s,a) etc.
+10.s Lemma 8 should be in the same form as Theorem 1. For any instance (P,s,a) etc.
 11.v Use Replemma for Lemmas 10,11. Should be 3,4.
-12. Delete Theorem 8.
-13. Write in lower bound main text, that in Appendix we have a rigorous measure theoretic proof (measurability of sets etc.)
-14. Change Title.
-15. Change expectation in Lower bound to be bold using the macros.
+12.s Delete Theorem 8.
+13.s Write in lower bound main text, that in Appendix we have a rigorous measure theoretic proof (measurability of sets etc.)
+14.s Change Title.
+15.s Change expectation in Lower bound to be bold using the macros.
 16. Correct punctuation in display mode math (put commas and full stops).
-17. Better name for Asynchronous Update Rule (Dynamics 2).
+17.s Better name for Asynchronous Update Rule (Dynamics 2).
 18. Section titles.
-19. Update rule of Dynamics.
+19.s Update rule of Dynamics.
