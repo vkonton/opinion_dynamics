@@ -384,16 +384,16 @@ and could be of independent interest.
   its left and right, as shown in Figure~\ref{fig:estimator},
   and since there are at most $t+1$ such values
   we have for all $t \geq k$ the set
-  \[
+  \(
     \{
-    p \in [0,1]\ :\ {\min_{0 \leq i \leq t} |\theta_t(i)-p| \leq 1/t^{1+c} }
+    p \in [0,1]:\ {\min_{0 \leq i \leq t} |\theta_t(i)-p| \leq 1/t^{1+c} }
     \}
     =
     \bigcup_{i=0}^t
     \lp(
     \theta_t(i) - \frac{1}{t^{1+c}},\ \theta_t(i) + \frac{1}{t^{1+c}}
     \rp).
-  \]
+  \)
   For each interval in the above union we have that
   $\Prob{|\theta_t(i)-p| \leq 1/t^{1+c}}\leq 2/t^{1+c}$
   and by the union bound we get
