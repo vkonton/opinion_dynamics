@@ -92,26 +92,26 @@ which corresponds to the expected loss of an estimator.
 \begin{definition}\label{d:risk}
   For an estimator $\theta =(\theta_t)_{t=1}^\infty$ we define
   its risk
-  $E_p[|\theta_t(X_1,\ldots,X_t) - p|]$,
+  $\Expnew{p}{|\theta_t(X_1,\ldots,X_t) - p|}$,
   where
   \[
-    E_p[|\theta_t(X_1,\ldots,X_t) - p|]
+    \Expnew{p}{|\theta_t(X_1,\ldots,X_t) - p|}
     = \sum_{(y_1,\ldots,y_t)\in\{0,1\}^t}
     |\theta_t(y_1,\ldots,y_t) -p|\
     p^{\sum_{i=1}^t y_i}\ (1-p)^{t-\sum_{i=1}^t y_i}
   \]
 \end{definition}
-The risk $E_p[|\theta_t(Y_1,\ldots,Y_t) - p|]$ is the expected distance
+The risk $\Expnew{p}{|\theta_t(Y_1,\ldots,Y_t) - p|}$ is the expected distance
 of the estimated value $\theta_t$ from the parameter $p$, when the
 distribution that generated the samples is $B(p)$.
-For convenience we also write it as $E_p[|\theta_t - p|]$.
+For convenience we also write it as $\Expnew{p}{|\theta_t - p|}$.
 The risk quantifies the error rate of
 the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the
 real parameter $p$ as the number of samples $t$ grows.
 Since $p$ is unknown, any meaningful estimator $\theta=(\theta_t)_{t=1}^\infty$
-must guarantee that $\lim_{t \to \infty} E_p[|\theta_t - p|]=0$ for all $p$.
+must guarantee that $\lim_{t \to \infty} \Expnew{p}{|\theta_t - p|}=0$ for all $p$.
 For example, \emph{sample mean} has error rate
-$E_p[|\theta_t-p|] \leq \frac{1}{2\sqrt{t}}$.
+$\Expnew{p}{|\theta_t-p|} \leq \frac{1}{2\sqrt{t}}$.
 
 We show now that any opinion dependent update rule $A$, achieving the
 convergence rate of Theorem~\ref{t:lower_bound}, can be used as a Bernoulli
@@ -122,7 +122,7 @@ estimator with asymptotically the same error rate.
   \Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
   Then there exists an estimator $\theta_A=(\theta_t^A)_{t=1}^\infty$ such that for all
   $p \in [0,1]$,
-  \(\lim_{t \rightarrow \infty}t^{1+c}E_p[|\theta_t^A-p|]=0.\)
+  \(\lim_{t \rightarrow \infty}t^{1+c}\Expnew{p}{|\theta_t^A-p|}=0.\)
 \end{lemma}
 \begin{proof}
   We construct an estimator $\theta_A = (\theta^A_t)_{t=1}^\infty$
@@ -142,9 +142,9 @@ estimator with asymptotically the same error rate.
   can construct the estimator $\theta_A$ with $\theta_t^A(W_c^0,\ldots,W_c^{t-1}) = 3x_c^A(t)$.
   For a given instance $I_p$ the choice of neighbor $W_c^t$ is given by the value of
   the Bernoulli random variable with parameter $p$ ($\Prob{W_c^t=1}=p$). As a result,
-  $E_p[|\theta_t^A-p|]= 3\Expnew{}{|x_c^A(t)-p/3|}\leq 3\Expnew{}{\norm{\infty}{x_A(t)-x^*}}$.
+  $\Expnew{p}{|\theta_t^A-p|}= 3\Expnew{}{|x_c^A(t)-p/3|}\leq 3\Expnew{}{\norm{\infty}{x_A(t)-x^*}}$.
   Since for any instance $I_p$, we have that $\lim \limits_{t \rightarrow \infty} t^{1+c}\Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
-  It follows that $\lim_{t \rightarrow \infty}t^{1+c}E_p[|\theta_t^A -p|]=0$ for all $p \in [0,1]$.
+  It follows that $\lim_{t \rightarrow \infty}t^{1+c}\Expnew{p}{|\theta_t^A -p|}=0$ for all $p \in [0,1]$.
 %  For a given $p \in [0,1]$, we construct an instance $I_q$ of
 %  Figure~\ref{fig:lb_instance} with $q = p$
 %  and simulate the update rule for all three nodes at the same time.
@@ -183,7 +183,7 @@ just need to prove the following claim.
 \end{claim}
 The above claim states that for any estimator $\theta=(\theta_t)_{t=1}^\infty$,
 we can inspect the functions $\theta_t: \{0,1\}^t \mapsto [0,1]$ and then choose
-a $p \in [0,1]$ such that the function $E_p[|\theta_t-p|]= \Omega(1/t^{1+c})$. As
+a $p \in [0,1]$ such that the function $\Expnew{p}{|\theta_t-p|}= \Omega(1/t^{1+c})$. As
 a result, we have reduced the construction of a lower bound concerning the round
 complexity of a dynamical process to a lower bound concerning the sample complexity of
 estimating the parameter $p$ of a Bernoulli distribution. The claim follows by
@@ -202,14 +202,14 @@ these methods and results we will briefly discuss some of them.
 
 Perhaps the oldest sample complexity lower bound for estimation problems
 is the well-known Cramer-Rao inequality.
-Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ such that $E_p[\theta_t]=p$ for
+Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ such that $\Expnew{p}{\theta_t}=p$ for
 all $p \in [0,1]$, then
 \begin{equation}\label{eq:crlb}
   \Expnew{p}{(\theta_t - p)^2} \geq \frac{p(1-p)}{t}.
 \end{equation}
 Since $\Expnew{p}{|\theta_t - p|}$ can be lower bounded
 by $\Expnew{p}{(\theta_t - p)^2}$ we can apply the Cramer-Rao inequality and
-prove our claim in the case of \emph{unbiased} estimators, $E_p[\theta_t]=p$
+prove our claim in the case of \emph{unbiased} estimators, $\Expnew{p}{\theta_t}=p$
 for all $t$. Obviously, we need to prove it for any estimator $\theta$, however
 this is a first indication that our claim holds.
 %Simply setting $p=1/2$ in inequality (\ref{eq:crlb}) would give us a
