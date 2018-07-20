@@ -69,13 +69,13 @@ establishing the no-regret property of fictitious play.
 We give the proof of the following simple lemma in
 Appendix~\ref{app:s:fictitious_noregret}.
 
-\begin{lemma}\label{l:y_t}
+\begin{replemma}{l:y_t}
 Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
 then for all $t$,
 \[
 \sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
 \]
-\end{lemma}
+\end{replemma}
 
 Now we can understand reason why \enquote{Follow the Leader}
 admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
@@ -89,13 +89,13 @@ numbers $x_t$ and $y_t$ are quite close and as a result the
 difference in their cost must be quite small. The above are
 formally stated in Lemma~\ref{l:no_regret_lemma}. For the proof
 see Appendix~\ref{app:s:fictitious_noregret}.
-\begin{lemma}\label{l:no_regret_lemma}
+\begin{replemma}{l:no_regret_lemma}
   For all $t\geq 0$,
   \(
     f(x_t,b_t) \leq f(y_t,b_t) + 2\frac{1-\alpha}{t+1} +
     \frac{(1-\alpha)^2}{(t+1)^2}
   \).
-\end{lemma}
+\end{replemma}
 
 Theorem~\ref{t:fictitious_noregret} easily follows since
 \begin{align*}

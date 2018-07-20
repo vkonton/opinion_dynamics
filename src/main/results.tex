@@ -52,12 +52,12 @@ Since each agent $i$ must select $x_i(t)$, before knowing which of her neighbors
 will meet and what opinion her neighbor will express, their update rule
 says \enquote{\emph{play the best according to what you have observed}}.
 For a given instance $(P,s,a)$ of the game %of Definition~\ref{d:random_game}
-the Follow the Leader dynamics $x(t)$ is defined in \ref{alg:fictitious_dynamics} and
+the Follow the Leader dynamics $x(t)$ is defined in \ref{alg:FTL_dynamics} and
 Theorem \ref{t:fictitious_convergence} shows its convergence rate to $x^*$.
 %
-\begin{algorithm}\label{alg:FTL_dynamics}
+\begin{algorithm}
   \caption{Follow the Leader dynamics}
-  \label{alg:fictitious_dynamics}
+  \label{alg:FTL_dynamics}
   \begin{algorithmic}[1]
     \STATE Initially $x_i(0) = s_i$ for all agents $i$.
     \STATE At round $t\geq 0$ each agent $i$:
@@ -90,7 +90,7 @@ Theorem \ref{t:fictitious_convergence} shows its convergence rate to $x^*$.
   update rule~(\ref{eq:fictitious_play}) after $t$ rounds satisfies
   \[
     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
-    C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
+    C \sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(1/2,\rho)}},
   \]
   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
 \end{reptheorem}

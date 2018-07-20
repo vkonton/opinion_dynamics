@@ -1,11 +1,11 @@
-1.v page 6 top broken reference.
-2.v Theorem 1 it is log^(3/2) instead of log^2.
+1.v OK page 6 top broken reference.
+2.v OK Theorem 1 it is log^(3/2) instead of log^2.
 3. fictitious play -> FTL dynamics everywhere in the paper remove fictitious play.
 4. Neighborhood N_i in sums instead of i \neq j. Fix notation of FJ model before equation 1 in introduction.
-5.v reptheorem 1 in appendix of fictitious convergence.
-6.v get the paper to be 14 pages with the refs, strict.
+5.v OK reptheorem 1 in appendix of fictitious convergence.
+6.v OK get the paper to be 14 pages with the refs, strict.
 7. Fix Remark 1, in lower bound section.
-8.v In Algorithm 2 d_i = |N_i|.
+8.v OK In Algorithm 2 d_i = |N_i|.
 9.v Remove Algorithm from algorithmic.
 10. Lemma 8 should be in the same form as Theorem 1. For any instance (P,s,a) etc.
 11.v Use Replemma for Lemmas 10,11. Should be 3,4.

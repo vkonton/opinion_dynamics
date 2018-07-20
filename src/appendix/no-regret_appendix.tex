@@ -1,13 +1,14 @@
 \section{FTL dynamics has no-regret}\label{app:s:fictitious_noregret}
 We prove here Lemma~\ref{l:y_t}, which we restate for
 convenience.
-\begin{lemma}
-Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
-then for all $t$,
-\[
-\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
-\]
-\end{lemma}
+\repeatlemma{l:y_t}
+% \begin{lemma}
+% Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
+% then for all $t$,
+% \[
+% \sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
+% \]
+% \end{lemma}
 \begin{proof}By definition of $y_t$,
   $\sum_{\tau=0}^t f(y_t,b_\tau)=\min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$, so
   \begin{align*}
@@ -23,15 +24,16 @@ then for all $t$,
 
 We next prove Lemma~\ref{l:no_regret_lemma} which we combine with
 Lemma~\ref{l:y_t} to show that the update rule~\ref{eq:fictitious_play}
-ensures no regret for the agents. We first restate the Lemma for
+ensures no regret for the agents. We first restate the lemma for
 convenience.
-\begin{lemma}
-  For all $t\geq 0$,
-  \(
-    f(x_t,b_t) \leq f(y_t,b_t) + 2\frac{1-\alpha}{t+1} +
-    \frac{(1-\alpha)^2}{(t+1)^2}
-  \).
-\end{lemma}
+\repeatlemma{l:no_regret_lemma}
+% \begin{lemma}
+%   For all $t\geq 0$,
+%   \(
+%     f(x_t,b_t) \leq f(y_t,b_t) + 2\frac{1-\alpha}{t+1} +
+%     \frac{(1-\alpha)^2}{(t+1)^2}
+%   \).
+% \end{lemma}
 \begin{proof}
   We first prove that for all $t$,
   \begin{equation}\label{eq:abs_value}

@@ -108,19 +108,9 @@ completeness.
       \end{align*}
   \end{itemize}
 \end{proof}
-
-\begin{theorem}\label{thm:convergence}
-  Let $I = (P,s, \alpha)$ be any instance of the opinion formation
-  game of Definition~\ref{d:random_game} with equilibrium
-  $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
-  update rule~\ref{eq:fictitious_play}
-  after $t$ rounds satisfies
-  \[
-    \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
-    C \sqrt{\log n}\frac{(\log t)^{3/2}}{t^{\min(1/2,\rho)}},
-  \]
-  where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
-\end{theorem}
+%
+We now prove Theorem~\ref{t:fictitious_convergence} which we repeat for convenience.
+\repeattheorem{t:fictitious_convergence}
 
 \begin{proof}
 By Lemma~\ref{l:recursive_equation} we have that for all $t\geq 1$ and $p \in [0,1]$,

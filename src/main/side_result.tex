@@ -42,10 +42,10 @@ precisely.
   \begin{algorithmic}[1]
     \STATE Initially $x_i(0) = s_i$ for all agent $i$.
     %\STATE Let $d_i$ be the number of non-negative entries of row $i$ of $P$.
-    \STATE Each agent $i$ keeps an array $M_i$ of length $d_i$.
+    \STATE Each agent $i$ keeps an array $M_i$ of length $|N_i|$.
     \STATE At round $t\geq 1$ each agent $i$:
     \bindent
-    \STATE $x_i(t) = (1-\alpha_i)\sum_{j=1}^{d_i} p_{ij} M_i[j] + \alpha_is_i$
+    \STATE $x_i(t) = (1-\alpha_i)\sum_{j=1}^{|N_i|} p_{ij} M_i[j] + \alpha_is_i$
     \STATE Meets neighbor $W_i^t$ and learns the opinion $x_{W_i^t}(t)$.
     \STATE $M_i[W_i^t] \gets x_{W_i^t}(t-1)$.
     \eindent

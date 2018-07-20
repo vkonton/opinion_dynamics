@@ -17,19 +17,8 @@ Our convergence result is stated in Theorem~\ref{t:fictitious_convergence}
 and it is the main result of the section.
 %
 \repeattheorem{t:fictitious_convergence}
-% \begin{theorem}\label{t:fictitious_convergence}
-%   Let $I = (P,s, \alpha)$ be any instance of the opinion formation
-%   game of Definition~\ref{d:random_payoff_game} with equilibrium
-%   $x^* \in [0,1]^n$.  The opinion vector $x(t)$ produced by
-%   update rule~\ref{eq:fictitious_play} after $t$ rounds satisfies
-%   \[
-%     \Expnew{}{\norm{\infty}{x(t) - x^*}} \leq
-%     C \sqrt{\log n}\frac{(\log t)^{2}}{t^{\min(1/2,\rho)}},
-%   \]
-%   where $\rho = \min_{i \in V} a_i$ and $C$ is a universal constant.
-% \end{theorem}
 %
-\noindent At first we present a high level idea of the proof.
+At first we present a high level idea of the proof.
 Notice that the unique equilibrium point $x^* \in [0,1]^n$ of the
 instance $I=(P,s,\alpha)$ satisfies the following equations
 for each agent $i \in V$,
@@ -72,9 +61,10 @@ for all $t \geq 1$ and all agents $i$:
     \lp|
     \frac{\sum_{\tau=0}^{t-1} x^*_{W_i^\tau}}{t} -
     \sum_{j \in N_i} p_{ij} x^*_j
-    \rp| \leq \delta(t)
+    \rp| \leq
+    \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}} :=
+    \delta(t).
 \end{equation}
-where $\delta(t) = \sqrt{ \frac{\log(\pi^2 n t^2/(6 p))}{t}}$.\\
 Since $W_i^\tau$ are independent random variables with
 $\Prob{W_i^\tau = j}=p_{ij}$ and \(\Exp{x^*_{W_i^\tau}} = \sum_{j \in N_i} p_{ij} x^*_j\).
 By the Hoeffding's inequality we get
@@ -102,14 +92,12 @@ and all agents $i$, we apply the union bound
     \sum_{t=1}^{\infty} \frac{6}{\pi^2} \frac{1}{t^2} \sum_{i=1}^n \frac{p}{n} =
     p
   \end{align*}
-\noindent As a result with probability at least $1-p$ we have that for all $t\geq 1$ and all agents $i$,
-  \begin{equation}\label{eq:error_per_round}
-    \lp|
-    \frac{\sum_{\tau=0}^{t-1} x^*_{W_i^\tau}}{t} -
-    \sum_{j \in N_i} p_{ij} x^*_j
-    \rp| \leq \delta(t)
-  \end{equation}
-\noindent Now we can prove our claim by induction. Assume that $\norm{\infty}{x(\tau)-x^*} \leq e(\tau)$ for all
+  %
+As a result with probability at least $1-p$ we have that
+inequality (\ref{eq:error_per_round}) holds for all $t\geq 1$ and all
+agents $i$.
+Now we can prove our claim by induction.
+Assume that $\norm{\infty}{x(\tau)-x^*} \leq e(\tau)$ for all
 $\tau \leq t-1$. Then
 \begin{align}
     x_i(t)
@@ -149,12 +137,12 @@ $\tau \leq t-1$. Then
 
 \begin{replemma}{l:recursion_upper_bound}
   Let $e(t)$ be a function satisfying the recursion
-  \[
+  \(
     e(t) =
-    \delta(t) + (1-\rho)\frac{\sum_{\tau=0}^{t-1}e(\tau)}{t}
+    \delta(t) + (1-\rho)(\sum_{\tau=0}^{t-1}e(\tau))/{t}
     \text{ and } e(0)=\|x(0) - x^*\|_{\infty},
-  \]
-  where \(\delta(t) = \sqrt{\frac{\ln(D t^{2.5})}{t}} \), \(\delta(0) = 0 \),
+  \)
+  where \(\delta(t) = \sqrt{\ln(D t^{2.5})/t} \), \(\delta(0) = 0 \),
   and $D > \me^{2.5}$ is a positive constant.  Then
   \(
     e(t) \leq
