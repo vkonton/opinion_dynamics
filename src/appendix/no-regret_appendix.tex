@@ -2,13 +2,6 @@
 We prove here Lemma~\ref{l:y_t}, which we restate for
 convenience.
 \repeatlemma{l:y_t}
-% \begin{lemma}
-% Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
-% then for all $t$,
-% \[
-% \sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
-% \]
-% \end{lemma}
 \begin{proof}By definition of $y_t$,
   $\sum_{\tau=0}^t f(y_t,b_\tau)=\min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$, so
   \begin{align*}
@@ -27,13 +20,6 @@ Lemma~\ref{l:y_t} to show that the update rule~\ref{eq:fictitious_play}
 ensures no regret for the agents. We first restate the lemma for
 convenience.
 \repeatlemma{l:no_regret_lemma}
-% \begin{lemma}
-%   For all $t\geq 0$,
-%   \(
-%     f(x_t,b_t) \leq f(y_t,b_t) + 2\frac{1-\alpha}{t+1} +
-%     \frac{(1-\alpha)^2}{(t+1)^2}
-%   \).
-% \end{lemma}
 \begin{proof}
   We first prove that for all $t$,
   \begin{equation}\label{eq:abs_value}
@@ -70,4 +56,21 @@ convenience.
     &\leq
     f(y_t,b_t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}
   \end{align*}
+\end{proof}
+We now restate and prove Theorem~\ref{t:fictitious_noregret}.
+\repeattheorem{t:fictitious_noregret}
+\begin{proof}
+ Theorem~\ref{t:fictitious_noregret} easily follows by Lemma~\ref{l:y_t}
+\begin{align*}
+  \sum_{\tau=0}^t f(x_\tau,b_\tau)
+  &\leq
+  \sum_{\tau=0}^t f(y_\tau,b_\tau) + \sum_{\tau=0}^T 2\frac{1-\alpha}{\tau+1} +
+  \sum_{\tau=0}^t \frac{(1-\alpha)^2}{(\tau+1)^2}\\
+  &\leq
+  \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,y_\tau) +
+  2(1-\alpha)(\log t + 1) + (1-\alpha)\frac{\pi^2}{6}\\
+  &\leq
+  \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,y_\tau) + O(\log t)
+\end{align*}
+
 \end{proof}

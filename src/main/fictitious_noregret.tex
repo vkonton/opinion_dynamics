@@ -1,6 +1,6 @@
 \section{FTL Dynamics has no-regret}\label{s:fictitious_noregret}
 In this section we explain why the
-update rule~\ref{eq:fictitious_play} (\enquote{Follow the Leader}) ensures
+update rule~(\ref{eq:fictitious_play}) (\enquote{Follow the Leader}) ensures
 no-regret to the agents that play the repeated version of the one shot
 game of Definition~\ref{d:random_game}.
 Based on the disagreement cost that each agent experiences,
@@ -19,8 +19,9 @@ Generally, different OCO problems can be defined by a set of functions
 $\mcal{F}$ that the adversary chooses from and a feasibility
 set $\mcal{K}$ from which the player picks her value (see \cite{Haz16}
 for an introduction to the OCO framework).
-In our case the feasibility set is $\mcal{K}=[0,1]$ and the set of functions is $\mcal{F}_{\alpha,s} = \{(1-\alpha)(x-b)^2 +
-\alpha(x -s)^2,~\text{for all }b \in [0,1]\}$.
+In our case the feasibility set is $\mcal{K}=[0,1]$ and the set of functions
+is $\mcal{F}_{\alpha,s} = \{(1-\alpha)(x-b)^2 + \alpha(x -s)^2$, for all
+$b \in [0,1]\}$.
 As a result, each selection of the
 constants $s,\alpha$ lead to a different OCO problem.
 
@@ -45,7 +46,7 @@ is a no-regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
 This is formally stated in Theorem~\ref{t:fictitious_noregret}
 and is the main result of this section.
 \repeattheorem{t:fictitious_noregret}
-Returning in our repeated game, it is reasonabe to
+Returning in our repeated game, it is reasonable to
 assume that each agent $i$ selects $x_i(t)$ according
 to no-regret algorithm $A_i$ for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$,
 since by Definition~\ref{d:no_regret_algo},
@@ -54,8 +55,8 @@ since by Definition~\ref{d:no_regret_algo},
 The latter means that the time averaged total disagreement cost
 that she suffers is similar to the time averaged cost by expressing the
 best fixed opinion and this holds no matter the opinions of the
-agents that $i$ meets. Theorem~\ref{t:fictitious_noregret}
-ensures that \emph{fictitious play} is a no-regret algorithm
+neighbors that $i$ meets. Theorem~\ref{t:fictitious_noregret}
+ensures that \emph{Follow the Leader} is a no-regret algorithm
 for any OCO problem $\mcal{F}_{s_i,\alpha_i}$ and explains why
 (\ref{eq:fictitious_play}) is a rational update rule for the agents.
 
@@ -65,12 +66,14 @@ account the value $b_t$ admits no-regret (Lemma~\ref{l:y_t}).
 Obviously knowing the value $b_t$ before selecting $x_t$
 is in direct contrast with the OCO framework, however proving
 the no-regret property for this algorithm easily extends to
-establishing the no-regret property of fictitious play.
-We give the proof of the following simple lemma in
+establishing the no-regret property of \emph{Follow the Leader}.
+Due to lack of space the proof of the subsequent lemmas and
+Theorem~\ref{t:fictitious_noregret} can be found in the
 Appendix~\ref{app:s:fictitious_noregret}.
 
 \begin{replemma}{l:y_t}
-Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$. Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
+Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$.
+Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
 then for all $t$,
 \[
 \sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
@@ -87,8 +90,9 @@ term $f(x_t,b_t)$ that $y_t$ takes into account doesn't change
 dramatically the minimum point of the sum. Thus, for each $t$ the
 numbers $x_t$ and $y_t$ are quite close and as a result the
 difference in their cost must be quite small. The above are
-formally stated in Lemma~\ref{l:no_regret_lemma}. For the proof
-see Appendix~\ref{app:s:fictitious_noregret}.
+formally stated in Lemma~\ref{l:no_regret_lemma}
+which implies directly Theorem~\ref{t:fictitious_noregret}.
+For the proof see Appendix~\ref{app:s:fictitious_noregret}.
 \begin{replemma}{l:no_regret_lemma}
   For all $t\geq 0$,
   \(
@@ -97,15 +101,3 @@ see Appendix~\ref{app:s:fictitious_noregret}.
   \).
 \end{replemma}
 
-Theorem~\ref{t:fictitious_noregret} easily follows since
-\begin{align*}
-  \sum_{\tau=0}^t f(x_\tau,b_\tau)
-  &\leq
-  \sum_{\tau=0}^t f(y_\tau,b_\tau) + \sum_{\tau=0}^T 2\frac{1-\alpha}{\tau+1} +
-  \sum_{\tau=0}^t \frac{(1-\alpha)^2}{(\tau+1)^2}\\
-  &\leq
-  \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,y_\tau) +
-  2(1-\alpha)(\log t + 1) + (1-\alpha)\frac{\pi^2}{6}\\
-  &\leq
-  \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,y_\tau) + O(\log t)
-\end{align*}
