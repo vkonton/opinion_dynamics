@@ -18,16 +18,16 @@ common assumption, that dates back to DeGroot \cite{DeGroot}, is that opinions
 evolve through a form of repeated averaging of information collected from the
 agent social neighborhoods.
 
-Our work builds on the model proposed by Friedkin and Johnsen \cite{FJ90}(FJ
-model).  The FJ model is a variation on the DeGroot model that captures the
-fact consensus on the opinions of a social group is rarely reached.
+Our work builds on the model proposed by Friedkin and Johnsen \cite{FJ90}. 
+The FJ model is a variation on the DeGroot model capturing the
+fact that consensus on the opinions is rarely reached.
 According to FJ model each person $i$ has a public opinion $x_i \in [0,1]$
 and an internal opinion $s_i\in [0,1]$, which is private and invariant
 over time. There also exists a weighted graph $G(V,E)$ representing a social
 network where $V$ stands for the persons ($|V|=n$) and $E$ their social
 relations. Initially, all nodes start with their internal opinion and
 at each round $t\geq1$, update their public opinion $x_i(t)$ to a weighted
-average of public opinion of their social neighbors and their internal opinion,
+average of the public opinions of their social neighbors and their internal opinion,
 %
 \begin{equation}\label{eq:FJ_model}
   %
@@ -60,11 +60,12 @@ disagreement cost
 \end{equation}
 %
 Note that the FJ model is the \emph{simultaneous best response dynamics} in the
-repeated version of this one shot game and that the Nash equilibrium of the
-above game is $x^*$. In \cite{BKO11} they quantified the inefficiency of the
-equilibrium with respect to the total disagreement cost. They proved that
-the Price of Anarchy is less than $9/8$ in case $G$ is undirected and
-$w_{ij}=w_{ji}$.
+repeated version of this one shot game and its equilibrium point $x^*$ is the
+Nash equilibrium of the above game. 
+In \cite{BKO11} they quantified its inefficiency with respect to the 
+total disagreement cost. They proved that the \emph{Price of Anarchy} is less 
+than $9/8$ in case $G$ is undirected and $w_{ij}=w_{ji}$ and
+provided bounds in the case of unweighted Eulerian directed graphs.
 
 We remark that in \cite{BKO11} an alternative framework for studying
 the dynamics of opinions were introduced. Instead of
@@ -72,7 +73,7 @@ modeling the way opinions evolve by precise dynamical processes, agents can be
 considered to repeatedly play a suitable one shot opinion formation game and
 update their opinions so as to minimize their individual disagreement cost.
 This framework allows for different aspects of the opinion formation process to
-be captured by suitable one shot games.  For example, in \cite{BGM13,EFHS17}
+be captured by suitable one shot games.  For example, in \cite{BGM13,BFM16,EFHS17}
 variants of the above opinion formation game were introduced and the
 convergence properties of the \emph{best response dynamics} were studied.
 Conceptually, this framework, also allows for the agents to update their
@@ -83,22 +84,29 @@ adopting \emph{best response}, could update their opinions according to a
 
 \subsection{Motivation and our setting}
 
-The equilibrium point $x^*$ of the FJ model is generally considered to be a
-good estimation of the final opinions formed in a social network. For example,
-Gionis et al.  \cite{GTT13} considered the problem of identifying $k$ agents in
-a network to set their internal opinion equal to 1 so as to maximize the sum
-of the opinions in the equilibrium point $x^*$ ($\norm{1}{x^*}$). This work
-belongs to a recent line of research concerning influence maximization problems
-with respect to $x^*$, \cite{GTT13,AKPT18,MMT17}. The reason for modeling such
-problems by the equilibrium $x^*$ is evident: the FJ model is one of the
-standard models for opinion formation and it converges exponentially fast to
-$x^*$.
+Many recent works study the Nash equilibrium $x^*$
+of the opinion formation game defined in \cite{BKO11}
+under various perspectives. In \cite{CCL16} they extended the
+bounds for PoA in more general classes of directed graphs, 
+while many recently introduced influence maximization problems 
+\cite{GTT13,AKPT18,MMT17} are defined with respect to $x^*$.
+For example, Gionis et al. \cite{GTT13} considered the problem 
+of identifying $k$ nodes in a network to set their internal 
+opinion equal to 1 so as to maximize the sum
+of the opinions in the equilibrium point $x^*$ ($\norm{1}{x^*}$).
+The reason for this scientific interest is evident:
+The equilibrium $x^*$ is considered as
+an appropriate way to model the final opinions 
+formed in a social network, since the \emph{standard} 
+FJ model converges exponentially fast to it. 
 
-Our work is motivated by the fact that the FJ model assumes a large amount of
-information exchange between the agents. At each round, its update rule
-requires that every agent learns all the opinions of her social neighbors.  In
+Our work is motivated by the fact that there are notable cases
+in which the FJ model is not an appropriate model for the dynamic of
+the opinions, due to the  large amount of information exchange that it implies. 
+More precisely, at each round its update 
+rule~(\ref{eq:FJ_model}) requires that every agent learns all the opinions of her social neighbors.  In
 today's large social networks where users usually have several hundreds of
-friends it is unlikely that, each day, they learn the opinions of all their
+friends it is higly unlikely that, each day, they learn the opinions of all their
 social neighbors.  In such environments it is far more reasonable to assume
 that individuals randomly meet a small subset of their acquaintances and these
 are the only opinions that they learn. Such information exchange constraints
@@ -108,7 +116,7 @@ limiting behavior of the opinions. In this work we ask:
 %
 \begin{question}\label{q:motivation1}
   %
-  Is the equilibrium $x^*$ the correct way to model the final formed opinions
+  Is the equilibrium $x^*$ an adequate way to model the final formed opinions
   in a large social network? Namely, are there simple variants of the FJ model
   that require limited information exchange and converge fast to $x^*$? Can
   they be justified as natural behavior for selfish agents under a
