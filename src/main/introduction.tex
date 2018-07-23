@@ -1,5 +1,19 @@
 \section{Introduction}
 
+%The study of \emph{Opinion Formation} has a long history (see e.g.
+%\cite{Jackson}). Opinion Formation is a \emph{dynamic process} in the sense
+%that socially connected people (e.g. family, friends, colleagues)
+%exchange information and this leads to changes in their expressed opinions
+%over time. The wide use Internet and social media has extremely facilitated
+%this information exchange and intensified the interest towards understanding
+%the way opinions are formed  This understanding is of great importance in 
+%todays's social and economic life since for various reasons 
+%such as prediction, advertisement etc. To capture opinion formation on a formal level, 
+%several have been proposed over the years (see e.g., \cite{DeGroot,FJ90,HK}.
+%The very common assumption that all these models share and dates back to DeGroot
+%\cite{DeGroot}, is that opinions evolve through a form of repeated averaging of 
+%information collected from the agent's social neighborhoods.
+
 The study of opinion formation dynamics has a long history (see e.g.
 \cite{Jackson}).  Today, the advent of social media makes the study of opinion
 formation in such large social networks even more important.  Apart from purely
@@ -222,12 +236,11 @@ and intuitive characterization of the update rules that can achieve exponential
 convergence and serve as an \enquote{algorithmic guide} for future limited
 information exchange variants of the FJ model.  Moreover, they indicate the
 fundamental reason underlying the exponentially fast convergence of the FJ model.
-It has
-little to do with the \enquote{large} information exchange that it requires and
+It has little to do with the \enquote{large} information exchange that it requires and
 much more to do with the fact that it uses the exact values of the weights
 $w_{ij}$.
 
-\subsection{Related Work}
+\subsection{Further Related Work}
 
 Apart from the aforementioned results there exists a large amount of literature
 concerning the FJ model.  Many recent works \cite{BGM13,CKO13,BFM16,EFHS17}
@@ -238,11 +251,13 @@ opinion formation game in which social relations depend on the expressed
 opinions is studied.  They prove that the discretized version of the above
 game admits a potential function and thus best-response converges to the Nash
 equilibrium. Convergence results in other discretized variants of the FJ model
-can be found in \cite{YOASS13,FGV16}. In \cite{FPS16} the convergence
-properties of limited information variants of the Heglesmann-Krause model
-\cite{HK} and the FJ model are examined.
+can be found in \cite{YOASS13,FGV16}. In \cite{FPS16} they provide convergence
+results for limited information variants of the Heglesmann-Krause model
+\cite{HK} and the FJ model. Although the examined limited information variant 
+of the FJ model is very similar to our FTL dynamics, the provided convergence results
+are much weaker than ours, since they concern the expected value of the opinion vector.
 
-Other works that relate to ours concern the convergence properties of
+Other works that relate to ours, concern the convergence properties of
 dynamics based on no-regret learning algorithms.  In
 \cite{FV97,FS99,SA00,SALS15} it is proved that in a finite $n$-person game if
 each agent updates her mixed strategy according to a no-regret algorithm the
@@ -257,21 +272,22 @@ unique Nash equilibrium, the strategy vector converges \emph{locally} and
 exponentially fast to it. They also provide conditions for \emph{global}
 convergence.  Our results fit in this line of research since we show that for a
 game with \emph{infinite} strategy space, the strategy vector (and not the
-time-averaged) converges to the unique Nash equilibrium.
+time-averaged) converges to the Nash equilibrium $x^*$.
 
-Imperfect information settings have recently received substantial attention
+No-regret dynamics in imperfect information settings have recently received substantial attention
 from the scientific community since they provide realistic models for the
 practical applications of game theory.  Perfect payoff information is rare in
 practice; agents act based on random or noisy past payoff observations.
 Kleinberg et al. in \cite{KPT09} treated load-balancing in distributed systems
-as a repeated game and analyzed the convergence properties of no-regret online
+as a repeated game and analyzed the convergence properties of no-regret
 learning algorithms under the \emph{full information assumption} that each
 agent learns the load of every machine.  In a subsequent work \cite{KPT11}, the
 same authors consider the same problem in a \emph{limited information setting}
 (\enquote{bulletin board model}), in which each agent learns the load of just
-the machine that served him. In \cite{HCM17,MS17} they examine the convergence
-properties of online learning algorithms in case the payoffs observed by the
-agents are contaminated with random noise.  Finally, in \cite{BM17} they show
-stochastic dynamics that lead to no regret regardless of the amount of noise in
-the player's observations and show that in specific zero-sum games time
-averages converge to the NE for any noise level.
+the machine that served him. Most relevant to ours, are the works \cite{HCM17,MS17,BM17,CHM17}
+where they examine the convergence properties of no-regret learning algorithms 
+in case the agents observe their payoffs with some additive
+zero-mean random noise. In our imperfect information setting the agents
+experience random disagreement cost, whereas their actual cost is its
+expected value. The main difference is that our \emph{noise} is not additive
+but due to a sampling process. 
