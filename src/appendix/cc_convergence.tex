@@ -38,40 +38,43 @@ Suppose that the collector picks coupons with different
 probabilities, where $n$ is the number of distinct coupons.
 Let $w$ be the minimum of these probabilities.
 If he selects $\ln n/w+ c/w$ coupons, then:
-$$
+\[
 \Prob{\text{collector hasn't seen all coupons}} \leq \frac{1}{\me^c}
-$$
+\]
 \end{lemma}
 
-For convenience of reasoning, we will divide the time in "epochs".
-The length of each epoch is $B$, so times $1$ to $B$ belong to the first
-epoch etc.
-The next lemma is a calculation of the appropriate size of $B$.
+%For convenience of reasoning, we will divide the time in "epochs".
+%The length of each epoch is $B$, so times $1$ to $B$ belong to the first
+%epoch etc.
+%The next lemma is a calculation of the appropriate size of $B$.
 \begin{lemma}\label{l:coupons}
 Let $\pi_{ij}(t)$ be the most recent round before round $t$ that agent $i$ met agent $j$ 
 and $B=2\ln(\frac{nt}{\delta})/\min_{ij}p_{ij}$.
-Then with probability at least $1-\delta$, for all $t\geq B$ and for all
-$i, j \in N_i$\[t-B\leq \pi_{ij}(t)\leq t.\]
-%If the size of
-%each epoch is
-%\[
-%B = \frac{2}{\min_{ij}p_{ij}}\ln \frac{nt}{\delta}
-%\]
-%then with probability at least $1-\delta$ all agents pick all their neighbours
-%at least once in every epoch.
+Then with probability at least $1-\delta$, for all $\tau \geq B$ and for all
+$i, j \in N_i$\[\tau-B\leq \pi_{ij}(\tau)\leq \tau-1.\]
 \end{lemma}
 \begin{proof}
-In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a
-collector and wants to gather all $n-1$ coupons during each epoch.
-Suppose $d = \max_i d_i$ is the maximum degree of the graph.
-Then, if we set  $c = \ln (\frac{nt}{\delta})$ , using Lemma~\ref{l:coupons_lemma}
-we get that a node hasn't seen at least one neighbour after $c/w + \ln d/w$ samples
-with probability at most $\frac{\delta}{nt}$. This means that if we set
-$D = c/w + \ln d/w =  \ln \frac{nt}{\delta}/w +  \ln d/w \geq 2/w\ln\frac{nt}{\delta}$ 
-when $\delta$ is small enough, then the probability that a specific agent at a specific 
-epoch hasn't collected all neighbouring opinions at least once is at most $\frac{\delta}{nt}$. 
-By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs
-with probability at least $1 - \delta$.
+For simplicity we denote $w=\min_{ij}p_{ij}$. 
+Consider an agent $i$ at round $\tau \geq B$ where $B=2\ln(\frac{nt}{\delta})/w$
+and assume that there exists an agent $j\in N_i$ such that $\pi_{ij}(\tau)< {\tau-B}$.
+Agent $i$ can be viewed as a coupon collector that has buyed $B$ coupons
+but has not found the coupon corresponding to agent $j$. Since $N_i<n$ and
+$\min_{j \in N_i}p_{ij}\geq w$ by Lemma~\ref{l:coupons_lemma} we have that 
+\[\Prob{\text{there exists }j\in N_i \text{ s.t. }\pi_{ij}(\tau)< {t-B}}\leq \frac{nt}{\delta}\]
+The proof follows by a union bound for all agent $i$ and all round $B\leq \tau \leq t$. 
+
+
+%In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a
+%collector and wants to gather all $n-1$ coupons during each epoch.
+%Suppose $d = \max_i d_i$ is the maximum degree of the graph.
+%Then, if we set  $c = \ln (\frac{nt}{\delta})$ , using Lemma~\ref{l:coupons_lemma}
+%we get that a node hasn't seen at least one neighbour after $c/w + \ln d/w$ samples
+%with probability at most $\frac{\delta}{nt}$. This means that if we set
+%$D = c/w + \ln d/w =  \ln \frac{nt}{\delta}/w +  \ln d/w \geq 2/w\ln\frac{nt}{\delta}$ 
+%when $\delta$ is small enough, then the probability that a specific agent at a specific 
+%epoch hasn't collected all neighbouring opinions at least once is at most $\frac{\delta}{nt}$. 
+%By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs
+%with probability at least $1 - \delta$.
 \end{proof}
 %Since all neighbours are picked at least once during each epoch,
 %the outdatedness of each agent is at most twice the length of the
@@ -92,7 +95,19 @@ then with probability at least $1-\delta$
 \leq \exp \lp(-\frac{\rho t\min_{ij}p_{ij}}{2\ln( \frac{nt}{\delta})} \rp)\]
 where $\rho = \min_{i\in V}\alpha_i$.
 \end{corollary}
-We now prove Theorem~\ref{t:exponential_update_rule} using the previous results.
+\begin{proof}
+Let $B=2\ln(\frac{nt}{\delta})/\min_{ij}p_{ij}$. By Lemma~\ref{l:coupons}
+we have that with probability at least $1-\delta$, for all $i,j\in N_i$ and 
+for all $\tau \geq B$, \[\tau -B \leq \pi_{ij}(\tau)  \]
+As a result, with probability at least $1-\delta$ the requirements 
+of Lemma~\ref{l:outdatedness_induction} are satisfied, meaning that 
+\[\norm{\infty}{x(t)-x^*} \leq (1-\rho)^{\frac{t}{B}}
+\leq \exp \lp(-\frac{\rho t\min_{ij}p_{ij}}{2\ln( \frac{nt}{\delta})} \rp)\]
+\end{proof}
+
+
+
+\noindent We can now prove Theorem~\ref{t:exponential_update_rule} using the previous results.
 \repeattheorem{t:exponential_update_rule}
 \begin{proof}
 Let $u(t) = \norm{\infty}{x(t)-x^*}$ and $w = \min_{ij}p_{ij}$.
@@ -100,7 +115,7 @@ From Corollary~\ref{cor:window} we obtain:
 \[ \Prob{u(t) >\exp\lp(-\frac{\rho wt}{2\ln( \frac{nt}{\delta})} \rp)} \leq \delta \]
 for every probability $\delta \in [0,1]$. Also, since all the
 parameters of the problem lie in $[0,1]$, we have
-$$\Exp{u(t)|u(t) > r} \leq 1$$
+\[\Exp{u(t)|u(t) > r} \leq 1\]
 Now, by the conditional expectations identity, we get:
 \begin{align*}
 \Exp{u(t)} &= \Exp{u(t)|u(t) > r}\Prob{u(t) > r} +\Exp{u(t)|u(t) \leq r}\Prob{u(t) \leq r}\\
@@ -110,7 +125,7 @@ where $r = \exp \lp(-\frac{\rho wt}{2\ln( \frac{nt}{\delta})}\rp)$.
 If we set $\delta = \exp \lp(-\frac{\rho w\sqrt{t}}{2\ln nt}\rp)$, then:
 \[
 \Exp{u(t)} \leq \exp \lp(-\frac{\rho w\sqrt{t}}{2\ln nt}\rp)
-+ \exp \lp(-\frac{\rho wt}{2\ln( \frac{nt}{p})}\rp)
++ \exp \lp(-\frac{\rho wt}{2\ln( \frac{nt}{\delta})}\rp)
 \]
 We now evaluate $r$ for our choice of probability $\delta$:
 \begin{align*}

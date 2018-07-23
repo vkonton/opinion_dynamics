@@ -1,3 +1,39 @@
+%We study opinion formation games based on the famous model proposed by Friedkin
+%and Johsen.  In today's huge social networks the assumption that in each round
+%agents update their opinions by taking into account the opinions of
+%\emph{all} their friends could be unrealistic. Therefore, we assume that in
+%each round each agent gets to meet with only one random friend of
+%hers.  Since it is more likely to meet some friends than others we assume
+%that agent $i$ meets agent $j$ with probability $p_{ij}$.
+%The original setting of the FJ model and our limited information
+%variant share the same equilibrium $x^*$.  Therefore, the interpretation
+%of the equilibrium $x^*$ as an estimate of the opinions of the agents in the long
+%run is still valid in our setting that resembles large social networks.
+% we use a \emph{limited information} opinion
+% formation game, where at round $t$, agent $i$ with intrinsic opinion
+% $s_i\in[0,1]$ and expressed opinion $x_i(t) \in[0,1]$ meets with probability
+% $p_{ij}$ neighbor $j$ with opinion $x_j(t)$ and suffers a disagreement cost
+% that is a convex combination of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
+
+
+%For a dynamics in the above setting to be considered as natural it must be
+%simple, converge to the equilibrium $x^*$, and perhaps most importantly, it
+%must be a rational choice for selfish agents.  In this work we show that
+%an intuitive game play, is a natural dynamics for the above game.
+%We prove that, after $O(1/\eps^2)$ rounds, the opinion vector
+%is within error $\eps$  of the equilibrium. Moreover, to show that selfish
+%agents would choose to update their opinions according to our update rule,
+%we use a limited information opinion formation game, and show that it
+%guarrantees no regret to the agents.
+
+
+%The classical Friedkin-Johsen dynamics converges to the equilibrium within
+%error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
+%information setting, our update rule needs $\widetilde{O}(1/\eps^2)$ rounds.
+%We ask whether there exists a different natural dynamics for our problem
+%with better rate of convergence.  We answer this question in the negative
+%by showing that update rules that guarrantee no regret to the agents cannot
+%converge with less than $\mrm{poly}(1/\eps)$ rounds.
 We study opinion formation games based on the famous model proposed by Friedkin
 and Johsen.  In today's huge social networks the assumption that in each round
 agents update their opinions by taking into account the opinions of
@@ -5,15 +41,11 @@ agents update their opinions by taking into account the opinions of
 each round each agent gets to meet with only one random friend of
 hers.  Since it is more likely to meet some friends than others we assume
 that agent $i$ meets agent $j$ with probability $p_{ij}$.
-The original setting of the FJ model and our limited information
-variant share the same equilibrium $x^*$.  Therefore, the interpretation
-of the equilibrium $x^*$ as an estimate of the opinions of the agents in the long
-run is still valid in our setting that resembles large social networks.
-% we use a \emph{limited information} opinion
-% formation game, where at round $t$, agent $i$ with intrinsic opinion
-% $s_i\in[0,1]$ and expressed opinion $x_i(t) \in[0,1]$ meets with probability
-% $p_{ij}$ neighbor $j$ with opinion $x_j(t)$ and suffers a disagreement cost
-% that is a convex combination of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
+Specifically, we define an opinion formation game, where at round $t$,
+agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
+\in[0,1]$ meets with probability $p_{ij}$ neighbor $j$ with opinion $x_j(t)$
+and suffers a disagreement cost that is a convex combination of
+$(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
 
 
 For a dynamics in the above setting to be considered as natural it must be
@@ -23,8 +55,7 @@ an intuitive game play, is a natural dynamics for the above game.
 We prove that, after $O(1/\eps^2)$ rounds, the opinion vector
 is within error $\eps$  of the equilibrium. Moreover, to show that selfish
 agents would choose to update their opinions according to our update rule,
-we use a limited information opinion formation game, and show that it
-guarrantees no regret to the agents.
+we show that it has no-regret.
 
 
 The classical Friedkin-Johsen dynamics converges to the equilibrium within
@@ -32,5 +63,7 @@ error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
 information setting, our update rule needs $\widetilde{O}(1/\eps^2)$ rounds.
 We ask whether there exists a different natural dynamics for our problem
 with better rate of convergence.  We answer this question in the negative
-by showing that update rules that guarrantee no regret to the agents cannot
-converge with less than $\mrm{poly}(1/\eps)$ rounds.
+by showing that dynamics based on no-regret algorithms cannot converge with
+less than $\mrm{poly}(1/\eps)$ rounds.
+
+
