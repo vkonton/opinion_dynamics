@@ -12,7 +12,11 @@ Having this knowledge, one could try to come up with an
 update rule resembling the original update rule of the FJ model.
 In update rule (\ref{alg:cc_upper}), each agent stores the
 \emph{most recent} opinions of the random neighbors that she meets in an array
-and then update her opinion according to their weighted sum (each agent knows row $i$ of $P$).
+and then update her opinion according to their weighted sum 
+(each agent knows row $i$ of $P$). For a given instance
+$I=(P,s,\alpha)$ we call the produced dynamics \emph{Row Dependent dynamics}
+and it is defined in \ref{alg:influence_dependent}. 
+
 The problem with this approach is that the opinions of the neighbors
 that she keeps in her array are \emph{outdated}, i.e. the opinion of
 neighbor of agent $i$ is different than what she expressed in their
@@ -40,7 +44,7 @@ precisely.
 \end{remark}
 \vspace{-5mm}
 \begin{algorithm*}
-  \caption{Matrix Dependent dynamics}
+  \caption{Row Dependent dynamics}
   \label{alg:influence_dependent}
   \begin{algorithmic}[1]
     \STATE Initially $x_i(0) = s_i$ for all agent $i$.
