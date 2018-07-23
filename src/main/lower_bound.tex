@@ -57,15 +57,9 @@ Theorem~\ref{t:lower_bound} applies since such a selection
 can be encoded as an opinion dependent update rule.
 Specifically, the function $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
 as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
-The next theorem is our fundamental result about lower bounds in
-\emph{opinion dependent} update rules.
-\repeattheorem{t:lower_bound}
-% \begin{theorem}
-%   Let $A$ be a sequence of functions with corresponding opinion dependent
-%   dynamics $x_A(t)$.
-%   For any $c>0$, there exists an instance $I$ such that
-%   $\Exp{\norm{\infty}{x_A(t)-x^*}} = \Omega(1/t^{1+c})$.
-% \end{theorem}
+% The next theorem is our fundamental result about lower bounds in
+% \emph{opinion dependent} update rules.
+% \repeattheorem{t:lower_bound}
 
 At first we show that any opinion dependent $A$, achieving the previous
 convergence rate, can be used as an estimator of the parameter
@@ -90,16 +84,20 @@ close to the mean $p$ of the Bernoulli that generated the samples.
 To measure the efficiency of an estimator we define the \emph{risk}
 which corresponds to the expected loss of an estimator.
 \begin{definition}\label{d:risk}
-  For an estimator $\theta =(\theta_t)_{t=1}^\infty$ we define
-  its risk
-  $\Expnew{p}{|\theta_t(X_1,\ldots,X_t) - p|}$,
-  where
-  \[
-    \Expnew{p}{|\theta_t(X_1,\ldots,X_t) - p|}
-    = \sum_{(y_1,\ldots,y_t)\in\{0,1\}^t}
-    |\theta_t(y_1,\ldots,y_t) -p|\
-    p^{\sum_{i=1}^t y_i}\ (1-p)^{t-\sum_{i=1}^t y_i}
-  \]
+  Let $P$ be a Bernoulli distribution with mean $p$ and
+  $P^t$ be the corresponding $t$-fold product distribution.
+  The risk of an estimator $\theta =(\theta_t)_{t=1}^\infty$ is
+  $\Expnew{(X_1,\ldots,X_t) \sim P^t}{|\theta_t(X_1,\ldots,X_t) - p|}$,
+  which we will denote by
+  $\Expnew{p}{|\theta_t(X_1,\ldots,X_t) - p|}$ or
+  $\Expnew{p}{|\theta_t - p|}$ for brevity.
+  % where
+  % \[
+  %   \Expnew{p}{|\theta_t(X_1,\ldots,X_t) - p|}
+  %   = \sum_{(y_1,\ldots,y_t)\in\{0,1\}^t}
+  %   |\theta_t(y_1,\ldots,y_t) -p|\
+  %   p^{\sum_{i=1}^t y_i}\ (1-p)^{t-\sum_{i=1}^t y_i}
+  % \]
 \end{definition}
 The risk $\Expnew{p}{|\theta_t(Y_1,\ldots,Y_t) - p|}$ is the expected distance
 of the estimated value $\theta_t$ from the parameter $p$, when the
@@ -176,7 +174,7 @@ It follows by Lemma~\ref{l:reduction} that in order to prove Theorem~\ref{t:lowe
 just need to prove the following claim.
 \begin{claim}\label{cl:fixed_p}
   For any estimator $\theta = (\theta_t)_{t=1}^\infty$
-  there exists a fixed $p \in [0,1]$ such that
+  there exists fixed $p \in [0,1]$ such that
   \(
     \lim_{t \to \infty} t^{1+c} \Expnew{p}{|\theta_t - p} > 0.
   \)

@@ -34,7 +34,7 @@ $\mcal{K}=[0,1]$ is a sequence of functions $(A_t)_{t=1}^\infty$ where $A_t:[0,1
 An algorithm $A$ is no-regret for the OCO problem with $\mcal{F}_{a,s}$ and
 $\mcal{K}=[0,1]$ if and only if for all sequences $(b_t)_{t=0}^\infty$ that the
 adversary may choose, if $x_t = A_t(b_0,\dots,b_{t-1})$ then for all $t$
-\[\sum_{\tau=0}^t f(x_\tau,b_\tau)  \leq \min_{x \in [0,1]}\sum_{\tau=0}^t f(x,b_\tau) + o(t) \]
+\(\sum_{\tau=0}^t f(x_\tau,b_\tau)  \leq \min_{x \in [0,1]}\sum_{\tau=0}^t f(x,b_\tau) + o(t).\)
 \end{definition}
 Informally speaking if the player selects the value
 $x_t$ according to a \emph{no-regret algorithm} then
@@ -45,7 +45,8 @@ $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
 is a no-regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
 This is formally stated in Theorem~\ref{t:fictitious_noregret}
 and is the main result of this section.
-\repeattheorem{t:fictitious_noregret}
+% \repeattheorem{t:fictitious_noregret}
+
 Returning in our repeated game, it is reasonable to
 assume that each agent $i$ selects $x_i(t)$ according
 to no-regret algorithm $A_i$ for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$,
@@ -75,9 +76,10 @@ Appendix~\ref{app:s:fictitious_noregret}.
 Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$.
 Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
 then for all $t$,
-\[
-\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}\sum_{\tau = 0}^tf(x,b_\tau)
-\]
+\(
+\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{x \in [0,1]}
+\sum_{\tau = 0}^tf(x,b_\tau).
+\)
 \end{replemma}
 
 Now we can understand reason why \enquote{Follow the Leader}
@@ -100,4 +102,3 @@ For the proof see Appendix~\ref{app:s:fictitious_noregret}.
     \frac{(1-\alpha)^2}{(t+1)^2}
   \).
 \end{replemma}
-

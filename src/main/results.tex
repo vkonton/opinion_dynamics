@@ -5,13 +5,11 @@ an instance of the game of Definition~\ref{d:random_game}.
 %
 \begin{definition}\label{d:instance}
   We denote an instance of the opinion formation game of Definition~\ref{d:random_game}
-  as $(P,s,\alpha)$.
-  \begin{itemize}
-    \item $P$ is a $n \times n$  matrix with non-negative elements $p_{ij}$,
-      with $p_{ii}=0$ and $\sum_{j=1}^n p_{ij}$ is either $0$ or $1$.
-    \item $s \in [0,1]^n$ is the internal opinion vector.
-    \item $\alpha \in (0,1]^n$ the self confidence coefficient vector.
-  \end{itemize}
+  as $(P,s,\alpha)$, where
+    $P$ is a $n \times n$  matrix with non-negative elements $p_{ij}$,
+      with $p_{ii}=0$ and $\sum_{j=1}^n p_{ij}$ is either $0$ or $1$,
+    $s \in [0,1]^n$ is the internal opinion vector,
+    $\alpha \in (0,1]^n$ the self confidence coefficient vector.
 \end{definition}
 %
 Following the notation introduced earlier we have that
@@ -65,12 +63,12 @@ Theorem \ref{t:fictitious_convergence} shows its convergence rate to $x^*$.
     \STATE Meets neighbor with index $W_i^t$, $\Prob{W_i^t=j}=p_{ij}$.
     \STATE Suffers cost \((1-\alpha_i) (x_i(t) - x_{W_i^t}(t))^2 + a_i (x_i(t) - s_i)^2\)
     and learns the opinion $x_{W_i^t}(t)$.
-  \item Updates her opinion
-    \begin{equation}\label{eq:fictitious_play}
+  \STATE Updates her opinion
+    \inlineequation[eq:fictitious_play]{
       x_i(t+1) =
       \argmin_{x \in [0,1]}
       \sum_{\tau=0}^{t}(1-\alpha_i)(x-x_{W_i^\tau}(\tau))^2+\alpha_i(x-s_i)^2
-    \end{equation}
+    }
     \eindent
   \end{algorithmic}
 \end{algorithm}
@@ -118,10 +116,10 @@ if the adversary can pick functions from a different class
   Let $\{b_t\}_{t=1}^\infty$ be an arbitrary sequence with
   $b_t \in [0,1]$. If $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x_,b_\tau)$
   then for all $t$,
-  \[
+  \(
     \sum_{\tau=0}^{t}f(x_\tau,b_\tau) \leq
-    \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}
-  \]
+    \min_{x \in [0,1]}\sum_{\tau=0}^tf(x,b_\tau) + \bigOh{\log t}.
+  \)
 \end{reptheorem}
 
 On the positive side, the FTL dynamics is a simple and natural

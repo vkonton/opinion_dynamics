@@ -2,7 +2,7 @@
 
 We already discussed that the reason that opinion dependent dynamics suffer slow
 convergence is that the update rule depends only on the expressed opinions.
-Based on works for asychronous distributed minization algorithms \cite{BT97,CC16},
+Based on works for asynchronous distributed minimization algorithms \cite{BT97,CC16},
 we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly can restore the
 exponential convergence rate.
@@ -12,10 +12,10 @@ Having this knowledge, one could try to come up with an
 update rule resembling the original update rule of the FJ model.
 In update rule (\ref{alg:cc_upper}), each agent stores the
 \emph{most recent} opinions of the random neighbors that she meets in an array
-and then update her opinion according to their weighted sum 
+and then update her opinion according to their weighted sum
 (each agent knows row $i$ of $P$). For a given instance
 $I=(P,s,\alpha)$ we call the produced dynamics \emph{Row Dependent dynamics}
-and it is defined in \ref{alg:influence_dependent}. 
+and it is defined in \ref{alg:influence_dependent}.
 
 The problem with this approach is that the opinions of the neighbors
 that she keeps in her array are \emph{outdated}, i.e. the opinion of
@@ -29,18 +29,18 @@ Lemma~\ref{l:outdatedness_induction} and its proof can be found
 Appendix~\ref{app:s:cc_convergence}.
 
 \begin{remark}
-It is necessary to know the matrix $P$ in order for this
-update rule to work. We first observe that the lower bound of
-Section~\ref{s:lower_bound} also holds in case the algorithm learns the index
-of the chosen neighbor. The reason is that the reduction involves only two neighbors
-with different opinions, so they are distinguishable.
-Therefore, if we tried to learn $P$ by observing the frequencies
-of the indices of the neighbors and run update rule (\ref{alg:cc_upper})
-with the empirical frequencies instead of the $p_{ij}$, our lower bound
-ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.
-Intuitively, if we know $P$ then the algorithm converges exponentially,
-since the slow part of the process is learning the probabilities $p_{ij}$
-precisely.
+  It is necessary to know the matrix $P$ in order for this
+  update rule to work. We first observe that the lower bound of
+  Section~\ref{s:lower_bound} also holds in case the algorithm learns the index
+  of the chosen neighbor. The reason is that the reduction involves only two neighbors
+  with different opinions, so they are distinguishable.
+  Therefore, if we tried to learn $P$ by observing the frequencies
+  of the indices of the neighbors and run update rule (\ref{alg:cc_upper})
+  with the empirical frequencies instead of the $p_{ij}$, our lower bound
+  ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.
+  Intuitively, if we know $P$ then the algorithm converges exponentially,
+  since the slow part of the process is learning the probabilities $p_{ij}$
+  precisely.
 \end{remark}
 \vspace{-5mm}
 \begin{algorithm*}
@@ -55,13 +55,12 @@ precisely.
     \STATE Meets neighbor with index $W_i^t$, $\Prob{W_i^t=j}=p_{ij}$.
     \STATE Suffers cost \((1-\alpha_i) (x_i(t) - x_{W_i^t}(t))^2 + a_i (x_i(t) - s_i)^2\)
     and learns $(x_{W_i^t}(t),W_i^t)$.
-    \STATE Updates her array $M_i$ and opinion as follows:
-     \begin{equation*}
-      M_i[W_i^t] \gets x_{W_i^t}(t)
-      \end{equation*}
-      \begin{equation}\label{alg:cc_upper}
-      x_i(t+1) = (1-\alpha_i)\sum_{j \in N_i} p_{ij} M_i[j] + \alpha_is_i
-       \end{equation}
+    \STATE Updates her array $M_i$ and opinion:
+    $
+    M_i[W_i^t] \gets x_{W_i^t}(t),\quad
+    x_i(t+1) = (1-\alpha_i)\sum_{j \in N_i} p_{ij} M_i[j] + \alpha_i s_i
+    $
+    \inlineequation[alg:cc_upper]{}
     \eindent
   \end{algorithmic}
 \end{algorithm*}
@@ -99,9 +98,9 @@ showing that the convergence rate of update rule (\ref{alg:cc_upper}) is exponen
   $x^* \in [0,1]^n$ and let $\rho = \min_{i \in V} a_i$.
   The opinion vector $x(t)\in[0,1]^n$ produced by
   update rule~(\ref{alg:cc_upper}) after $t$ rounds satisfies
-  \[
+  \(
     \Exp{\norm{\infty}{x(t) - x^*}}
     \leq
-    2\exp \lp(- \rho  \min_{ij} p_{ij} \frac{\sqrt{t}}{4\ln(nt)} \rp).
-  \]
+    2\exp(- \rho  \min_{ij} p_{ij} \sqrt{t}/(4\ln(nt)) ).
+  \)
 \end{reptheorem}

@@ -37,11 +37,11 @@
 We study opinion formation games based on the famous model proposed by Friedkin
 and Johsen.  In today's huge social networks the assumption that in each round
 agents update their opinions by taking into account the opinions of
-\emph{all} their friends could be unrealistic. Therefore, we assume that 
+\emph{all} their friends could be unrealistic. Therefore, we assume that
 in each round each agent gets to meet with only one random friend of
 hers. Since it is more likely to meet some friends than others we assume
 that agent $i$ meets agent $j$ with probability $p_{ij}$.
-In this imperfect information setting, we are interested in simple and 
+In this imperfect information setting, we are interested in simple and
 natural variants of the FJ model that converge to the same equilibrium point $x^*$.
 Specifically, we define an opinion formation game, where at round $t$,
 agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
@@ -51,20 +51,17 @@ $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
 We show that the agents can adopt an intuitive and simple update
 rule that ensures \emph{no-regret} to the experienced disagreement cost
 and at the same time the produced opinion vector converges
-to the equilibrium $x^*$. More precisely we prove that, after 
-$\bigOh{\text{poly}(1/\eps)}$ rounds, 
+to the equilibrium $x^*$. More precisely we prove that, after
+$\mrm{poly}(1/\eps)$ rounds,
 the opinion vector is within error $\eps$  of the equilibrium.
 
 The classical Friedkin-Johsen dynamics converges to the equilibrium within
-error $\eps$ after only $\bigOh{\log(1/\eps})$ rounds whereas, in our imperfect
-information setting, our update rule needs $\bigOh{\text{poly}(1/\eps)}$ rounds.
+error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
+information setting, our update rule needs $\mrm{poly}(1/\eps)$ rounds.
 We ask whether there exists a different no-regret dynamics for our problem
 with better rate of convergence.  We answer this question in the negative
 by showing that dynamics based on no-regret algorithms cannot converge with
 less than $\Omega(1/\eps)$ rounds. Finally, we present an update rule that
-requires only $\widetilde{O}(\text{log}^2(1/\eps))$ rounds to acheive dinstance 
+requires only $\widetilde{O}(\log^2(1/\eps))$ rounds to acheive dinstance
 $\eps$, revealing that slow convergence is not a generic property of our
 imperfect information setting.
-
-
-

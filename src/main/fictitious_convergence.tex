@@ -5,18 +5,19 @@ Notice that for an instance $I=(P,s,\alpha)$, the opinion vector $x(t) \in [0,1]
 of the FTL dynamics (see \ref{alg:FTL_dynamics}) can be written equivalently as follows:
 \begin{itemize}
  \item Initially all agents adopt their internal opinion, $x_i(0)=s_i$
- \item At round $t \geq 1$, each agent $i$ updates her opinion as follows:
- \begin{equation}
-x_i(t)=(1-\alpha_i)\frac{\sum_{\tau=0}^{t-1} x_{W_i^\tau}(\tau)}{t}+ \alpha_i s_i\end{equation}
-\end{itemize}
+ \item At round $t \geq 1$, each agent $i$ updates her opinion
+ \(
+x_i(t)=(1-\alpha_i)(1/t)\sum_{\tau=0}^{t-1} x_{W_i^\tau}(\tau)+ \alpha_i s_i,
+\)
 where $W_i^\tau$ is the neighbor that $i$ met at round $t$.
+\end{itemize}
 Since the opinion vector $x(t)$ is a random vector,
 our convergence metric is $\Expnew{}{\norm{\infty}{x(t) - x^*}}$
 where the expectation is taken over the random meeting of the agents.
 Our convergence result is stated in Theorem~\ref{t:fictitious_convergence}
 and it is the main result of the section.
 %
-\repeattheorem{t:fictitious_convergence}
+%\repeattheorem{t:fictitious_convergence}
 %
 At first we present a high level idea of the proof.
 Notice that the unique equilibrium point $x^* \in [0,1]^n$ of the
