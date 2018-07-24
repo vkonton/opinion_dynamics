@@ -79,8 +79,8 @@ outputs an answer in $[0,1]$.
 \end{definition}
 Perhaps the first estimator that comes to one's mind is the
 \emph{sample mean}, that is $\theta_t=(1/t) \sum_{i=1}^t X_i$.
-Of course for an estimator to be efficient we would like its answer to be
-close to the mean $p$ of the Bernoulli that generated the samples.
+%Of course for an estimator to be efficient we would like its answer to be
+%close to the prameter $p$ of the Bernoulli that generated the samples.
 To measure the efficiency of an estimator we define the \emph{risk}
 which corresponds to the expected loss of an estimator.
 \begin{definition}\label{d:risk}
@@ -99,11 +99,11 @@ which corresponds to the expected loss of an estimator.
   %   p^{\sum_{i=1}^t y_i}\ (1-p)^{t-\sum_{i=1}^t y_i}
   % \]
 \end{definition}
-The risk $\Expnew{p}{|\theta_t(Y_1,\ldots,Y_t) - p|}$ is the expected distance
-of the estimated value $\theta_t$ from the parameter $p$, when the
-distribution that generated the samples is $B(p)$.
-For convenience we also write it as $\Expnew{p}{|\theta_t - p|}$.
-The risk quantifies the error rate of
+%The risk $\Expnew{p}{|\theta_t(Y_1,\ldots,Y_t) - p|}$ is the expected distance
+%of the estimated value $\theta_t$ from the parameter $p$, when the
+%distribution that generated the samples is $B(p)$.
+%For convenience we also write it as $\Expnew{p}{|\theta_t - p|}$.
+The risk $\Expnew{p}{|\theta_t - p|}$ quantifies the error rate of
 the estimated value $\hat{p} =\theta_t(Y_1,\ldots,Y_t)$ to the
 real parameter $p$ as the number of samples $t$ grows.
 Since $p$ is unknown, any meaningful estimator $\theta=(\theta_t)_{t=1}^\infty$
@@ -174,7 +174,7 @@ It follows by Lemma~\ref{l:reduction} that in order to prove Theorem~\ref{t:lowe
 just need to prove the following claim.
 \begin{claim}\label{cl:fixed_p}
   For any estimator $\theta = (\theta_t)_{t=1}^\infty$
-  there exists fixed $p \in [0,1]$ such that
+  there exists a $p \in [0,1]$ such that
   \(
     \lim_{t \to \infty} t^{1+c} \Expnew{p}{|\theta_t - p} > 0.
   \)
