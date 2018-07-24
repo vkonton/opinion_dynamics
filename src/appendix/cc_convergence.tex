@@ -18,14 +18,14 @@ Lemma~\ref{l:outdatedness_induction}
     =
     |(1-\alpha_i)\sum_{j \in N_i}p_{ij}(x_j(\pi_{ij}(t)) -x_j^*)|
     \leq
-    (1-\alpha_i)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|\leq (1-\rho)
+    (1-\alpha_i)\sum_{j \in N_i}p_{ij}|x_j(\pi_{ij}(t))-x_j^*|\leq (1-\rho)
   \end{align*}
-  From the induction hypothesis we have for $\pi_{ij}(t) \geq (k-1)B$,
-  that $|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$.
+  Assume that for all $t\geq (k-1)B$ we have that $\norm{\infty}{x(t)-x^*}\leq (1-\rho)^{k-1}$.
   For $k\geq 2$, we again have that
-  $|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}p_{ij}|(x_j(\pi_{ij}(t))-x_j^*)|$.
-  Since $t-B \leq \pi_{ij}(t)$ and $t\geq kB$, we have
-  that $\pi_{ij}(t) \geq (k-1)B$ and the induction hypothesis applies.
+  \[|x_i(t) - x_i^*|\leq (1-\rho)\sum_{j \in N_i}p_{ij}|x_j(\pi_{ij}(t))-x_j^*|\]
+  Since $t-B \leq \pi_{ij}(t)$ and $t \geq kB$ we obtain that $\pi_{ij}(t) \geq (k-1)B$.
+  As a result, the inductive hypothesis applies, $|x_j(\pi_{ij}(t))-x_j^*| \leq (1-\rho)^{k-1}$
+  and $|x_i(t) - x_i^*|\leq (1-\rho)^k$.
 \end{proof}
 
 We now turn our attention to
@@ -60,7 +60,7 @@ and assume that there exists an agent $j\in N_i$ such that $\pi_{ij}(\tau)< {\ta
 Agent $i$ can be viewed as a coupon collector that has buyed $B$ coupons
 but has not found the coupon corresponding to agent $j$. Since $N_i<n$ and
 $\min_{j \in N_i}p_{ij}\geq w$ by Lemma~\ref{l:coupons_lemma} we have that 
-\[\Prob{\text{there exists }j\in N_i \text{ s.t. }\pi_{ij}(\tau)< {t-B}}\leq \frac{nt}{\delta}\]
+\[\Prob{\text{there exists }j\in N_i \text{ s.t. }\pi_{ij}(\tau)< {\tau-B}}\leq \frac{\delta}{nt}\]
 The proof follows by a union bound for all agent $i$ and all round $B\leq \tau \leq t$. 
 
 

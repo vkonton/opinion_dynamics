@@ -1,6 +1,6 @@
 \section{FTL dynamics has no-regret}\label{app:s:fictitious_noregret}
-We prove here Lemma~\ref{l:y_t}, which we restate for
-convenience.
+We present the detailed proofs of Lemma~\ref{l:y_t}, Lemma~\ref{l:no_regret_lemma} and
+Theorem~\ref{t:fictitious_noregret} of Section~\ref{s:fictitious_noregret}.
 \repeatlemma{l:y_t}
 \begin{proof}By definition of $y_t$,
   $\sum_{\tau=0}^t f(y_t,b_\tau)=\min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$, so
@@ -15,10 +15,10 @@ convenience.
   Inductively, we prove that $\sum_{\tau=0}^t f(y_\tau,b_\tau) \leq \min_{ x \in [0,1]} \sum_{\tau=0}^t f(x,b_\tau)$.
 \end{proof}
 
-We next prove Lemma~\ref{l:no_regret_lemma} which we combine with
-Lemma~\ref{l:y_t} to show that the update rule~\ref{eq:fictitious_play}
-ensures no regret for the agents. We first restate the lemma for
-convenience.
+%We next prove Lemma~\ref{l:no_regret_lemma} which we combine with
+%Lemma~\ref{l:y_t} to show that the update rule~\ref{eq:fictitious_play}
+%ensures no regret for the agents. We first restate the lemma for
+%convenience.
 \repeatlemma{l:no_regret_lemma}
 \begin{proof}
   We first prove that for all $t$,
@@ -57,7 +57,7 @@ convenience.
     f(y_t,b_t) + 2\frac{1-\alpha}{t+1} + \frac{(1-\alpha)^2}{(t+1)^2}
   \end{align*}
 \end{proof}
-We now restate and prove Theorem~\ref{t:fictitious_noregret}.
+%We now restate and prove Theorem~\ref{t:fictitious_noregret}.
 \repeattheorem{t:fictitious_noregret}
 \begin{proof}
  Theorem~\ref{t:fictitious_noregret} easily follows by Lemma~\ref{l:y_t}
