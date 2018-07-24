@@ -13,7 +13,7 @@ an instance of the game of Definition~\ref{d:random_game}.
 \end{definition}
 %
 Following the notation introduced earlier we have that
-$p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_i)$ if $j \in N_i$ and $0$ otherwise.
+$p_{ij} = w_{ij}/(\sum_{j \in N_i}w_{ij}+w_{ii})$ if $j \in N_i$ and $0$ otherwise.
 Obviously, if an agent $i$ does not have outgoing edges then $N_i = \emptyset$ and
 $p_{ij} = 0$ for all $j$. Therefore, $\sum_{j=1}^n p_{ij}$ is $0$ if $N_i= \emptyset$
 and $1$ otherwise.
@@ -28,7 +28,7 @@ the agents repeatedly play the one shot game of Definition~\ref{d:random_game}.
 We denote as $W_i^t$ the neighbor that agent $i$ met
 at round $t$, which is a random variable whose
 probability distribution is determined by the
-instance $I=(P,s,\alpha)$ of the game, $\Prob{W_i^t}=p_{ij}$.
+instance $I=(P,s,\alpha)$ of the game, $\Prob{W_i^t=j}=p_{ij}$.
 
 % If $N_i \neq \emptyset$ then $\sum_{j \in N_i}p_{ij}=1$.
 % To properly define our game, we remark that if $N_i=\emptyset$ then
@@ -50,7 +50,7 @@ Since each agent $i$ must select $x_i(t)$, before knowing which of her neighbors
 will meet and what opinion her neighbor will express, their update rule
 says \enquote{\emph{play the best according to what you have observed}}.
 For a given instance $(P,s,a)$ of the game %of Definition~\ref{d:random_game}
-the Follow the Leader dynamics $x(t)$ is defined in \ref{alg:FTL_dynamics} and
+the Follow the Leader dynamics $x(t)$ is defined in Dynamics~\ref{alg:FTL_dynamics} and
 Theorem \ref{t:fictitious_convergence} shows its convergence rate to $x^*$.
 %
 \begin{algorithm}
@@ -96,15 +96,15 @@ Theorem \ref{t:fictitious_convergence} shows its convergence rate to $x^*$.
 
 In Section~\ref{s:fictitious_noregret} we argue that,
 apart from its simplicity, update rule (\ref{eq:fictitious_play}) ensures
-no-regret for the agents, and therefore is a \emph{rational game play} for selfish agents.
+no regret for the selfish agents, and therefore is a \emph{rational game play}.
 %At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
 %and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
 Since each agent $i$ selfishly wants to minimizing the disagreement cost
 that she experiences, it is natural to assume that she selects $x_i(t)$ according to
-an \emph{no-regret algorithm} for the \emph{online convex optimization problem}
+an \emph{no regret algorithm} for the \emph{online convex optimization problem}
 where the adversary chooses a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$
 at each round $t$. In Theorem~\ref{t:fictitious_noregret}
-we prove that \enquote{Follow the Leader} is a no-regret algorithm
+we prove that \enquote{Follow the Leader} is a no regret algorithm
 for the above OCO problem. We remark that this does not hold,
 if the adversary can pick functions from a different class
 (see e.g. chapter 5 in \cite{Haz16}).
@@ -142,9 +142,9 @@ For a fixed instance $I=(P,s,\alpha)$, the
 FTL dynamics converges with rate
 $\widetilde{O}(1/t^{\text{min}(\rho,1/2)})$ while FJ model
 converges with rate $O(e^{-\rho t})$ \cite{GS14}.
-As a result the following question arises
+As a result the following question arises.
 \begin{question}
-  Can the agents adopt other no-regret algorithms such that the resulting
+  Can the agents adopt other no regret algorithms such that the resulting
   dynamics $x(t)$ converges exponentially fast to $x^*$?
 \end{question}
 
@@ -153,7 +153,7 @@ The reason that FTL dynamics converges slowly is that
 update rule (\ref{eq:fictitious_play})
 only depends on the opinions of the agents that agent $i$ meets,
 $\alpha_i$, and $s_i$. This is also true for any update rule that
-ensures no-regret to the agents (see Section~\ref{s:lower_bound}).
+ensures no regret to the agents (see Section~\ref{s:lower_bound}).
 We call such update rules \enquote{\emph{opinion dependent}}
 and the produced dynamics \emph{opinion dependent dynamics}.
 
@@ -168,7 +168,7 @@ Let an opinion dependent update rule $A$. For a given instance $I=(P,s,\alpha)$
 the rule $A$ produces an opinion depedent dynamics $x_A(t)$ defined as follows:
 \begin{itemize}
  \item Initially each agent $i$ selects her opinion $x_i^A(0)=A_0(s_i,\alpha_i)$
- \item At each round $t\geq 1$, each agent $i$ selects her opinion as:
+ \item At round $t\geq 1$, each agent $i$ selects her opinion
    \(x_i^A(t)=A_t(x_{W_i^0}(0),\dots,x_{W_i^{t-1}}(t-1),\alpha_i,s_i)\),
 where $W_i^t$ is the neighbors that $i$ meets at round $t$.
 \end{itemize}
