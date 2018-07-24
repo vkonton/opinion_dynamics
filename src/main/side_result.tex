@@ -12,35 +12,39 @@ Having this knowledge, one could try to come up with an
 update rule resembling the original update rule of the FJ model.
 In update rule (\ref{alg:cc_upper}), each agent stores the
 \emph{most recent} opinions of the random neighbors that she meets in an array
-and then update her opinion according to their weighted sum
+and then updates her opinion according to their weighted sum
 (each agent knows row $i$ of $P$). For a given instance
 $I=(P,s,\alpha)$ we call the produced dynamics \emph{Row Dependent dynamics}
-and it is defined in \ref{alg:influence_dependent}.
+and it is defined in Dynamics~\ref{alg:influence_dependent}.
 
 The problem with this approach is that the opinions of the neighbors
 that she keeps in her array are \emph{outdated}, i.e. the opinion of
-neighbor of agent $i$ is different than what she expressed in their
-last meeting.  The good news are that as long as this outdatedness
+a neighbor of agent $i$ has changed since their last meeting.
+The good news are that as long as this outdatedness
 is bounded we can still achieve exponential convergence to the
 equilibrium.  By bounded outdatedness we mean that there exists a
 number of rounds $B$ such that all agents have met all their neighbors
-at least once from $t$ to $t+B$. The latter is formally stated in
+at least once from $t-B$ to $t$. The latter is formally stated in
 Lemma~\ref{l:outdatedness_induction} and its proof can be found
 Appendix~\ref{app:s:cc_convergence}.
 
 \begin{remark}
-  It is necessary to know the matrix $P$ in order for this
-  update rule to work. We first observe that the lower bound of
-  Section~\ref{s:lower_bound} also holds in case the algorithm learns the index
-  of the chosen neighbor. The reason is that the reduction involves only two neighbors
-  with different opinions, so they are distinguishable.
-  Therefore, if we tried to learn $P$ by observing the frequencies
-  of the indices of the neighbors and run update rule (\ref{alg:cc_upper})
-  with the empirical frequencies instead of the $p_{ij}$, our lower bound
-  ensures that the rate of convergence would not be $O(1/t^{1+c})$ for any $c>0$.
-  Intuitively, if we know $P$ then the algorithm converges exponentially,
-  since the slow part of the process is learning the probabilities $p_{ij}$
-  precisely.
+  It is necessary that each \enquote{knows} the row $i$ of matrix $P$ for
+  this update rule to work. We mention that the lower bound of
+  Section~\ref{s:lower_bound} still holds even if the agents also use the indices
+  of the neighbors that they meet to update their opinion.
+  Theorem~\ref{t:lower_bound} can be easily modified to
+  cover this case.
+  Observe that Dynamics~\ref{alg:influence_dependent} uses the exact
+  values of the weights $w_{ij}$ and this is inevitable for any update
+  rule that achieves exponential convergence.
+   % Therefore, if we tried to learn $P$ by observing the frequencies
+  % of the indices of the neighbors and run update rule (\ref{alg:cc_upper})
+  % with the empirical frequencies instead of the $p_{ij}$, our lower bound
+  % ensures that the rate of convergence would not be $o(1/t^{1+c})$ for any $c>0$.
+  % Intuitively, if we know $P$ then the algorithm converges exponentially,
+  % since the slow part of the process is learning the probabilities $p_{ij}$
+  % precisely.
 \end{remark}
 \vspace{-5mm}
 \begin{algorithm*}

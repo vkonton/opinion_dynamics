@@ -1,51 +1,14 @@
 \section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
-% In this section we prove that exponential convergence
-% cannot be established for any \emph{opinion dependent dynamics}
-% produced by an \emph{opinion dependent update rule}. The reason
-% that this class of update rules is of particular interest is that
-% it includes the dynamics produced by different no-regret OCO algorithms.
-
-% More precisely, consider that for any instance $I=(P,s,\alpha)$, each
-% agent $i$ selects her selects her opinion $x_i(t)$ according
-% to Zinkevic's online learning algorithm \cite{Z03}, producing
-% an opinion vector $x(t)$. This dynamical process can be fairly
-% considered natural since Zinkevic's algorithm ensures no-regret
-% for any OCO problem with $\mcal{F}_{\alpha_i,s_i}$ and $\mcal{K}=[0,1]$.
-% Our result states that there exists an instance $I=(P,s,\alpha)$
-% such that the produced vector $x(t)$ does not converge to $x^*$ faster than
-% polynomially.
-
-% The reason is fairly simple.
-
-
-% that if agents update their opinions
-% using Zinkevic's algorithm then by specifying the values $\alpha_i,s_i$
-% and the opinions that agent $i$ observed until round $t-1$,
-% one can deterministically derive the opinion $x_i(t)$ without knowing anything
-% else about the instance $I=(P,s,\alpha)$. Meaning that the above dynamical
-% process can be produced by suitable \emph{opinion dependent update rule}.
-
-
-
-In the previous sections we saw that if each
-agent $i$ updates her opinion according to
-update rule~(\ref{eq:fictitious_play})
-the resulting opinion vector $x(t)$ produced
-for an instance $I=(P,s,\alpha)$ converges
-to the unique equilibrium point $x^*$ and
-ensures no-regret for the OCO problem
-with $F_{s_i,\alpha_i}$. In this section we
-prove that no-regret dynamics cannot converge much
-faster. For example if for every instance
-$I=(P,s,\alpha)$ each agent $i$ update her opinion according
-to Online Gradient Descent which is a no-regret algorithm
+In this section we prove that any no regret dynamics cannot converge much
+faster than FTL dynamics (Dynamics~\ref{alg:FTL_dynamics}). For example, assume
+that for every instance $I=(P,s,\alpha)$, each agent $i$ update
+her opinion according to Online Gradient Descent which is a no regret algorithm
 proposed by Zinkevic in \cite{Z03}, i.e.
 $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$
-and $x(t)$ is the produced opinion vector.
-Our results imply that there exists an instance $\mcal{I}$
-such that $x(t)$ does not converge to $x^*$ faster than polynomially.
-The reason is fairly simple: Let us select
-for each $(s,\alpha) \in [0,1]^2$ a no-regret algorithm
+and $x(t)$ is the produced opinion vector.  Our results imply that there exists
+an instance $I$ such that $x(t)$ does not converge to $x^*$ faster than polynomially.
+The reason is fairly simple: let us select for each $(s,\alpha) \in [0,1]^2$ a
+no regret algorithm
 $A_{s,\alpha}$\footnote{
 These $s,\alpha$ are scalars in $[0,1]$ and
 should not be confused with the internal opinion vector $s$
@@ -71,18 +34,18 @@ notation. For simplicity we will restrict the following definitions
 of estimators and risk to the case of estimating the parameter $p$ of Bernoulli
 random variables.
 Given $t$ independent samples from a Bernoulli random variable $B(p)$
-an estimator is an algorithm that takes these samples as inputs and
+an estimator is an algorithm that takes these samples as input and
 outputs an answer in $[0,1]$.
 \begin{definition}\label{d:estimator}
   An estimator $\theta=(\theta_t)_{t=1}^{\infty}$
   is a sequence of functions, $\theta_t: \{0,1\}^t\mapsto [0,1]$.
 \end{definition}
 Perhaps the first estimator that comes to one's mind is the
-\emph{sample mean}, that is $\theta_t=(1/t) \sum_{i=1}^t X_i$.
+\emph{sample mean}, that is $\theta_t = \sum_{i=1}^t X_i/t$.
 %Of course for an estimator to be efficient we would like its answer to be
 %close to the prameter $p$ of the Bernoulli that generated the samples.
-To measure the efficiency of an estimator we define the \emph{risk}
-which corresponds to the expected loss of an estimator.
+To measure the efficiency of an estimator we define the \emph{risk},
+which corresponds to the expected error of an estimator.
 \begin{definition}\label{d:risk}
   Let $P$ be a Bernoulli distribution with mean $p$ and
   $P^t$ be the corresponding $t$-fold product distribution.
@@ -111,13 +74,12 @@ must guarantee that $\lim_{t \to \infty} \Expnew{p}{|\theta_t - p|}=0$ for all $
 For example, \emph{sample mean} has error rate
 $\Expnew{p}{|\theta_t-p|} \leq \frac{1}{2\sqrt{t}}$.
 
-We show now that any opinion dependent update rule $A$, achieving the
-convergence rate of Theorem~\ref{t:lower_bound}, can be used as a Bernoulli
-estimator with asymptotically the same error rate.
+We show now that any opinion dependent update rule $A$, can be used as a
+Bernoulli estimator with the same error rate.
 \begin{lemma}\label{l:reduction}
   Let $A$ an opinion dependent update rule such that for all instances $I$,
-  $\lim \limits_{t \rightarrow \infty} t^{1+c}
-  \Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
+  \[\lim_{t \rightarrow \infty} t^{1+c}
+  \Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0.\]
   Then there exists an estimator $\theta_A=(\theta_t^A)_{t=1}^\infty$ such that for all
   $p \in [0,1]$,
   \(\lim_{t \rightarrow \infty}t^{1+c}\Expnew{p}{|\theta_t^A-p|}=0.\)
@@ -136,16 +98,17 @@ estimator with asymptotically the same error rate.
    \item  $x_c^A(t)=A_t(x_{W_c^0}(0),\ldots,x_{W_c^{t-1}}(t-1),1/2,1)$
   \end{itemize}
   The key observation is that the opinion vector $x_A(t)$ is a deterministic function
-  of the index sequence $W_c^0,\ldots,W_c^{t-1}$ and does not depend on $p$. Thus we
-  can construct the estimator $\theta_A$ with $\theta_t^A(W_c^0,\ldots,W_c^{t-1}) = 3x_c^A(t)$.
+  of the index sequence $W_c^0,\ldots,W_c^{t-1}$ and does not depend on $p$. Thus,
+  we can construct the estimator $\theta_A$ with
+  $\theta_t^A(W_c^0,\ldots,W_c^{t-1}) = 3x_c^A(t)$.
   For a given instance $I_p$ the choice of neighbor $W_c^t$ is given by the value of
   the Bernoulli random variable with parameter $p$ ($\Prob{W_c^t=1}=p$). As a result,
-  $\Expnew{p}{|\theta_t^A-p|}= 3\Expnew{}{|x_c^A(t)-p/3|}\leq 3\Expnew{}{\norm{\infty}{x_A(t)-x^*}}$.
-  Since for any instance $I_p$, we have that $\lim \limits_{t \rightarrow \infty} t^{1+c}\Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
-  It follows that $\lim_{t \rightarrow \infty}t^{1+c}\Expnew{p}{|\theta_t^A -p|}=0$ for all $p \in [0,1]$.
-%  For a given $p \in [0,1]$, we construct an instance $I_q$ of
-%  Figure~\ref{fig:lb_instance} with $q = p$
-%  and simulate the update rule for all three nodes at the same time.
+  $\Expnew{p}{|\theta_t^A-p|}=
+  3\Expnew{}{|x_c^A(t)-p/3|}\leq 3\Expnew{}{\norm{\infty}{x_A(t)-x^*}}$.
+  Since for any instance $I_p$, we have that
+  $\lim \limits_{t \rightarrow \infty} t^{1+c}\Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
+  It follows that $\lim_{t \rightarrow \infty}t^{1+c}\Expnew{p}{|\theta_t^A -p|}=0$
+  for all $p \in [0,1]$.
   \vspace{-5mm}
   \begin{figure}
     \centering
@@ -164,8 +127,9 @@ estimator with asymptotically the same error rate.
         \path [->] (2) edge[bend right] node {$1$} (C);
       \end{scope}
     \end{tikzpicture}
-    \vspace{-10mm}
-    \caption{The Lower Bound Instance} \label{fig:lb_instance}
+    \vspace{-15mm}
+    % \caption{The Lower Bound Instance}
+    \label{fig:lb_instance}
   \end{figure}
   %
 \end{proof}
@@ -185,7 +149,7 @@ a $p \in [0,1]$ such that the function $\Expnew{p}{|\theta_t-p|}= \Omega(1/t^{1+
 a result, we have reduced the construction of a lower bound concerning the round
 complexity of a dynamical process to a lower bound concerning the sample complexity of
 estimating the parameter $p$ of a Bernoulli distribution. The claim follows by
-Lemma~\ref{l:estimation_lower_bound} which we present at the end of the section.
+Lemma~\ref{l:estimation_lower_bound}, which we present at the end of the section.
 
 At this point we should mention that it is known
 that $\Omega(1/\eps^2)$ samples are needed to estimate the parameter $p$
@@ -197,11 +161,13 @@ for an \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
 However, there is some fine print in these results which does not allow us
 to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.
+We remark that this discussion is not needed to understand the proof of
+Lemma~\ref{l:estimation_lower_bound}.
 
-Perhaps the oldest sample complexity lower bound for estimation problems
+The oldest sample complexity lower bound for estimation problems
 is the well-known Cramer-Rao inequality.
-Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ such that $\Expnew{p}{\theta_t}=p$ for
-all $p \in [0,1]$, then
+Let the function $\theta_t: \{0,1\}^t \mapsto [0,1]$ such
+that $\Expnew{p}{\theta_t}=p$ for all $p \in [0,1]$, then
 \begin{equation}\label{eq:crlb}
   \Expnew{p}{(\theta_t - p)^2} \geq \frac{p(1-p)}{t}.
 \end{equation}
@@ -218,9 +184,8 @@ this is a first indication that our claim holds.
 %estimators are not unbiased.  Thus, we would like to get a lower bound
 %with minimal assumptions about the estimator.
 
-To the best of our knowledge, sample complexity lower bounds without
-assumptions about the estimator are given as lower bounds for the
-\emph{minimax risk}, which was defined
+Sample complexity lower bounds without assumptions about the estimator are usually
+given as lower bounds for the \emph{minimax risk}, which was defined
 \footnote{
   Although the minimax risk is defined for any estimation problem and loss
   function, for simplicity, we write the minimax risk for estimating the mean
@@ -234,13 +199,12 @@ algorithm, an adversary inspects it and picks the worst possible
 $p \in[0,1]$ to generate the samples that our algorithm will get as input.
 The methods of Le'Cam, Fano, and Assouad are well-known
 information-theoretic methods to establish lower bounds for the minimax risk.
-For more on these methods see \cite{Yu97,Tsy08} and the
-very good lecture notes of Duchi, \cite{duchi_stats311}.
+For more on these methods see \cite{Yu97,Tsy08}.
 As we stated before, it is well known that the minimax risk for the
 case of estimating the mean of a Bernoulli is lower bounded by
 $\Omega(1/\sqrt{t})$ and this lower bound can be established
 by Le Cam's method.
-In order to show why such arguments do no work for our purposes
+In order to show why such results do no work for our purposes
 we shall sketch how one would apply Le Cam's method to get this lower bound.
 To apply Le Cam's method, one typically chooses two Bernoulli distributions
 whose means are far but their total variation distance is small.
@@ -266,10 +230,10 @@ Lemma~\ref{l:estimation_lower_bound}.
 In fact, we show something stronger:
 for \emph{almost all} $p \in [0,1]$, any estimator $\theta$ cannot
 achieve rate $o(1/t^{1+c})$.
-More precisely,  suppose we select a $p$ uniformly at
+More precisely,  suppose we select $p$ uniformly at
 random in $[0,1]$ and run the estimator $\theta$ with samples from the
-distribution $B(p)$, then with probability $1$ the error rate $\Expnew{p}{|\theta_t  - p |} \in
-\Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
+distribution $B(p)$, then with probability $1$ the error rate
+$\Expnew{p}{|\theta_t  - p |} = \Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
 $\Omega(1/\sqrt{t})$ we prove that no exponential convergence rate
 is possible and we remark that our proof is fairly simple, intuitive,
 and could be of independent interest.
@@ -278,15 +242,14 @@ and could be of independent interest.
 % in the statistics literature,
 
 \begin{lemma}\label{l:estimation_lower_bound}
-  Let a Bernoulli estimator $\theta=(\theta_t)_{t=1}^\infty$
+  Let $\theta=(\theta_t)_{t=1}^\infty$ be a Bernoulli estimator
   with error rate $\Expnew{p}{|\theta_t  - p |}$.
   For any $c>0$, if we select $p$ uniformly at random in $[0,1]$ then
    \(\lim_{t\to \infty} t^{1+c} \Expnew{p}{|\theta_t  - p |} > 0\) with
    probability $1$.
 \end{lemma}
 \begin{proof}
-  Let an estimator $\theta = \{\theta_t\}_{t=1}^{\infty}$, where
-  $\theta_t: \{0,1\}^t\mapsto [0,1]$.  The function $\theta_t$ can have at most
+Since $\theta_t$ is a function from $\{0,1\}^t$ to $[0,1]$, $\theta_t$ can have at most
   $2^t$ different values. Without loss of generality we assume that
   $\theta_t$ takes the same value $\theta_t(x)$ for all $x \in \{0,1\}^t$
   with the same number of $1$'s. For example,
@@ -303,27 +266,28 @@ and could be of independent interest.
   For any estimator $\theta$ with error rate $\Expnew{p}{|\theta_t  - p |}$ there exists another
   estimator $\theta'$ that satisfies the above property and
   $\Expnew{p}{|\theta_t'  - p |} \leq \Expnew{p}{|\theta_t  - p |}$ for all $p \in [0,1]$.
-  Thus we can assume that $\theta_t$ takes at most $t+1$ different
+  Thus, we can assume that $\theta_t$ takes at most $t+1$ different
   values.
   %
   Let $A$ denote the set of $p$ for which the estimator has error
   rate $o(1/t^{1+c})$, that is
   %
   \[
-    A= \{p\in [0,1]: \lim_{t \to \infty} t^{1+c}\Expnew{p}{|\theta_t  - p |}=0\}
+    A= \{p\in [0,1]: \lim_{t \to \infty} t^{1+c}\Expnew{p}{|\theta_t  - p |}=0\}.
   \]
   We show that if we select $p$ uniformly at random in $[0,1]$ then
   $\Prob{p \in A} = 0$.  We also define the set
   \[
-    A_k=\{p\in [0,1]: \text{for all }t \geq k,~ t^{1+c}\Expnew{p}{|\theta_t  - p |}\leq 1\}
+    A_k=\{p\in [0,1]: \text{for all }t \geq k,~
+    t^{1+c}\Expnew{p}{|\theta_t  - p |}\leq 1\}.
   \]
   %
   Observe that if $p \in A$ then there exists $t_p$ such that
   $p \in A_{t_p}$, meaning that
-  $A \subseteq \cup_{k=1}^{\infty}A_k$.  As a result,
+  $A \subseteq \bigcup_{k=1}^{\infty}A_k$.  As a result,
   \[
     \Prob{p \in A} \leq \Prob {p \in\bigcup_{k=1}^{\infty}A_k} \leq
-    \sum_{k=1}^{\infty}\Prob{p \in A_k}
+    \sum_{k=1}^{\infty}\Prob{p \in A_k}.
   \]
   %
   To complete the proof we show that $\Prob{p \in A_k}=0$ for all $k$.
@@ -332,7 +296,7 @@ and could be of independent interest.
   Using this intuition we define the set
   \[
     B_k = \{p \in [0,1]: \text{for all
-    }t\geq k,~ t^{1+c}\min_{0\leq i \leq t}|\theta_t(i)-p| \leq 1\}
+    }t\geq k,~ t^{1+c}\min_{0\leq i \leq t}|\theta_t(i)-p| \leq 1\}.
   \]
   %
   We now show that $A_k \subseteq B_k$.
@@ -344,15 +308,16 @@ and could be of independent interest.
     t^{1 + c} \sum_{i=0}^t \binom{t}{i} \lp| \theta_t(i) - p \rp| p^i (1-p)^{t-i}
     = t^{1+c} \Expnew{p}{|\theta_t  - p |}
     \leq
-    1/2.
+    1.
   \]
   %
   Thus, $\Prob{p \in A_k} \leq \Prob{p \in B_k}$.
-  We write the set $B_k$ as \(
+  We write the set $B_k$ as
+  \[
     B_k = \bigcap_{t=k}^{\infty}\{p \in [0,1]:~ \min_{0 \leq
       i \leq t} |\theta_t(i)-p|\leq 1/t^{1+c}
     \}.
-  \)
+  \]
   %
   As a result,
   \(
@@ -380,26 +345,26 @@ and could be of independent interest.
   \end{figure}
   Each value $\theta_t(i)$ \enquote{covers} length $1/t^{1+c}$ from
   its left and right, as shown in Figure~\ref{fig:estimator},
-  and since there are at most $t+1$ such values
-  we have for all $t \geq k$ the set
-  \(
-    \{
-    p \in [0,1]:\ {\min_{0 \leq i \leq t} |\theta_t(i)-p| \leq 1/t^{1+c} }
-    \}
-    =
-    \bigcup_{i=0}^t
-    \lp(
-    \theta_t(i) - \frac{1}{t^{1+c}},\ \theta_t(i) + \frac{1}{t^{1+c}}
-    \rp).
-  \)
-  For each interval in the above union we have that
-  $\Prob{|\theta_t(i)-p| \leq 1/t^{1+c}}\leq 2/t^{1+c}$
-  and by the union bound we get
+  and since there are at most $t+1$ such values,
+  % we have for all $t \geq k$ the set
+  % \(
+  %   \{
+  %   p \in [0,1]:\ {\min_{0 \leq i \leq t} |\theta_t(i)-p| \leq 1/t^{1+c} }
+  %   \}
+  %   =
+  %   \bigcup_{i=0}^t
+  %   \lp(
+  %   \theta_t(i) - \frac{1}{t^{1+c}},\ \theta_t(i) + \frac{1}{t^{1+c}}
+  %   \rp).
+  % \)
+  % For each interval in this union we have
+  % $\Prob{|\theta_t(i)-p| \leq 1/t^{1+c}}\leq 2/t^{1+c}$
+  by the union bound we get
   $\Prob{p \in B_k} \leq 2(t+1)/t^{1+c}$, for all $t \geq k$.
   We conclude that $\Prob{p \in B_k} =0$.
 \end{proof}
 
-%\begin{remark}\label{r:lower_bound_no-regret}
+%\begin{remark}\label{r:lower_bound_no regret}
 %  The only point that we use that
 %  the update rules are \emph{opinion dependent} is in Lemma~\ref{l:reduction}.
 %  It is not difficult to see that the reduction still holds if the update rules
