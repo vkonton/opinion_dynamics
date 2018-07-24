@@ -7,9 +7,9 @@ we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly can restore the
 exponential convergence rate.
 Our update rule, depends not only on the expressed opinions of the
-agents but also on their indices and matrix $P$.
-Having this knowledge, one could try to come up with an
-update rule resembling the original update rule of the FJ model.
+neighbors that an agent $i$ meets but also on the $i$-th row of matrix $P$.
+%Having this knowledge, one could try to come up with an
+%update rule resembling the original update rule of the FJ model.
 In update rule (\ref{alg:cc_upper}), each agent stores the
 \emph{most recent} opinions of the random neighbors that she meets in an array
 and then updates her opinion according to their weighted sum
@@ -29,15 +29,25 @@ Lemma~\ref{l:outdatedness_induction} and its proof can be found
 Appendix~\ref{app:s:cc_convergence}.
 
 \begin{remark}
-  It is necessary that each \enquote{knows} the row $i$ of matrix $P$ for
-  this update rule to work. We mention that the lower bound of
+  %It is necessary that each agent $i$ \enquote{knows} the row $i$ of matrix $P$ for
+  %this update rule to work.
+  Update rule~(\ref{alg:cc_upper}), apart from the opinions
+  and the indices of the neighbors that an agent meets, 
+  also depends on the the exact values of the weights $p_{ij}$ and that is
+  why \emph{Row Dependent dynamics} converge exponentially
+  fast. We mention that the lower bound of
   Section~\ref{s:lower_bound} still holds even if the agents also use the indices
-  of the neighbors that they meet to update their opinion.
-  Theorem~\ref{t:lower_bound} can be easily modified to
-  cover this case.
-  Observe that Dynamics~\ref{alg:influence_dependent} uses the exact
-  values of the weights $w_{ij}$ and this is inevitable for any update
-  rule that achieves exponential convergence.
+  of the neighbors that they meet to update their opinion, since
+  Lemma~\ref{l:reduction} can be easily modified to
+  cover this case. The latter implies that any update rule that 
+  ensures exponential convergence must require that each agent 
+  $i$ is \emph{aware} of the $i$-th row of matrix $P$.
+  
+%  requires that 
+%  each agent $i$ \enquote{knows} the row $i$ of matrix $P$ for
+%  uses the exact
+%  values of the weights $p_{ij}$ and this is inevitable for any update
+%  rule that achieves exponential convergence rate.
    % Therefore, if we tried to learn $P$ by observing the frequencies
   % of the indices of the neighbors and run update rule (\ref{alg:cc_upper})
   % with the empirical frequencies instead of the $p_{ij}$, our lower bound
