@@ -1,11 +1,11 @@
-\section{FTL Dynamics has no-regret}\label{s:fictitious_noregret}
+\section{FTL dynamics ensures no regret}\label{s:fictitious_noregret}
 In this section we explain why the
 update rule~(\ref{eq:fictitious_play}) (\enquote{Follow the Leader}) ensures
-no-regret to the agents that play the repeated version of the one shot
+no regret to the agents that play the repeated version of the one shot
 game of Definition~\ref{d:random_game}.
-Based on the disagreement cost that each agent experiences,
+Based on the cost that each agent experiences,
 we consider an appropriate \emph{Online Convex Optimization} problem.
-This problem can be viewed as the following \enquote{game} played between an
+This problem can be viewed as a \enquote{game} played between an
 adversary and a player. \emph{At round }$t\geq 0$,
 \begin{enumerate}
   \item \emph{the player selects a value }$x_t \in [0,1]$.
@@ -31,22 +31,22 @@ $\mcal{K}=[0,1]$ is a sequence of functions $(A_t)_{t=1}^\infty$ where $A_t:[0,1
 \end{definition}
 
 \begin{definition}\label{d:no_regret_algo}
-An algorithm $A$ is no-regret for the OCO problem with $\mcal{F}_{a,s}$ and
+An algorithm $A$ is no regret for the OCO problem with $\mcal{F}_{a,s}$ and
 $\mcal{K}=[0,1]$ if and only if for all sequences $(b_t)_{t=0}^\infty$ that the
 adversary may choose, if $x_t = A_t(b_0,\dots,b_{t-1})$ then for all $t$
 \(\sum_{\tau=0}^t f(x_\tau,b_\tau)  \leq \min_{x \in [0,1]}\sum_{\tau=0}^t f(x,b_\tau) + o(t).\)
 \end{definition}
 Informally speaking if the player selects the value
-$x_t$ according to a \emph{no-regret algorithm} then
+$x_t$ according to a \emph{no regret algorithm} then
 she does not regret for not playing any fixed value no
 matter what the choices of the adversary are.
 Theorem~\ref{t:fictitious_noregret} states that
 \enquote{Follow the Leader} i.e. $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
-is a no-regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
+is a no regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
 
 Returning in our repeated game, it is natural to
 consider that each agent $i$ selects $x_i(t)$ according
-to no-regret algorithm $A_i$ for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$,
+to no regret algorithm $A_i$ for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$,
 since by Definition~\ref{d:no_regret_algo},
 \[\frac{1}{t}\sum_{\tau=0}^t f_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq
 \frac{1}{t}\min_{x \in [0,1]}\sum_{\tau=0}^tf_i(x,x_{W_i^\tau}(\tau)) + \frac{o(t)}{t}\]
@@ -55,20 +55,20 @@ that she suffers is similar to the time averaged cost by expressing the
 best fixed opinion and this holds no matter the opinions of the
 neighbors that $i$ meets. Under this perspective FTL dynamics 
 is a natural dynamics in our imperfect information setting,
-since update rule~(\ref{eq:fictitious_play}) ensures no-regret to the agents.
+since update rule~(\ref{eq:fictitious_play}) ensures no regret to the agents.
 
 %Theorem~\ref{t:fictitious_noregret}
-%ensures that \emph{Follow the Leader} is a no-regret algorithm
+%ensures that \emph{Follow the Leader} is a no regret algorithm
 %for any OCO problem $\mcal{F}_{s_i,\alpha_i}$ and explains why
 %(\ref{eq:fictitious_play}) is a rational update rule for the agents.
 
-The rest of the section is dedicated to prove Theorem~\ref{t:fictitious_noregret}.
+\change{We now present the key steps for proving Theorem~\ref{t:fictitious_noregret}}.
 We first prove that a similar strategy that also takes into
-account the value $b_t$ admits no-regret (Lemma~\ref{l:y_t}).
+account the value $b_t$ admits no regret (Lemma~\ref{l:y_t}).
 Obviously knowing the value $b_t$ before selecting $x_t$
 is in direct contrast with the OCO framework, however proving
-the no-regret property for this algorithm easily extends to
-establishing the no-regret property of \emph{Follow the Leader}.
+the no regret property for this algorithm easily extends to
+establishing the no regret property of \emph{Follow the Leader}.
 The proofs of the subsequent lemmas and
 Theorem~\ref{t:fictitious_noregret} can be found in the
 Appendix~\ref{app:s:fictitious_noregret}.
@@ -83,10 +83,11 @@ then for all $t$,
 \end{replemma}
 Now we can understand reason why \enquote{Follow the Leader}
 admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
-of the best fixed strategy, we can compare the cost incurred by $x_t$ with
+of the best fixed value, we can compare the cost incurred by $x_t$ with
 that of $y_t$.  Since the functions in $\mcal{F}_{\alpha,s}$ are quadratic,
-the extra term $f(x_t,b_t)$ that $y_t$ takes into account doesn't change
-dramatically the minimum point of the total sum. 
+the extra term $f(x,b_t)$ that $y_t$ takes into account doesn't change
+dramatically the minimum of the total sum. Meaning that $x_t,y_t$ 
+are relatively close. 
 %Thus, for each $t$ the
 %numbers $x_t$ and $y_t$ are quite close and as a result the
 %difference in their cost must be quite small. The above are
