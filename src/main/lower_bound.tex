@@ -6,7 +6,7 @@ her opinion according to Online Gradient Descent which is a no regret algorithm
 proposed by Zinkevic in \cite{Z03}, i.e.
 $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$
 and $x(t)$ is the produced opinion vector.  Our results imply that there exists
-an instance $I$ such that $x(t)$ does not converge to $x^*$ faster than polynomially.
+an instance $I$ such that $x(t)$ converge to $x^*$ slowly.
 The reason is fairly simple: let us select for each $(s,\alpha) \in [0,1]^2$ a
 no regret algorithm
 $A_{s,\alpha}$\footnote{
@@ -234,9 +234,9 @@ More precisely,  suppose we select $p$ uniformly at
 random in $[0,1]$ and run the estimator $\theta$ with samples from the
 distribution $B(p)$, then with probability $1$ the error rate
 $\Expnew{p}{|\theta_t  - p |} = \Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
-$\Omega(1/\sqrt{t})$ we prove that no exponential convergence rate
-is possible and we remark that our proof is fairly simple, intuitive,
-and could be of independent interest.
+$\Omega(1/\sqrt{t})$ we prove that no fast convergence rate
+(see Definition~\ref{d:convergence_rate} is possible and we remark that our
+proof is fairly simple, intuitive, and could be of independent interest.
 %
 % Finally, while we do not preclude the possibility of similar results to exist
 % in the statistics literature,

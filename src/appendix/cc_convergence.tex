@@ -1,6 +1,6 @@
-\section{An Update Rule with Exponential Convergence Rate}\label{app:s:cc_convergence}
+\section{An Update Rule with Fast Convergence Rate}\label{app:s:cc_convergence}
 We are now going to state and prove a series of lemmas that culminate in
-the proof of Theorem~\ref{t:exponential_update_rule}. We first prove 
+the proof of Theorem~\ref{t:exponential_update_rule}. We first prove
 Lemma~\ref{l:outdatedness_induction}
 
 \repeatlemma{l:outdatedness_induction}
@@ -48,20 +48,20 @@ If he selects $\ln n/w+ c/w$ coupons, then:
 %epoch etc.
 %The next lemma is a calculation of the appropriate size of $B$.
 \begin{lemma}\label{l:coupons}
-Let $\pi_{ij}(t)$ be the most recent round before round $t$ that agent $i$ met agent $j$ 
+Let $\pi_{ij}(t)$ be the most recent round before round $t$ that agent $i$ met agent $j$
 and $B=2\ln(\frac{nt}{\delta})/\min_{ij}p_{ij}$.
 Then with probability at least $1-\delta$, for all $\tau \geq B$ and for all
 $i, j \in N_i$\[\tau-B\leq \pi_{ij}(\tau)\leq \tau-1.\]
 \end{lemma}
 \begin{proof}
-For simplicity we denote $w=\min_{ij}p_{ij}$. 
+For simplicity we denote $w=\min_{ij}p_{ij}$.
 Consider an agent $i$ at round $\tau \geq B$ where $B=2\ln(\frac{nt}{\delta})/w$
 and assume that there exists an agent $j\in N_i$ such that $\pi_{ij}(\tau)< {\tau-B}$.
 Agent $i$ can be viewed as a coupon collector that has buyed $B$ coupons
 but has not found the coupon corresponding to agent $j$. Since $N_i<n$ and
-$\min_{j \in N_i}p_{ij}\geq w$ by Lemma~\ref{l:coupons_lemma} we have that 
+$\min_{j \in N_i}p_{ij}\geq w$ by Lemma~\ref{l:coupons_lemma} we have that
 \[\Prob{\text{there exists }j\in N_i \text{ s.t. }\pi_{ij}(\tau)< {\tau-B}}\leq \frac{\delta}{nt}\]
-The proof follows by a union bound for all agent $i$ and all round $B\leq \tau \leq t$. 
+The proof follows by a union bound for all agent $i$ and all round $B\leq \tau \leq t$.
 
 
 %In our setting, coupon $i$ corresponds to the selection of neighbour $i$. Each node is a
@@ -70,26 +70,26 @@ The proof follows by a union bound for all agent $i$ and all round $B\leq \tau \
 %Then, if we set  $c = \ln (\frac{nt}{\delta})$ , using Lemma~\ref{l:coupons_lemma}
 %we get that a node hasn't seen at least one neighbour after $c/w + \ln d/w$ samples
 %with probability at most $\frac{\delta}{nt}$. This means that if we set
-%$D = c/w + \ln d/w =  \ln \frac{nt}{\delta}/w +  \ln d/w \geq 2/w\ln\frac{nt}{\delta}$ 
-%when $\delta$ is small enough, then the probability that a specific agent at a specific 
-%epoch hasn't collected all neighbouring opinions at least once is at most $\frac{\delta}{nt}$. 
+%$D = c/w + \ln d/w =  \ln \frac{nt}{\delta}/w +  \ln d/w \geq 2/w\ln\frac{nt}{\delta}$
+%when $\delta$ is small enough, then the probability that a specific agent at a specific
+%epoch hasn't collected all neighbouring opinions at least once is at most $\frac{\delta}{nt}$.
 %By a simple union bound argument, we get that all agents have seen all their neighbours during all epochs
 %with probability at least $1 - \delta$.
 \end{proof}
 %Since all neighbours are picked at least once during each epoch,
 %the outdatedness of each agent is at most twice the length of the
 %epoch. We now show %Lemma~\ref{l:outdatedness_induction}
-%from which we get that bounded outdatedness preserves the exponential
+%from which we get that bounded outdatedness preserves the fast
 %convergence.
 %
 %Combining this with Lemma~\ref{l:outdatedness_induction} we have
 %the following.
-By direct application of Lemma~\ref{l:outdatedness_induction} and 
-Lemma~\ref{l:coupons}, we obtain the following corollary that 
+By direct application of Lemma~\ref{l:outdatedness_induction} and
+Lemma~\ref{l:coupons}, we obtain the following corollary that
 will be useful in proving Theorem~\ref{t:exponential_update_rule}.
 \begin{corollary}\label{cor:window}
 Let $x(t)$ the opinion vector produced by update rule (\ref{alg:cc_upper})
-for the instance $I=(P,s,\alpha)$, 
+for the instance $I=(P,s,\alpha)$,
 then with probability at least $1-\delta$
 \[\norm{\infty}{x(t)-x^*} %\leq (1-\rho)^{\frac{t}{2B}}
 \leq \exp \lp(-\frac{\rho t\min_{ij}p_{ij}}{2\ln( \frac{nt}{\delta})} \rp)\]
@@ -97,15 +97,13 @@ where $\rho = \min_{i\in V}\alpha_i$.
 \end{corollary}
 \begin{proof}
 Let $B=2\ln(\frac{nt}{\delta})/\min_{ij}p_{ij}$. By Lemma~\ref{l:coupons}
-we have that with probability at least $1-\delta$, for all $i,j\in N_i$ and 
+we have that with probability at least $1-\delta$, for all $i,j\in N_i$ and
 for all $\tau \geq B$, \[\tau -B \leq \pi_{ij}(\tau)  \]
-As a result, with probability at least $1-\delta$ the requirements 
-of Lemma~\ref{l:outdatedness_induction} are satisfied, meaning that 
+As a result, with probability at least $1-\delta$ the requirements
+of Lemma~\ref{l:outdatedness_induction} are satisfied, meaning that
 \[\norm{\infty}{x(t)-x^*} \leq (1-\rho)^{\frac{t}{B}}
 \leq \exp \lp(-\frac{\rho t\min_{ij}p_{ij}}{2\ln( \frac{nt}{\delta})} \rp)\]
 \end{proof}
-
-
 
 \noindent We can now prove Theorem~\ref{t:exponential_update_rule} using the previous results.
 \repeattheorem{t:exponential_update_rule}
