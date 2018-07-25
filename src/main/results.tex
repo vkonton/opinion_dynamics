@@ -21,10 +21,14 @@ Moreover, $\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})>0$ since $w_{ii}>0$.
 Note that a given instance $I=(P,s,\alpha)$ also defines an instance
 of the FJ model and we denote as $x^* \in [0,1]^n$
 its equilibrium point, which coincides with the Nash equilibrium
-of one shot game of Definition~\ref{d:random_game}.
+of the game of Definition~\ref{d:random_game}.
 Another parameter of an instance $I=(P,s,\alpha)$ that we often use is
-$\rho=\min_{i \in V}\alpha_i$. Throughout the paper we consider that
-the agents repeatedly play the one shot game of Definition~\ref{d:random_game}.
+$\rho=\min_{i \in V}\alpha_i$. 
+
+
+
+Throughout the paper we study \emph{dynamics}
+in the game of Definition~\ref{d:random_game}.
 We denote as $W_i^t$ the neighbor that agent $i$ met
 at round $t$, which is a random variable whose
 probability distribution is determined by the
@@ -44,7 +48,7 @@ instance $I=(P,s,\alpha)$ of the game, $\Prob{W_i^t=j}=p_{ij}$.
 
 
 In Section~\ref{s:fictitious_convergence}, we study the convergence properties
-of the dynamics $x(t)$ when all agents update their opinions
+of the opinion vector $x(t)$ when all agents update their opinions
 according to the \enquote{Follow the Leader} principle.
 Since each agent $i$ must select $x_i(t)$, before knowing which of her neighbors she
 will meet and what opinion her neighbor will express, their update rule
@@ -151,10 +155,10 @@ As a result the following question arises.
 In Section~\ref{s:lower_bound} we answer this question in the negative.
 The reason that FTL dynamics converges slowly is that
 update rule (\ref{eq:fictitious_play})
-only depends on the opinions of the agents that agent $i$ meets,
+only depends on the opinions of the neighbors that agent $i$ meets,
 $\alpha_i$, and $s_i$. This is also true for any update rule that
 ensures no regret to the agents (see Section~\ref{s:lower_bound}).
-We call such update rules \enquote{\emph{opinion dependent}}
+As already mentioned, we call such update rules \enquote{\emph{opinion dependent}}
 and the produced dynamics \emph{opinion dependent dynamics}.
 
 \begin{definition}[opinion dependent update rule]\label{d:opinion_dependent_dynamics}
@@ -178,8 +182,8 @@ Note that FTL dynamics is an opinion dependent dynamics
 since update rule~(\ref{eq:fictitious_play}) can
 be written equivalently, $x_i(0)=s_i$ and $x_i(t)=(1-\alpha_i)\sum_{\tau=0}^{t-1}x_{W_i^\tau}(\tau)/t + \alpha_i s_i$.
 In Theorem~\ref{t:lower_bound} we
-show that for any opinion dependent update rule there exists an instance
-$I = (P,s,\alpha)$ where $\poly(1/\eps)$ rounds are required to
+show that for any opinion dependent dynamics there exists an instance
+$I = (P,s,\alpha)$ where $\Omega(1/\eps)$ rounds are required to
 achieve convergence within error $\eps$.
 \begin{reptheorem}{t:lower_bound}
   Let $A$ be an \emph{opinion dependent} update rule, which all
