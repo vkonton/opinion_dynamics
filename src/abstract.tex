@@ -35,33 +35,15 @@
 %by showing that update rules that guarrantee no regret to the agents cannot
 %converge with less than $\mrm{poly}(1/\eps)$ rounds.
 We study opinion formation games based on the famous model proposed by Friedkin
-and Johsen.  In today's huge social networks the assumption that in each round
+and Johsen. In today's huge social networks the assumption that in each round
 agents update their opinions by taking into account the opinions of
-\emph{all} their friends could be unrealistic. Therefore, we assume that
-in each round each agent gets to meet with only one random friend of
-hers. Since it is more likely to meet some friends than others we assume
-that agent $i$ meets agent $j$ with probability $p_{ij}$.
-In this limited information setting, we are interested in simple and
-natural variants of the FJ model that converge to the same equilibrium point $x^*$.
-Specifically, we define an opinion formation game, where at round $t$,
-agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
-\in[0,1]$ meets with probability $p_{ij}$ neighbor $j$ with opinion $x_j(t)$
-and suffers a disagreement cost that is a convex combination of
-$(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
-We show that the agents can adopt an intuitive and simple update
-rule that ensures \emph{no-regret} to the experienced disagreement cost
-and at the same time the produced opinion vector converges
-to the equilibrium $x^*$ within error $\eps$ after
-$\mrm{poly}(1/\eps)$ rounds.
+\emph{all} their friends is unrealistic. So, we are interested in the convergence 
+properties of simple and natural variants of the FJ model that use limited information 
+exchange in each round and converge to the same equilibrium point. 
+%
+As in the FJ model, we assume that each agent $i$ has an intrinsic opinion $s_i \in [0,1]$ and maintains an expressed opinion $x_i(t) \in [0,1]$ in each round $t$. To model limited information exchange, we consider an opinion formation process where each agent $i$ meets with  one random friend $j$ in each round $t$ and learns only her current opinion $x_j(t)$.  The amount of influence $j$ imposes on $i$ is reflected by the probability $p_{ij}$ with which $i$ meets $j$. Then, agent $i$ suffers a a disagreement cost that is a convex combination of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$. 
+%
+For this variant of the FJ model, we show that the agents can adopt a simple opinion update rule that ensures \emph{no-regret} to the experienced disagreement cost and results in an opinion vector that converges to the equilibrium point $x^\ast$ of the FJ model within error $\eps$ in $O(\ln n \mrm{poly}(1/\eps))$ rounds.
+%
+The convergence time is exponentially slower than the convergence time of the FJ model in the full information setting. So, a natural question is whether there exist no-regret dynamics with improved convergence rate. We show that any dynamics that guarantees vanishing regret against the experienced disagreement cost cannot converge to $x^\ast$ in $o(1/\eps)$ rounds. We prove this result by establishing a connection to learning a Bernoulli distribution, which indicates that no-regret dynamics suffer low convergence rates due to their inability to collect and exploit information about the influence weights associated with probabilities $p_{ij}$. Finally, we present an opinion update rule that also learns the influence weights and converges to $x^\ast$ in $\tilde{O}(\ln n\log^2(1/\eps))$ rounds, thus providing evidence that convergence rate of opinion dynamics is affected more by the knowledge of influence weights in each agent's social neighborhood that by the knowledge of the opinions in it.   
 
-The classical Friedkin-Johsen dynamics converges to the equilibrium within
-error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our limited
-information setting, our update rule needs $\mrm{poly}(1/\eps)$ rounds.
-We ask whether there exists a different no-regret dynamics for our problem
-with better rate of convergence.  We answer this question in the negative
-by showing that dynamics based on no-regret algorithms cannot converge with
-less than $\Omega(1/\eps)$ rounds.  Finally, we present an update rule that
-requires only $\widetilde{O}(\log^2(1/\eps))$ rounds to acheive error $\eps$,
-resembling the convergence of the original FJ model.  Slow convergence is not
-a generic property of our limited information setting but rather a
-characteristic of no regret dynamics.
