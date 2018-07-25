@@ -45,9 +45,9 @@ are formed \cite{AFH05,K47}.  At the same time, it admits a unique stable point
 point $x^* \in [0,1]^n$ to which it converges exponentially fast \cite{GS14}.
 The FJ model has also been studied under a game theoretic viewpoint.  Bindel et
 al. considered its update rule as the minimizer of a quadratic disagreement
-cost function and based on it they defined the following opinion
-formation game \cite{BKO11}. Each node $i$ is a selfish agent whose strategy is
-the public opinion $x_i$ that she expresses incurring her a disagreement cost
+cost function and based on it they defined the following opinion formation game
+\cite{BKO11}. Each node $i$ is a selfish agent whose strategy is the public
+opinion $x_i$ that she expresses incurring her a disagreement cost
 %
 \begin{equation}\label{eq:BKO_cost}
   %
@@ -55,19 +55,18 @@ the public opinion $x_i$ that she expresses incurring her a disagreement cost
   %
 \end{equation}
 %
-Note that the FJ model is the \emph{simultaneous best response dynamics}
-and its stable point $x^*$ is the unique Nash equilibrium
-of the above game.  In \cite{BKO11} they quantified its
-inefficiency with respect to the total disagreement cost. They proved that the
-\emph{Price of Anarchy} (PoA) is $9/8$ in case $G$ is undirected and
-$w_{ij}=w_{ji}$. They also provided PoA bounds in the case of unweighted
-Eulerian directed graphs.
+Note that the FJ model is the \emph{simultaneous best response dynamics} and
+its stable point $x^*$ is the unique Nash equilibrium of the above game.  In
+\cite{BKO11} they quantified its inefficiency with respect to the total
+disagreement cost. They proved that the \emph{Price of Anarchy} (PoA) is $9/8$
+in case $G$ is undirected and $w_{ij}=w_{ji}$. They also provided PoA bounds in
+the case of unweighted Eulerian directed graphs.
 
 %We remark that in \cite{BKO11} an alternative framework for studying the
 %dynamics of opinions were introduced. Instead of modeling the way opinions
 %evolve by precise dynamical processes, agents can be considered to repeatedly
-%play a suitable one shot opinion formation game and update their opinions so as
-%to minimize their individual disagreement cost.  This framework allows for
+%play a suitable one shot opinion formation game and update their opinions so
+%as to minimize their individual disagreement cost.  This framework allows for
 %different aspects of the opinion formation process to be captured by suitable
 %one shot games.  For example, in \cite{BGM13,BFM16,EFHS17} variants of the
 %above opinion formation game were introduced and the convergence properties of
@@ -77,17 +76,16 @@ Eulerian directed graphs.
 %above repeated game, agents, instead of adopting \emph{best response}, could
 %update their opinions according to a \emph{no regret} learning algorithm.
 
-We remark that in \cite{BKO11} an alternative framework, for studying 
-the way opinions evolve, were introduced. Namely, the opinion formation process
-can be described as the \emph{dynamics} 
-of an opinion formation game. This framework is much more comprehensive
-for two reasons. At first, different aspects of the opinion formation process can be 
-easily captured by defining suitable games.
-Secondly, it permits considering different \emph{natural dynamics}
-for the same opinion formation game (e.g. \emph{best response dynamics, 
-no regret dynamics, fictitious play}). Following this framework subsequent
-works \cite{BGM13,BFM16,EFHS17} considered variants of the above game and
-studied the convergence properties of the \emph{best response dynamics}.
+We remark that in \cite{BKO11} an alternative framework, for studying the way
+opinions evolve, were introduced. Namely, the opinion formation process can be
+described as the \emph{dynamics} of an opinion formation game. This framework
+is much more comprehensive for two reasons. At first, different aspects of the
+opinion formation process can be easily captured by defining suitable games.
+Secondly, it permits considering different \emph{natural dynamics} for the same
+opinion formation game (e.g. \emph{best response dynamics, no regret dynamics,
+  fictitious play}). Following this framework subsequent works
+\cite{BGM13,BFM16,EFHS17} considered variants of the above game and studied the
+convergence properties of the \emph{best response dynamics}.
 
 \subsection{Motivation and our setting}
 
@@ -128,18 +126,18 @@ this work we ask:
 \end{question}
 
 %KAINOUTGIO
-To address these question, one could define precise dynamical processes
-whose updare rules require limited information exchange between the agents 
-and study their convergence properties. Instead of doing we describe the
-opinion formation process in such large networks as \emph{dynamics} in 
-an adequate opinion formation game that captures these information exchange 
-constraints. This allows us to precisely define which \emph{dynamics}
-we consider as \emph{natural}, but importantly to classify such \emph{dynamics}
-according to their convergence rate. 
+To address these question, one could define precise dynamical processes whose
+updare rules require limited information exchange between the agents and study
+their convergence properties. Instead of doing we describe the opinion
+formation process in such large networks as \emph{dynamics} in an adequate
+opinion formation game that captures these information exchange constraints.
+This allows us to precisely define which \emph{dynamics} we consider as
+\emph{natural}, but importantly to classify such \emph{dynamics} according to
+their convergence rate.
 
-The opinion formation game that we consider is a straightforward
-variant of the game defined in \cite{BKO11} based on intepreting the 
-weight $w_{ij}$ as a measure on how frequently $i$ meets $j$.
+The opinion formation game that we consider is a straightforward variant of the
+game defined in \cite{BKO11} based on intepreting the weight $w_{ij}$ as a
+measure on how frequently $i$ meets $j$.
 \begin{definition}\label{d:random_game}
   %
   For a given opinion vector $x \in [0,1]^n$, the disagreement cost of agent
@@ -150,133 +148,71 @@ weight $w_{ij}$ as a measure on how frequently $i$ meets $j$.
       w_{ij}/\sum_{j\in N_i}w_{ij}$.
       %
     \item Agent $i$ suffers cost $C_i(x_i , x_{-i}) = (1-a_i)(x_i-x_j)^2 +
-      a_i(x_i-s_i)^2$, where $\alpha_i = w_{ii}/(\sum_{j\in N_i}w_{ij}+w_{ii})$.
+      a_i(x_i-s_i)^2$, where $\alpha_i = w_{ii}/(\sum_{j\in
+        N_i}w_{ij}+w_{ii})$.
       %
   \end{itemize}
   %
-\end{definition}
-This \emph{random payoff} game provides us with a general description of all the \emph{dynamics}
-examined in this paper. At round $t$, each agent $i$ selects an opinion $x_i(t)$ and suffers a
-disagreement cost based on the opinion of the neighbor that she randomly met.
-At the end of the round $t$, she is informed only about the opinion and the index 
-of this neighbor and may use this information to update her opinion in the next round. 
-Obviously different update rules lead to different \emph{dynamics}, however all of these
-respect the information exchange constraints: at each round each agent learns 
-the opinion of \emph{just one} of her neighbors. 
-Question~\ref{q:motivation1} now takes the following more
-concrete form.
+\end{definition} This \emph{random payoff} game provides us with a general
+description of all the \emph{dynamics} examined in this paper. At round $t$,
+each agent $i$ selects an opinion $x_i(t)$ and suffers a disagreement cost
+based on the opinion of the neighbor that she randomly met.  At the end of the
+round $t$, she is informed only about the opinion and the index of this
+neighbor and may use this information to update her opinion in the next round.
+Obviously different update rules lead to different \emph{dynamics}, however all
+of these respect the information exchange constraints: at each round each agent
+learns the opinion of \emph{just one} of her neighbors.
+Question~\ref{q:motivation1} now takes the following more concrete form.
 
 \begin{question}\label{q:motivation2}
   %
   Can the agents update their opinions according to the limited information
   that they receive such that the produced opinion vector $x(t)$ convergences
   fast to the equilibrium $x^*$ and the total disagreement cost that they
-  experience is minimal?
-\end{question}
+  experience is minimal?  \end{question}
 
-% PALIO!!!!
-%To capture the fact that, in large networks, agents meet a small random subset
-%of their friends each day, we consider an imperfect information variant of the
-%opinion formation game defined in \cite{BKO11}. In equation~(\ref{eq:BKO_cost})
-%the coefficient $w_{ij}$ measures the influence that $j$ poses on $i$.
-%Following the common belief that \enquote{the more often we interact with
-%  someone, the more we are influenced by her}, $w_{ij}$ can be interpreted as a
-%measure on how frequently $i$ meets $j$. In our imperfect information variant,
-%each agent $i$ randomly meets an agent $j$ (with respect to her weights) and
-%experiences disagreement cost based on the distance of their opinions and on
-%the distance of the expressed opinion of $i$ and her internal opinion.  More
-%formally, we consider the following one shot game.
-%
-%\begin{definition}\label{d:random_game}
-  %
-%  For a given opinion vector $x \in [0,1]^n$, the disagreement cost of agent
-%  $i$ is the random variable $C_i(x_i,x_{-i})$ defined as follows:
-%  \begin{itemize}
-      %
-%    \item Agent $i$ meets one of her neighbors $j$ with probability $p_{ij}=
-%      w_{ij}/\sum_{j\in N_i}w_{ij}$.
-      %
-%    \item Agent $i$ suffers cost $C_i(x_i , x_{-i}) = (1-a_i)(x_i-x_j)^2 +
-%      a_i(x_i-s_i)^2$, where $\alpha_i = w_{ii}/(\sum_{j\in N_i}w_{ij}+w_{ii})$.
-      %
-%  \end{itemize}
-  %
-%\end{definition}
-%
-%Our one shot game departs from the original opinion formation game of
-%\cite{BKO11}.  In the game of \cite{BKO11} an opinion vector $x\in [0,1]^n$
-%defines \emph{deterministically} the cost $C_i(x)$ of each agent $i$, whereas
-%in our variant of Definition~\ref{d:random_game} it defines a probability
-%distribution on the cost $C_i(x)$ that $i$ suffers.  Notice that the expected
-%disagreement cost of each agent $i$ (scaled by the constant $\sum_{j\in
-%  N_i}w_{ij}+w_{ii}$) is the same as the disagreement cost defined in
-%equation~(\ref{eq:BKO_cost}).  As a result, the Nash equilibrium with respect
-%to the expected cost of the agents, is the equilibrium point $x^*$.
 
-%In order to model the opinion formation process in limited information exchange
-%environments, we assume that the agents are engaged in the repeated version
-%of the one-shot game of Definition~\ref{d:random_game}.
-%At round $t$, each agent $i$ selects an opinion $x_i(t)$ and suffers a
-%disagreement cost based on the opinion of the neighbor that she randomly met.
-%At the end of the round she is informed only about the opinion of this neighbor
-%and may use this information to update her opinion. Information exchange is now
-%vastly reduced: at each round each agent learns the opinion of \emph{just one}
-%of her neighbors.  Question~\ref{q:motivation1} now takes the following more
-%concrete form.
-%
-%\begin{question}\label{q:motivation2}
-  %
-%  Can the agents update their opinions according to the limited information
-%  that they receive such that the produced opinion vector $x(t)$ convergences
-%  fast to the equilibrium $x^*$ and the total disagreement cost that they
-%  experience is minimal?
-  %
-%\end{question}
-
-\subsection{Contribution}
-%KAINOURGIO
-Note that a given instance $G(V,E,w)$ of the game defined in
-\cite{BKO11} also defines an instance of the FJ model and of the 
-game in Definition~\ref{d:random_game}. For any fixed instance 
-the FJ model converges exponentially fast to the equilibrium $x^*$, 
-the opinion vector $x(t)$ is in distance $\eps$ in $\bigOh{\log 1/\eps}$ \cite{GS14}. 
-We provide a simple characterization on the \emph{limited information dynamics} 
-that can acheive such fast convergence. We prove that if the update
-rule, that the agents follow, only depends on the opinions of the neighbors
-that they randomly met, then there exists an instance such that
-the produced opinion vector $x(t)$ requires at least $\Omega(1/\eps)$
-rounds to be $\eps$-close to $x^*$. We call these update rules 
-\emph{opinion dependent} and the respective dynamics 
+\subsection{Contribution} Note that a given instance $G(V,E,w)$ of the game
+defined in \cite{BKO11} also defines an instance of the FJ model and of the
+game in Definition~\ref{d:random_game}. For any fixed instance the FJ model
+converges exponentially fast to the equilibrium $x^*$, the opinion vector
+$x(t)$ is in distance $\eps$ in $\bigOh{\log 1/\eps}$ \cite{GS14}.  We provide
+a simple characterization on the \emph{limited information dynamics} that can
+acheive such fast convergence. We prove that if the update rule, that the
+agents follow, only depends on the opinions of the neighbors that they randomly
+met, then there exists an instance such that the produced opinion vector $x(t)$
+requires at least $\Omega(1/\eps)$ rounds to be $\eps$-close to $x^*$. We call
+these update rules \emph{opinion dependent} and the respective dynamics
 \emph{opinion dependen dynamics}. In section~\ref{s:lower_bound}, we show that
 the existence of opinion dependent update rules with fast convergence rate
-implies the existence of Bernoulli estimators with small sample complexity
-and we present a novel information theoretic argument to rule out their
-existence. The reason that we are interested in \emph{opinion dependent dynamics}
-is that they can be consider as \emph{natural behavior} in the following
-sense. If an update rule ensures the no regret property to any agent that adopts, 
-i.e. the time averaged disagreement cost (that the agent experiences) per round
-approaches that of expressing the best opinion in hindsight no matter
-which of her neighbor meets and the way they update their opinions,
-then this update rule is \emph{opinion dependent}.
+implies the existence of Bernoulli estimators with small sample complexity and
+we present a novel information theoretic argument to rule out their existence.
+The reason that we are interested in \emph{opinion dependent dynamics} is that
+they can be consider as \emph{natural behavior} in the following sense. If an
+update rule ensures the no regret property to any agent that adopts, i.e. the
+time averaged disagreement cost (that the agent experiences) per round
+approaches that of expressing the best opinion in hindsight no matter which of
+her neighbor meets and the way they update their opinions, then this update
+rule is \emph{opinion dependent}.
 
-We introduce a simple and intuitive \emph{opinion dependent update rule} 
-and we show that if the agents adopt it to update their opinions, the 
-resulting opinion vector $x(t)$ converges to $x^*$. 
-Our update rule is a \emph{Follow the Leader algorithm},
-meaning that at round $t$, each agent updates her opinion to the minimizer of
-total disagreement cost that she experienced until round $t-1$.  It also has a very
-simple form: it is roughly the time average of the opinions that the agent
-observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
-rate and we show that in order to achieve $\eps$ distance from $x^*$,
-$\mrm{poly}(1/\eps)$ rounds are needed. In Section~\ref{s:fictitious_noregret}, we
-show that this rule also ensures \emph{no regret} to the agents.
-Its no regret property can be derived by the more general results in \cite{HAK07}.
-However, we give a short and simple proof that may be of interest. 
+We introduce a simple and intuitive \emph{opinion dependent update rule} and we
+show that if the agents adopt it to update their opinions, the resulting
+opinion vector $x(t)$ converges to $x^*$.  Our update rule is a \emph{Follow
+  the Leader algorithm}, meaning that at round $t$, each agent updates her
+opinion to the minimizer of total disagreement cost that she experienced until
+round $t-1$.  It also has a very simple form: it is roughly the time average of
+the opinions that the agent observes.  In
+Section~\ref{s:fictitious_convergence}, we bound its convergence rate and we
+show that in order to achieve $\eps$ distance from $x^*$, $\mrm{poly}(1/\eps)$
+rounds are needed. In Section~\ref{s:fictitious_noregret}, we show that this
+rule also ensures \emph{no regret} to the agents.  Its no regret property can
+be derived by the more general results in \cite{HAK07}.  However, we give a
+short and simple proof that may be of interest.
 
-Finally, in Section~\ref{s:cc_convergence} we show that \enquote{slow convergence}
-is not a generic property of the \emph{limited information dynamics}. 
-We present an update rule that apart from the observed opinions, also uses the
-weights $w_{ij}$ and converges exponentially fast to $x^*$.
+Finally, in Section~\ref{s:cc_convergence} we show that \enquote{slow
+  convergence} is not a generic property of the \emph{limited information
+  dynamics}.  We present an update rule that apart from the observed opinions,
+also uses the weights $w_{ij}$ and converges exponentially fast to $x^*$.
 
 
 Our results imply that even if agents are subjected to information exchange
@@ -284,69 +220,22 @@ constraints, there exist natural dynamics that converge to equilibrium $x^*$,
 making it a robust choice for modeling the limiting behavior of the opinions.
 
 
-%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-
-
-%$$PALIO$$
-%We introduce a simple and intuitive update rule and we show that if the agents
-%adopt it to update their opinions, the resulting opinion vector $x(t)$
-%converges to $x^*$.  Our update rule is a \emph{Follow the Leader algorithm},
-%meaning that at round $t$, each agent updates her opinion to the minimizer of
-%total disagreement cost that she experienced until round $t-1$.  It also has a very
-%simple form: it is roughly the time average of the opinions that the agent
-%observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
-%rate and we show that in order to achieve $\eps$ distance from $x^*$,
-%$\mrm{poly}(1/\eps)$ rounds are needed. We overcome the main technical
-%difficulty, which lies in the stochastic nature of our process, by using
-%elegant concentration arguments.  In Section~\ref{s:fictitious_noregret}, we
-%show that this rule ensures \emph{no regret} to any agent that adopts it.
-%Namely, the average disagreement cost (that the agent experiences) per round
-%approaches that of expressing the best opinion in hindsight.  The latter makes
-%our algorithm a natural behavioral assumption for agents that selfishly want to
-%minimize their incurred disagreement cost.  The no regret property of our
-%update rule can be derived by the more general results in \cite{HAK07}.
-%However, we give a short and simple proof that may be of interest.  Our
-%results imply that even if agents are subjected to information exchange
-%constraints, there exist natural dynamics that converge to equilibrium $x^*$,
-%making it a robust choice for modeling the limiting behavior of the opinions.
-
-%In Section~\ref{s:lower_bound}, we show that for any update rule that ensures
-%\emph{no regret} to the agents, the resulting opinion vector $x(t)$ cannot
-%converge to $x^*$ faster than polynomially.  We prove the latter for a larger
-%class of update rules, \emph{opinion dependent update rules}, which includes
-%all the update rules that only depend on the observed opinions.  We show that
-%the existence of opinion dependent update rules with fast convergence rate
-%implies the existence of Bernoulli estimators with small sample complexity
-%and we present a novel information theoretic argument to rule out their
-%existence.  Interestingly, polynomial convergence is not a generic property of
-%our imperfect information exchange setting.  In Section~\ref{s:cc_convergence},
-%we present an update rule that apart from the observed opinions, also uses the
-%weights $w_{ij}$ and converges exponentially fast to $x^*$. Our results provide
-%a clear and intuitive characterization of the update rules that can achieve
-%exponential convergence and serve as an \enquote{algorithmic guide} for future
-%limited information exchange variants of the FJ model.  Moreover, they indicate
-%the fundamental reason underlying the exponentially fast convergence of the FJ
-%model.  It has little to do with the \enquote{large} information exchange that
-%it requires and much more to do with the fact that it uses the exact values of
-%the weights $w_{ij}$.
-
 \subsection{Further Related Work}
 
-There exists a large amount of literature concerning the FJ model.
-Many recent works \cite{BGM13,CKO13}, \cite{BFM16,EFHS17}
-bound the inefficiency of equilibrium in variants of opinion formation game
-defined in \cite{BKO11}. In \cite{GS14} they bound the convergence time of the
-FJ model in special graph topologies.  In \cite{BFM16}, a variant of the
-opinion formation game in which social relations depend on the expressed
-opinions is studied.  They prove that the discretized version of the above game
-admits a potential function and thus best-response converges to the Nash
-equilibrium.  Convergence results in other discretized variants of the FJ model
-can be found in \cite{YOASS13,FGV16}. In \cite{FPS16} they provide convergence
-results for limited information variants of the Heglesmann-Krause model
-\cite{HK} and the FJ model. Although they considered limited information variant
-of the FJ model is very similar to ours, their convergence
-results are much weaker, since they concern the expected value of the
-opinion vector.
+There exists a large amount of literature concerning the FJ model.  Many recent
+works \cite{BGM13,CKO13}, \cite{BFM16,EFHS17} bound the inefficiency of
+equilibrium in variants of opinion formation game defined in \cite{BKO11}. In
+\cite{GS14} they bound the convergence time of the FJ model in special graph
+topologies.  In \cite{BFM16}, a variant of the opinion formation game in which
+social relations depend on the expressed opinions is studied.  They prove that
+the discretized version of the above game admits a potential function and thus
+best-response converges to the Nash equilibrium.  Convergence results in other
+discretized variants of the FJ model can be found in \cite{YOASS13,FGV16}. In
+\cite{FPS16} they provide convergence results for limited information variants
+of the Heglesmann-Krause model \cite{HK} and the FJ model. Although they
+considered limited information variant of the FJ model is very similar to ours,
+their convergence results are much weaker, since they concern the expected
+value of the opinion vector.
 
 Other works that relate to ours, concern the convergence properties of dynamics
 based on no regret learning algorithms.  In \cite{FV97,FS99,SA00,SALS15} it is
@@ -356,14 +245,14 @@ strategy vector converges to Coarse Correlated Equilibrium. The convergence
 properties of no regret dynamics for games with infinite strategy spaces were
 considered in \cite{EMN09}.  They proved that for a large class of games with
 concave utility functions (socially concave games), the time-averaged strategy
-vector converges to Pure Nash Equilibrium (PNE). More recent work investigates a stronger notion of
-convergence of no regret dynamics. In \cite{CHM17} they show that, in
-$n$-person finite generic games that admit unique Nash equilibrium, the
-strategy vector converges \emph{locally} and exponentially fast to it. They
-also provide conditions for \emph{global} convergence.  Our results fit in this
-line of research since we show that for a game with \emph{infinite} strategy
-space, the strategy vector (and not the time-averaged) converges to the Nash
-equilibrium $x^*$.
+vector converges to Pure Nash Equilibrium (PNE). More recent work investigates
+a stronger notion of convergence of no regret dynamics. In \cite{CHM17} they
+show that, in $n$-person finite generic games that admit unique Nash
+equilibrium, the strategy vector converges \emph{locally} and exponentially
+fast to it. They also provide conditions for \emph{global} convergence.  Our
+results fit in this line of research since we show that for a game with
+\emph{infinite} strategy space, the strategy vector (and not the time-averaged)
+converges to the Nash equilibrium $x^*$.
 
 No regret dynamics in imperfect information settings have recently received
 substantial attention from the scientific community since they provide
@@ -377,8 +266,8 @@ subsequent work \cite{KPT11}, the same authors consider the same problem in a
 \emph{imperfect information setting} (\enquote{bulletin board model}), in which
 each agent learns the load of just the machine that served him. Most relevant
 to ours, are the works \cite{HCM17,MS17,BM17,CHM17}, where they examine the
-convergence properties of no regret learning algorithms when the agents
-observe their payoffs with some additive zero-mean random noise. In our
-imperfect information setting the agents experience random disagreement cost
-with expected value equal to the actual cost.  The main difference is that
-our \emph{noise} is not additive but due to a sampling process.
+convergence properties of no regret learning algorithms when the agents observe
+their payoffs with some additive zero-mean random noise. In our imperfect
+information setting the agents experience random disagreement cost with
+expected value equal to the actual cost.  The main difference is that our
+\emph{noise} is not additive but due to a sampling process.
