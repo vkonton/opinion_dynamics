@@ -14,10 +14,11 @@ combination of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.  We show that the
 agents can adopt an intuitive and simple update rule that ensures
 \emph{no regret} to the experienced disagreement cost and at the same time the
 produced opinion vector converges to the equilibrium $x^*$ within error $\eps$
-after $\mrm{poly}(1/\eps)$ rounds.  In our imperfect information setting, we
-prove that, for dynamics that ensure no regret for the agents,
-$\Omega(1/\eps)$ rounds are also necessary.  Finally, we present an update rule that
-requires only $\widetilde{O}(\log^2(1/\eps))$ rounds to acheive error $\eps$,
+after roughly $O(\mrm{poly}(\log n /\eps))$ rounds, where $n$ is the number of
+agents.  In our imperfect information setting, we prove that, for dynamics that
+ensure no regret for the agents, $\Omega(1/\eps)$ rounds are also necessary.
+Finally, we present an update rule that requires only
+$\widetilde{O}(\log^2(1/\eps))$ rounds to acheive error $\eps$,
 resembling the convergence of the original FJ model.  Slow convergence is not
 a generic property of our imperfect information setting but rather a
 characteristic of no regret dynamics.

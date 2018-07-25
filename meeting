@@ -1,0 +1,12 @@
+1. Definition 4: how big is this class.  Why is this class non trivial and important.
+2. OK small round complexity.
+3. Nash equilibrium of definition 1.
+4. Mathematical definition of everything.
+5. Pointwise convergence and no regret.
+6. Opinion Dependent vs no regret.
+7. question 3 should be better placed.
+8. Definition 2.
+9. exponential and polynomial convergence.
+10. No repeated game and one shot game, say dynamics of the game.
+11. No regret is opinion dependent, No regret is independent of the choices of
+the agents.
