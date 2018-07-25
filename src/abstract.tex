@@ -28,7 +28,7 @@
 
 
 %The classical Friedkin-Johsen dynamics converges to the equilibrium within
-%error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
+%error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our limited
 %information setting, our update rule needs $\widetilde{O}(1/\eps^2)$ rounds.
 %We ask whether there exists a different natural dynamics for our problem
 %with better rate of convergence.  We answer this question in the negative
@@ -41,7 +41,7 @@ agents update their opinions by taking into account the opinions of
 in each round each agent gets to meet with only one random friend of
 hers. Since it is more likely to meet some friends than others we assume
 that agent $i$ meets agent $j$ with probability $p_{ij}$.
-In this imperfect information setting, we are interested in simple and
+In this limited information setting, we are interested in simple and
 natural variants of the FJ model that converge to the same equilibrium point $x^*$.
 Specifically, we define an opinion formation game, where at round $t$,
 agent $i$ with intrinsic opinion $s_i\in[0,1]$ and expressed opinion $x_i(t)
@@ -55,7 +55,7 @@ to the equilibrium $x^*$ within error $\eps$ after
 $\mrm{poly}(1/\eps)$ rounds.
 
 The classical Friedkin-Johsen dynamics converges to the equilibrium within
-error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our imperfect
+error $\eps$ after only $O(\log(1/\eps))$ rounds whereas, in our limited
 information setting, our update rule needs $\mrm{poly}(1/\eps)$ rounds.
 We ask whether there exists a different no-regret dynamics for our problem
 with better rate of convergence.  We answer this question in the negative
@@ -63,5 +63,5 @@ by showing that dynamics based on no-regret algorithms cannot converge with
 less than $\Omega(1/\eps)$ rounds.  Finally, we present an update rule that
 requires only $\widetilde{O}(\log^2(1/\eps))$ rounds to acheive error $\eps$,
 resembling the convergence of the original FJ model.  Slow convergence is not
-a generic property of our imperfect information setting but rather a
+a generic property of our limited information setting but rather a
 characteristic of no regret dynamics.

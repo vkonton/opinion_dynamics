@@ -186,7 +186,7 @@ Since we are most concerned about the dependence of the rate of convergence
 on the distance $\eps$ from the equilibrium, we shall suppress the dependence on
 other constants of the problem such as the size of the graph, $n$.  We remark
 that the dependence of our dynamics on these constants is in fact rather good
-(see Section~\ref{s:results}, but we do this only for clarity of exposition.
+(see Section~\ref{s:results}), but we do this only for clarity of exposition.
 
 \begin{definition}[Informal]\label{d:convergence_rate}
   We say that a dynamics converges slow resp. fast to its stable point $x^*$ if it
@@ -243,7 +243,7 @@ limiting behavior of the opinions of agents since even in our limited informatio
 setting, there exist natural dynamics that converge to it.  Our lower bound
 indicates that rationality comes at the price of \enquote{slow} convergence.
 
-\subsection{Further Related Work}
+\subsection{Related Work}
 
 There exists a large amount of literature concerning the FJ model.  Many recent
 works \cite{BGM13,CKO13}, \cite{BFM16,EFHS17} bound the inefficiency of
@@ -277,7 +277,7 @@ results fit in this line of research since we show that for a game with
 \emph{infinite} strategy space, the strategy vector (and not the time-averaged)
 converges to the Nash equilibrium $x^*$.
 
-No regret dynamics in imperfect information settings have recently received
+No regret dynamics in limited information settings have recently received
 substantial attention from the scientific community since they provide
 realistic models for the practical applications of game theory.  Perfect payoff
 information is rare in practice; agents act based on random or noisy past
@@ -286,11 +286,11 @@ in distributed systems as a repeated game and analyzed the convergence
 properties of no regret learning algorithms under the \emph{full information
   assumption} that each agent learns the load of every machine.  In a
 subsequent work \cite{KPT11}, the same authors consider the same problem in a
-\emph{imperfect information setting} (\enquote{bulletin board model}), in which
+\emph{limited information setting} (\enquote{bulletin board model}), in which
 each agent learns the load of just the machine that served him. Most relevant
 to ours, are the works \cite{HCM17,MS17,BM17,CHM17}, where they examine the
 convergence properties of no regret learning algorithms when the agents observe
-their payoffs with some additive zero-mean random noise. In our imperfect
+their payoffs with some additive zero-mean random noise. In our limited
 information setting the agents experience random disagreement cost with
 expected value equal to the actual cost.  The main difference is that our
 \emph{noise} is not additive but due to a sampling process.

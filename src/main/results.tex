@@ -4,7 +4,7 @@ is also an instance the game of Definition~\ref{d:random_game}.
 Following the notation introduced earlier we have that
 $p_{ij} = w_{ij}/\sum_{j \in N_i}w_{ij}$ if $j \in N_i$ and $0$ otherwise.
 Moreover, $\alpha_i=w_{ii}/(\sum_{j \in N_i}w_{ij}+w_{ii})>0$ since $w_{ii}>0$
-by the definition of the game in \cite{BKO11}. 
+by the definition of the game in \cite{BKO11}.
 If an agent $i$ does not have outgoing edges ($N_i = \emptyset$) then
 $p_{ij} = 0$ for all $j$. Therefore $\sum_{j=1}^n p_{ij}=0$, $\alpha_i=1$ if $N_i= \emptyset$
 and $\sum_{j=1}^n p_{ij}=1$, $\alpha_i \in (0,1)$ otherwise.
@@ -22,8 +22,8 @@ an instance of the game of Definition~\ref{d:random_game}.
 %
 
 An instance $I=(P,s,\alpha)$ is also an instance
-of the FJ model, since by the update rule~(\ref{eq:FJ_model}) 
-$x_i(t+1)=(1-\alpha_i)\sum_{j \in N_i}p_{ij}x_j(t-1) + a_i s_i$.  
+of the FJ model, since by the update rule~(\ref{eq:FJ_model})
+$x_i(t+1)=(1-\alpha_i)\sum_{j \in N_i}p_{ij}x_j(t-1) + a_i s_i$.
 It also defines the opinion vector $x^* \in [0,1]^n$ which is the
 stable point of the FJ model and the Nash equilibrium
 of the game in \cite{BKO11}.
@@ -32,7 +32,7 @@ For a given instance $I=(P,s,\alpha)$ the equilibrium
 $x^*\in [0,1]^n$ is the unique solution of the following linear system,
 for every $i \in V$, $x^*_i=(1-\alpha_i)\sum_{j \in N_i}p_{ij}x_j^* + a_i s_i$.
 \end{definition}
-The fact that the above linear systems always admits a solution follows
+The fact that the above linear system always admits a solution follows
 by matrix norm properties.
 Throughout the paper we study \emph{dynamics}
 in the game of Definition~\ref{d:random_game}.
