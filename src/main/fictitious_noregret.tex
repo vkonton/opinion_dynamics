@@ -1,9 +1,9 @@
-\section{FTL dynamics ensures no regret}\label{s:fictitious_noregret}
-In this section we explain why the
-update rule~(\ref{eq:fictitious_play}) (\enquote{Follow the Leader}) ensures
-no regret to the agents that play the repeated version of the one shot
+\section{\emph{Follow the Leader} ensures no regret}\label{s:fictitious_noregret}
+In this section we explain why update rule~(\ref{eq:fictitious_play}) 
+(\enquote{Follow the Leader}) ensures
+no regret to any agent that repeqtedly play the
 game of Definition~\ref{d:random_game}.
-Based on the cost that each agent experiences,
+Based on the cost that the agents experience,
 we consider an appropriate \emph{Online Convex Optimization} problem.
 This problem can be viewed as a \enquote{game} played between an
 adversary and a player. \emph{At round }$t\geq 0$,
@@ -44,7 +44,7 @@ Theorem~\ref{t:fictitious_noregret} states that
 \enquote{Follow the Leader} i.e. $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
 is a no regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
 
-Returning in our repeated game, it is natural to
+Returning to the dynamics of the game in Definition~\ref{d:random_game}, it is reasonalbe to
 consider that each agent $i$ selects $x_i(t)$ according
 to no regret algorithm $A_i$ for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$,
 since by Definition~\ref{d:no_regret_algo},
@@ -54,15 +54,16 @@ The latter means that the time averaged total disagreement cost
 that she suffers is similar to the time averaged cost by expressing the
 best fixed opinion and this holds no matter the opinions of the
 neighbors that $i$ meets. Under this perspective FTL dynamics 
-is a natural dynamics in our imperfect information setting,
-since update rule~(\ref{eq:fictitious_play}) ensures no regret to the agents.
+is a \emph{natural limited information dynamics},
+since update rule~(\ref{eq:fictitious_play}) ensures 
+no regret to the agents.
 
 %Theorem~\ref{t:fictitious_noregret}
 %ensures that \emph{Follow the Leader} is a no regret algorithm
 %for any OCO problem $\mcal{F}_{s_i,\alpha_i}$ and explains why
 %(\ref{eq:fictitious_play}) is a rational update rule for the agents.
 
-\change{We now present the key steps for proving Theorem~\ref{t:fictitious_noregret}}.
+We now present the key steps for proving Theorem~\ref{t:fictitious_noregret}.
 We first prove that a similar strategy that also takes into
 account the value $b_t$ admits no regret (Lemma~\ref{l:y_t}).
 Obviously knowing the value $b_t$ before selecting $x_t$
