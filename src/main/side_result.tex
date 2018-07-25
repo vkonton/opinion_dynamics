@@ -1,15 +1,13 @@
-\section{An Update Rule with Exponential Convergence Rate}\label{s:cc_convergence}
+\section{An Update Rule with Fast Convergence Rate}\label{s:cc_convergence}
 
 We already discussed that the reason that opinion dependent dynamics suffer slow
 convergence is that the update rule depends only on the expressed opinions.
 Based on works for asynchronous distributed minimization algorithms \cite{BT97,CC16},
 we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly can restore the
-exponential convergence rate.
+fast convergence rate.
 Our update rule, depends not only on the expressed opinions of the
 neighbors that an agent $i$ meets but also on the $i$-th row of matrix $P$.
-%Having this knowledge, one could try to come up with an
-%update rule resembling the original update rule of the FJ model.
 In update rule (\ref{alg:cc_upper}), each agent stores the
 \emph{most recent} opinions of the random neighbors that she meets in an array
 and then updates her opinion according to their weighted sum
@@ -21,7 +19,7 @@ The problem with this approach is that the opinions of the neighbors
 that she keeps in her array are \emph{outdated}, i.e. the opinion of
 a neighbor of agent $i$ has changed since their last meeting.
 The good news are that as long as this outdatedness
-is bounded we can still achieve exponential convergence to the
+is bounded we can still achieve fast convergence to the
 equilibrium.  By bounded outdatedness we mean that there exists a
 number of rounds $B$ such that all agents have met all their neighbors
 at least once from $t-B$ to $t$. The latter is formally stated in
@@ -32,29 +30,16 @@ Appendix~\ref{app:s:cc_convergence}.
   %It is necessary that each agent $i$ \enquote{knows} the row $i$ of matrix $P$ for
   %this update rule to work.
   Update rule~(\ref{alg:cc_upper}), apart from the opinions
-  and the indices of the neighbors that an agent meets, 
+  and the indices of the neighbors that an agent meets,
   also depends on the the exact values of the weights $p_{ij}$ and that is
-  why \emph{Row Dependent dynamics} converge exponentially
-  fast. We mention that the lower bound of
+  why \emph{Row Dependent dynamics} converge fast. We mention that the lower bound of
   Section~\ref{s:lower_bound} still holds even if the agents also use the indices
   of the neighbors that they meet to update their opinion, since
   Lemma~\ref{l:reduction} can be easily modified to
-  cover this case. The latter implies that any update rule that 
-  ensures exponential convergence must require that each agent 
+  cover this case. The latter implies that any update rule that
+  ensures fast convergence must require that each agent
   $i$ is \emph{aware} of the $i$-th row of matrix $P$.
-  
-%  requires that 
-%  each agent $i$ \enquote{knows} the row $i$ of matrix $P$ for
-%  uses the exact
-%  values of the weights $p_{ij}$ and this is inevitable for any update
-%  rule that achieves exponential convergence rate.
-   % Therefore, if we tried to learn $P$ by observing the frequencies
-  % of the indices of the neighbors and run update rule (\ref{alg:cc_upper})
-  % with the empirical frequencies instead of the $p_{ij}$, our lower bound
-  % ensures that the rate of convergence would not be $o(1/t^{1+c})$ for any $c>0$.
-  % Intuitively, if we know $P$ then the algorithm converges exponentially,
-  % since the slow part of the process is learning the probabilities $p_{ij}$
-  % precisely.
+
 \end{remark}
 \vspace{-5mm}
 \begin{algorithm*}
@@ -84,7 +69,7 @@ Appendix~\ref{app:s:cc_convergence}.
 %In the  following we briefly summarize their result.  For completeness we
 %give here a prove tailored for our purposes.
 %Using a simple induction we get that bounded outdatedness
-%preserves the exponential convergence.  Its simple proof can be found in
+%preserves the fast convergence.  Its simple proof can be found in
 \begin{replemma}{l:outdatedness_induction}
   Let $\rho = \min_i a_i$, and $\pi_{ij}(t)$ be the most recent round
   before round $t$, that agent $i$ met her neighbor $j$.
@@ -104,7 +89,7 @@ Since we want this to be true for all agents
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
 In Section~\ref{app:s:cc_convergence} of the Appendix we give the detailed
 argument that leads to the Theorem~\ref{t:exponential_update_rule},
-showing that the convergence rate of update rule (\ref{alg:cc_upper}) is exponential.
+showing that the convergence rate of update rule (\ref{alg:cc_upper}) is fast.
 
 \begin{reptheorem}{t:exponential_update_rule}
   Let $I = (P,s, \alpha)$ be an instance of the opinion formation

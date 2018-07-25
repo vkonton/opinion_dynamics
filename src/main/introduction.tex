@@ -156,7 +156,10 @@ frequently $i$ meets $j$.
 %
 Note that the FJ model, the game defined in \cite{BKO11}, and the game of
 Definition~\ref{d:random_game} are all defined using equivalent instances
-$G(V,E,w)$.  This game provides us with a general template of all the \emph{dynamics}
+$G(V,E,w)$.  Moreover, it is not hard to see that the equilibrium $x^*$ is also
+the unique Nash equilibrium of the above game with respect to the expected
+disagreement cost of the agents.
+This game provides us with a general template of all the \emph{dynamics}
 examined in this paper.  At round $t$, each agent $i$ selects an opinion
 $x_i(t)$ and suffers a disagreement cost based on the opinion of the neighbor
 that she randomly met.  At the end of the round $t$, she is informed only about
@@ -181,8 +184,11 @@ We discuss here the contribution of this work at a high level; for
 the formal statements of our theorems see Section~\ref{s:results}.
 Since we are most concerned about the dependence of the rate of convergence
 on the distance $\eps$ from the equilibrium, we shall suppress the dependence on
-other constants of the problem such as the size of the graph, $n$.
-\begin{definition}\label{d:convergence_rate}
+other constants of the problem such as the size of the graph, $n$.  We remark
+that the dependence of our dynamics on these constants is in fact rather good
+(see Section~\ref{s:results}, but we do this only for clarity of exposition.
+
+\begin{definition}[Informal]\label{d:convergence_rate}
   We say that a dynamics converges slow resp. fast to its stable point $x^*$ if it
   requires $\mrm{poly}(1/\eps)$ resp. $\mrm{poly}(\log(1/\eps))$ rounds to be
   within (expected) error $\eps$ of $x^*$.
@@ -226,7 +232,7 @@ give a short and simple proof that may be of some interest.
 In Section~\ref{s:cc_convergence} we show that \enquote{slow convergence} is
 not a generic property of the \emph{limited information dynamics}.  We present
 an update rule that apart from the observed opinions, also uses the weights
-$w_{ij}$ and converges exponentially fast to $x^*$.  This update rule reveals
+$w_{ij}$ and converges fast to $x^*$.  This update rule reveals
 that the slow convergence of \emph{opinion dependent} update rules is not due
 to the reduced information exchange (learning the opinion of only one agent),
 but due to the fact that the agents are \enquote{oblivious} to the weighted
@@ -265,8 +271,8 @@ concave utility functions (socially concave games), the time-averaged strategy
 vector converges to Pure Nash Equilibrium (PNE). More recent work investigates
 a stronger notion of convergence of no regret dynamics. In \cite{CHM17} they
 show that, in $n$-person finite generic games that admit unique Nash
-equilibrium, the strategy vector converges \emph{locally} and exponentially
-fast to it. They also provide conditions for \emph{global} convergence.  Our
+equilibrium, the strategy vector converges \emph{locally} and fast to it.
+They also provide conditions for \emph{global} convergence.  Our
 results fit in this line of research since we show that for a game with
 \emph{infinite} strategy space, the strategy vector (and not the time-averaged)
 converges to the Nash equilibrium $x^*$.
