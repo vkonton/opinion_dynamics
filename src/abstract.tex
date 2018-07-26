@@ -9,28 +9,27 @@ As in the FJ model, we assume that each agent $i$ has an intrinsic opinion $s_i
 \in [0,1]$ and maintains an expressed opinion $x_i(t) \in [0,1]$ in each round
 $t$. To model limited information exchange, we consider an opinion formation
 process where each agent $i$ meets with  one random friend $j$ in each round
-$t$ and learns only her current opinion $x_j(t)$.  The amount of influence $j$
+$t$ and learns only her current opinion $x_j(t)$. The amount of influence $j$
 imposes on $i$ is reflected by the probability $p_{ij}$ with which $i$ meets
-$j$. Then, agent $i$ suffers a a disagreement cost that is a convex combination
+$j$. Then, agent $i$ suffers a disagreement cost that is a convex combination
 of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
 %
 For this variant of the FJ model, we show that the agents can adopt a simple
-opinion update rule that ensures \emph{no regret} to the experienced
+opinion update rule that ensures no regret to the experienced
 disagreement cost and results in an opinion vector that converges to the
-equilibrium point $x^\ast$ of the FJ model within error $\eps$ in
+equilibrium point $x^\ast$ of the FJ model within distance $\eps$ in
 $\mrm{poly}(\log n /\eps)$ rounds.
 %
 The convergence time is exponentially slower than the convergence time of the
 FJ model in the full information setting. So, a natural question is whether
 there exists no regret dynamics with improved convergence rate. We show that any
 dynamics that guarantees vanishing regret against the experienced disagreement
-cost requires roughly $\Omega(1/\eps)$ rounds to be within error $\eps$ from
-$x^{\ast}$ for any $c>0$. We prove this result by
-establishing a connection to learning a Bernoulli distribution, which indicates
-that no-regret dynamics suffer low convergence rates due to their inability to
-collect and exploit information about the influence weights associated with
-probabilities $p_{ij}$. Finally, we present an opinion update rule that also
+cost requires $\Omega(1/\eps)$ rounds to be within distance $\eps$ from
+$x^{\ast}$. We prove this result through a connection to learning a Bernoulli distribution, 
+which indicates that no-regret dynamics suffer low convergence rates due to their inability to
+exploit information about the influence weights associated with
+probabilities $p_{ij}$. Finally, we present an opinion update rule that 
 uses the influence weights and converges to $x^\ast$ in
-$\tilde{O}(\log n \log^2(1/\eps))$ rounds, thus providing evidence that convergence
-rate of opinion dynamics is affected more by the knowledge of influence weights
-in each agent's social neighborhood that by the knowledge of the opinions in it.
+$\tilde{O}(\log n \log^2(1/\eps))$ rounds, thus providing evidence that absence of knowledge
+about the influence weights in each agent's social neighborhood impacts the convergence rate more
+than absence of knowledge about the opinions in it.
