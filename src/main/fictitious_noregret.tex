@@ -1,7 +1,6 @@
-\section{\emph{Follow the Leader} ensures no regret}\label{s:fictitious_noregret}
-In this section we explain why update rule~(\ref{eq:fictitious_play}) 
-(\enquote{Follow the Leader}) ensures
-no regret to any agent that repeqtedly play the
+\section{Follow the Leader ensures no regret}\label{s:fictitious_noregret}
+In this section we explain why update rule~(\ref{eq:fictitious_play}) ensures
+no regret to any agent that repeatedly play the
 game of Definition~\ref{d:random_game}.
 Based on the cost that the agents experience,
 we consider an appropriate \emph{Online Convex Optimization} problem.
@@ -20,8 +19,8 @@ $\mcal{F}$ that the adversary chooses from and a feasibility
 set $\mcal{K}$ from which the player picks her value (see \cite{Haz16}
 for an introduction to the OCO framework).
 In our case the feasibility set is $\mcal{K}=[0,1]$ and the set of functions
-is $\mcal{F}_{\alpha,s} = \{(1-\alpha)(x-b)^2 + \alpha(x -s)^2$, for all
-$b \in [0,1]\}$.
+is
+$\mcal{F}_{\alpha,s} = \{x \mapsto (1-\alpha)(x-b)^2 + \alpha(x -s)^2 : b \in [0,1]\}$.
 As a result, each selection of the
 constants $s,\alpha$ lead to a different OCO problem.
 
@@ -41,21 +40,21 @@ $x_t$ according to a \emph{no regret algorithm} then
 she does not regret for not playing any fixed value no
 matter what the choices of the adversary are.
 Theorem~\ref{t:fictitious_noregret} states that
-\enquote{Follow the Leader} i.e. $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
+\emph{Follow the Leader} i.e. $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
 is a no regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
 
-Returning to the dynamics of the game in Definition~\ref{d:random_game}, it is reasonalbe to
-consider that each agent $i$ selects $x_i(t)$ according
+Returning to the dynamics of the game in Definition~\ref{d:random_game},
+it is reasonable to consider that each agent $i$ selects $x_i(t)$ according
 to no regret algorithm $A_i$ for the OCO problem with $\mcal{F}_{s_i,\alpha_i}$,
 since by Definition~\ref{d:no_regret_algo},
 \[\frac{1}{t}\sum_{\tau=0}^t f_i(x_i(\tau),x_{W_i^\tau}(\tau)) \leq
 \frac{1}{t}\min_{x \in [0,1]}\sum_{\tau=0}^tf_i(x,x_{W_i^\tau}(\tau)) + \frac{o(t)}{t}\]
 The latter means that the time averaged total disagreement cost
-that she suffers is similar to the time averaged cost by expressing the
+that she suffers is close to the time averaged cost by expressing the
 best fixed opinion and this holds no matter the opinions of the
-neighbors that $i$ meets. Under this perspective FTL dynamics 
+neighbors that $i$ meets. Under this perspective FTL dynamics
 is a \emph{natural limited information dynamics},
-since update rule~(\ref{eq:fictitious_play}) ensures 
+since update rule~(\ref{eq:fictitious_play}) ensures
 no regret to the agents.
 
 %Theorem~\ref{t:fictitious_noregret}
@@ -70,9 +69,8 @@ Obviously knowing the value $b_t$ before selecting $x_t$
 is in direct contrast with the OCO framework, however proving
 the no regret property for this algorithm easily extends to
 establishing the no regret property of \emph{Follow the Leader}.
-The proofs of the subsequent lemmas and
-Theorem~\ref{t:fictitious_noregret} can be found in the
-Appendix~\ref{app:s:fictitious_noregret}.
+The proofs of the subsequent lemmas and Theorem~\ref{t:fictitious_noregret} can
+be found in the Appendix~\ref{app:s:fictitious_noregret}.
 \begin{replemma}{l:y_t}
 Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$.
 Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
@@ -82,13 +80,13 @@ then for all $t$,
 \sum_{\tau = 0}^tf(x,b_\tau).
 \)
 \end{replemma}
-Now we can understand reason why \enquote{Follow the Leader}
+Now we can understand reason why \emph{Follow the Leader}
 admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
 of the best fixed value, we can compare the cost incurred by $x_t$ with
 that of $y_t$.  Since the functions in $\mcal{F}_{\alpha,s}$ are quadratic,
 the extra term $f(x,b_t)$ that $y_t$ takes into account doesn't change
-dramatically the minimum of the total sum. Meaning that $x_t,y_t$ 
-are relatively close. 
+dramatically the minimum of the total sum. Namely, $x_t,y_t$
+are relatively close.
 %Thus, for each $t$ the
 %numbers $x_t$ and $y_t$ are quite close and as a result the
 %difference in their cost must be quite small. The above are

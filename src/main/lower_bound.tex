@@ -24,10 +24,9 @@ as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
 % \emph{opinion dependent} update rules.
 % \repeattheorem{t:lower_bound}
 
-At first we show that any opinion dependent $A$, achieving the previous
-convergence rate, can be used as an estimator of the parameter
-$p \in [0,1] $ of Bernoulli random variable with the same asymptotic error
-rate. This reduction is formally stated in Lemma~\ref{l:reduction}.
+In Lemma~\ref{l:reduction} we show that any opinion dependent update rule $A$,
+can be used as an estimator of the parameter $p \in [0,1] $ of Bernoulli random
+variable.
 Since we prove Theorem~\ref{t:lower_bound} using a reduction to
 an estimation problem we shall first briefly introduce some definitions and
 notation. For simplicity we will restrict the following definitions
@@ -74,10 +73,8 @@ must guarantee that $\lim_{t \to \infty} \Expnew{p}{|\theta_t - p|}=0$ for all $
 For example, \emph{sample mean} has error rate
 $\Expnew{p}{|\theta_t-p|} \leq \frac{1}{2\sqrt{t}}$.
 
-We show now that any opinion dependent update rule $A$, can be used as a
-Bernoulli estimator with the same error rate.
 \begin{lemma}\label{l:reduction}
-  Let $A$ an opinion dependent update rule such that for all instances $I$,
+  Let $A$ an opinion dependent update rule such that for all instances $I=(P,s,a)$,
   \[\lim_{t \rightarrow \infty} t^{1+c}
   \Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0.\]
   Then there exists an estimator $\theta_A=(\theta_t^A)_{t=1}^\infty$ such that for all
@@ -106,7 +103,7 @@ Bernoulli estimator with the same error rate.
   $\Expnew{p}{|\theta_t^A-p|}=
   3\Expnew{}{|x_c^A(t)-p/3|}\leq 3\Expnew{}{\norm{\infty}{x_A(t)-x^*}}$.
   Since for any instance $I_p$, we have that
-  $\lim \limits_{t \rightarrow \infty} t^{1+c}\Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
+  $\lim_{t \rightarrow \infty} t^{1+c}\Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0$.
   It follows that $\lim_{t \rightarrow \infty}t^{1+c}\Expnew{p}{|\theta_t^A -p|}=0$
   for all $p \in [0,1]$.
   \vspace{-5mm}
@@ -127,14 +124,16 @@ Bernoulli estimator with the same error rate.
         \path [->] (2) edge[bend right] node {$1$} (C);
       \end{scope}
     \end{tikzpicture}
-    \vspace{-15mm}
+    \vspace{-12mm}
     % \caption{The Lower Bound Instance}
+     \caption{}
     \label{fig:lb_instance}
+    \vspace{-8mm}
   \end{figure}
   %
 \end{proof}
 %
-It follows by Lemma~\ref{l:reduction} that in order to prove Theorem~\ref{t:lower_bound} we
+In order to prove Theorem~\ref{t:lower_bound} we
 just need to prove the following claim.
 \begin{claim}\label{cl:fixed_p}
   For any estimator $\theta = (\theta_t)_{t=1}^\infty$
@@ -230,13 +229,14 @@ Lemma~\ref{l:estimation_lower_bound}.
 In fact, we show something stronger:
 for \emph{almost all} $p \in [0,1]$, any estimator $\theta$ cannot
 achieve rate $o(1/t^{1+c})$.
-More precisely,  suppose we select $p$ uniformly at
-random in $[0,1]$ and run the estimator $\theta$ with samples from the
-distribution $B(p)$, then with probability $1$ the error rate
-$\Expnew{p}{|\theta_t  - p |} = \Omega(1/t^{1+c})$. Although we do not show the sharp lower bound
-$\Omega(1/\sqrt{t})$ we prove that no fast convergence rate
-(see Definition~\ref{d:convergence_rate} is possible and we remark that our
-proof is fairly simple, intuitive, and could be of independent interest.
+% More precisely,  suppose we select $p$ uniformly at
+% random in $[0,1]$ and run the estimator $\theta$ with samples from the
+% distribution $B(p)$, then with probability $1$ the error rate
+% $\Expnew{p}{|\theta_t  - p |} = \Omega(1/t^{1+c})$.
+% Although we do not show the sharp lower bound
+% $\Omega(1/\sqrt{t})$ we prove that no fast convergence rate
+% (see Definition~\ref{d:convergence_rate} is possible and we remark that our
+% proof is fairly simple, intuitive, and could be of independent interest.
 %
 % Finally, while we do not preclude the possibility of similar results to exist
 % in the statistics literature,

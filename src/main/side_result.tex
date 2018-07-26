@@ -1,4 +1,4 @@
-\section{An Update Rule with Fast Convergence Rate}\label{s:cc_convergence}
+\section{Limited Information Dynamics with Fast Convergence}\label{s:cc_convergence}
 
 We already discussed that the reason that opinion dependent dynamics suffer slow
 convergence is that the update rule depends only on the expressed opinions.
@@ -13,7 +13,7 @@ In update rule (\ref{alg:cc_upper}), each agent stores the
 and then updates her opinion according to their weighted sum
 (each agent knows row $i$ of $P$). For a given instance
 $I=(P,s,\alpha)$ we call the produced dynamics \emph{Row Dependent dynamics}
-and it is defined in Dynamics~\ref{alg:influence_dependent}.
+(Dynamics~\ref{alg:influence_dependent}).
 
 The problem with this approach is that the opinions of the neighbors
 that she keeps in her array are \emph{outdated}, i.e. the opinion of
@@ -22,8 +22,8 @@ The good news are that as long as this outdatedness
 is bounded we can still achieve fast convergence to the
 equilibrium.  By bounded outdatedness we mean that there exists a
 number of rounds $B$ such that all agents have met all their neighbors
-at least once from $t-B$ to $t$. The latter is formally stated in
-Lemma~\ref{l:outdatedness_induction} and its proof can be found
+at least once from $t-B$ to $t$.  The latter is formally stated in
+Lemma~\ref{l:outdatedness_induction} and its proof can be found in
 Appendix~\ref{app:s:cc_convergence}.
 
 \begin{remark}
@@ -37,8 +37,8 @@ Appendix~\ref{app:s:cc_convergence}.
   of the neighbors that they meet to update their opinion, since
   Lemma~\ref{l:reduction} can be easily modified to
   cover this case. The latter implies that any update rule that
-  ensures fast convergence must require that each agent
-  $i$ is \emph{aware} of the $i$-th row of matrix $P$.
+  ensures fast convergence would require from each agent
+  $i$ to be \emph{aware} of the $i$-th row of matrix $P$.
 
 \end{remark}
 \vspace{-5mm}
@@ -78,7 +78,7 @@ Appendix~\ref{app:s:cc_convergence}.
   \(\norm{\infty}{x(t) - x^*} \leq (1-\rho)^k\).
 \end{replemma}
 
-In our randomized setting there does not exist a fixed length window $B$
+In Row Dependent dynamics there does not exist a fixed length window $B$
 that satisfies the requirements of Lemma~\ref{l:outdatedness_induction}.
 However we can select a length value such that the requirements hold with high probability.
 To do this observe that agent $i$ simply needs to wait to meet the neighbor
@@ -87,8 +87,8 @@ $\log(1/\delta)/\min_{j} p_{ij}$ rounds we have that with probability at least
 $1-\delta$ agent $i$ met all her neighbors at least once.
 Since we want this to be true for all agents
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
-In Section~\ref{app:s:cc_convergence} of the Appendix we give the detailed
-argument that leads to the Theorem~\ref{t:exponential_update_rule},
+In Appendix~\ref{app:s:cc_convergence} we give the detailed
+argument that leads to Theorem~\ref{t:exponential_update_rule},
 showing that the convergence rate of update rule (\ref{alg:cc_upper}) is fast.
 
 \begin{reptheorem}{t:exponential_update_rule}
