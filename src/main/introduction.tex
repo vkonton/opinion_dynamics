@@ -70,9 +70,9 @@ easily captured by defining suitable games.
 % Secondly, it permits considering different \emph{natural dynamics} for the
 % same opinion formation game (e.g. \emph{best response dynamics, no regret
 % dynamics, fictitious play}).
-For example, subsequent works \cite{BGM13,BFM16,EFHS17} considered variants of
+Subsequent works \cite{BGM13,BFM16,EFHS17} considered variants of
 the above game and studied the convergence properties of the \emph{best
-  response dynamics}.
+ response dynamics}.
 
 \subsection{Motivation and our setting}
 
@@ -80,7 +80,7 @@ Many recent works study the Nash equilibrium $x^*$ of the opinion formation
 game defined in \cite{BKO11} under various perspectives. In \cite{CCL16} they
 extended the bounds for PoA in more general classes of directed graphs, while
 many recently introduced influence maximization problems
-\cite{GTT13,AKPT18,MMT17}which are defined with respect to $x^*$.
+\cite{GTT13,AKPT18,MMT17} are defined with respect to $x^*$.
 % For example, Gionis et al. \cite{GTT13} considered the problem of identifying
 % $k$ nodes in a network to set their internal opinion equal to 1 so as to
 % maximize the sum of the opinions in the equilibrium point $x^*$
@@ -121,7 +121,7 @@ opinion formation game that captures these information exchange constraints.
 This way we can precisely define which \emph{dynamics} are \emph{natural}, and,
 more importantly, to study general classes of \emph{dynamics} (e.g. no regret
 dynamics) without explicitly defining their update rule.  The opinion formation
-game that we consider is a variant of the game defined in \cite{BKO11} based on
+game that we consider is a variant of the game in \cite{BKO11} based on
 interpreting the weight $w_{ij}$ as a measure of how frequently $i$ meets $j$.
 %
 \begin{definition}\label{d:random_game}
@@ -141,12 +141,10 @@ interpreting the weight $w_{ij}$ as a measure of how frequently $i$ meets $j$.
   %
 \end{definition}
 %
-Note that the FJ model, the game defined in \cite{BKO11}, and the game of
-Definition~\ref{d:random_game} are all defined using equivalent instances
-$G(V,E,w)$.  Moreover, it is not hard to see that the equilibrium $x^*$ is also
-the unique Nash equilibrium of the game of Definition~\ref{d:random_game} with
-respect to the expected disagreement cost of the agents.  This game provides us
-with a general template of all the \emph{dynamics} examined in this paper.  At
+Note that the expected disagreement cost of each agent in the above game
+is the same as the disagreement cost in \cite{BKO11} (scaled by $\sum_{j \in N_i}w_{ij}+w_{ii}$). 
+Moreover its Nash equilibrium, with respect to the expected disagreement cost, is $x^*$.
+This game provides us with a general template of all the \emph{dynamics} examined in this paper.  At
 round $t$, each agent $i$ selects an opinion $x_i(t)$ and suffers a
 disagreement cost based on the opinion of the neighbor that she randomly met.
 At the end of the round $t$, she is informed only about the opinion and the
@@ -160,15 +158,16 @@ concrete form.
 \begin{question}\label{q:motivation2}
   %
   Can the agents update their opinions according to the limited information
-  that they receive such that the produced opinion vector $x(t)$ converges fast
-  to the equilibrium $x^*$ and the total disagreement cost that they experience
+  that they receive such that the produced opinion vector $x(t)$ converges
+  to the equilibrium $x^*$? How is the convergence rate affected by the limited
+  information exchange? Are there dynamics that ensures that the cost that the agents experience
   is minimal?
   %
 \end{question}
 
 In what follows, we are mostly concerned about the dependence of
-the rate of convergence on the distance $\eps$ from the equilibrium, we shall
-suppress the dependence on other constants of the problem such as the size of
+the rate of convergence on the distance $\eps$ from the equilibrium $x^*$, we shall
+suppress the dependence on other parameters such as the size of
 the graph, $n$.  We remark that the dependence of our dynamics on these
 constants is in fact rather good (see Section~\ref{s:results}), and we only do
 this only for clarity of exposition.
@@ -205,7 +204,7 @@ cost even if the other agents play irrationally or adversarially.
 In order to provide such strong guarantees, no regret rules must only depend on
 the opinions that the agent observes and do not take into account
 the weights $w_{ij}$ of the outgoing edges (see Section~\ref{s:lower_bound}).
-We call the update rules with the latter property, \emph{opinion dependent}.
+We call the update rules with the latter property, \emph{graph oblivious}.
 In Section~\ref{s:lower_bound} we use a novel information theoretic argument
 to prove the aforementioned lower bound for this more general class.
 
@@ -215,9 +214,10 @@ the opinion vector $x(t)$ is $\eps$-close to $x^*$ in
 $O(\log^2 (1/\eps))$ rounds. The reason that the previous lower
 bound doesn't apply is that this rule does not ensure \emph{no regret}
 to the agents that adopt it. In fact there is a very
-simple example with two agents in which the first follows the rule
-while the second selects her opinions adversarially.  The first player
-experiences regret.
+simple example with two agents, in which the first follows the rule
+while the second selects her opinions adversarially, where 
+the first agent experiences regret (see Example \ref{ex:regret_side_result} 
+in Appendix~\ref{app:s:cc_convergence}).
 
 We introduce an intuitive \emph{no regret} update rule and we
 show that if all agents adopt it, the resulting opinion vector $x(t)$
