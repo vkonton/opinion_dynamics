@@ -6,10 +6,10 @@ that socially connected people (e.g. family, friends, colleagues) exchange
 information and this leads to changes in their expressed opinions over time.
 Today, the advent of the internet and social media makes the study of opinion
 formation in large social networks even more important; realistic models of how
-people form their opinions by interacting with each other, are of great
+people form their opinions by interacting with each other are of great
 practical interest for prediction, advertisement etc. In an attempt to
 formalize the process of opinion formation, several models have been proposed
-over the years (see e.g., \cite{DeGroot,FJ90,HK,DNAW00}.  The common assumption
+over the years (see e.g., \cite{DeGroot,FJ90,HK,DNAW00}).  The common assumption
 underlying all these models, which dates back to DeGroot \cite{DeGroot}, is
 that opinions evolve through a form of repeated averaging of information
 collected from the agents' social neighborhoods.
@@ -80,7 +80,7 @@ Many recent works study the Nash equilibrium $x^*$ of the opinion formation
 game defined in \cite{BKO11} under various perspectives. In \cite{CCL16} they
 extended the bounds for PoA in more general classes of directed graphs, while
 many recently introduced influence maximization problems
-\cite{GTT13,AKPT18,MMT17} are defined with respect to $x^*$.
+\cite{GTT13,AKPT18,MMT17}, which are defined with respect to $x^*$.
 % For example, Gionis et al. \cite{GTT13} considered the problem of identifying
 % $k$ nodes in a network to set their internal opinion equal to 1 so as to
 % maximize the sum of the opinions in the equilibrium point $x^*$
@@ -116,9 +116,9 @@ this work we ask:
 To address these questions, one could define precise dynamical processes whose
 update rules require limited information exchange between the agents and study
 their convergence properties. Instead of doing so, we describe the opinion
-formation process in such large networks as \emph{dynamics} of an adequate
+formation process in such large networks as \emph{dynamics} of a suitable
 opinion formation game that captures these information exchange constraints.
-This way we can precisely define which \emph{dynamics} are \emph{natural}, and,
+This way we can precisely define which \emph{dynamics} are \emph{natural} and,
 more importantly, to study general classes of \emph{dynamics} (e.g. no regret
 dynamics) without explicitly defining their update rule.  The opinion formation
 game that we consider is a variant of the game in \cite{BKO11} based on
@@ -147,7 +147,7 @@ Moreover its Nash equilibrium, with respect to the expected disagreement cost, i
 This game provides us with a general template of all the \emph{dynamics} examined in this paper.  At
 round $t$, each agent $i$ selects an opinion $x_i(t)$ and suffers a
 disagreement cost based on the opinion of the neighbor that she randomly met.
-At the end of the round $t$, she is informed only about the opinion and the
+At the end of round $t$, she is informed only about the opinion and the
 index of this neighbor and may use this information to update her opinion in
 the next round.  Obviously different update rules lead to different
 \emph{dynamics}, however all of these respect the information exchange
@@ -160,16 +160,17 @@ concrete form.
   Can the agents update their opinions according to the limited information
   that they receive such that the produced opinion vector $x(t)$ converges
   to the equilibrium $x^*$? How is the convergence rate affected by the limited
-  information exchange? Are there dynamics that ensures that the cost that the agents experience
+  information exchange? Are there dynamics that ensure that the cost that the agents experience
   is minimal?
   %
 \end{question}
 
 In what follows, we are mostly concerned about the dependence of
-the rate of convergence on the distance $\eps$ from the equilibrium $x^*$, we shall
+the rate of convergence on the distance $\eps$ from the equilibrium $x^*$. 
+Thus, we shall
 suppress the dependence on other parameters such as the size of
 the graph, $n$.  We remark that the dependence of our dynamics on these
-constants is in fact rather good (see Section~\ref{s:results}), and we only do
+constants is in fact rather good (see Section~\ref{s:results}), and we do
 this only for clarity of exposition.
 
 \begin{definition}[Informal]\label{d:convergence_rate}

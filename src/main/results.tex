@@ -99,8 +99,8 @@ can be considered as \emph{natural dynamics} for selfish agents.
 %At each round $t$ each agent $i$, selects an opinion $x_i(t) \in [0,1]$
 %and suffers a cost $(1-\alpha_i)(x_i(t)-x_{W_i^t}(t))^2 + \alpha_i(x_i(t)-s_i)^2$.
 
-Since each agent $i$ selfishly wants to minimizing the disagreement cost
-that she experiences, it is natural to consider that she selects $x_i(t)$ according to
+Since each agent $i$ selfishly wants to minimize the disagreement cost
+that she experiences, it is natural to assume that she selects $x_i(t)$ according to
 a \emph{no regret algorithm} for the \emph{online convex optimization problem}
 where the adversary chooses a function $f_t(x)=(1-\alpha_i)(x-b_t)^2 + \alpha_i(x-s_i)^2$
 at each round $t$. In Theorem~\ref{t:fictitious_noregret}
@@ -142,12 +142,12 @@ The reason that FTL dynamics converges slowly is that
 only depends on the opinions of the neighbors that agent $i$ meets,
 $\alpha_i$, and $s_i$. This is also true for any update rule that
 ensures no regret to the agents (see Section~\ref{s:lower_bound}).
-As already mentioned, we call this larger class of update rules
+As already mentioned, we call this larger class
 of update rules \emph{graph oblivious}, and we prove slow convergence
 for any \emph{graph oblivious dynamics}.
 
 \begin{definition}[graph oblivious update rule]\label{d:opinion_dependent_dynamics}
-An graph oblivious update rule $A$ is a sequence of
+A graph oblivious update rule $A$ is a sequence of
 functions $(A_t)_{t=0}^\infty$ where
 $A_t: [0,1]^{t+2}\mapsto [0,1]$.
 \end{definition}
@@ -169,7 +169,7 @@ Theorem~\ref{t:lower_bound} states that for any graph oblivious dynamics
 there exists an instance $I = (P,s,\alpha)$, where roughly $\Omega(1/\eps)$
 rounds are required to achieve convergence within error $\eps$.
 \begin{reptheorem}{t:lower_bound}
-  Let $A$ be an \emph{graph oblivious} update rule, which all agents use to
+  Let $A$ be a \emph{graph oblivious} update rule, which all agents use to
   update their opinions.  For any $c>0$ there exists an instance $I=(P,s,a)$
   such that
   \(
@@ -180,10 +180,10 @@ rounds are required to achieve convergence within error $\eps$.
 \end{reptheorem}
 %
 To prove Theorem~\ref{t:lower_bound}, we show that 
-graph oblivious rules whose dynamics converge fast,
+graph oblivious rules whose dynamics converge fast
 imply the existence of estimators for Bernoulli distributions with
 \enquote{small} sample complexity. The key part of the proof lies 
-in Lemma~\ref{l:estimation_lower_bound}, in which is proven
+in Lemma~\ref{l:estimation_lower_bound}, in which it is proven
 that such estimators cannot exist.
 We also briefly discuss two well-known sample complexity lower bounds
 from the statistics literature and explain why they do not work in our case.
@@ -191,7 +191,7 @@ from the statistics literature and explain why they do not work in our case.
 In Section~\ref{s:cc_convergence}, we present a simple update rule that
 achieves error rate $\me^{-\widetilde{O}(\sqrt{t})}$.
 This update rule is a function of the opinions and the indices of the neighbors
-that $i$ met, $\alpha_i,s_i$ and the $i$-th row the matrix $P$. Obviously
+that $i$ met, $\alpha_i,s_i$ and the $i$-th row of the matrix $P$. Obviously
 this rule is not \emph{graph oblivious}, due to its dependency on the $i$-th row
 and the indices, 
 and thus does not ensure no regret to an agent that adopts it 

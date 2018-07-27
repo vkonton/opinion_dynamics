@@ -6,8 +6,8 @@ Based on works for asynchronous distributed minimization algorithms
 \cite{BT97,CC16}, we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly can restore the
 fast convergence rate.
-Our update rule, depends not only on the expressed opinions of the
-neighbors that an agent $i$ meets but also on the $i$-th row of matrix $P$.
+Our update rule depends not only on the expressed opinions of the
+neighbors that an agent $i$ meets, but also on the $i$-th row of matrix $P$.
 We have already mentioned that while this update rule guarantees fast convergence
 it does not guarantee no regret to the agents.  To make this concrete we include
 a simple example in Appendix~\ref{app:s:cc_convergence}.  Agents that choose
@@ -91,7 +91,7 @@ To do this observe that agent $i$ simply needs to wait to meet the neighbor
 $j$ with the smallest weight $p_{ij}$. Therefore, after
 $\log(1/\delta)/\min_{j} p_{ij}$ rounds we have that with probability at least
 $1-\delta$ agent $i$ met all her neighbors at least once.
-Since we want this to be true for all agents
+Since we want this to be true for all agents,
 we shall roughly take $B = 1/\min_{p_{ij} > 0} {p_{ij}}$.
 In Appendix~\ref{app:s:cc_convergence} we give the detailed
 argument that leads to Theorem~\ref{t:exponential_update_rule},
