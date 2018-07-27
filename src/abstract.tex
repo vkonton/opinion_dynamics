@@ -1,7 +1,7 @@
 We study opinion formation games based on the famous model proposed by Friedkin
-and Johsen. In today's huge social networks the assumption that in each round
-agents update their opinions by taking into account the opinions of \emph{all}
-their friends is unrealistic. So, we are interested in the convergence
+and Johsen (FJ model). In today's huge social networks the assumption that in
+each round agents update their opinions by taking into account the opinions of
+\emph{all} their friends is unrealistic. So, we are interested in the convergence
 properties of simple and natural variants of the FJ model that use limited
 information exchange in each round and converge to the same stable point.
 %
@@ -14,19 +14,18 @@ imposes on $i$ is reflected by the probability $p_{ij}$ with which $i$ meets
 $j$. Then, agent $i$ suffers a disagreement cost that is a convex combination
 of $(x_i(t) - s_i)^2$ and $(x_i(t) - x_j(t))^2$.
 %
-An important class of dynamics in this setting are of emph{no regret} dynamics,
+An important class of dynamics in this setting are of \emph{no regret} dynamics,
 i.e. dynamics that ensure vanishing regret against the experienced
-disagreement cost to the agents.  We show an exponential gap between no regret
-dynamics and dynamics that more general dynamics do not ensure no regret.
-No regret dynamics require rougly $\Omega(1/\eps)$ rounds to be within
-distance $\eps$ from their stable point.  On the other hand, we provide
-an opinion update rule that does not ensure no regret and uses the influence weights
-and converges to $x^\ast$ in $\tilde{O}(\log n \log^2(1/\eps))$ rounds.
-The robustness guarranties of no regret dynamics come at the price
-of slow convergence.
-Finally, for our variant of the FJ model, we show that the agents can adopt a simple
-opinion update rule that ensures no regret to the experienced disagreement cost
-and results in an opinion vector that converges to the equilibrium point
-$x^\ast$ of the FJ model within distance $\eps$ in $\mrm{poly}(\log n /\eps)$
-rounds. In view of our lower bound for no regret dynamics this rate of
-convergence is close to best possible.
+disagreement cost to the agents.  We show an exponential gap on
+the convergence rate between no regret dynamics and dynamics that more general
+dynamics do not ensure no regret.  No regret dynamics require roughly
+$\Omega(1/\eps)$ rounds to be within distance $\eps$ from the stable point of
+the FJ model.  On the other hand, we provide an opinion update rule that does
+not ensure no regret and converges to
+$x^\ast$ in $\tilde{O}(\log^2(1/\eps))$ rounds.  Finally, for our variant
+of the FJ model, we show that the agents can adopt a simple opinion update rule
+that ensures no regret to the experienced disagreement cost and results in an
+opinion vector that converges to the stable point $x^\ast$ of the FJ model
+within distance $\eps$ in $\mrm{poly}(1/\eps)$ rounds. In view of our
+lower bound for no regret dynamics this rate of convergence is close to best
+possible.

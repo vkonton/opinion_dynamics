@@ -283,23 +283,21 @@ simple form: it is roughly the time average of the opinions that the agent
 observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
 rate and we show that in order to achieve $\eps$ distance from $x^*$,
 $\mrm{poly}(1/\eps)$ rounds are needed.  In view of our lower bound this rate
-is close to best possible.  In Section~\ref{s:fictitious_noregret}, we show that this
-rule ensures \emph{no regret} to the agents.  Its no regret property can be
-derived by the more general results in \cite{HAK07}.  However, we give a short
-and simple proof that may be of interest.
+is close to best possible.  In Section~\ref{s:fictitious_noregret}, we prove its
+\emph{no regret} property. This can be derived by the more general results
+in \cite{HAK07}.  However, we give a short and simple proof that may be of
+interest.
 
 Our results reveal that the equilibrium $x^*$ is a robust choice for modeling
 the limiting behavior of the opinions of agents since, even in our limited
-information setting, there exist simple and natural dynamics that converges
-to it.  We show that fast convergence can be achieved even in
-our \emph{limited information setting}, however this depends on
-the assumption on how selfish the agents are. Under the assumption that
-the agents are only concerned about their individual disagreement cost,
-we present an update rule that they can adopt and the resulting opinion
-vector converges with a slow rate to $x^*$. If this assumption is removed,
-the update rule in Section~\ref{s:cc_convergence} leads to \emph{dynamics}
-with fast convergence rate.
-
+information setting, there exist simple and natural dynamics that converge
+to it.  The convergence rate of the dynamics crucially depends on whether the
+agents act selfishly, i.e. they are only concerned about their individual
+disagreement cost.
+We present an update rule that selfish agents can adopt and show that the
+resulting opinion vector converges $x^*$ but with a slow rate, while, for non
+selfish agents, the update rule in Section~\ref{s:cc_convergence} leads to a
+\emph{dynamics} with fast convergence rate.
 
 \subsection{Related Work}
 
