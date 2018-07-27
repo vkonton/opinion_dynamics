@@ -2,7 +2,7 @@
 
 In this section we provide rigorous definitions of \emph{no regret} algorithms
 and explain why update rule~(\ref{eq:fictitious_play}) ensures
-no regret to any agent that repeatedly play the game of
+no regret to any agent that repeatedly plays the game of
 Definition~\ref{d:random_game}.
 Based on the cost that the agents experience,
 we consider an appropriate \emph{Online Convex Optimization} problem.
@@ -28,7 +28,7 @@ constants $s,\alpha$ lead to a different OCO problem.
 
 \begin{definition}\label{d:OCO_algo}
 An algorithm $A$ for the OCO problem with $\mcal{F}_{a,s}$ and
-$\mcal{K}=[0,1]$ is a sequence of functions $(A_t)_{t=1}^\infty$ where $A_t:[0,1]^t \mapsto [0,1]$.
+$\mcal{K}=[0,1]$ is a sequence of functions $(A_t)_{t=0}^\infty$ where $A_t:[0,1]^t \mapsto [0,1]$.
 \end{definition}
 
 \begin{definition}\label{d:no_regret_algo}
@@ -37,7 +37,7 @@ $\mcal{K}=[0,1]$ if and only if for all sequences $(b_t)_{t=0}^\infty$ that the
 adversary may choose, if $x_t = A_t(b_0,\dots,b_{t-1})$ then for all $t$
 \(\sum_{\tau=0}^t f(x_\tau,b_\tau)  \leq \min_{x \in [0,1]}\sum_{\tau=0}^t f(x,b_\tau) + o(t).\)
 \end{definition}
-Informally speaking if the player selects the value
+Informally speaking, if the player selects the value
 $x_t$ according to a \emph{no regret algorithm} then
 she does not regret for not playing any fixed value no
 matter what the choices of the adversary are.
@@ -53,7 +53,7 @@ since by Definition~\ref{d:no_regret_algo},
 \frac{1}{t}\min_{x \in [0,1]}\sum_{\tau=0}^tf_i(x,x_{W_i^\tau}(\tau)) + \frac{o(t)}{t}\]
 The latter means that the time averaged total disagreement cost
 that she suffers is close to the time averaged cost by expressing the
-best fixed opinion and this holds no matter the opinions of the
+best fixed opinion and this holds regardless of the opinions of the
 neighbors that $i$ meets. Under this perspective FTL dynamics
 is a \emph{natural limited information dynamics},
 since update rule~(\ref{eq:fictitious_play}) ensures
@@ -82,7 +82,7 @@ then for all $t$,
 \sum_{\tau = 0}^tf(x,b_\tau).
 \)
 \end{replemma}
-Now we can understand reason why \emph{Follow the Leader}
+Now we can understand why \emph{Follow the Leader}
 admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
 of the best fixed value, we can compare the cost incurred by $x_t$ with
 that of $y_t$.  Since the functions in $\mcal{F}_{\alpha,s}$ are quadratic,

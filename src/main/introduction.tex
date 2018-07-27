@@ -189,11 +189,11 @@ more general dynamics produced by update rules that do not ensure no regret.
 \emph{No regret dynamics} are produced by update rules that
 ensure no regret to any agent that adopts them.
 Namely, the total disagreement cost of an agent that follows such a
-rule, is close to the total disagreement cost that she would experience by
+rule is close to the total disagreement cost that she would experience by
 selecting the best fixed opinion in hindsight. The latter must hold
 regardless of the way the other agents update their opinions
 and of the neighbors that the agent gets to meet.
-This powerful property consists no regret dynamics to be \emph{natural dynamics}
+This powerful property renders no regret dynamics \emph{natural dynamics}
 for describing the behavior of agents \cite{CL03,EMN09,KPT11,SALS15}.
 We prove that if all the agents adopt an update rule that ensures no regret,
 then there exists an instance of the game such that the produced opinion
@@ -203,7 +203,7 @@ because it provides robust guarantees.
 Agents who adopt no regret update rules suffer minimal total disagreement
 cost even if the other agents play irrationally or adversarially.
 In order to provide such strong guarantees, no regret rules must only depend on
-the opinions that the agent observes and do not take into account
+the opinions that the agent observes and not take into account
 the weights $w_{ij}$ of the outgoing edges (see Section~\ref{s:lower_bound}).
 We call the update rules with the latter property, \emph{opinion dependent}.
 In Section~\ref{s:lower_bound} we use a novel information theoretic argument
@@ -214,7 +214,7 @@ whose resulting dynamics converges fast, i.e.
 the opinion vector $x(t)$ is $\eps$-close to $x^*$ in
 $O(\log^2 (1/\eps))$ rounds. The reason that the previous lower
 bound doesn't apply is that this rule does not ensure \emph{no regret}
-to the agents that adopt it. In fact there is a very
+to the agents that adopt it. In fact, there is a very
 simple example with two agents in which the first follows the rule
 while the second selects her opinions adversarially.  The first player
 experiences regret.
@@ -226,7 +226,7 @@ that at round $t$, each agent updates her opinion to the minimizer of total
 disagreement cost that she experienced until round $t-1$.  It also has a very
 simple form: it is roughly the time average of the opinions that the agent
 observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
-rate and we show that in order to achieve $\eps$ distance from $x^*$,
+rate and show that in order to achieve $\eps$ distance from $x^*$,
 $\mrm{poly}(1/\eps)$ rounds are sufficient.  In view of our lower bound this rate
 is close to best possible.  In Section~\ref{s:fictitious_noregret}, we prove its
 \emph{no regret} property. This can be derived by the more general results
@@ -240,7 +240,7 @@ to it.  The convergence rate crucially depends on whether the
 agents act selfishly, i.e. they are only concerned about their individual
 disagreement cost.
 We present an update rule that selfish agents can adopt (no regret update rule)
-and show that the resulting opinion vector converges $x^*$ but with a slow rate,
+and show that the resulting opinion vector converges to $x^*$ but with a slow rate,
 while, for non selfish agents, the update rule in Section~\ref{s:cc_convergence}
 leads to a \emph{dynamics} with fast convergence rate.
 
@@ -250,18 +250,18 @@ There exists a large amount of literature concerning the FJ model.  Many recent
 works \cite{BGM13,CKO13}, \cite{BFM16,EFHS17} bound the inefficiency of
 equilibrium in variants of opinion formation game defined in \cite{BKO11}. In
 \cite{GS14} they bound the convergence time of the FJ model in special graph
-topologies.  In \cite{BFM16}, a variant of the opinion formation game in which
-social relations depend on the expressed opinions is studied.  They prove that
+topologies.  In \cite{BFM16}, a variant of the opinion formation game, in which
+social relations depend on the expressed opinions, is studied.  They prove that
 the discretized version of the above game admits a potential function and thus
 best-response converges to the Nash equilibrium.  Convergence results in other
 discretized variants of the FJ model can be found in \cite{YOASS13,FGV16}. In
 \cite{FPS16} they provide convergence results for limited information variants
-of the Heglesmann-Krause model \cite{HK} and the FJ model. Although they
+of the Heglesmann-Krause model \cite{HK} and the FJ model. Although the
 considered limited information variant of the FJ model is very similar to ours,
 their convergence results are much weaker, since they concern the expected
 value of the opinion vector.
 
-Other works that relate to ours, concern the convergence properties of dynamics
+Other works that relate to ours concern the convergence properties of dynamics
 based on no regret learning algorithms.  In \cite{FV97,FS99,SA00,SALS15} it is
 proved that in a finite $n$-person game if each agent updates her mixed
 strategy according to a no regret algorithm the resulting \emph{time-averaged}
