@@ -166,9 +166,7 @@ concrete form.
   %
 \end{question}
 
-\subsection{Contribution} We discuss here the contribution of this work at a
-high level; for the formal statements of our theorems see
-Section~\ref{s:results}.  Since we are mostly concerned about the dependence of
+In what follows, we are mostly concerned about the dependence of
 the rate of convergence on the distance $\eps$ from the equilibrium, we shall
 suppress the dependence on other constants of the problem such as the size of
 the graph, $n$.  We remark that the dependence of our dynamics on these
@@ -183,121 +181,124 @@ this only for clarity of exposition.
   %
 \end{definition}
 
-We know that the FJ model converges fast to the equilibrium $x^*$: the opinion
-vector $x(t)$ is in distance $\eps$ in $O(\log (1/\eps))$ rounds \cite{GS14}.
-We characterize the \emph{limited information dynamics} that can achieve such
-fast convergence.  We prove that if the update rule, that the agents use, only
-depends on the opinions of the neighbors that they meet, then there exists an
-instance such that the produced opinion vector $x(t)$ requires roughly
-$\Omega(1/\eps)$ rounds to be $\eps$-close to $x^*$. We call these update rules
-\emph{opinion dependent} and the respective dynamics \emph{opinion dependent
-  dynamics}.  In Section~\ref{s:lower_bound}, we show that the existence of
-opinion dependent update rules with fast convergence rate implies the existence
-of Bernoulli estimators with small sample complexity and we present a novel,
-information theoretic argument, to rule out their existence.  The reason that
-we are interested in \emph{opinion dependent dynamics} is that they subsume the
-class of \emph{no regret dynamics} which is generally accepted as \emph{natural
-  behavior}  \cite{EMN09}.  We say that an update rule ensures no regret to any
-agent that adopts it, when the time averaged disagreement cost (that the agent
-experiences) per round is close to the cost of expressing the best opinion in
-hindsight independently of the neighbors that she meets. Therefore, update
-rules that ensure no regret are a reasonable choice for selfish agents.
+% \subsection{Contribution}
 
-We introduce a simple and intuitive \emph{opinion dependent update rule} and we
-show that if the agents adopt it, the resulting opinion vector $x(t)$ converges
-to $x^*$.  Our update rule is a \emph{Follow the Leader algorithm}, meaning
-that at round $t$, each agent updates her opinion to the minimizer of total
-disagreement cost that she experienced until round $t-1$.  It also has a very
-simple form: it is roughly the time average of the opinions that the agent
-observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
-rate and we show that in order to achieve $\eps$ distance from $x^*$,
-$\mrm{poly}(1/\eps)$ rounds are needed.  In
-Section~\ref{s:fictitious_noregret}, we show that this rule also ensures
-\emph{no regret} to the agents.  Its no regret property can be derived by the
-more general results in \cite{HAK07}.  However, we give a short and simple
-proof that may be of interest.
+% We discuss here the contribution of this work at a
+% high level; for the formal statements of our theorems see
+% Section~\ref{s:results}.
 
-In Section~\ref{s:cc_convergence} we show that \enquote{slow convergence} is
-not a generic property of the \emph{limited information dynamics}.  We present
-an update rule that, apart from the observed opinions, also uses the weights
-$w_{ij}$ and converges fast to $x^*$.  This update rule reveals that the slow
-convergence of \emph{opinion dependent} update rules is not due to the reduced
-information exchange (learning the opinion of only one agent), but due to the
-fact that the agents are \enquote{oblivious} to the weighted graph of the
-instance and they \enquote{learn} it during the game play.
 
-Our results reveal that the equilibrium $x^*$ is a robust choice for modeling
-the limiting behavior of the opinions of agents since even in our limited
-information setting, there exist natural dynamics that converge to it.  Our
-lower bound indicates that rationality comes at the price of slow
-convergence.
+% We know that the FJ model converges fast to the equilibrium $x^*$: the opinion
+% vector $x(t)$ is in distance $\eps$ in $O(\log (1/\eps))$ rounds \cite{GS14}.
+% We characterize the \emph{limited information dynamics} that can achieve such
+% fast convergence.  We prove that if the update rule, that the agents use, only
+% depends on the opinions of the neighbors that they meet, then there exists an
+% instance such that the produced opinion vector $x(t)$ requires roughly
+% $\Omega(1/\eps)$ rounds to be $\eps$-close to $x^*$. We call these update rules
+% \emph{opinion dependent} and the respective dynamics \emph{opinion dependent
+%   dynamics}.  In Section~\ref{s:lower_bound}, we show that the existence of
+% opinion dependent update rules with fast convergence rate implies the existence
+% of Bernoulli estimators with small sample complexity and we present a novel,
+% information theoretic argument, to rule out their existence.  The reason that
+% we are interested in \emph{opinion dependent dynamics} is that they subsume the
+% class of \emph{no regret dynamics} which is generally accepted as \emph{natural
+%   behavior}  \cite{EMN09}.  We say that an update rule ensures no regret to any
+% agent that adopts it, when the time averaged disagreement cost (that the agent
+% experiences) per round is close to the cost of expressing the best opinion in
+% hindsight independently of the neighbors that she meets. Therefore, update
+% rules that ensure no regret are a reasonable choice for selfish agents.
 
-\subsection{Contribution2} 
-The major contribution of the paper is providing 
-an exponential separation on the convergence
-rate of \emph{no regret dynamics} and the convergence
-rate of more general dynamics produced by update rules
-that don't ensure no regret.
+% We introduce a simple and intuitive \emph{opinion dependent update rule} and we
+% show that if the agents adopt it, the resulting opinion vector $x(t)$ converges
+% to $x^*$.  Our update rule is a \emph{Follow the Leader algorithm}, meaning
+% that at round $t$, each agent updates her opinion to the minimizer of total
+% disagreement cost that she experienced until round $t-1$.  It also has a very
+% simple form: it is roughly the time average of the opinions that the agent
+% observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
+% rate and we show that in order to achieve $\eps$ distance from $x^*$,
+% $\mrm{poly}(1/\eps)$ rounds are needed.  In
+% Section~\ref{s:fictitious_noregret}, we show that this rule also ensures
+% \emph{no regret} to the agents.  Its no regret property can be derived by the
+% more general results in \cite{HAK07}.  However, we give a short and simple
+% proof that may be of interest.
+
+% In Section~\ref{s:cc_convergence} we show that \enquote{slow convergence} is
+% not a generic property of the \emph{limited information dynamics}.  We present
+% an update rule that, apart from the observed opinions, also uses the weights
+% $w_{ij}$ and converges fast to $x^*$.  This update rule reveals that the slow
+% convergence of \emph{opinion dependent} update rules is not due to the reduced
+% information exchange (learning the opinion of only one agent), but due to the
+% fact that the agents are \enquote{oblivious} to the weighted graph of the
+% instance and they \enquote{learn} it during the game play.
+
+% Our results reveal that the equilibrium $x^*$ is a robust choice for modeling
+% the limiting behavior of the opinions of agents since even in our limited
+% information setting, there exist natural dynamics that converge to it.  Our
+% lower bound indicates that rationality comes at the price of slow
+% convergence.
+
+\subsection{Contribution}
+The major contribution of the paper is proving an exponential separation on
+the convergence rate of \emph{no regret dynamics} and the convergence rate of
+more general dynamics produced by update rules that do not ensure no regret.
 
 \emph{No regret dynamics} are produced by update rules
-that ensures that the total disagreement cost of an
-agent that adopts such a rule, is close to the total 
-disagreement cost that she would experience by selecting
-the fixed best opinion. This gaurantee holds no matter
-the way the other agents update their opinions and the 
-neighbors that the agent meets. This powerful property
-has consisted the no regret dynamics as \emph{natural dynamics}
+ensuring that the total disagreement cost of an agent that adopts such a
+rule, is close to the total disagreement cost that she would experience by
+selecting the fixed best opinion in hindsight. This guarantee holds
+independently of the way the other agents update their opinions.
+Moreover, it should not depend on the neighbors that the agent gets to meet.
+This powerful property consists no regret dynamics to be \emph{natural dynamics}
 for describing the behavior of agents \cite{EMN09}.
-We prove that if all the agents adopt such an update rule
-then there exists an instance of the game such that the produced opinion 
-vector $x(t)$ requires roughly $\Omega(1/\eps)$ rounds to 
-be $\eps$-close to $x^*$. The reason the no regret property
-comes at the price of slow convergence is due to the robust
-guarantees that it provides. Note that \emph{no regret} rules 
-ensure that the total disagreement cost of an agent that adopts them is minimal 
-even the other agents play irationally or even adversarially to her.
-In order to provide such gaurantees, no regret rules only depend on
-the opinions that the agent observes and do not take into account 
+We prove that if all the agents adopt an update rule that ensures no regret,
+then there exists an instance of the game such that the produced opinion
+vector $x(t)$ requires roughly $\Omega(1/\eps)$ rounds to
+be $\eps$-close to $x^*$. No regret comes at the price of slow convergence
+because it provides robust guarantees.
+Agents who adopt no regret update rules suffer minimal total disagreement
+cost when the other agents play irrationally or even adversarially.
+In order to provide such guarantees, no regret rules only depend on
+the opinions that the agent observes and do not take into account
 the weights $w_{ij}$ of the outgoing edges (see Section~\ref{s:lower_bound}).
 We call the update rules with the latter property, \emph{opinion dependent}.
 In Section~\ref{s:lower_bound} we use a novel information theoretic argument
-to prove the forementioned lower bound for this more general class. 
+to prove the aforementioned lower bound for this more general class.
 
 In Section~\ref{s:cc_convergence}, we present a simple update rule
-whose resulting dynamics converges exponentially fast i.e. 
-the opinion vector $x(t)$ is $\eps$-close to $x^*$ in 
-$\bigOh{\log^2 (1/\eps)}$ rounds. The reason that the previous lower
+whose resulting dynamics converges fast, i.e.
+the opinion vector $x(t)$ is $\eps$-close to $x^*$ in
+$O(\log^2 (1/\eps))$ rounds. The reason that the previous lower
 bound doesn't apply is that this update rule does not ensures \emph{no regret}
-to the agents that adopt it. In fact there is a very 
-simple example with two agents in which the first follows the rule 
-and the second selects her opinions adversarially, resulting in 
+to the agents that adopt it. In fact there is a very
+simple example with two agents in which the first follows the rule
+and the second selects her opinions adversarially, resulting in
 the first player experiencing regret.
+
 We introduce a simple and intuitive \emph{no regret} update rule and we
-show that if the all agents adopt it, the resulting opinion vector $x(t)$ converges
-to $x^*$.  Our rule is a \emph{Follow the Leader algorithm}, meaning
+show that if the all agents adopt it, the resulting opinion vector $x(t)$
+converges to $x^*$.  Our rule is a \emph{Follow the Leader algorithm}, meaning
 that at round $t$, each agent updates her opinion to the minimizer of total
 disagreement cost that she experienced until round $t-1$.  It also has a very
 simple form: it is roughly the time average of the opinions that the agent
 observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
 rate and we show that in order to achieve $\eps$ distance from $x^*$,
-$\mrm{poly}(1/\eps)$ rounds are needed.  In Section~\ref{s:fictitious_noregret}, 
-we show that this rule also ensures \emph{no regret} to the agents. 
-Its no regret property can be derived by the
-more general results in \cite{HAK07}.  However, we give a short and simple
-proof that may be of interest.
+$\mrm{poly}(1/\eps)$ rounds are needed.  In view of our lower bound this rate
+is close to best possible.  In Section~\ref{s:fictitious_noregret}, we show that this
+rule ensures \emph{no regret} to the agents.  Its no regret property can be
+derived by the more general results in \cite{HAK07}.  However, we give a short
+and simple proof that may be of interest.
 
 Our results reveal that the equilibrium $x^*$ is a robust choice for modeling
-the limiting behavior of the opinions of agents since even in our limited
-information setting, there exist simple and natural dynamics that converge to it.
-They show that fast convergence can be acheived even in
-our \emph{limited information setting}, however this vastly depends on
+the limiting behavior of the opinions of agents since, even in our limited
+information setting, there exist simple and natural dynamics that converges
+to it.  We show that fast convergence can be achieved even in
+our \emph{limited information setting}, however this depends on
 the assumption on how selfish the agents are. Under the assumption that
-the agents are only concerned about their individual disagreement cost, 
-we present an update rule that they can adopt and the resulting opinion 
+the agents are only concerned about their individual disagreement cost,
+we present an update rule that they can adopt and the resulting opinion
 vector converges with a slow rate to $x^*$. If this assumption is removed,
 the update rule in Section~\ref{s:cc_convergence} leads to \emph{dynamics}
-with exponential convergence rate.
-
+with fast convergence rate.
 
 
 \subsection{Related Work}
