@@ -142,3 +142,32 @@ Using the previous calculation, we obtain:
 &=2\exp \lp(- \rho  \min_{ij} p_{ij} \frac{\sqrt{t}}{4\ln(nt)} \rp)
 \end{align*}
 \end{proof}
+
+
+\begin{example}\label{regret_side_result}
+The purpose of this example is to illustrate that 
+the update rule~(\ref{alg:cc_upper}) does not ensure the no regret
+property. If some agents for various reasons exhibit
+irrational or adversarial behavior, agents that adopt update 
+rule~(\ref{alg:cc_upper}) may experience regret. That is the reason
+that \emph{Row Dependent dynamics} converge exponetially faster that any
+\emph{no regret dynamics} incluing the \emph{FTL dynamics}.
+
+Consider the instance of the game of Definition~\ref{d:random_game} consisting
+of two agents. Agent $1$ adopts update rule~(\ref{alg:cc_upper}) and
+has $s_1=0,\alpha_1=1/2,p_{12}=1$ and agent $2$ plays adversarially. Thus,
+$s_2,\alpha_2,p_{21}$ don't need to be specified. By update rule~(\ref{alg:cc_upper}),
+$x_1(t)=x_2(t-1)/2$ and thus total disagreement cost that agent $1$ experiences until
+round $t$ is 
+\begin{equation*}
+ \sum_{\tau=0}^t\frac{1}{2}x_1(t)^2+\frac{1}{2}(x_1(t) - x_2(t))^2 =
+ \sum_{\tau=0}^t\frac{1}{8}x_2(t-1)^2 + \frac{1}{2}(\frac{1}{2}x_2(t-1)-x_2(t))^2.
+\end{equation*}
+Since agent $2$ plays adversarially, she selects $x_2(t)=0$ if $t$ is even
+and $1$ otherwise. As a result, the total cost that agent $1$ experiences is
+$\sum_{\tau=0}^t \frac{1}{2}x_1(t)^2+\frac{1}{2}(x_1(t) - x_2(t))^2 \simeq 3t/8$.
+Now agent $1$ regrets for no adopting the fixed opinion $1/4$ during the whole game play.
+Selecting $x_1(t)=1/3$ for all $t$, would incur him total disagreement cost
+$\sum_{\tau=0}^t\frac{1}{2}(1/3)^2+\frac{1}{2}(1/3 - x_2(t))^2\simeq 7t/36$
+which is less than $3t/8$.
+\end{example}
