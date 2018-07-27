@@ -1,30 +1,44 @@
-\section{Lower Bound for Opinion Dependent Dynamics}\label{s:lower_bound}
+\section{Lower Bound for Graph Oblivious Dynamics}\label{s:lower_bound}
 In this section we prove that any no regret dynamics cannot converge much
-faster than FTL dynamics (Dynamics~\ref{alg:FTL_dynamics}). For example, assume
-that for every instance $I=(P,s,\alpha)$, each agent $i$ update
-her opinion according to Online Gradient Descent which is a no regret algorithm
-proposed by Zinkevic in \cite{Z03}, i.e.
-$x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$
-and $x(t)$ is the produced opinion vector.  Our results imply that there exists
-an instance $I$ such that $x(t)$ converge to $x^*$ slowly.
-The reason is fairly simple: let us select for each $(s,\alpha) \in [0,1]^2$ a
+faster than FTL dynamics (Dynamics~\ref{alg:FTL_dynamics}). %For example, assume
+The main result of the section is Theorem~\ref{t:lower_bound}
+that establishes slow convergence for the more general class of
+\emph{graph oblivious dynamics}
+
+To illustrate why Theorem~\ref{t:lower_bound} serves our purpose, consider the
+following no regret dynamics. For every instance $I=(P,s,\alpha)$, each agent $i$ uses
+the Online Gradient Descent\footnote{
+Online Gradient Descent is an influential no regret algorithm 
+proposed by Zinkevic in \cite{Z03} for the general OCO problem, where
+the adversary can select any convex function with bounded gradient. The latter
+directly implies that it also ensures no regret in our simpler 
+OCO problem with $\mcal{F}_{s_i,\alpha_i}$ and $\mcal{K}=[0,1]$.}
+to update her opinion,
+i.e. $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$
+and $x(t)$ is the produced opinion vector. It is easy to see that the
+opinion of an agent $i$ at round $t$ only depends on the observed opinion,
+$\alpha_i$ and $s_i$.  As a result, Theorem~\ref{t:lower_bound} applies
+and establishes the existence of an instance $I$ such that $x(t)$ 
+converges slowly to $x^*$.
+
+Using the above reasoning we can use Theorem~\ref{t:lower_bound}
+to prove that any no regret dynamics converges slowly.
+Let us select for each $(s,\alpha) \in [0,1]^2$ a
 no regret algorithm
 $A_{s,\alpha}$\footnote{
 These $s,\alpha$ are scalars in $[0,1]$ and
 should not be confused with the internal opinion vector $s$
 and the self confidence vector $\alpha$ of an instance $I=(P,s,\alpha)$.}for the OCO problem with
-$\mcal{F}_{s,\alpha}$. Now for every instance $I=(P,s,\alpha)$ each agent $i$ updates her
+$\mcal{F}_{s,\alpha}$. This selection defines the following no regret dynamics: 
+for every instance $I=(P,s,\alpha)$ each agent $i$ updates her
 opinion according to $A_{s_i,\alpha_i}$,
 resulting in an opinion vector $x(t)$.
-Theorem~\ref{t:lower_bound} applies since such a selection
-can be encoded as an opinion dependent update rule.
+Note that such a selection can be encoded as a graph oblivious update rule.
 Specifically, the function $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
 as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
-% The next theorem is our fundamental result about lower bounds in
-% \emph{opinion dependent} update rules.
-% \repeattheorem{t:lower_bound}
+As a result, Theorem~\ref{t:lower_bound} applies again.
 
-In Lemma~\ref{l:reduction} we show that any opinion dependent update rule $A$,
+In Lemma~\ref{l:reduction} we show that any graph oblivious update rule $A$,
 can be used as an estimator of the parameter $p \in [0,1] $ of Bernoulli random
 variable.
 Since we prove Theorem~\ref{t:lower_bound} using a reduction to
@@ -74,7 +88,7 @@ For example, \emph{sample mean} has error rate
 $\Expnew{p}{|\theta_t-p|} \leq \frac{1}{2\sqrt{t}}$.
 
 \begin{lemma}\label{l:reduction}
-  Let $A$ an opinion dependent update rule such that for all instances $I=(P,s,a)$,
+  Let $A$ a graph oblivious update rule such that for all instances $I=(P,s,a)$,
   \[\lim_{t \rightarrow \infty} t^{1+c}
   \Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0.\]
   Then there exists an estimator $\theta_A=(\theta_t^A)_{t=1}^\infty$ such that for all
@@ -156,7 +170,7 @@ of a Bernoulli random variable within additive error $\eps$.
 Another well-known result is that taking the average of the samples
 is the \emph{best} way to estimate the mean of a Bernoulli random variable.
 These results would indicate that the best possible rate of convergence
-for an \emph{opinion dependent dynamics} would be $O(1/\sqrt{t})$.
+for an \emph{graph oblivious dynamics} would be $O(1/\sqrt{t})$.
 However, there is some fine print in these results which does not allow us
 to use them. In order to explain the various limitations of
 these methods and results we will briefly discuss some of them.
@@ -366,7 +380,7 @@ Since $\theta_t$ is a function from $\{0,1\}^t$ to $[0,1]$, $\theta_t$ can have 
 
 %\begin{remark}\label{r:lower_bound_no regret}
 %  The only point that we use that
-%  the update rules are \emph{opinion dependent} is in Lemma~\ref{l:reduction}.
+%  the update rules are \emph{graph oblivious} is in Lemma~\ref{l:reduction}.
 %  It is not difficult to see that the reduction still holds if the update rules
 %  also depend on the indices of the neighbors that an agent meets.
 %  As a result, Theorem~\ref{t:lower_bound} still applies.
