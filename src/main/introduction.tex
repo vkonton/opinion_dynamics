@@ -33,15 +33,15 @@ opinion,
 \end{equation}
 %
 where $N_i =\{j \in V:(i,j) \in E\}$ is the set of $i$'s neighbors, the weight
-$w_{ij}$ associated with the edge $(i,j) \in E$ measures the extend of the
+$w_{ij}$ associated with the edge $(i,j) \in E$ measures the extent of the
 influence that $j$ poses on $i$ and the weight $w_{ii}>0$ quantifies how
-susceptible is $i$ in adopting opinions that differ from her internal opinion
+susceptible $i$ is in adopting opinions that differ from her internal opinion
 $s_i$.
 
 The FJ model is one of most influential models for opinion formation. It has a
 very simple update rule, making it plausible for modeling natural behavior and
 its basic assumptions are aligned with empirical findings on the way opinions
-are formed \cite{AFH05,K47}.  At the same time, it admits a unique stable point
+are formed \cite{AFH05,K47}.  At the same time, it admits a unique stable
 point $x^* \in [0,1]^n$ to which it converges with a \emph{linear} rate
 \cite{GS14}.  The FJ model has also been studied under a game theoretic
 viewpoint.  Bindel et al. considered its update rule as the minimizer of a
@@ -62,7 +62,7 @@ its stable point $x^*$ is the unique Nash equilibrium of the above game.  In
 disagreement cost. They proved that the \emph{Price of Anarchy} (PoA) is $9/8$
 in case $G$ is undirected and $w_{ij}=w_{ji}$. They also provided PoA bounds in
 the case of unweighted Eulerian directed graphs.  We remark that in
-\cite{BKO11} an alternative framework, for studying the way opinions evolve,
+\cite{BKO11} an alternative framework for studying the way opinions evolve
 was introduced.  The opinion formation process can be described as the
 \emph{dynamics} of an opinion formation game.  This framework is much more
 comprehensive since different aspects of the opinion formation process can be
@@ -80,7 +80,7 @@ Many recent works study the Nash equilibrium $x^*$ of the opinion formation
 game defined in \cite{BKO11} under various perspectives. In \cite{CCL16} they
 extended the bounds for PoA in more general classes of directed graphs, while
 many recently introduced influence maximization problems
-\cite{GTT13,AKPT18,MMT17} are defined with respect to $x^*$.
+\cite{GTT13,AKPT18,MMT17}which are defined with respect to $x^*$.
 % For example, Gionis et al. \cite{GTT13} considered the problem of identifying
 % $k$ nodes in a network to set their internal opinion equal to 1 so as to
 % maximize the sum of the opinions in the equilibrium point $x^*$
@@ -168,7 +168,7 @@ concrete form.
 
 \subsection{Contribution} We discuss here the contribution of this work at a
 high level; for the formal statements of our theorems see
-Section~\ref{s:results}.  Since we are most concerned about the dependence of
+Section~\ref{s:results}.  Since we are mostly concerned about the dependence of
 the rate of convergence on the distance $\eps$ from the equilibrium, we shall
 suppress the dependence on other constants of the problem such as the size of
 the graph, $n$.  We remark that the dependence of our dynamics on these
@@ -219,7 +219,7 @@ proof that may be of interest.
 
 In Section~\ref{s:cc_convergence} we show that \enquote{slow convergence} is
 not a generic property of the \emph{limited information dynamics}.  We present
-an update rule that apart from the observed opinions, also uses the weights
+an update rule that, apart from the observed opinions, also uses the weights
 $w_{ij}$ and converges fast to $x^*$.  This update rule reveals that the slow
 convergence of \emph{opinion dependent} update rules is not due to the reduced
 information exchange (learning the opinion of only one agent), but due to the
@@ -345,7 +345,7 @@ properties of no regret learning algorithms under the \emph{full information
 subsequent work \cite{KPT11}, the same authors consider the same problem in a
 \emph{limited information setting} (\enquote{bulletin board model}), in which
 each agent learns the load of just the machine that served him. Most relevant
-to ours, are the works \cite{HCM17,MS17,BM17,CHM17}, where they examine the
+to ours are the works \cite{HCM17,MS17,BM17,CHM17}, where they examine the
 convergence properties of no regret learning algorithms when the agents observe
 their payoffs with some additive zero-mean random noise. In our limited
 information setting the agents experience random disagreement cost with
