@@ -232,6 +232,74 @@ information setting, there exist natural dynamics that converge to it.  Our
 lower bound indicates that rationality comes at the price of slow
 convergence.
 
+\subsection{Contribution2} 
+The major contribution of the paper is providing 
+an exponential separation on the convergence
+rate of \emph{no regret dynamics} and the convergence
+rate of more general dynamics produced by update rules
+that don't ensure no regret.
+
+\emph{No regret dynamics} are produced by update rules
+that ensures that the total disagreement cost of an
+agent that adopts such a rule, is close to the total 
+disagreement cost that she would experience by selecting
+the fixed best opinion. This gaurantee holds no matter
+the way the other agents update their opinions and the 
+neighbors that the agent meets. This powerful property
+has consisted the no regret dynamics as \emph{natural dynamics}
+for describing the behavior of agents \cite{EMN09}.
+We prove that if all the agents adopt such an update rule
+then there exists an instance of the game such that the produced opinion 
+vector $x(t)$ requires roughly $\Omega(1/\eps)$ rounds to 
+be $\eps$-close to $x^*$. The reason the no regret property
+comes at the price of slow convergence is due to the robust
+guarantees that it provides. Note that \emph{no regret} rules 
+ensure that the total disagreement cost of an agent that adopts them is minimal 
+even the other agents play irationally or even adversarially to her.
+In order to provide such gaurantees, no regret rules only depend on
+the opinions that the agent observes and do not take into account 
+the weights $w_{ij}$ of the outgoing edges (see Section~\ref{s:lower_bound}).
+We call the update rules with the latter property, \emph{opinion dependent}.
+In Section~\ref{s:lower_bound} we use a novel information theoretic argument
+to prove the forementioned lower bound for this more general class. 
+
+In Section~\ref{s:cc_convergence}, we present a simple update rule
+whose resulting dynamics converges exponentially fast i.e. 
+the opinion vector $x(t)$ is $\eps$-close to $x^*$ in 
+$\bigOh{\log^2 (1/\eps)}$ rounds. The reason that the previous lower
+bound doesn't apply is that this update rule does not ensures \emph{no regret}
+to the agents that adopt it. In fact there is a very 
+simple example with two agents in which the first follows the rule 
+and the second selects her opinions adversarially, resulting in 
+the first player experiencing regret.
+We introduce a simple and intuitive \emph{no regret} update rule and we
+show that if the all agents adopt it, the resulting opinion vector $x(t)$ converges
+to $x^*$.  Our rule is a \emph{Follow the Leader algorithm}, meaning
+that at round $t$, each agent updates her opinion to the minimizer of total
+disagreement cost that she experienced until round $t-1$.  It also has a very
+simple form: it is roughly the time average of the opinions that the agent
+observes.  In Section~\ref{s:fictitious_convergence}, we bound its convergence
+rate and we show that in order to achieve $\eps$ distance from $x^*$,
+$\mrm{poly}(1/\eps)$ rounds are needed.  In Section~\ref{s:fictitious_noregret}, 
+we show that this rule also ensures \emph{no regret} to the agents. 
+Its no regret property can be derived by the
+more general results in \cite{HAK07}.  However, we give a short and simple
+proof that may be of interest.
+
+Our results reveal that the equilibrium $x^*$ is a robust choice for modeling
+the limiting behavior of the opinions of agents since even in our limited
+information setting, there exist simple and natural dynamics that converge to it.
+They show that fast convergence can be acheived even in
+our \emph{limited information setting}, however this vastly depends on
+the assumption on how selfish the agents are. Under the assumption that
+the agents are only concerned about their individual disagreement cost, 
+we present an update rule that they can adopt and the resulting opinion 
+vector converges with a slow rate to $x^*$. If this assumption is removed,
+the update rule in Section~\ref{s:cc_convergence} leads to \emph{dynamics}
+with exponential convergence rate.
+
+
+
 \subsection{Related Work}
 
 There exists a large amount of literature concerning the FJ model.  Many recent
