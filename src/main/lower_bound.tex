@@ -1,44 +1,73 @@
 \section{Lower Bound for Graph Oblivious Dynamics}\label{s:lower_bound}
 In this section we prove that any no regret dynamics cannot converge much
 faster than FTL dynamics (Dynamics~\ref{alg:FTL_dynamics}). %For example, assume
-The main result of the section is Theorem~\ref{t:lower_bound}
-that establishes slow convergence for the more general class of
-\emph{graph oblivious dynamics}
+%This is formally stated in Theorem~\ref{t:lower_bound} which applies to the more
+%general class of \emph{graph oblivious dynamics}.
 
-To illustrate why Theorem~\ref{t:lower_bound} serves our purpose, consider the
-following no regret dynamics. For every instance $I=(P,s,\alpha)$, each agent $i$ uses
-the Online Gradient Descent\footnote{
-Online Gradient Descent is an influential no regret algorithm 
-proposed by Zinkevic in \cite{Z03} for the general OCO problem, where
-the adversary can select any convex function with bounded gradient. The latter
-directly implies that it also ensures no regret in our simpler 
-OCO problem with $\mcal{F}_{s_i,\alpha_i}$ and $\mcal{K}=[0,1]$.}
-to update her opinion,
-i.e. $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$
-and $x(t)$ is the produced opinion vector. It is easy to see that the
-opinion of an agent $i$ at round $t$ only depends on the observed opinion,
-$\alpha_i$ and $s_i$.  As a result, Theorem~\ref{t:lower_bound} applies
-and establishes the existence of an instance $I$ such that $x(t)$ 
-converges slowly to $x^*$.
-
-Using the above reasoning we can use Theorem~\ref{t:lower_bound}
-to prove that any no regret dynamics converges slowly.
-Let us select for each $(s,\alpha) \in [0,1]^2$ a
+\begin{definition}[no regret dynamics]
+Consider a collection of no regret algorithms such that
+for each $(s,\alpha) \in [0,1]^2$ a
 no regret algorithm
 $A_{s,\alpha}$\footnote{
 These $s,\alpha$ are scalars in $[0,1]$ and
 should not be confused with the internal opinion vector $s$
 and the self confidence vector $\alpha$ of an instance $I=(P,s,\alpha)$.}for the OCO problem with
-$\mcal{F}_{s,\alpha}$. This selection defines the following no regret dynamics: 
-for every instance $I=(P,s,\alpha)$ each agent $i$ updates her
-opinion according to $A_{s_i,\alpha_i}$,
-resulting in an opinion vector $x(t)$.
-Note that such a selection can be encoded as a graph oblivious update rule.
+$\mcal{F}_{s,\alpha}$ and $\mcal{K}=[0,1]$, is selected. For a given instance $I=(P,s,\alpha)$
+this selection produces the no regret dynamics $x(t)$ defined as follows:
+\begin{itemize}
+ \item Initially each agent $i$ selects her opinion $x_i(0)=A_0^{s_i,\alpha_i}(s_i,\alpha_i)$
+ \item At round $t\geq 1$, each agent $i$ selects her opinion
+   \(x_i(t)=A_t^{s_i,\alpha_i}(x_{W_i^0}(0),\dots,x_{W_i^{t-1}}(t-1),s_i,\alpha_i)\),
+where $W_i^t$ is the neighbors that $i$ meets at round $t$.
+\end{itemize}
+\end{definition}
+
+Since such a selection of no regret algorithms can be encoded as a graph oblivious update rule.
 Specifically, the function $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
 as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
-As a result, Theorem~\ref{t:lower_bound} applies again.
+Theorem~\ref{t:lower_bound} applies and establishes the existence of an 
+instance $I=(P,s,\alpha)$ such that the produced $x(t)$ converges at the best
+slowly to $x^*$. For example if agents use the Online Gradient Descent\footnote{
+Online Gradient Descent is an influential no regret algorithm 
+proposed by Zinkevic in \cite{Z03} for the general OCO problem, where
+the adversary can select any convex function with bounded gradient. The latter
+directly implies that it also ensures no regret in our simpler 
+OCO problem with $\mcal{F}_{s_i,\alpha_i}$ and $\mcal{K}=[0,1]$.}
+to update her opinion i.e. $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$.
+Then we are ensured that fast convergence cannot be established in the produced no regret dynamics.
+%To illustrate why Theorem~\ref{t:lower_bound} serves our purpose, consider the
+%following no regret dynamics. For every instance $I=(P,s,\alpha)$, each agent $i$ uses
+%the Online Gradient Descent\footnote{
+%Online Gradient Descent is an influential no regret algorithm 
+%proposed by Zinkevic in \cite{Z03} for the general OCO problem, where
+%the adversary can select any convex function with bounded gradient. The latter
+%directly implies that it also ensures no regret in our simpler 
+%OCO problem with $\mcal{F}_{s_i,\alpha_i}$ and $\mcal{K}=[0,1]$.}
+%to update her opinion,
+%i.e. $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$
+%and $x(t)$ is the produced opinion vector. It is easy to see that the
+%opinion of an agent $i$ at round $t$ only depends on the observed opinion,
+%$\alpha_i$ and $s_i$.  As a result, Theorem~\ref{t:lower_bound} applies
+%and establishes the existence of an instance $I$ such that $x(t)$ 
+%converges slowly to $x^*$.
 
-In Lemma~\ref{l:reduction} we show that any opinion dependent update rule $A$
+%Using the above reasoning we can use Theorem~\ref{t:lower_bound}
+%to prove that any no regret dynamics converges slowly.
+%Let us select for each $(s,\alpha) \in [0,1]^2$ a
+%no regret algorithm
+%$A_{s,\alpha}$\footnote{
+%These $s,\alpha$ are scalars in $[0,1]$ and
+%should not be confused with the internal opinion vector $s$
+%and the self confidence vector $\alpha$ of an instance $I=(P,s,\alpha)$.}for the OCO problem with
+%$\mcal{F}_{s,\alpha}$. This selection defines the following no regret dynamics: 
+%for every instance $I=(P,s,\alpha)$ each agent $i$ updates her
+%opinion according to $A_{s_i,\alpha_i}$,
+%resulting in an opinion vector $x(t)$.
+%Note that such a selection can be encoded as a graph oblivious update rule.
+%Specifically, the function $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
+%as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
+%As a result, Theorem~\ref{t:lower_bound} applies again.
+In Lemma~\ref{l:reduction} we show that any graph oblivious update rule $A$
 can be used as an estimator of the parameter $p \in [0,1] $ of a Bernoulli random
 variable.
 Since we prove Theorem~\ref{t:lower_bound} using a reduction to
@@ -88,7 +117,7 @@ For example, \emph{sample mean} has error rate
 $\Expnew{p}{|\theta_t-p|} \leq \frac{1}{2\sqrt{t}}$.
 
 \begin{lemma}\label{l:reduction}
-  Let $A$ a graph oblivious update rule such that for all instances $I=(P,s,a)$,
+  Let $A$ a graph oblivious update rule such that for all instances $I=(P,s,\alpha)$,
   \[\lim_{t \rightarrow \infty} t^{1+c}
   \Expnew{}{\norm{\infty}{x_A(t)-x^*}}=0.\]
   Then there exists an estimator $\theta_A=(\theta_t^A)_{t=1}^\infty$ such that for all
@@ -104,9 +133,9 @@ $\Expnew{p}{|\theta_t-p|} \leq \frac{1}{2\sqrt{t}}$.
   Now consider the opinion vector $x_A(t)$ produced by the update
   rule $A$ for the instance $I_p$. Note that for $t \geq 1$,
   \begin{itemize}
-   \item  $x_1^A(t)=A_t(x_c(0),\ldots,x_c(t-1),1/2,1)$
-   \item  $x_0^A(t)=A_t(x_c(0),\ldots,x_c(t-1),1/2,0)$
-   \item  $x_c^A(t)=A_t(x_{W_c^0}(0),\ldots,x_{W_c^{t-1}}(t-1),1/2,0)$
+   \item  $x_1^A(t)=A_t(x_c(0),\ldots,x_c(t-1),1,1/2)$
+   \item  $x_0^A(t)=A_t(x_c(0),\ldots,x_c(t-1),0,1/2)$
+   \item  $x_c^A(t)=A_t(x_{W_c^0}(0),\ldots,x_{W_c^{t-1}}(t-1),0,1/2)$
   \end{itemize}
   The key observation is that the opinion vector $x_A(t)$ is a deterministic function
   of the index sequence $W_c^0,\ldots,W_c^{t-1}$ and does not depend on $p$. Thus,

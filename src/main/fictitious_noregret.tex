@@ -13,7 +13,7 @@ adversary and a player. \emph{At round }$t\geq 0$,
   \item \emph{the adversary observes the }$x_t$ \emph{and selects a} $b_t \in [0,1]$
   \item \emph{the player receives cost} $f(x_t,b_t)=(1-\alpha)(x_t-b_t)^2 + \alpha(x_t -s)^2$.
 \end{enumerate}
-where $\alpha,s$ are constants in $[0,1]$. The goal of
+where $s,\alpha$ are constants in $[0,1]$. The goal of
 the player is to pick $x_t$ based on the history
 $(b_0,\ldots,b_{t-1})$ in a way that minimizes her total cost.
 Generally, different OCO problems can be defined by a set of functions
@@ -22,17 +22,17 @@ set $\mcal{K}$ from which the player picks her value (see \cite{Haz16}
 for an introduction to the OCO framework).
 In our case the feasibility set is $\mcal{K}=[0,1]$ and the set of functions
 is
-$\mcal{F}_{\alpha,s} = \{x \mapsto (1-\alpha)(x-b)^2 + \alpha(x -s)^2 : b \in [0,1]\}$.
+$\mcal{F}_{s,\alpha} = \{x \mapsto (1-\alpha)(x-b)^2 + \alpha(x -s)^2 : b \in [0,1]\}$.
 As a result, each selection of the
 constants $s,\alpha$ leads to a different OCO problem.
 
 \begin{definition}\label{d:OCO_algo}
-An algorithm $A$ for the OCO problem with $\mcal{F}_{a,s}$ and
+An algorithm $A$ for the OCO problem with $\mcal{F}_{s,\alpha}$ and
 $\mcal{K}=[0,1]$ is a sequence of functions $(A_t)_{t=0}^\infty$ where $A_t:[0,1]^t \mapsto [0,1]$.
 \end{definition}
 
 \begin{definition}\label{d:no_regret_algo}
-An algorithm $A$ is no regret for the OCO problem with $\mcal{F}_{a,s}$ and
+An algorithm $A$ is no regret for the OCO problem with $\mcal{F}_{s,\alpha}$ and
 $\mcal{K}=[0,1]$ if and only if for all sequences $(b_t)_{t=0}^\infty$ that the
 adversary may choose, if $x_t = A_t(b_0,\dots,b_{t-1})$ then for all $t$
 \(\sum_{\tau=0}^t f(x_\tau,b_\tau)  \leq \min_{x \in [0,1]}\sum_{\tau=0}^t f(x,b_\tau) + o(t).\)
@@ -43,7 +43,7 @@ she does not regret not playing any fixed value no
 matter what the choices of the adversary are.
 Theorem~\ref{t:fictitious_noregret} states that
 \emph{Follow the Leader} i.e. $x_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^{t-1}f(x,b_\tau)$
-is a no regret algorithm for all the OCO problems with $\mcal{F}_{\alpha,s}$.
+is a no regret algorithm for all the OCO problems with $\mcal{F}_{s,\alpha}$.
 
 Returning to the dynamics of the game in Definition~\ref{d:random_game},
 it is reasonable to assume that each agent $i$ selects $x_i(t)$ according
@@ -88,7 +88,7 @@ then for all $t$,
 Now we can understand why \emph{Follow the Leader}
 admits no regret. Since the cost incurred by the sequence $y_t$ is at most that
 of the best fixed value, we can compare the cost incurred by $x_t$ with
-that of $y_t$.  Since the functions in $\mcal{F}_{\alpha,s}$ are quadratic,
+that of $y_t$.  Since the functions in $\mcal{F}_{s,\alpha}$ are quadratic,
 the extra term $f(x,b_t)$ that $y_t$ takes into account doesn't change
 dramatically the minimum of the total sum. Namely, $x_t,y_t$
 are relatively close.
