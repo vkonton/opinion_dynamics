@@ -74,10 +74,11 @@ Obviously, knowing the value $b_t$ before selecting $x_t$
 is in direct contrast with the OCO framework, however proving
 the no regret property for this algorithm easily extends to
 establishing the no regret property of \emph{Follow the Leader}.
-The proofs of the subsequent lemmas and Theorem~\ref{t:fictitious_noregret} can
-be found in the Appendix~\ref{app:s:fictitious_noregret}.
+Theorem~\ref{t:fictitious_noregret} follows
+by direct application of Lemma~\ref{l:no_regret_lemma}
+and all proofs can be found in the Appendix~\ref{app:s:fictitious_noregret}.
 \begin{replemma}{l:y_t}
-Let $\{b_t\}_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$.
+Let $(b_t)_{t=0}^\infty$ be an arbitrary sequence with $b_t \in [0,1]$.
 Let $y_t = \argmin_{x \in [0,1]}\sum_{\tau=0}^tf(x_,b_\tau)$
 then for all $t$,
 \(

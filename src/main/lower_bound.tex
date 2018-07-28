@@ -24,9 +24,9 @@ where $W_i^t$ is the neighbors that $i$ meets at round $t$.
 
 Since such a selection of no regret algorithms can be encoded as a graph oblivious update rule.
 Specifically, the function $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
-as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
+as $A_t(b_0,\ldots,b_{t-1},s,\alpha) = A^t_{s,\alpha}(b_0,\ldots,b_{t-1})$.
 Theorem~\ref{t:lower_bound} applies and establishes the existence of an 
-instance $I=(P,s,\alpha)$ such that the produced $x(t)$ converges at the best
+instance $I=(P,s,\alpha)$ such that the produced $x(t)$ converges at best
 slowly to $x^*$. For example if agents use the Online Gradient Descent\footnote{
 Online Gradient Descent is an influential no regret algorithm 
 proposed by Zinkevic in \cite{Z03} for the general OCO problem, where
@@ -34,7 +34,7 @@ the adversary can select any convex function with bounded gradient. The latter
 directly implies that it also ensures no regret in our simpler 
 OCO problem with $\mcal{F}_{s_i,\alpha_i}$ and $\mcal{K}=[0,1]$.}
 to update her opinion i.e. $x_i(t+1)= x_i(t) - 1/\sqrt{t}(x_i(t)-(1-\alpha_i)x_{W_i^t}(t)-\alpha_is_i)$.
-Then we are ensured that fast convergence cannot be established in the produced no regret dynamics.
+Then we are ensured that fast convergence cannot be established in the respective no regret dynamics.
 %To illustrate why Theorem~\ref{t:lower_bound} serves our purpose, consider the
 %following no regret dynamics. For every instance $I=(P,s,\alpha)$, each agent $i$ uses
 %the Online Gradient Descent\footnote{
@@ -67,6 +67,7 @@ Then we are ensured that fast convergence cannot be established in the produced 
 %Specifically, the function $A_t:\{0,1\}^{t+2} \mapsto [0,1]$ is defined
 %as $A_t(b_0,\ldots,b_{t-1},a,s) = A^t_{a,s}(b_0,\ldots,b_{t-1})$.
 %As a result, Theorem~\ref{t:lower_bound} applies again.
+The rest of the section is dedicated to prove Theorem~\ref{t:lower_bound}.
 In Lemma~\ref{l:reduction} we show that any graph oblivious update rule $A$
 can be used as an estimator of the parameter $p \in [0,1] $ of a Bernoulli random
 variable.

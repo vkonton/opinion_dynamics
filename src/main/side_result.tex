@@ -1,7 +1,7 @@
 \section{Limited Information Dynamics with Fast Convergence}\label{s:cc_convergence}
 
 We already discussed that the reason that graph oblivious dynamics suffer slow
-convergence is that the update rule depends only on the expressed opinions.
+convergence is that the update rule depends only on the observed opinions.
 Based on works for asynchronous distributed minimization algorithms
 \cite{BT97,CC16}, we provide an update rule showing that information about the
 graph $G$ combined with agents that do not act selfishly can restore the
@@ -12,7 +12,7 @@ We have already mentioned that while this update rule guarantees fast convergenc
 it does not guarantee no regret to the agents.  To make this concrete we include
 a simple example in Appendix~\ref{app:s:cc_convergence}.  Agents that choose
 to update their opinions according to Dynamics~\ref{alg:influence_dependent}
-will experience regret if the other agents play irrationally.
+may experience regret if some other agents play adversarially.
 
 In update rule (\ref{alg:cc_upper}), each agent stores the
 \emph{most recent} opinions of the random neighbors that she meets in an array
